@@ -1,4 +1,4 @@
-This folder is based on the replication package of "CodeGrid: A Grid Representation of Code" [1]. This replication package saves many intermediate files for caching purposes, and we include all these files for ease of replication. For more details, please see https://github.com/itscodegrid/codegrid.
+This folder is based on the replication package of "CodeGrid: A Grid Representation of Code" [1]. This replication package saves many intermediate files for caching purposes. We include some of these files that are small enough in `data/` for ease of replication. For the rest of the intermediate files, they will be calculated the first time you run the code and cached thereafter. For more details, please see https://github.com/itscodegrid/codegrid.
 
 
 ### References
