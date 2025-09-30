@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1149929
+*  Stack Overflow answer #:3758542
+*  And Stack Overflow answer#:1150180
+*/
+int add (int x, int y) {
+    int a, b;
+    do {
+        a = x & y;
+        b = x ^ y;
+        x = a << 1;
+        y = b;
+    }
+    while (a);
+    return b;
+}
+
+int add (int x, int y) {
+    int carry = 0;
+    int result = 0;
+    int i;
+    for (i = 0; i < 32; ++i) {
+        int a = (x >> i) & 1;
+        int b = (y >> i) & 1;
+        result |= ((a ^ b) ^ carry) << i;
+        carry = (a & b) | (b & carry) | (carry & a);
+    }
+    return result;
+}
+

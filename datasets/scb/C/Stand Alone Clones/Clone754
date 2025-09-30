@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8465006
+*  Stack Overflow answer #:19315089
+*  And Stack Overflow answer#:51695663
+*/
+int main () {
+    int a, l;
+    char str [50], str1 [50], str3 [100];
+    printf ("\nEnter a string: ");
+    scanf ("%s", str);
+    str3[0] = '\0';
+    printf ("\nEnter the string which you want to concat with string one: ");
+    scanf ("%s", str1);
+    strcat (str3, str);
+    strcat (str3, str1);
+    printf ("\nThe string is %s\n", str3);
+}
+
+int main () {
+    char str1 [MAX], str2 [MAX], str3 [MAX];
+    int i, j = 0, count = 0;
+    printf ("Input string 1: ");
+    gets (str1);
+    printf ("\nInput string 2: ");
+    gets (str2);
+    for (i = 0; str1[i] != '\0'; i++) {
+        str3[i] = str1[i];
+        count++;
+    }
+    for (i = count; str2[j] != '\0'; i++) {
+        str3[i] = str2[j];
+        j++;
+    }
+    str3[i] = '\0';
+    printf ("\nConcatenated string : ");
+    puts (str3);
+    return 0;
+}
+

@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41384262
+*  Stack Overflow answer #:41384841
+*  And Stack Overflow answer#:41384915
+*/
+char *stringToBinary (char *s) {
+    if (s == NULL) {
+        return NULL;
+    }
+    size_t slen = strlen (s);
+    errno = 0;
+    char *binary = malloc (slen *CHAR_BIT + 1);
+    if (binary == NULL) {
+        fprintf (stderr, "malloc has failed in stringToBinary(%s): %s\n", s, strerror (errno));
+        return NULL;
+    }
+    if (slen == 0) {
+        *binary = '\0';
+        return binary;
+    }
+    char *ptr;
+    char *start = binary;
+    int i;
+    for (ptr = s; *ptr != '\0'; ptr++) {
+        for (i = CHAR_BIT - 1; i >= 0; i--, binary++) {
+            *binary = (*ptr & 1 << i) ? '1' : '0';
+        }
+    }
+    *binary = '\0';
+    binary = start;
+    return binary;
+}
+
+char *stringToBinary (char *s) {
+    if (s == NULL)
+        return 0;
+    size_t len = strlen (s);
+    char *binary = malloc (len *8 + 1);
+    binary[0] = '\0';
+    for (size_t i = 0; i < len; ++i) {
+        char ch = s[i];
+        for (int j = 7; j >= 0; --j) {
+            if (ch & (1 << j)) {
+                strcat (binary, "1");
+            }
+            else {
+                strcat (binary, "0");
+            }
+        }
+    }
+    return binary;
+}
+

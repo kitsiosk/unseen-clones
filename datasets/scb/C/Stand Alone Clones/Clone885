@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:43038217
+*  Stack Overflow answer #:43038962
+*  And Stack Overflow answer#:43038390
+*/
+void listdir (const char *path) {
+    DIR *dir;
+    struct dirent *entry;
+    if (!(dir = opendir (path)))
+        return;
+    while ((entry = readdir (dir))) {
+        if (strcmp (entry->d_name, ".") == 0 || strcmp (entry->d_name, "..") == 0)
+            continue;
+        char *current;
+        if (asprintf (&current, "%s/%s", path, entry->d_name) < 0) {
+            fprintf (stderr, "asprintf failed, exiting");
+            goto exit;
+        }
+        puts (current);
+        if (entry->d_type == DT_DIR) {
+            listdir (current);
+        }
+        free (current);
+    }
+exit :
+    closedir (dir);
+}
+
+void listdir (const char *name) {
+    DIR *dir;
+    struct dirent *entry;
+    int file_size;
+    if (!(dir = opendir (name)))
+        return;
+    while ((entry = readdir (dir)) != NULL) {
+        printf ("%s/%s\n", name, entry -> d_name);
+        if (entry->d_type == DT_DIR) {
+            char path [1024];
+            if (strcmp (entry->d_name, ".") == 0 || strcmp (entry->d_name, "..") == 0)
+                continue;
+            sprintf (path, "%s/%s", name, entry -> d_name);
+            listdir (path);
+        }
+    }
+    closedir (dir);
+}
+

@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22030336
+*  Stack Overflow answer #:22030586
+*  And Stack Overflow answer#:22030421
+*/
+int main () {
+    double v;
+    int err;
+    err = scanf ("%lf", &v);
+    if (1 == err) {
+        printf ("%lf\n", v);
+    }
+    else {
+        printf ("read failed\n");
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int number;
+    int newNumber;
+    int i;
+    printf ("Enter a number in decimal...\n");
+    scanf ("%d", & number);
+    printf ("%d in binary is: ", number);
+    for (i = sizeof (int) * 8 - 1; i >= 0; i--) {
+        newNumber = (number >> i);
+        if (newNumber & 1) {
+            printf ("1");
+        }
+        else {
+            printf ("0");
+        }
+    }
+    printf ("\n");
+    return 0;
+}
+

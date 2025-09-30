@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19631212
+*  Stack Overflow answer #:19631422
+*  And Stack Overflow answer#:19631523
+*/
+int main () {
+    int a, b;
+    a = 10;
+    b = 10;
+    char str1 [10], str2 [10];
+    char progCmdline [100];
+    sprintf (str1, " %d", a);
+    sprintf (str2, " %d", b);
+    strcpy (progCmdline, "subprogram.exe ");
+    strcat (progCmdline, str1);
+    strcat (prog, str2);
+    system (progCmdline);
+}
+
+int main (int argc, char *argv []) {
+    if (argc < 2) {
+        printf ("needs atleast two inputs");
+    }
+    else {
+        printf ("%d", atoi (argv [1]) + argv [2])
+        );
+    }
+}
+

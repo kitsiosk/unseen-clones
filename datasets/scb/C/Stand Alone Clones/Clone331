@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41000786
+*  Stack Overflow answer #:41001169
+*  And Stack Overflow answer#:41001994
+*/
+int main () {
+    int i, j;
+    int cm, p;
+    for (i = 0; i <= 7; i++) {
+        for (j = 0; j <= 11; j++) {
+            cm = round (i *30.48 + j * 2.54);
+            printf ("%5d", cm);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main () {
+    for (int feet = 0; feet <= 7; ++feet) {
+        for (int inches = 0; inches < 12; ++inches) {
+            int microns = (feet * 12 + inches) * 25400;
+            int rounded_cm = (microns + 5000) / 10000;
+            printf ("%5d", rounded_cm);
+        }
+        puts ("");
+    }
+}
+

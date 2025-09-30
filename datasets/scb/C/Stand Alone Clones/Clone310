@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17006745
+*  Stack Overflow answer #:17006834
+*  And Stack Overflow answer#:17007651
+*/
+void prime (void) {
+    long i, j;
+    pflags[0] = 1;
+    pflags[1] = 1;
+    for (i = 2; i <= sqrt (SIZE); i++)
+        if (pflags[i] == 0)
+            for (j = 2; j * i < SIZE; j++)
+                pflags[i * j] = 1;
+    j = 0;
+    for (i = 0; i < SIZE; i++) {
+        if (pflags[i] == 0)
+            pvalues[j++] = i;
+    }
+}
+
+void prime (void) {
+    long i, j;
+    p[0] = 1;
+    p[1] = 1;
+    for (i = 2; i <= (long) sqrt ((double) SIZE); i++)
+        if (p[i] == 0)
+            for (j = 2; j * i < SIZE; j++)
+                p[i * j] = 1;
+}
+

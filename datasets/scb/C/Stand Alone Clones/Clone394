@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46512633
+*  Stack Overflow answer #:46513581
+*  And Stack Overflow answer#:46512691
+*/
+int main () {
+    size_t m = 3;
+    size_t n = 3;
+    int **a = create_mat (m, n);
+    int **b = create_mat (m, n);
+    if (!a || !b) {
+        printf ("error when allocating matrix\n");
+    }
+    else {
+        read_mat (a, m, n);
+        read_mat (b, m, n);
+        int **c = add_mat (a, b, m, n);
+        if (!c) {
+            printf ("error when allocating matrix\n");
+        }
+        else {
+            print_mat (c, m, n);
+            free_mat (c, m);
+        }
+    }
+    free_mat (a, m);
+    free_mat (b, m);
+    return 0;
+}
+
+int main () {
+    int n = 2, m = 2;
+    int a [n] [m];
+    read_mat (a, n, m);
+    int b [n] [m];
+    read_mat (b, n, m);
+    int **c;
+    c = add_mat (a, b, n, m);
+    print (c, n, m);
+    free2Darray (c, n);
+    return 0;
+}
+

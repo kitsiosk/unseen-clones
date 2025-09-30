@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:327893
+*  Stack Overflow answer #:327929
+*  And Stack Overflow answer#:327925
+*/
+int porownaj (const void *p_a, const void *p_b) {
+    const pkt *pkt_a = p_a;
+    const pkt *pkt_b = p_b;
+    if (pkt_a->alfa > pkt_b->alfa)
+        return 1;
+    if (pkt_a->alfa < pkt_b->alfa)
+        return -1;
+    if (pkt_a->r_kw > pkt_b->r_kw)
+        return 1;
+    if (pkt_a->r_kw < pkt_b->r_kw)
+        return -1;
+    return 0;
+}
+
+int porownaj (const void *vp1, const void *vp2) {
+    const pkt *pkt_a = (const pkt *) vp1;
+    const pkt *pkt_b = (const pkt *) vp2;
+    if (pkt_a->alfa > pkt_b->alfa && pkt_a->r_kw > pkt_b->r_kw)
+        return 1;
+    if (pkt_a->alfa == pkt_b->alfa && pkt_a->r_kw == pkt_b->r_kw)
+        return 0;
+    if (pkt_a->alfa < pkt_b->alfa && pkt_a->r_kw < pkt_b->r_kw)
+        return -1;
+    return 0;
+}
+

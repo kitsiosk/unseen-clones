@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18628152
+*  Stack Overflow answer #:18630474
+*  And Stack Overflow answer#:18630196
+*/
+void merge (void *src, unsigned int alen, unsigned int blen, unsigned int size, fn_cmp fcmp) {
+    void *bsrc = (unsigned char *) src + alen * size;
+    void *dst = malloc ((alen + blen) * size);
+    unsigned int a = 0, b = 0, k = 0;
+    for (k = 0; k < (alen + blen); ++k) {
+        if (a < alen) {
+            if (b < blen) {
+                if (fcmp ((const unsigned char *) src + a * size, (const unsigned char *) bsrc + b * size) <= 0) {
+                    memcpy ((unsigned char *) dst + k * size, (const unsigned char *) src + a ++ * size, size);
+                }
+                else {
+                    memcpy ((unsigned char *) dst + k * size, (const unsigned char *) bsrc + b ++ * size, size);
+                }
+            }
+            else {
+                memcpy ((unsigned char *) dst + k * size, (const unsigned char *) src + a * size, (alen - a) * size);
+                k += (alen - a);
+            }
+        }
+        else {
+            memcpy ((unsigned char *) dst + k * size, (const unsigned char *) bsrc + b * size, (blen - b) * size);
+            k += (blen - b);
+        }
+    }
+    memcpy (src, dst, (alen + blen) * size);
+    free (dst);
+}
+
+static void merge (void *a, int n, int size, int (*fcmp) (const void *, const void *)) {
+    int i, j, k, mid = n / 2;
+    void *temp = (void *) malloc (n *size);
+    memset (temp, 'X', n * size);
+    printf ("-->> %s\n", __func__);
+    print_node ("Before Merge", (node *) a, n);
+    for (i = 0, j = mid, k = 0; k < n; k++) {
+        if ((i < mid) && (j >= n)) {
+            memcpy (temp + (k * size), a + i * size, size);
+            i++;
+        }
+        else if ((i < mid) && (fcmp (a +i * size, a +j * size) <= 0)) {
+            memcpy (temp + (k * size), a + j * size, size);
+            j++;
+        }
+    }
+    print_node ("Mid Merge", (node *) temp, n);
+    for (i = 0, j = 0; j < n; i++, j++)
+        memcpy (a +(j * size), temp +(i * size), size);
+    free (temp);
+    print_node ("After Merge", (node *) a, n);
+    printf ("<<-- %s\n", __func__);
+}
+

@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34756010
+*  Stack Overflow answer #:34756254
+*  And Stack Overflow answer#:34757225
+*/
+int main (void) {
+    FILE *file_ptr;
+    int character;
+    int prev_char_was_letter = 0;
+    int word_count = 0;
+    file_ptr = fopen ("my_file.txt", "r");
+    if (!file_ptr) {
+        fprintf (stderr, "can't open file\n");
+        return 1;
+    }
+    character = fgetc (file_ptr);
+    while (character != EOF) {
+        if (is_alpha (character) && !prev_char_was_letter) {
+            word_count++;
+            prev_char_was_letter = 1;
+        }
+        else if (!is_alpha (character)) {
+            prev_char_was_letter = 0;
+        }
+        character = fgetc (file_ptr);
+    }
+    printf ("%d\n", word_count);
+    fclose (file_ptr);
+}
+
+int main (int argc, char **argv) {
+    FILE *fp;
+    char line [MAX_LINE];
+    char *s;
+    int wcnt = 0;
+    if (argc == 1) {
+        fp = stdin;
+    }
+    else {
+        fp = fopen (argv[1], "r");
+    }
+    if (fp == 0) {
+        return -1;
+    }
+    while (!feof (fp)) {
+        s = fgets (line, MAX_LINE, fp);
+        if (s) {
+            s = strtok (line, delim);
+            while (s != NULL) {
+                if (isaword (s)) {
+                    wcnt++;
+                }
+                s = strtok (NULL, delim);
+            }
+        }
+    }
+    fclose (fp);
+    printf ("word count = %d", wcnt);
+    return 0;
+}
+

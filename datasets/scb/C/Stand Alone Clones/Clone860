@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49014310
+*  Stack Overflow answer #:49014987
+*  And Stack Overflow answer#:49014599
+*/
+void myfunc (int n) {
+    static int n0 = 0, i;
+    static double **x = NULL;
+    if (n > n0) {
+        x = realloc (x, n * sizeof (double *))
+        );
+        for (i = n0; i < n; i++) {
+            x [i] = malloc (2 * sizeof (double)));
+        }
+        n0 = n;
+    }
+}
+
+void myfunc (int n) {
+    static int n0 = 0;
+    static double **x = NULL;
+    if (n > n0) {
+        if (x == NULL) {
+            x = malloc (n * sizeof (double *));
+            for (int i = 0; i < n; i++) {
+                x[i] = malloc (2 * sizeof (double));
+            }
+        }
+        else {
+            x = realloc (x, n * sizeof (double *));
+            for (int i = n0; i < n; i++) {
+                x[i] = malloc (2 * sizeof (double));
+            }
+        }
+        n0 = n;
+    }
+}
+

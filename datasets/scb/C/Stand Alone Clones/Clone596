@@ -1,0 +1,78 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1201200
+*  Stack Overflow answer #:14976268
+*  And Stack Overflow answer#:12280731
+*/
+void DrawFilledCircle (int x0, int y0, int radius) {
+    int x = radius;
+    int y = 0;
+    int xChange = 1 - (radius << 1);
+    int yChange = 0;
+    int radiusError = 0;
+    while (x >= y) {
+        for (int i = x0 - x; i <= x0 + x; i++) {
+            SetPixel (i, y0 + y);
+            SetPixel (i, y0 - y);
+        }
+        for (int i = x0 - y; i <= x0 + y; i++) {
+            SetPixel (i, y0 + x);
+            SetPixel (i, y0 - x);
+        }
+        y++;
+        radiusError += yChange;
+        yChange += 2;
+        if (((radiusError << 1) + xChange) > 0) {
+            x--;
+            radiusError += xChange;
+            xChange += 2;
+        }
+    }
+}
+
+void DrawFilledCircle (int circleDiameter, int circlePosX, int circlePosY) {
+    const int FULL = (1 << 2);
+    const int HALF = (FULL >> 1);
+    int size = (circleDiameter << 2);
+    int ray = (size >> 1);
+    int dY2;
+    int ray2 = ray * ray;
+    int posmin, posmax;
+    int Y, X;
+    int x = ((circleDiameter & 1) == 1) ? ray : ray - HALF;
+    int y = HALF;
+    circlePosX -= (circleDiameter >> 1);
+    circlePosY -= (circleDiameter >> 1);
+    for (;; y += FULL) {
+        dY2 = (ray - y) * (ray - y);
+        for (;; x -= FULL) {
+            if (dY2 + (ray - x) * (ray - x) <= ray2)
+                continue;
+            if (x < y) {
+                Y = (y >> 2);
+                posmin = Y;
+                posmax = circleDiameter - Y;
+                while (Y < posmax) {
+                    for (X = posmin; X < posmax; X++)
+                        setPixel (circlePosX +X, circlePosY +Y);
+                    Y++;
+                }
+                return;
+            }
+            X = (x >> 2) + 1;
+            Y = y >> 2;
+            posmax = circleDiameter - X;
+            int mirrorY = circleDiameter - Y - 1;
+            while (X < posmax) {
+                setPixel (circlePosX + X, circlePosY + Y);
+                setPixel (circlePosX + X, circlePosY + mirrorY);
+                setPixel (circlePosX + Y, circlePosY + X);
+                setPixel (circlePosX + mirrorY, circlePosY + X);
+                X++;
+            }
+            break;
+        }
+    }
+}
+

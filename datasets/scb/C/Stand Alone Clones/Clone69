@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16016627
+*  Stack Overflow answer #:16017909
+*  And Stack Overflow answer#:16021686
+*/
+int main () {
+    int i = 0;
+    intarray_t t1 = {
+        .length = 6,
+        .items = (int [6]) {1, 2, 3, 4, 5, 6}
+    };
+    s1.chars = t1;
+    printf ("%d %d\n", s1.hash, s1.chars.length);
+    while (i < s1.chars.length) {
+        printf ("%d", s1.chars.items [i]);
+        i++;
+    }
+    putchar ('\n');
+    return 0;
+}
+
+int main (void) {
+    int i;
+    printf ("sizeof chararray_t: %zu\n", sizeof (chararray_t));
+    printf ("offsetof items: %zu\n", offsetof (chararray_t, items));
+    printf ("sizeof string_t: %zu\n", sizeof (string_t));
+    printf ("offsetof dummy: %zu\n", offsetof (string_t, dummy));
+    for (i = 0; i < 5; ++i) {
+        printf ("%d ", b1.chars.items [i]);
+    }
+    putchar ('\n');
+    for (i = 0; i < 5; ++i) {
+        printf ("%d ", b1.dummy [i]);
+    }
+    putchar ('\n');
+    return 0;
+}
+

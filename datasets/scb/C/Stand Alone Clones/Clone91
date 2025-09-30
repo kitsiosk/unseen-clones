@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10000621
+*  Stack Overflow answer #:10001260
+*  And Stack Overflow answer#:10001176
+*/
+int main (int ac, char *argv []) {
+    char str [] = "foo $$ foo ## foo []";
+    char *s = "foo";
+    char *p;
+    p = strtok (str, " ");
+    while (p != NULL) {
+        if (strcmp (p, s))
+            printf ("%s\n", p);
+        p = strtok (NULL, " ");
+    }
+    return 0;
+}
+
+int main () {
+    char *str = "foo $$ foo ## foo []";
+    char *s = "foo";
+    char **buffer = malloc (MAX_BUFFER_SIZE * sizeof (*buffer)), **buf = buffer;
+    char *start, *end;
+    int s_len = strlen (s);
+    start = str;
+    end = strstr (str, s);
+    while (end) {
+        add_to_buf (start, end - start, & buf);
+        start = end + s_len;
+        end = strstr (start, s);
+    }
+    add_to_buf (start, strlen (str) - (start - str), & buf);
+    *buf = 0;
+    for (buf = buffer; *buf; ++buf)
+        printf ("%s\n", *buf);
+    free (buffer);
+    return 0;
+}
+

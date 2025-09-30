@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41346797
+*  Stack Overflow answer #:41346859
+*  And Stack Overflow answer#:41347753
+*/
+int main () {
+    int i = 0, N, sum = 0;
+    scanf ("%d", & N);
+    int ar [N];
+    for (i = 0; i < N; i++)
+        scanf ("%d", &ar[i]);
+    for (i = 0; i < N; i++)
+        sum = sum + ar[i];
+    printf ("%d\n", sum);
+    return 0;
+}
+
+int main (void) {
+    int i, N, sum;
+    int *ar;
+    if (scanf ("%d", &N) != 1 || N <= 0) {
+        fprintf (stderr, "invalid number\n");
+        return 1;
+    }
+    ar = malloc (sizeof (*ar) * N);
+    if (ar == NULL) {
+        fprintf (stderr, "cannot allocate array for %d items\n", N);
+        return 1;
+    }
+    for (i = 0; i < N; i++) {
+        if (scanf ("%d", &ar[i]) != 1) {
+            fprintf (stderr, "invalid or missing number for entry %d\n", i);
+            return 1;
+        }
+    }
+    sum = 0;
+    for (i = 0; i < N; i++) {
+        sum += ar[i];
+    }
+    printf ("%d\n", sum);
+    free (ar);
+    return 0;
+}
+

@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27718330
+*  Stack Overflow answer #:27718786
+*  And Stack Overflow answer#:27719182
+*/
+int main () {
+    int c = 0;
+    int maxi = 10;
+    scanf ("%d", & c);
+    int t [c];
+    for (int i = 0; i < c; i++)
+        scanf ("%d", &t[i]);
+    for (int i = 0; i < c; i++) {
+        int com1 = t[i], com2 = 0;
+        if (t[i] > 10) {
+            com1 = 10 com2 = t [i] - com1;
+        }
+        printf ("%d %d\n", com1, com2);
+    }
+    return 0;
+}
+
+int main () {
+    int c = 0, mini, maxi, i, com1, com2, *t;
+    scanf ("%d", & c);
+    t = malloc (c * sizeof (int));
+    for (i = 0; i < c; i++)
+        scanf ("%d", &t[i]);
+    printf ("\n");
+    for (i = 0; i < c; i++) {
+        if (t[i] > 10) {
+            maxi = 10;
+            mini = t[i] - 10;
+        }
+        else {
+            maxi = t[i];
+            mini = 0;
+        }
+        com1 = rand () % (maxi - mini + 1) + mini;
+        com2 = t[i] - com1;
+        printf ("%d %d\n", com1, com2);
+    }
+    free (t);
+    return 0;
+}
+

@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13128584
+*  Stack Overflow answer #:13128744
+*  And Stack Overflow answer#:13128891
+*/
+int main (void) {
+    float fchange = 0.00;
+    int change = 0;
+    printf ("How much change is owed? ");
+    fchange = GetFloat ();
+    change = (int) roundf (fchange *100.0);
+    int quarters = change / 25;
+    change = change % 25;
+    int dimes = change / 10;
+    change = change % 10;
+    int nickels = change / 5;
+    change = change % 5;
+    printf ("%d quarters, %d dimes, %d nickels, %d pennies\n", quarters, dimes, nickels, change);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    float change = atof (argv[1]);
+    int work = (int) (100 * change + 0.5);
+    int quarters, dimes, nickels, pennies;
+    quarters = work / 25;
+    work %= 25;
+    dimes = work / 10;
+    work %= 10;
+    nickels = work / 5;
+    work %= 5;
+    pennies = work;
+    printf ("%.2f dollars = %d quarters, %d dimes, %d nickels and %d pennies: %d coins total\n", change, quarters, dimes, nickels, pennies, quarters + dimes + nickels + pennies);
+    return 0;
+}
+

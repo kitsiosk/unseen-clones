@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30140934
+*  Stack Overflow answer #:30142257
+*  And Stack Overflow answer#:30141100
+*/
+void ltrim (char *src) {
+    char *dst;
+    for (dst = src; *src == ' '; src++) {
+    }
+    if (dst == src)
+        return;
+    while ((*dst++ = *src++)) {
+    }
+    return;
+}
+
+void ltrim (char *string) {
+    int i = 0;
+    while (string[0] == ' ') {
+        i = 0;
+        while (string[i]) {
+            string[i] = string[i + 1];
+            i++;
+        }
+    }
+    printf ("inside function string is <%s>---length is %d\n", string, strlen (string));
+}
+

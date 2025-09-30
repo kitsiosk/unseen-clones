@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22077554
+*  Stack Overflow answer #:22078232
+*  And Stack Overflow answer#:22134995
+*/
+main () {
+    int x = 0xefffffff;
+    int y;
+    printf ("%x", x);
+    y = x & (0x80000000);
+    y = y >> 31;
+    x = (y & (~x + 1)) + (~y & (x));
+    x = x >> 2;
+    x = x & (0x3fffffff);
+    x = x + x + x;
+    x = x >> 2;
+    x = x & (0x3fffffff);
+    x = (y & (~x + 1)) + (~y & (x));
+    printf ("\n%x %d", x, x);
+}
+
+int main (void) {
+    int a, t, r, c, res;
+    a = 0;
+    do {
+        t = a >> 4;
+        r = a & 0xf;
+        c = (a >> 31) & 15;
+        res = t + t + t + ((r + r + r + c) >> 4);
+        if (res != ref (a)) {
+            printf ("!!!! error a=%08x  res=%08x  ref=%08x\n", a, res, ref (a));
+            return EXIT_FAILURE;
+        }
+        a++;
+    }
+    while (a);
+    return EXIT_SUCCESS;
+}
+

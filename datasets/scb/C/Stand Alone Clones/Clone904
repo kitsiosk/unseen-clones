@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:43059810
+*  Stack Overflow answer #:43120731
+*  And Stack Overflow answer#:43061511
+*/
+int main () {
+    printf ("1st Run:\n" "========\n" "\n");
+    run (& testSetSafe1);
+    printf ("\n");
+    printf ("2nd Run:\n" "========\n" "\n");
+    run (& testSetSafe2);
+    printf ("\n");
+    printf ("3rd Run:\n" "========\n" "\n");
+    run (& testSetUnsafe);
+    printf ("\n");
+    printf ("Done.\n");
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int input [NUMBER_OF_RESOURCES];
+    for (int i = 0; i < NUMBER_OF_RESOURCES; ++i)
+        input[i] = 10;
+    if (argc > NUMBER_OF_RESOURCES) {
+        for (int i = 0; i < NUMBER_OF_RESOURCES; ++i) {
+            input[i] = strtol (argv[i + 1], NULL, 10);
+        }
+    }
+    int result;
+    for (int i = 0; i < NUMBER_OF_RESOURCES; ++i) {
+        available[i] = input[i];
+    }
+    for (int i = 0; i < NUMBER_OF_CUSTOMERS; ++i) {
+        for (int j = 0; j < NUMBER_OF_RESOURCES; ++j) {
+            maximum[i][j] = input[j] - 4;
+            need[i][j] = 2;
+        }
+    }
+    Thread threads [NUMBER_OF_CUSTOMERS];
+    struct ThreadParams params [NUMBER_OF_CUSTOMERS];
+    for (int i = 0; i < NUMBER_OF_CUSTOMERS; ++i) {
+        printf ("Creating customer %d\n", i + 1);
+        params[i].req[0] = 2;
+        params[i].req[1] = 2;
+        params[i].req[2] = 2;
+        params[i].threadNum = i;
+        result = startThread (threads +i, &request_resources, params +i);
+    }
+    for (int i = 0; i < NUMBER_OF_CUSTOMERS; ++i) {
+        joinThread (threads + i);
+    }
+    printf ("Done\n");
+    return 0;
+}
+

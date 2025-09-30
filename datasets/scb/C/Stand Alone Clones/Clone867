@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12579719
+*  Stack Overflow answer #:12580127
+*  And Stack Overflow answer#:12579863
+*/
+int main () {
+    int *sdimen, i;
+    sdimen = malloc (10 * sizeof (int));
+    sdimen[0] = 10;
+    sdimen[1] = 20;
+    printf ("\n.. %d... %d ", sdimen [0], sdimen [1]);
+    int **twodimen;
+    twodimen = malloc (sizeof (int *) * 10);
+    for (i = 0; i < 10; i++) {
+        twodimen[i] = malloc (sizeof (int) * 5);
+    }
+    twodimen[0][0] = 10;
+    twodimen[0][3] = 30;
+    twodimen[2][3] = 50;
+    printf ("\n %d ... %d.... %d ", twodimen [0] [0], twodimen [0] [3], twodimen [2] [3]);
+    return 0;
+}
+
+int main (void) {
+    int **ptr;
+    int x;
+    x = 5;
+    ptr = malloc (sizeof (int *) * 10);
+    ptr[0] = &x;
+    printf ("%d\n", * ptr [0]);
+    free (ptr);
+    return 0;
+}
+

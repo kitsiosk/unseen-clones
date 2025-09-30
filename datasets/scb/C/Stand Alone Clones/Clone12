@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21660311
+*  Stack Overflow answer #:21660367
+*  And Stack Overflow answer#:21660830
+*/
+int main (void) {
+    int x;
+    scanf ("%d", & x);
+    if (x == 1)
+        printf ("ON");
+    else if (x == 0)
+        printf ("OFF");
+    else
+        printf ("Unexpected Input");
+}
+
+int main (void) {
+    int n = 0;
+    int c;
+    while ((c = getchar ()) != EOF && isdigit (c) && (INT_MAX - (c - '0')) / 10 >= n) {
+        n *= 10;
+        n += c - '0';
+    }
+    if (c == EOF)
+        printf ("End of file or an error was encountered");
+    else if (c == '\n')
+        printf ("Newline encountered");
+    else if (!isdigit (c))
+        printf ("Non-digit character %c encountered", c);
+    else if ((INT_MAX - (c - '0')) / 10 < n)
+        printf ("Overflow would be caused by appending %c", c);
+    else
+        printf ("unexpected logic error");
+    printf (" after %d\n", n);
+    return 0;
+}
+

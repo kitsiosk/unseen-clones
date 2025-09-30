@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19508712
+*  Stack Overflow answer #:19521841
+*  And Stack Overflow answer#:19509111
+*/
+void autocorrelation (int32_t *data, float *r) {
+    int m, n;
+    for (m = 0; m < P + 1; m++)
+        r[m] = 0.0f;
+    for (n = 0; n < N; n++) {
+        int limit = min (P +1, N -n);
+        for (m = 0; m < limit; m++) {
+            r[m] += data[n] * data[n + m];
+        }
+    }
+}
+
+void autocorrelation (float * restrict data, float * restrict r) {
+    float *data_end = data + N;
+    for (int m = 0; m < P + 1; m++) {
+        float temp = 0;
+        for (float *data_n = data, *data_nm = data + m; data_nm != data_end; data_n++, data_nm++) {
+            temp += *data_n * *data_nm;
+        }
+        r[m] = temp;
+    }
+}
+

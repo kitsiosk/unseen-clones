@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:589389
+*  Stack Overflow answer #:589410
+*  And Stack Overflow answer#:589425
+*/
+int main (void) {
+    FILE *fin, *fout;
+    int c;
+    if ((fin = fopen ("input.txt", "r")) == NULL) {
+        fprintf (stderr, "Cannot read from input.txt");
+        return 1;
+    }
+    if ((fout = fopen ("output.txt", "w")) == NULL) {
+        fprintf (stderr, "Cannot write to output.txt");
+        fclose (fin);
+        return 1;
+    }
+    while ((c = fgetc (fin)) >= 0) {
+        fputc (c, fout);
+    }
+    fclose (fin);
+    fclose (fout);
+    return 0;
+}
+
+int main (void) {
+    char c;
+    FILE *read;
+    read = fopen ("myfile", "r");
+    if (read == NULL) {
+        perror ("Error: could not open \"myfile\" for reading.\n");
+        exit (1);
+    }
+    c = fgetc (read);
+    fclose (read);
+    printf ("The first character of myfile is %c.\n", c);
+    return 0;
+}
+

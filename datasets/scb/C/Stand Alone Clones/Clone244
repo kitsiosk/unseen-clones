@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28790745
+*  Stack Overflow answer #:28791133
+*  And Stack Overflow answer#:28791220
+*/
+int main (void) {
+    VecType x [] = {3.45, 1.23, 9.14, 4.67, 2.19, 3.45, 5.92};
+    size_t x_size = sizeof (x) / sizeof (x[0]);
+    int oo [x_size];
+    for (size_t i = 0; i < x_size; i++)
+        oo[i] = (int) i;
+    print_arrays ("Before", x_size, x, oo);
+    qsort_r (oo, x_size, sizeof (oo [0]), x, compare);
+    print_arrays ("After", x_size, x, oo);
+    return 0;
+}
+
+int main () {
+    Type arr [] = {8, 5, 4, 9, 1, 7, 6, 3, 2, 0};
+    size_t n = sizeof (arr) / sizeof (*arr);
+    size_t *ind = order (arr, n);
+    size_t i;
+    for (i = 0; i < n; i++) {
+        printf ("%4d%16d\n", ind [i], arr [ind [i]]);
+    }
+    free (ind);
+    return 0;
+}
+

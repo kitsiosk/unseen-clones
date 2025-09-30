@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5012126
+*  Stack Overflow answer #:5012162
+*  And Stack Overflow answer#:5012327
+*/
+int main (void) {
+    FILE *fp;
+    fp = fopen ("write.txt", "w");
+    if (fp == NULL) {
+        printf ("File not created okay, errno = %d\n", errno);
+        return 1;
+    }
+    fclose (fp);
+    printf ("File created okay\n");
+    return 0;
+}
+
+int main () {
+    FILE
+    * fp, char ch;
+    fp = fopen ("write.txt", "r");
+    if (fp == NULL) {
+        printf ("Some problem in opening the file");
+        exit (0);
+    }
+    else {
+        while ((ch = fgetc (fp)) != EOF) {
+            printf ("%c", ch);
+        }
+    }
+    fclose (fp);
+    return 0;
+}
+

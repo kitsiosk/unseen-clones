@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14394117
+*  Stack Overflow answer #:14394702
+*  And Stack Overflow answer#:14394315
+*/
+int main () {
+    float a [] = {1.123, 12.123, 123.123, 12345.123};
+    for (int i = 0; i < 4; i++) {
+    std :
+        : stringstream ss;
+        ss << a[i];
+    std :
+        : string s;
+        ss >> s;
+        s.resize (5);
+        cout << s << "\n";
+    }
+    cout << endl;
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    float a [] = {1.123, 12.123, 123.123, 12345.123};
+    int i;
+    char floatString [100] = {0};
+    for (i = 0; i < sizeof (a) / sizeof (a[0]); i++) {
+        memset (floatString, 0, sizeof (floatString));
+        sprintf (floatString, "%f", a [i]);
+        floatString[5] = '\0';
+        printf ("%s\n", floatString);
+    }
+    return 0;
+}
+

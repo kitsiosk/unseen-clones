@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30540156
+*  Stack Overflow answer #:30761135
+*  And Stack Overflow answer#:30685749
+*/
+int main () {
+    int k;
+    struct sigdeath_notify_info death;
+    daft_thread_accounting_info_init (& g_thread_accounting);
+    register_signal_handlers ();
+    for (k = 0; k < 200; ++k) {
+        start_daft_thread (someone_please_fix_me, (void *) k);
+    }
+    while (read (g_thread_accounting.monitor_pipe[0], &death, sizeof (death)) == sizeof (death)) {
+        struct daft_thread_t *info = find_thread_by_tid (death.tid);
+        if (info == NULL) {
+            fprintf (stderr, "*** thread_id %u not found\n", death.tid);
+            continue;
+        }
+        fprintf (stderr, "Thread %u (%d) died of %d, restarting.\n", death.tid, (int) info -> start_routine_arg, death.signum);
+        restart_daft_thread (info);
+    }
+    fprintf (stderr, "Shouldn't get here.\n");
+    return 0;
+}
+
+int main (void) {
+    pthread_t thread1, thread2, thread3;
+    int segvindex1 = rand () % 5;
+    int segvindex2 = rand () % 5;
+    int segvindex3 = rand () % 5;
+    struct sigaction sact;
+    memset (& sact, 0, sizeof sact);
+    sact.sa_sigaction = handler;
+    sact.sa_flags = SA_SIGINFO;
+    if (sigaction (SIGSEGV, &sact, NULL) < 0) {
+        perror ("sigaction");
+        return 1;
+    }
+    pthread_create (& thread1, NULL, & threadfunc, (void *) & segvindex1);
+    pthread_create (& thread2, NULL, & threadfunc, (void *) & segvindex2);
+    pthread_create (& thread3, NULL, & threadfunc, (void *) & segvindex3);
+    pthread_join (thread1, NULL);
+    pthread_join (thread2, NULL);
+    pthread_join (thread3, NULL);
+    return 0;
+}
+

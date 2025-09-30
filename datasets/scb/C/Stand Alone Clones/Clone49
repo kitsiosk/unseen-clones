@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11269792
+*  Stack Overflow answer #:11271061
+*  And Stack Overflow answer#:11271231
+*/
+int main () {
+    char my_string [] = "1.0,2.0,3.0";
+    float *my_array;
+    char **strs;
+    size_t count;
+    strs = split (my_string, ", \t", &count);
+    my_array = (float *) malloc (sizeof (float) * count);
+    {
+        int i;
+        for (i = 0; i < count; ++i)
+            my_array[i] = (float) atof (strs[i]);
+        free4split (strs);
+    }
+    {
+        int i;
+        for (i = 0; i < count; ++i)
+            printf ("%f\n", my_array[i]);
+    }
+    return 0;
+}
+
+int main () {
+    char my_string [] = "1.0,2.0,3.0";
+    float *my_array = NULL;
+    char *word, *p = my_string;
+    int count = 0;
+    while (NULL != (word = getToken (&p, ','))) {
+        my_array = (float *) realloc (my_array, sizeof (float) * (++count));
+        my_array[count - 1] = (float) atof (word);
+        free (word);
+    }
+    {
+        int i;
+        for (i = 0; i < count; ++i)
+            printf ("%f\n", my_array[i]);
+    }
+    return 0;
+}
+

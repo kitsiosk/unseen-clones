@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1801549
+*  Stack Overflow answer #:1801703
+*  And Stack Overflow answer#:36963869
+*/
+int main () {
+    Node d = {'d', 0};
+    Node c = {'c', &d};
+    Node b = {'b', &c};
+    Node a = {'a', &b};
+    Node *root = &a;
+    print_list (root);
+    root = reverse (root);
+    print_list (root);
+    return 0;
+}
+
+void main () {
+    node *head;
+    clrscr ();
+    head = NULL;
+    add_end (& head, 1);
+    add_end (& head, 2);
+    add_end (& head, 3);
+    print_all (head);
+    reverse (& head);
+    print_all (head);
+    getch ();
+}
+

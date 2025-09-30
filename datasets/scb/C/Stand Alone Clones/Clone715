@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52715808
+*  Stack Overflow answer #:52716195
+*  And Stack Overflow answer#:52717293
+*/
+int main (int arg_c, char **args) {
+    int i = 100;
+    pthread_t loop;
+    pthread_create (& loop, NULL, timer, & i);
+    while (i > 0) {
+        i++;
+        getchar ();
+        printf ("inc counter: %d \n", i);
+    }
+    printf ("%d after\n", i);
+    pthread_join (loop, NULL);
+    return 0;
+}
+
+int main (void) {
+    int ch;
+    timer_t tid;
+    struct itimerspec its = {0};
+    struct sigevent se = {0};
+    se.sigev_notify = SIGEV_THREAD;
+    se.sigev_notify_function = timer;
+    its.it_value.tv_sec = its.it_interval.tv_sec = 1;
+    timer_create (CLOCK_REALTIME, & se, & tid);
+    timer_settime (tid, 0, & its, NULL);
+    initscr ();
+    halfdelay (1);
+    noecho ();
+    curs_set (0);
+    for (;;) {
+        ch = getch ();
+        if (ch != ERR) {
+            changed = 1;
+            value++;
+        }
+        if (changed) {
+            changed = 0;
+            mvprintw (0, 0, "%d ", value);
+            refresh ();
+        }
+    }
+    endwin ();
+}
+

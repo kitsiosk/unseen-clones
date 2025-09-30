@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38335563
+*  Stack Overflow answer #:38335679
+*  And Stack Overflow answer#:38336974
+*/
+long factorial (int level, long number) {
+    int result;
+    printf ("[%03d] Calculating: %d\n", level, number);
+    if (number <= 1) {
+        result = 1;
+    }
+    else {
+        result = number * factorial (level +1, number -1);
+    }
+    printf ("[%03d] Returning:   %d\n", level, result);
+    return result;
+}
+
+long factorial (long number) {
+    static char output [4096];
+    static int level;
+    static int index;
+    int saved_index;
+    long result;
+    switch (level++) {
+    case 1 :
+        index += snprintf (output +index, sizeof (output) - index, "= ");
+    default :
+        index += snprintf (output +index, sizeof (output) - index, "%ld x ", number +1);
+    case 0 :
+        snprintf (output +index, sizeof (output) - index, "factorial(%ld)\n", number);
+    }
+    saved_index = index;
+    printf ("%s", output);
+    result = factorial_body (number);
+    index = saved_index;
+    snprintf (output + index, sizeof (output) - index, -- level ? "%ld\n" : "= %ld\n", result);
+    printf ("%s", output);
+    return result;
+}
+

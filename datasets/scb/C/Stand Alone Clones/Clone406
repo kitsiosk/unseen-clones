@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9243312
+*  Stack Overflow answer #:11429631
+*  And Stack Overflow answer#:20516071
+*/
+int main (int argc, char **argv) {
+    if (argc <= 2) {
+        if (argv)
+            argc = atoi (argv[1]);
+        else
+            return argc;
+    }
+    argc *= main (argc -1, NULL);
+    if (argv) {
+        printf ("=%d\n", argc);
+        return 0;
+    }
+    return argc;
+}
+
+void main () {
+    clrscr ();
+    int number, counter;
+label1 :
+    cout << "\n Enter the Number = ";
+    cin >> number;
+    if (number < 0) {
+        cout << "\n Enter a non negative number, please!";
+        goto label1;
+    }
+    cout << "\n\n ----------- Results ------------";
+    cout << "\n\n The Factorial of the number " << number << "\n is " << factorial (number);
+    getch ();
+}
+

@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22907120
+*  Stack Overflow answer #:22907211
+*  And Stack Overflow answer#:22907421
+*/
+main () {
+    int c, i;
+    c = getchar ();
+    i = 1;
+    while (c != '\n') {
+        if (c >= 48 && c <= 57)
+            i = (c - '0') * i;
+        c = getchar ();
+    }
+    printf ("%d", i);
+}
+
+int main (void) {
+    int c;
+    int i = 1;
+    do {
+        c = getchar ();
+        if (c >= '0' && c <= '9') {
+            i *= (c - '0');
+        }
+    }
+    while (c != '\n');
+    printf ("Product: %d\n", i);
+    return 0;
+}
+

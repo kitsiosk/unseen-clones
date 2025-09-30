@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17615236
+*  Stack Overflow answer #:17615536
+*  And Stack Overflow answer#:17625946
+*/
+int main (int argc, char *argv []) {
+    char *wordInput = argv[1];
+    char *newWord = (char *) malloc ((strlen (wordInput) + 1) * (sizeof (char)));
+    int i, j, k;
+    fprintf (stdout, "Word is %s\n", wordInput);
+    for (i = 0; i < strlen (wordInput); i++) {
+        newWord[i] = wordInput[i];
+        for (j = i - 1; j >= 0; j--) {
+            if (newWord[j + 1] < newWord[j]) {
+                SWAP (newWord [j + 1], newWord [j]);
+            }
+            else {
+                break;
+            }
+        }
+    }
+    newWord[strlen (wordInput)] = '\0';
+    fprintf (stdout, "Converting sorted word %s back to %s...\n", newWord, wordInput);
+    for (i = 0; i < strlen (wordInput) - 1; i++) {
+        for (j = i; j < strlen (newWord); j++) {
+            if (newWord[j] == wordInput[i]) {
+                if (i != j) {
+                    SWAP (newWord [j], newWord [i]);
+                    fprintf (stdout, "Swapping %d with %d --> %s\n", i, j, newWord);
+                }
+                break;
+            }
+        }
+    }
+}
+
+int main (void) {
+    char wordInput [25];
+    char newWord [25];
+    int i, len;
+    char *p;
+    strcpy (wordInput, "poop");
+    strcpy (newWord, "oopp");
+    len = strlen (newWord);
+    printf ("newWold:%s\n", newWord);
+    for (i = 0; i < len; ++i) {
+        if (wordInput[i] == newWord[i])
+            continue;
+        if (NULL != (p = strchr (&newWord[i + 1], wordInput[i])))
+            swap (&newWord[i], p);
+        else
+            break;
+    }
+    if (i < len) {
+        printf ("can't...orz\n");
+    }
+    else {
+        printf ("Back to original input: %s\n", newWord);
+    }
+    return 0;
+}
+

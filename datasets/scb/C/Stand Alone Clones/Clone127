@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37225997
+*  Stack Overflow answer #:37226130
+*  And Stack Overflow answer#:37226119
+*/
+int main (void) {
+    struct perdata {
+        char name [20];
+        int age;
+        float salary;
+    };
+    struct perdata p [4];
+    for (int i = 0; i < 4; i++) {
+        scanf ("%s", & p [i].name);
+    }
+    for (int i = 0; i < 4; i++) {
+        printf ("p%d.name:%s\n", i + 1, p [i].name);
+    }
+    getch ();
+}
+
+int main () {
+    struct student s [10];
+    int i;
+    printf ("Enter information of students:\n");
+    for (i = 0; i < 10; ++i) {
+        s[i].roll = i + 1;
+        printf ("\nFor roll number %d\n", s [i].roll);
+        printf ("Enter name: ");
+        scanf ("%s", s [i].name);
+        printf ("Enter marks: ");
+        scanf ("%f", & s [i].marks);
+        printf ("\n");
+    }
+    printf ("Displaying information of students:\n\n");
+    for (i = 0; i < 10; ++i) {
+        printf ("\nInformation for roll number %d:\n", i + 1);
+        printf ("Name: ");
+        puts (s [i].name);
+        printf ("Marks: %.1f", s [i].marks);
+    }
+    return 0;
+}
+

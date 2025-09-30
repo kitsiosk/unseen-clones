@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1833716
+*  Stack Overflow answer #:1834240
+*  And Stack Overflow answer#:1833758
+*/
+void openPasswd (char ***users, char ***names, size_t entries) {
+    size_t i;
+    *users = malloc (sizeof **users * entries);
+    *names = malloc (sizeof **names * entries);
+    for (i = 0; i < entries; i++) {
+        (*users)[i] = malloc (sizeof *(*users)[i] * get_user_length (i));
+        if ((*users)[i] != NULL) {
+            strcpy ((* users) [i], get_user (i));
+        }
+        (*names)[i] = malloc (sizeof *(*names)[i] * get_name_length (i));
+        if ((*names)[i] != NULL) {
+            strcpy ((* names) [i], get_name (i));
+        }
+    }
+}
+
+void openPasswd (char ***users, char ***names) {
+    *users = malloc (3 * sizeof **users);
+    (*users)[0] = "3";
+    (*users)[1] = "4";
+    (*users)[2] = "7";
+    *names = malloc (3 * sizeof **names);
+    (*names)[0] = "foo";
+    (*names)[1] = "bar";
+    (*names)[2] = "baz";
+}
+

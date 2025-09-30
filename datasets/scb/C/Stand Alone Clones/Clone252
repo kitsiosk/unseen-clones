@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53490082
+*  Stack Overflow answer #:53490657
+*  And Stack Overflow answer#:53491472
+*/
+int main (int argc, char **argv) {
+    char *fname = "./someFileNameHere";
+    struct stat st;
+    stat (fname, & st);
+    char *content = malloc (st.st_size + 1);
+    content[st.st_size] = 0;
+    FILE *infile = fopen (fname, "rb");
+    size_t read = fread (content, sizeof (char), st.st_size, infile);
+    fclose (infile);
+    puts (content);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    size_t nbytes;
+    char *content;
+    if (argc < 2) {
+        fprintf (stderr, "error: insufficient input. filename req'd.\n");
+        return 1;
+    }
+    if ((content = read_file (argv[1], &nbytes))) {
+        printf ("read %zu bytes of data from %s\n" "------content------\n%s\n-------------------\n", nbytes, argv [1], content);
+        free (content);
+    }
+    return 0;
+}
+

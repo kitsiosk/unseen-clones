@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9076494
+*  Stack Overflow answer #:11501477
+*  And Stack Overflow answer#:49044880
+*/
+int main (void) {
+    time_t now = time (0);
+    struct tm local = *localtime (&now);
+    struct tm utc = *gmtime (&now);
+    time_t t1 = mktime (&local);
+    time_t t2 = my_timegm (&utc);
+    assert (t1 == t2);
+    printf ("t =%lu\nt1=%lu\nt2=%lu\n", now, t1, t2);
+    return 0;
+}
+
+int main (void) {
+    char mytime_1 [20] = "2018-02-28 13:00:00";
+    char utctime_1 [20], back_1 [20];
+    localToUTC (utctime_1, mytime_1);
+    utcToLocal (back_1, utctime_1);
+    printf ("My time: %s\n", mytime_1);
+    printf ("UTC time: %s\n", utctime_1);
+    printf ("Back: %s\n", back_1);
+    printf ("-------------------------------------------\n");
+    char mytime_2 [20] = "2018-07-28 17:00:00";
+    char utctime_2 [20], back_2 [20];
+    localToUTC (utctime_2, mytime_2);
+    utcToLocal (back_2, utctime_2);
+    printf ("My time: %s\n", mytime_2);
+    printf ("UTC time: %s\n", utctime_2);
+    printf ("Back: %s\n", back_2);
+    printf ("-------------------------------------------\n");
+    return 0;
+}
+

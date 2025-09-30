@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31826746
+*  Stack Overflow answer #:31987936
+*  And Stack Overflow answer#:31829089
+*/
+int main () {
+    char buffer [SIZE];
+    int i;
+    srand ((unsigned) time (NULL));
+    for (i = 0; i < SIZE; ++i)
+        buffer[i] = (char) i;
+    for (i = 0; i < NUMBER; ++i) {
+        do
+            shuffle (buffer, SIZE);
+        while (buffer[0] == 0);
+        printout (buffer, LENGTH);
+    }
+    return 0;
+}
+
+int main (void) {
+    char digits [] = "123456789";
+    srand (time (NULL));
+    size_t i = sizeof digits - 1;
+    while (i) {
+        size_t j = rand () % i;
+        char tmp = digits[--i];
+        digits[i] = digits[j];
+        digits[j] = tmp;
+    }
+    printf ("number is %s\n", digits);
+    return 0;
+}
+

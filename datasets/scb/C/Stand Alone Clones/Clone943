@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5589136
+*  Stack Overflow answer #:5589450
+*  And Stack Overflow answer#:5589140
+*/
+int main () {
+    struct data ob1;
+    struct data *buffer = (struct data *) malloc (sizeof (struct data));
+    if (buffer == NULL) {
+        printf ("Memory allocation failed\n");
+        return;
+    }
+    ob1.num1 = 1;
+    ob1.num2 = 2;
+    ob1.num3 = 3;
+    ob1.num4 = 4;
+    memcpy (buffer, & ob1, sizeof (struct data));
+}
+
+int main (int argc, char **argv) {
+    data my_data;
+    my_data.num1 = 64;
+    my_data.num2 = 65;
+    my_data.num3 = 66;
+    char buffer [20];
+    memcpy (buffer, & my_data, sizeof (data));
+    data copy_data;
+    memcpy (& copy_data, buffer, sizeof (data));
+    printf ("the numbers : %d - %d - %d \n", copy_data.num1, copy_data.num2, copy_data.mum3);
+    return 0;
+}
+

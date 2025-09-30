@@ -1,0 +1,123 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29519068
+*  Stack Overflow answer #:33448646
+*  And Stack Overflow answer#:29519183
+*/
+int main (void) {
+    char hexchar [SIZEOF_CHAR * 2 + 1], hexint [SIZEOF_INT * 2 + 1], hexlong [SIZEOF_LONG * 2 + 1], hexpointer [SIZEOF_POINTER * 2 + 1];
+    int strlen_hexchar, strlen_hexint, strlen_hexlong, strlen_hexpointer;
+    strlen_hexchar = sprintf (hexchar, "%x", (unsigned char) -1);
+    strlen_hexint = sprintf (hexint, "%x", (unsigned int) -1);
+    strlen_hexlong = sprintf (hexlong, "%x", (unsigned long) -1l);
+    strlen_hexpointer = sprintf (hexpointer, "%p", (void *) -1l);
+    printf ("#define SIZEOF_CHAR sizeof(char)                // %2d\n", SIZEOF_CHAR);
+    printf ("#define SIZEOF_INT sizeof(int)                  // %2d\n", SIZEOF_INT);
+    printf ("#define SIZEOF_LONG sizeof(long)                  // %2d\n", SIZEOF_LONG);
+    printf ("#define SIZEOF_POINTER sizeof(void *)           // %2d\n", SIZEOF_POINTER);
+    printf ("\n");
+    printf ("#define NIBBLE_BIT %-2d\n", NIBBLE_BIT);
+    printf ("#ifndef CHAR_BIT\n");
+    printf ("#define CHAR_BIT %-2d   // should have been defined in <limits.h>\n", CHAR_BIT);
+    printf ("#endif\n");
+    printf ("#define INT_BIT (SIZEOF_INT * CHAR_BIT)         // %2d\n", INT_BIT);
+    printf ("#define INT_LONG (INT_LONG * CHAR_BIT)         // %2d\n", LONG_BIT);
+    printf ("#define POINTER_BIT (SIZEOF_POINTER * CHAR_BIT) // %2d\n", POINTER_BIT);
+    printf ("\n");
+    printf ("\nTest setup...\n");
+    printf ("\n");
+    printf ("char hexchar[CHAR_BIT * SIZEOF_CHAR + 1],\n");
+    printf ("    hexint[CHAR_BIT * SIZEOF_INT + 1],\n");
+    printf ("    hexlong[CHAR_BIT * SIZEOF_LONG + 1],\n");
+    printf ("    hexpointer[CHAR_BIT * SIZEOF_POINTER + 1];\n");
+    printf ("int strlen_hexchar, strlen_hexint, strlen_hexlong, strlen_hexpointer;\n");
+    printf ("\n");
+    printf ("strlen_hexchar = sprintf(hexchar, \"%%x\", (unsigned char)-1);\n//    returned %d, hexchar populated with \"%s\"\n", strlen_hexchar, hexchar);
+    printf ("strlen_hexint = sprintf(hexint, \"%%x\", (unsigned int)-1);\n//    returned %d, hexint populated with \"%s\"\n", strlen_hexint, hexint);
+    printf ("strlen_hexlong = sprintf(hexlong, \"%%x\", (unsigned long)-1);\n//    returned %d, hexlong populated with \"%s\"\n", strlen_hexlong, hexlong);
+    printf ("strlen_hexpointer = sprintf(hexpointer, \"%%x\", (void*)-1l);\n//    returned %d, hexpointer populated with \"%s\"\n", strlen_hexpointer, hexpointer);
+    printf ("\n\nTest results...\n");
+    printf ("\n");
+    if (SIZEOF_CHAR * 2 == strlen_hexchar) {
+        printf ("testing (SIZEOF_CHAR * 2 == strlen_hexchar) [pass]\n");
+    }
+    else {
+        printf ("testing (SIZEOF_CHAR * 2 == strlen_hexchar) [fail]\n");
+        printf ("  (%d != $d)\n", SIZEOF_CHAR * 2, strlen_hexchar);
+    }
+    if (SIZEOF_INT * 2 == strlen_hexint) {
+        printf ("testing (SIZEOF_INT * 2 == strlen_hexint) [pass]\n");
+    }
+    else {
+        printf ("testing (SIZEOF_INT * 2 == strlen_hexint) [fail]\n");
+        printf ("  (%d != $d)\n", SIZEOF_INT * 2, strlen_hexint);
+    }
+    if (SIZEOF_LONG * 2 == strlen_hexlong) {
+        printf ("testing (SIZEOF_LONG * 2 == strlen_hexlong) [pass]\n");
+    }
+    else {
+        printf ("testing (SIZEOF_LONG * 2 == strlen_hexlong) [fail]\n");
+        printf ("  (%d != $d)\n", SIZEOF_LONG * 2, strlen_hexlong);
+    }
+    if (SIZEOF_POINTER * 2 == strlen_hexpointer) {
+        printf ("testing (SIZEOF_POINTER * 2 == strlen_hexpointer) [pass]\n");
+    }
+    else {
+        printf ("testing (SIZEOF_POINTER * 2 == strlen_hexpointer) [fail]\n");
+        printf ("  (%d != $d)\n", SIZEOF_POINTER * 2, strlen_hexpointer);
+    }
+    printf ("\n");
+    if (CHAR_BIT == strlen_hexchar * NIBBLE_BIT) {
+        printf ("testing (CHAR_BIT == strlen_hexchar * NIBBLE_BIT) [pass]\n");
+    }
+    else {
+        printf ("testing (CHAR_BIT == strlen_hexchar * NIBBLE_BIT) [fail]\n");
+        printf ("  (%d != $d)\n", CHAR_BIT, strlen_hexchar * NIBBLE_BIT);
+    }
+    if (INT_BIT == strlen_hexint * NIBBLE_BIT) {
+        printf ("testing (INT_BIT == strlen_hexint * NIBBLE_BIT) [pass]\n");
+    }
+    else {
+        printf ("testing (INT_BIT == strlen_hexint * NIBBLE_BIT) [fail]\n");
+        printf ("  (%d != $d)\n", INT_BIT, strlen_hexint * NIBBLE_BIT);
+    }
+    if (LONG_BIT == strlen_hexlong * NIBBLE_BIT) {
+        printf ("testing (LONG_BIT == strlen_hexlong * NIBBLE_BIT) [pass]\n");
+    }
+    else {
+        printf ("testing (LONG_BIT == strlen_hexlong * NIBBLE_BIT) [fail]\n");
+        printf ("  (%d != $d)\n", LONG_BIT, strlen_hexlong * NIBBLE_BIT);
+    }
+    if (POINTER_BIT == strlen_hexpointer * 4) {
+        printf ("testing (POINTER_BIT == strlen_hexpointer * NIBBLE_BIT) [pass]\n");
+    }
+    else {
+        printf ("testing (POINTER_BIT == strlen_hexpointer * NIBBLE_BIT) [fail]\n");
+        printf ("  (%d != $d)\n", POINTER_BIT, strlen_hexpointer * NIBBLE_BIT);
+    }
+    printf ("\n");
+    if ((int) (SIZEOF_POINTER * CHAR_BIT) == strlen_hexpointer * NIBBLE_BIT) {
+        printf ("testing ((int)(SIZEOF_POINTER * CHAR_BIT) == strlen_hexpointer * NIBBLE_BIT) [pass]\n");
+    }
+    else {
+        printf ("testing ((int)(SIZEOF_POINTER * CHAR_BIT) == strlen_hexpointer * NIBBLE_BIT) [fail]\n");
+        printf ("  (%d != %d)\n", (int) (SIZEOF_POINTER * CHAR_BIT), strlen_hexpointer * NIBBLE_BIT);
+    }
+    printf ("\nConclusion: this machine word is %d bytes and %d bits\n", SIZEOF_POINTER * 8 / CHAR_BIT, strlen_hexpointer * NIBBLE_BIT);
+    if ((int) (SIZEOF_POINTER * CHAR_BIT) != strlen_hexpointer * NIBBLE_BIT) {
+        printf (" * however this conclusion did not pass the (int)(SIZEOF_POINTER * 8 / CHAR_BIT) == strlen_hexpointer * NIBBLE_BIT) test\n");
+    }
+    return 0;
+}
+
+int main () {
+    int num = 1;
+    int count = 0;
+    while (num <<= 8) {
+        count++;
+    }
+    printf ("System size of int:%d", count + 1);
+    return 0;
+}
+

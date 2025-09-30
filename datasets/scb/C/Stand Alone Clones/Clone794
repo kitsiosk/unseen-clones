@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2450704
+*  Stack Overflow answer #:2450962
+*  And Stack Overflow answer#:2450795
+*/
+void trim (char *str) {
+    char *start, *end;
+    for (start = str; *start; start++) {
+        if (!isspace ((unsigned char) start[0]))
+            break;
+    }
+    for (end = start + strlen (start); end > start + 1; end--) {
+        if (!isspace ((unsigned char) end[-1]))
+            break;
+    }
+    *end = 0;
+    if (start > str)
+        memmove (str, start, (end - start) + 1);
+}
+
+void trim (char *str) {
+    char *ptr = str;
+    while (*ptr == ' ' || *ptr == '\t' || *ptr == '\r' || *ptr == '\n')
+        ++ptr;
+    char *end = ptr;
+    while (*end)
+        ++end;
+    if (end > ptr) {
+        for (--end; end >= ptr && (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\n'); --end)
+            ;
+    }
+    memmove (str, ptr, end - ptr);
+    str[end - ptr] = 0;
+}
+

@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35249853
+*  Stack Overflow answer #:35250252
+*  And Stack Overflow answer#:35249906
+*/
+int main (int argc, char **argv) {
+    char inputBuffer [1024];
+    char *ptr = NULL;
+    int integer = 8888;
+    FILE *xfin;
+    --argc;
+    ++argv;
+    if (argc > 0)
+        xfin = fopen (*argv, "r");
+    else
+        xfin = stdin;
+    while (fgets (inputBuffer, sizeof (inputBuffer), xfin)) {
+        ptr = inputBuffer;
+        int done = 0;
+        while (!done) {
+            char *newPtr = ASCIItoInt (ptr, &integer);
+            if (newPtr == NULL) {
+                if (*ptr != '\0')
+                    ++ptr;
+                else
+                    done = 1;
+            }
+            else {
+                printf ("%d\n", integer);
+                ptr = newPtr;
+            }
+        }
+    }
+    if (argc > 0)
+        fclose (xfin);
+    return 0;
+}
+
+int main () {
+    int i;
+    char buffer [256];
+    printf ("Enter a number: ");
+    fgets (buffer, 256, stdin);
+    i = atoi (buffer);
+    printf ("The value entered is %d. Its double is %d.\n", i, i * 2);
+    return 0;
+}
+

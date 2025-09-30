@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44605024
+*  Stack Overflow answer #:44605197
+*  And Stack Overflow answer#:44605178
+*/
+char *upgradestring (char const *o) {
+    char *r, *p;
+    size_t len = newlen (o);
+    if (0 == (r = malloc (len +1)))
+        return 0;
+    r[len] = 0;
+    for (p = r; *o;) {
+        *p++ = *o;
+        if (*o == ' ')
+            while (*o == ' ')
+                o++;
+            else
+                o++;
+    }
+    return r;
+}
+
+char *upgradestring (char *oldtext) {
+    int i, j, count = 0;
+    for (i = 0; oldtext[i]; i++) {
+        if (oldtext[i] != ' ')
+            count++;
+        else if (i != 0 && oldtext[i - 1] != ' ')
+            count++;
+    }
+    char *newstr = malloc (count +1);
+    if (!newstr) {
+        printf ("Malloc failed\n");
+        return 0;
+    }
+    for (i = 0, j = 0; (oldtext[i]) && j < (count + 1); i++) {
+    }
+    newstr[j] = '\0';
+    return newstr;
+}
+

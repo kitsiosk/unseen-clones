@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22370713
+*  Stack Overflow answer #:22370799
+*  And Stack Overflow answer#:22370816
+*/
+int main () {
+    char z [10];
+    int a;
+    printf ("enter the no.");
+    scanf ("%d", & a);
+    printf ("the entered no. is:%d\n", a);
+    int i;
+    for (i = 0; i < a; i++) {
+        printf ("enter the letters:");
+        scanf ("%c", & z [i]);
+    }
+    printf ("the entered letters are:");
+    for (i = 0; i < a; i++) {
+        printf ("%c\n", z [i]);
+    }
+    return 0;
+}
+
+int main () {
+    char z;
+    int a;
+    printf ("enter the no.");
+    scanf ("%d", & a);
+    printf ("the entered no. is:%d\n", a);
+    int i;
+    for (i = 0; i < a; i++) {
+        printf ("enter the letters:");
+        scanf ("%s", & z);
+        printf ("letter scanned:%c\n", z);
+    }
+    return 0;
+}
+

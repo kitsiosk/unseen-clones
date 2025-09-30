@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18821489
+*  Stack Overflow answer #:18821848
+*  And Stack Overflow answer#:18821552
+*/
+int main () {
+    int a [4], i;
+    FILE *point = fopen ("test.txt", "r");
+    for (i = 0; i < 4; i++) {
+        fscanf (point, "%d,", & a [i]);
+    }
+    for (i = 0; i < 4; i++) {
+        printf ("%d\n", a [i]);
+    }
+}
+
+int main () {
+    FILE *f = fopen ("test.txt", "r");
+    int n = 0, i = 0;
+    int numbers [5];
+    while (fscanf (f, "%d,", &n) > 0) {
+        numbers[i++] = n;
+    }
+    fclose (f);
+}
+

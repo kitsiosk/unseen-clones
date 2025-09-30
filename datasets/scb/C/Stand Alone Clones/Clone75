@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1391314
+*  Stack Overflow answer #:1391367
+*  And Stack Overflow answer#:1391406
+*/
+int main (int argc, char *argv []) {
+    (void) argc, (void) argv;
+    static uint8_t buffer [WIDTH * HEIGHT * 3];
+    _Bool ok = init_app ("SDL example", NULL, SDL_INIT_VIDEO) && SDL_SetVideoMode (WIDTH, HEIGHT, 24, SDL_HWSURFACE);
+    assert (ok);
+    SDL_Surface *data_sf = SDL_CreateRGBSurfaceFrom (init_data (buffer), WIDTH, HEIGHT, 24, WIDTH *3, mask32 (0), mask32 (1), mask32 (2), 0);
+    SDL_SetEventFilter (filter);
+    for (; process (buffer); SDL_Delay (10))
+        render (data_sf);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int x, y, t;
+    SDL_Event event;
+    SDL_Surface *scr;
+    SDL_Init (SDL_INIT_VIDEO);
+    scr = SDL_SetVideoMode (640, 480, 24, SDL_SWSURFACE);
+    assert (scr);
+    SDL_LockSurface (scr);
+    for (y = 0; y < scr->h; y++)
+        for (x = 0; x < scr->w; x++) {
+            t = ((x * x + y * y) & 511) - 256;
+            if (t < 0)
+                t = -(t + 1);
+            pel (scr, x, y, 0) = 255 - t;
+            pel (scr, x, y, 1) = t;
+            pel (scr, x, y, 2) = t;
+        }
+    SDL_UnlockSurface (scr);
+    SDL_UpdateRect (scr, 0, 0, 0, 0);
+    while (SDL_WaitEvent (&event)) {
+        if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+            break;
+    }
+    SDL_Quit ();
+    return EXIT_SUCCESS;
+}
+

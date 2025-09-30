@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:24592145
+*  Stack Overflow answer #:24595311
+*  And Stack Overflow answer#:24592368
+*/
+uint32_t get_micros () {
+    uint32_t before_ms, after_ms, calc_micros;
+    do {
+        before_ms = g_timing_tick_ms;
+        calc_micros = before_ms * 1000 + (1000 - SysTick->VAL / 84);
+        after_ms = g_timing_tick_ms;
+    }
+    while (before_ms != after_ms);
+    return calc_micros;
+}
+
+uint32_t get_micros () {
+    static uint32_t last_value;
+    volatile uint32_t timestamp = g_timing_tick_ms;
+    volatile uint32_t val = SysTick->VAL;
+    uint32_t micro_us = (timestamp * 1000 + (1000 - val / 84));
+    if (last_value > micro_us)
+        micro_us += 1000;
+    last_value = micro_us;
+    return micro_us;
+}
+

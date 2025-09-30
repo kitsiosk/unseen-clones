@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18942719
+*  Stack Overflow answer #:18943224
+*  And Stack Overflow answer#:18943028
+*/
+int main (void) {
+    FILE *fp;
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    const char *s = " ";
+    char *token = NULL;
+    int i = 0;
+    double arr [200];
+    int j;
+    fp = fopen ("g.txt", "r");
+    if (fp == NULL) {
+        printf ("Error opening");
+        exit (EXIT_FAILURE);
+    }
+    while ((read = getline (&line, &len, fp)) != -1) {
+        token = strtok (line, s);
+        while (token != NULL) {
+            arr[i] = atoi (token);
+            printf ("%f\n", arr [i]);
+            token = strtok (NULL, s);
+            i++;
+        }
+    }
+    exit (EXIT_SUCCESS);
+    return 0;
+}
+
+int main (void) {
+    int i = 0, totalNums, totalNum, j = 0;
+    size_t count;
+    int numbers [100] [100];
+    char *line = malloc (100);
+    FILE *file;
+    file = fopen ("g.txt", "r");
+    while (getline (&line, &count, file) != -1) {
+        for (; count > 0; count--, j++)
+            sscanf (line, "%d", &numbers[i][j]);
+        i++;
+    }
+    totalNums = i;
+    totalNum = j;
+    for (i = 0; i < totalNums; i++) {
+        for (j = 0; j < totalNum; j++) {
+            printf ("\n%d", numbers [i] [j]);
+        }
+    }
+    fclose (file);
+    return 0;
+}
+

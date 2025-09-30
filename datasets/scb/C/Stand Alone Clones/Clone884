@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7896508
+*  Stack Overflow answer #:7896636
+*  And Stack Overflow answer#:7896840
+*/
+int main () {
+    int fd;
+    struct termios tio;
+    printf ("Enter something: ");
+    tcgetattr (fileno (stdin), & tio);
+    tio.c_lflag &= ~ECHO;
+    tcsetattr (fileno (stdin), TCSANOW, & tio);
+    munch_line ();
+    putchar ('\n');
+}
+
+int main (void) {
+    printf ("ZZZZZZZZZZ");
+    printf ("\x1b[%dD", 10U);
+    printf ("YYYYYYYYY");
+    printf ("\x1b[%dD", 9U);
+    printf ("XXXXXXXX");
+    printf ("\x1b[%dD", 2U);
+    printf ("\x1b[1K");
+    printf ("\r\n");
+    return 0;
+}
+

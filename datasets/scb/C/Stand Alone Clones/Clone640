@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46717958
+*  Stack Overflow answer #:51344736
+*  And Stack Overflow answer#:46718186
+*/
+int main () {
+    char string [4];
+    int reverse = 0;
+    printf ("Enter the number to reverse:\n");
+    scanf_s ("%d", & reverse);
+    if (reverse > 999)
+        return 0;
+    sprintf_s (string, "%d", reverse);
+    char c1 = string[0];
+    string[0] = string[2];
+    string[2] = c1;
+    reverse = atoi (string);
+    printf (" The reverse is %d", reverse);
+    return 0;
+}
+
+int main () {
+    int n, num1, num2, num3, reverse;
+    printf ("Enter the number to reverse:\n");
+    scanf ("%d", & n);
+    num1 = n / 100;
+    num2 = (n % 100) / 10;
+    num3 = n % 10;
+    reverse = 100 * num3 + 10 * num2 + num1;
+    printf (" The reverse is %d", reverse);
+    system ("pause");
+    return 0;
+}
+

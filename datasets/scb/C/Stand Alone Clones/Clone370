@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41346797
+*  Stack Overflow answer #:41347510
+*  And Stack Overflow answer#:41347122
+*/
+int main (void) {
+    int N;
+    printf ("Give the array size: ");
+    scanf ("%d", & N);
+    int array [N];
+    ReadArrayData (N, array);
+    int sumOfArrayElements = CalculateArraySum (N, array);
+    printf ("The sum of array elements is %d.\n", sumOfArrayElements);
+    return 0;
+}
+
+int main () {
+    int i = 0, N, sum = 0;
+    scanf ("%d", & N);
+    int ar [N];
+    for (i = 0; i < N; i++) {
+        scanf ("%d", & ar [i]);
+        sum = sum + ar[i];
+    }
+    printf ("%d\n", sum);
+    return 0;
+}
+

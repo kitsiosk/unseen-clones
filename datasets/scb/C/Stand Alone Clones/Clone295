@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5656530
+*  Stack Overflow answer #:22557543
+*  And Stack Overflow answer#:36244366
+*/
+int main (int argc, char *argv []) {
+    key_t key;
+    int shmid;
+    char *data;
+    int mode;
+    if (argc > 2) {
+        fprintf (stderr, "usage: shmdemo [data_to_write]\n");
+        exit (1);
+    }
+    if ((key = ftok ("hello.txt", 'R')) == -1) {
+        perror ("ftok");
+        exit (1);
+    }
+    if ((shmid = shmget (key, SHM_SIZE, 0644 | IPC_CREAT)) == -1) {
+        perror ("shmget");
+        exit (1);
+    }
+    data = shmat (shmid, (void *) 0, 0);
+    if (data == (char *) (-1)) {
+        perror ("shmat");
+        exit (1);
+    }
+    if (argc == 2) {
+        printf ("writing to segment: \"%s\"\n", argv [1]);
+        strncpy (data, argv [1], SHM_SIZE);
+    }
+    else
+        printf ("segment contains: \"%s\"\n", data);
+    if (shmdt (data) == -1) {
+        perror ("shmdt");
+        exit (1);
+    }
+    return 0;
+}
+
+int main () {
+    int segment_id;
+    char *shared_memory;
+    struct shmid_ds shmbuffer;
+    int segment_size;
+    const int shared_segment_size = 0x6400;
+    segment_id = shmget (IPC_PRIVATE, shared_segment_size, IPC_CREAT | IPC_EXCL | S_IRUSR | S_IWUSR);
+    shared_memory = (char *) shmat (segment_id, 0, 0);
+    printf ("shared memory attached at address %p\n", shared_memory);
+    shmctl (segment_id, IPC_STAT, & shmbuffer);
+    segment_size = shmbuffer.shm_segsz;
+    printf ("segment size: %d\n", segment_size);
+    sprintf (shared_memory, "Hello, world.");
+    shmdt (shared_memory);
+    shared_memory = (char *) shmat (segment_id, (void *) 0x5000000, 0);
+    printf ("shared memory reattached at address %p\n", shared_memory);
+    printf ("%s\n", shared_memory);
+    shmdt (shared_memory);
+    shmctl (segment_id, IPC_RMID, 0);
+    return 0;
+}
+

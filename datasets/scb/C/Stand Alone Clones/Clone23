@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14497828
+*  Stack Overflow answer #:14499252
+*  And Stack Overflow answer#:14500117
+*/
+int main (void) {
+    int index;
+    char wordToPrint [SIZE];
+    printf ("please enter a random word:\n");
+    for (index = 0; index < SIZE; index++) {
+        scanf ("%c", & wordToPrint [index]);
+    }
+    int len = strlen (wordToPrint);
+    for (index = 0; index < SIZE; index++) {
+        --len;
+        printf ("%c", wordToPrint [len - 1]);
+    }
+    return 0;
+}
+
+int main () {
+    char sentence [100], rev_sentence [100], c;
+    int j = 0, i = 0, m = 0;
+    sentence[i] = ' ';
+    i++;
+    printf ("Enter a sentence : ");
+    while ((c = getchar ()) != '\n') {
+        sentence[i] = c;
+        i++;
+    }
+    sentence[i] = '\0';
+    printf ("Reversed word is: ");
+    for (i = strlen (sentence) - 1; i >= 0; i = i - 1) {
+        if (sentence[i] == ' ') {
+            rev_sentence[j] = '\0';
+            strrev (rev_sentence);
+            printf ("%s ", rev_sentence);
+            for (m = 0; m < 100; m++)
+                rev_sentence[m] = 0;
+            j = 0;
+            continue;
+        }
+        rev_sentence[j] = sentence[i];
+        j++;
+    }
+    rev_sentence[j] = '\0';
+}
+

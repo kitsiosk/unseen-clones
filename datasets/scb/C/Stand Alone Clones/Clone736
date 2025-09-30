@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3673226
+*  Stack Overflow answer #:3673291
+*  And Stack Overflow answer#:32983646
+*/
+int main () {
+    time_t timer;
+    char buffer [26];
+    struct tm *tm_info;
+    time (& timer);
+    tm_info = localtime (&timer);
+    strftime (buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    puts (buffer);
+    return 0;
+}
+
+int main () {
+    char buffer [26];
+    int millisec;
+    struct tm *tm_info;
+    struct timeval tv;
+    gettimeofday (& tv, NULL);
+    millisec = lrint (tv.tv_usec / 1000.0);
+    if (millisec >= 1000) {
+        millisec -= 1000;
+        tv.tv_sec++;
+    }
+    tm_info = localtime (&tv.tv_sec);
+    strftime (buffer, 26, "%Y:%m:%d %H:%M:%S", tm_info);
+    printf ("%s.%03d\n", buffer, millisec);
+    return 0;
+}
+

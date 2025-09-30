@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32700670
+*  Stack Overflow answer #:32701500
+*  And Stack Overflow answer#:32701442
+*/
+int main (void) {
+    int value;
+    int count;
+    value = 0;
+    count = 0;
+    if ((scanf ("%d%n", &value, &count) == 1) && (count == 7))
+        fprintf (stderr, "ok, value is `%d'\n", value);
+    else
+        fprintf (stderr, "wrong length: %d\n", count);
+    return 0;
+}
+
+int main () {
+    int id = 0;
+    int pin = 0;
+    int count1 = 0;
+    for (;;) {
+        printf ("enter student id: ");
+        scanf ("%i", & id);
+        while (id != 0) {
+            id /= 10;
+            count1++;
+        }
+        if (count1 != 7 && count1 != 8) {
+            printf ("the student id should be in 7 or 8 digits\n");
+            count1 = 0;
+        }
+        else
+            break;
+    }
+    printf ("enter student pin: ");
+    scanf ("%i", & pin);
+    return 0;
+}
+

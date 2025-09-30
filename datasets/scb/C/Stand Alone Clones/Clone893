@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1219438
+*  Stack Overflow answer #:1219888
+*  And Stack Overflow answer#:1219450
+*/
+popRC pop (struct stack *pS) {
+    popRC rc;
+    rc.size = pS->size;
+    if (rc.size) {
+        --pS->size;
+        rc.value = pS->pData[pS->size];
+    }
+    return rc;
+}
+
+int pop (double *outval) {
+    if (outval == 0)
+        return -1;
+    if (sp > 0)
+        *outval = val[--sp];
+    else {
+        printf ("error: stack empty\n");
+        return -1;
+    }
+    return 0;
+}
+

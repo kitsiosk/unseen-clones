@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1716013
+*  Stack Overflow answer #:13073049
+*  And Stack Overflow answer#:12425529
+*/
+int main (void) {
+    int number, p = 0, n = 0;
+    while (1) {
+        printf ("-> ");
+        if (scanf ("%d", &number) == 0) {
+            fflush (stdin);
+            printf ("Err...\n");
+            continue;
+        }
+        fflush (stdin);
+        if (number > 0)
+            p++;
+        else if (number < 0)
+            n++;
+        else
+            break;
+    }
+    printf ("Read %d positive and %d negative numbers\n", p, n);
+    return 0;
+}
+
+main () {
+    while (1) {
+        printf ("Input Number: ");
+        num_ok = scanf ("%d", &n);
+        if (num_ok != 1) {
+            scanf ("%c", & c);
+            printf ("That wasn't a number: %c\n", c);
+        }
+        else {
+            printf ("The number is: %d\n", n);
+        }
+    }
+}
+

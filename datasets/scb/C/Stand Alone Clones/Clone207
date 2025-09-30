@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27762518
+*  Stack Overflow answer #:27764992
+*  And Stack Overflow answer#:27765469
+*/
+int main () {
+    CvCapture *capture;
+    IplImage *frame;
+    IplImage *tmp;
+    capture = cvCreateCameraCapture (0);
+    while (1) {
+        if (capture) {
+            frame = cvQueryFrame (capture);
+        }
+        if (frame) {
+            CvSize size = cvSize (100, 100);
+            tmp = cvCreateImage (size, IPL_DEPTH_8U, 3);
+            cvResize (frame, tmp, CV_INTER_CUBIC);
+            cvReleaseImage (& tmp);
+        }
+    }
+    cvReleaseCapture (& capture);
+}
+
+int main (int argc, char * const argv []) {
+    struct rusage usage;
+    long max_resident_set_size = 0;
+    long frame_no = 0;
+    CvCapture *capture;
+    IplImage *frame;
+    capture = cvCreateCameraCapture (0);
+    if (!capture) {
+        return 1;
+    }
+    while (frame_no < 100) {
+        frame = cvQueryFrame (capture);
+        frame_no++;
+        errno = 0;
+        getrusage (RUSAGE_SELF, & usage);
+        if (errno == EFAULT)
+            printf ("Error: EFAULT\n");
+        else if (errno == EINVAL)
+            printf ("Error: EINVAL\n");
+        else if (max_resident_set_size != usage.ru_maxrss) {
+            printf ("frame %ld maximum resident set size: %ld\n", frame_no, usage.ru_maxrss);
+            printf ("frame %ld maximum resident set size diff : %ld\n", frame_no, (usage.ru_maxrss - max_resident_set_size));
+            max_resident_set_size = usage.ru_maxrss;
+        }
+    }
+    cvReleaseCapture (& capture);
+    return 0;
+}
+

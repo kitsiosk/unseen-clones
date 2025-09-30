@@ -1,0 +1,27 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20468789
+*  Stack Overflow answer #:20469256
+*  And Stack Overflow answer#:20469444
+*/
+void print (char *a) {
+    int i = 0;
+    printf ("the list of names include : \n");
+    while (i < (lim * maxx)) {
+        printf ("%s\n", a);
+        i += maxx;
+        a = a + maxx;
+    }
+}
+
+void print (char aray [lim] [maxx]) {
+    int i, j;
+    printf ("the list of names include : \n");
+    for (i = 0; i < lim; i++) {
+        for (j = 0; j < maxx; j++) {
+            puts (aray [i] [j]);
+        }
+    }
+}
+

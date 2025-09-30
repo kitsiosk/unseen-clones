@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54378372
+*  Stack Overflow answer #:54379645
+*  And Stack Overflow answer#:54378430
+*/
+void strcatO (char a [], const char b []) {
+    size_t ai = 0;
+    while (a[ai]) {
+        ai++;
+    }
+    size_t bi = 0;
+    while (b[bi]) {
+        a[ai++] = b[bi++];
+    }
+    a[ai] = '\0';
+    printf ("<%s>", a);
+}
+
+void strcatO (char a [], char b []) {
+    size_t i = strlen (a);
+    size_t j;
+    for (j = 0; b[j] != 0; ++j) {
+        a[i++] = b[j];
+    }
+    a[i] = 0;
+    printf ("%s\n", a);
+}
+

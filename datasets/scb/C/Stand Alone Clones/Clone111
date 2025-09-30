@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36928394
+*  Stack Overflow answer #:36932651
+*  And Stack Overflow answer#:36930085
+*/
+static void modeScore (const int t [], int num) {
+    int start = 0;
+    int mode = t[0];
+    int score = 0;
+    for (int i = 1; i < num; ++i) {
+        if (i - start > score) {
+            score = i - start;
+            mode = t[start];
+        }
+        if (t[start] != t[i])
+            start = i;
+    }
+    printf ("Part F: %3d is mode (count %d)\n", mode, score);
+}
+
+static void modeScore (int t [], int num) {
+    int f [SIZE] = {0};
+    for (int i = 0; i < num; i++)
+        f[t[i]]++;
+    int mode = 0;
+    int max = 0;
+    for (int j = 0; j < num; j++) {
+        if (f[j] > max) {
+            max = f[j];
+            mode = j;
+        }
+    }
+    printf ("Part F: %3d is mode (count %d)\n", mode, max);
+}
+

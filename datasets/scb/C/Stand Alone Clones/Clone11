@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18291918
+*  Stack Overflow answer #:18292109
+*  And Stack Overflow answer#:18292123
+*/
+int main (void) {
+    string names [6];
+    int num_entries = 0, i = 0;
+    string name = malloc (sizeof (char) * 16);
+    printf ("\nHow many names do you want to enter ? \n");
+    scanf ("%d", & num_entries);
+    getchar ();
+    for (i = 0; i < num_entries; i++) {
+        printf ("\nEnter a name : ");
+        fgets (name, 16, stdin);
+        names[i] = malloc (sizeof (char) * strlen (name) + 1);
+        strcpy (names [i], name);
+    }
+    for (i = 0; i < num_entries; i++)
+        puts (names[i]);
+    return 0;
+}
+
+int main (void) {
+    char *names [6];
+    int num_entries = 0, i = 0, size = 0, c = 0;
+    string name = malloc (sizeof (char) * 16);
+    if (!name) {
+        printf ("Unable to allocate memory for name\n");
+        return (1);
+    }
+    printf ("\nHow many names do you want to enter ? \n");
+    scanf ("%d", & num_entries);
+    while ((c = getchar ()) != '\n' && c != EOF)
+        ;
+    for (i = 0; i < num_entries; i++) {
+        printf ("\nEnter a name : ");
+        gets (name);
+        size = strlen (name);
+        names[i] = (string) malloc (sizeof (char) * size + 1);
+        strcpy (names [i], name);
+    }
+    for (i = 0; i < num_entries; i++)
+        puts (names[i]);
+    return (0);
+}
+

@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49342761
+*  Stack Overflow answer #:49343786
+*  And Stack Overflow answer#:49342908
+*/
+void triangle (int width) {
+    int i, j, height, tmp;
+    height = 2 * width - 1;
+    tmp = 1;
+    for (i = 0; i < height; i++) {
+        for (j = 0; j < tmp; j++) {
+            putchar ('*');
+        }
+        putchar ('\n');
+        if (i < height / 2) {
+            tmp++;
+        }
+        else {
+            tmp--;
+        }
+    }
+}
+
+void triangle (int width) {
+    int line, i, rev = 0;
+    for (line = 1; line < width; ++line) {
+        for (i = 0; i < line && i < width; i++) {
+            printf ("*");
+        }
+        printf ("\n");
+    }
+    for (; line; --line) {
+        for (i = 0; i < line && i < width; i++) {
+            printf ("*");
+        }
+        printf ("\n");
+    }
+}
+

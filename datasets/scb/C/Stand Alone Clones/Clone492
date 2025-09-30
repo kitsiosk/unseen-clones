@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18568365
+*  Stack Overflow answer #:18568664
+*  And Stack Overflow answer#:18569222
+*/
+int main () {
+    int k = 0;
+    int n = 1234;
+    while (n != 0) {
+        k *= 10;
+        k += n % 10;
+        n /= 10;
+    }
+    printf ("%d", k);
+    return 0;
+}
+
+int main (void) {
+    int ary [] = {1, 2, 3, 4};
+    int size = sizeof (ary) / sizeof (ary[0]);
+    reverse (ary, size);
+    for (int i = 0; i < size; i++)
+        printf ("%d ", ary[i]);
+    printf ("\n");
+    return 0;
+}
+

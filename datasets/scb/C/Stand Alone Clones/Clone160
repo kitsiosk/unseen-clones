@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53701613
+*  Stack Overflow answer #:53701746
+*  And Stack Overflow answer#:53701733
+*/
+void main () {
+    clrscr ();
+    do {
+        menu ();
+        foods ();
+        printf ("\n Do you want to order more? [1] Yes [2] No:");
+        scanf ("%d", & choice);
+        getchar ();
+        grandtotal = grandtotal + total;
+    }
+    while (choice == 1);
+    printf ("\n Total Price is: %0.2f", grandtotal);
+    getch ();
+}
+
+void main () {
+    clrscr ();
+    float grandtotal = 0;
+    int choice = 0;
+    do {
+        char food = menu ();
+        float total = foods (food);
+        grandtotal = grandtotal + total;
+        printf ("\n Total Price is: %0.2f", grandtotal);
+        printf ("\n Do you want to order more? [1] Yes [2] No:");
+        if (scanf ("%d", &choice) != 1) {
+            perror ("scanf error");
+            abort ();
+        }
+    }
+    while (choice != 1);
+}
+

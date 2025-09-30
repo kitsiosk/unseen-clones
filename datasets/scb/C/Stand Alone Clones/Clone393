@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2218290
+*  Stack Overflow answer #:2218503
+*  And Stack Overflow answer#:2218350
+*/
+int main (int argc, char *argv []) {
+    char filename [128];
+    char *name = "hello";
+    char *extension = ".txt";
+    if (sizeof (filename) < strlen (name) + 1) {
+        fprintf (stderr, "Name '%s' is too long\n", name);
+        return EXIT_FAILURE;
+    }
+    strncpy (filename, name, sizeof (filename));
+    if (sizeof (filename) < (strlen (filename) + strlen (extension) + 1)) {
+        fprintf (stderr, "Final size of filename is too long!\n");
+        return EXIT_FAILURE;
+    }
+    strncat (filename, extension, (sizeof (filename) - strlen (filename)));
+    printf ("Filename is %s\n", filename);
+    return EXIT_SUCCESS;
+}
+
+int main (void) {
+    char *ext = ".txt";
+    int len = strlen (name) + strlen (ext) + 1;
+    char *n2 = malloc (len);
+    char *n2a = malloc (len);
+    if (n2 == NULL || n2a == NULL)
+        abort ();
+    strlcpy (n2, name, len);
+    strlcat (n2, ext, len);
+    printf ("%s\n", n2);
+    strncpy (n2a, name, len);
+    strncat (n2a, ext, len - strlen (n2a));
+    printf ("%s\n", n2a);
+    return 0;
+}
+

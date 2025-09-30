@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17128722
+*  Stack Overflow answer #:17130789
+*  And Stack Overflow answer#:17128931
+*/
+int main (void) {
+    int ch;
+    int numWords = 0;
+    int numLetters = 0;
+    bool prevWasASpace = true;
+    printf ("Enter a sentence: ");
+    while ((ch = getchar ()) != EOF && ch != '\n') {
+        if (ch == ' ')
+            prevWasASpace = true;
+        else {
+            if (prevWasASpace)
+                numWords++;
+            prevWasASpace = false;
+            numLetters++;
+        }
+    }
+    if (numWords > 0) {
+        double avg = numLetters / (float) (numWords);
+        printf ("Average word length: %.1f (C = %d, N = %d)\n", avg, numLetters, numWords);
+    }
+    else
+        printf ("You didn't enter any words\n");
+    return 0;
+}
+
+int main () {
+    char ch;
+    float avg;
+    int words = 0;
+    int letters = 0;
+    int in_word = 0;
+    printf ("Enter a sentence: ");
+    while ((ch = getchar ()) != '\n') {
+        if (ch != ' ') {
+            if (!in_word) {
+                words++;
+                in_word = 1;
+            }
+            letters++;
+        }
+        else {
+            in_word = 0;
+        }
+    }
+    printf ("Average word lenth: %.1f", avg = (float) letters / words);
+}
+

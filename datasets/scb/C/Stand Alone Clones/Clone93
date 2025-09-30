@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12146651
+*  Stack Overflow answer #:12146699
+*  And Stack Overflow answer#:12146815
+*/
+int main () {
+    char *p = "krishna";
+    int size = strlen (p) + 1;
+    char *q = (char *) malloc (size);
+    char *qi = q;
+    do {
+        *q++ = *p;
+    }
+    while (*p++ != '\0');
+    q = qi;
+    printf ("%s", q);
+    getch ();
+    return 0;
+}
+
+void main () {
+    char *p = "krishna";
+    char *q = (char *) malloc (sizeof (char) * (strlen (p) + 1));
+    strcpy (q, p);
+    printf ("%s", q);
+    getchar ();
+    free (q);
+    return 0;
+}
+

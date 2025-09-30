@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45099960
+*  Stack Overflow answer #:45100319
+*  And Stack Overflow answer#:45101593
+*/
+int main (void) {
+    char buf [4096];
+    long len;
+    FILE *fp;
+    fp = fopen ("temp.txt", "rb+");
+    if (fp == NULL) {
+        fprintf (stderr, "cannot open temp.txt: %s\n", strerror (errno));
+        return 1;
+    }
+    while ((len = fread (buf, 1, sizeof buf, fp)) > 0) {
+        fseek (fp, - len, SEEK_CUR);
+        memset (buf, 'g', len);
+        fwrite (buf, 1, len, fp);
+        fseek (fp, 0, SEEK_CUR);
+    }
+    fclose (fp);
+    return 0;
+}
+
+int main () {
+    unsigned char ch = 'g';
+    FILE *fp = fopen ("tmp.txt", "rb+");
+    if (fp == NULL) {
+        printf ("cannot open file\n");
+        return -1;
+    }
+    if (fseek (fp, 0, SEEK_END) != 0) {
+        printf ("error during seeking\n");
+        fclose (fp);
+        return -1;
+    }
+    long size = ftell (fp);
+    if (size < 0) {
+        printf ("error during ftell");
+        fclose (fp);
+        return -1;
+    }
+    rewind (fp);
+    for (long i = 0; i < size; ++i) {
+        fputc (ch, fp);
+    }
+    fclose (fp);
+    return 0;
+}
+

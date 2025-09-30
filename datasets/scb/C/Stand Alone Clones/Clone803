@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46680577
+*  Stack Overflow answer #:46680826
+*  And Stack Overflow answer#:46681893
+*/
+int main (void) {
+    int n;
+    scanf ("%d", & n);
+    a = (int **) malloc (n * sizeof (int *));
+    for (int i = 0; i < 5; i++) {
+        a[i] = (int *) malloc (n * sizeof (int));
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf ("%d", & a [i] [j]);
+        }
+    }
+    fun (n);
+    return 0;
+}
+
+int main () {
+    int x = 3;
+    int y = 2;
+    array2d = malloc (sizeof (*array2d) + sizeof (double [x] [y]));
+    array2d->x = x;
+    array2d->y = y;
+    double count = 0.0;
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
+            array2d->array[i * y + j] = count++;
+            printf ("%f ", array2d -> array [i * y + j]);
+        }
+        printf ("\n");
+    }
+    ...free (array2d);
+}
+

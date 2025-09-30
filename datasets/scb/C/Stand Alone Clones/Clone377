@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49776226
+*  Stack Overflow answer #:49880273
+*  And Stack Overflow answer#:49862020
+*/
+int main () {
+    const char * const key = "secret";
+    const char * const msg = "test";
+    unsigned char output [32];
+    size_t outputSize = 32;
+    gcry_mac_hd_t hd;
+    gcry_mac_open (& hd, GCRY_MAC_HMAC_SHA256, 0, NULL);
+    char *tmp = hmacSHA256 (hd, key, strlen (key), msg, strlen (msg));
+    printf ("HMAC-SHA256: '%s'\n", tmp);
+    free (tmp);
+    tmp = hmacSHA256 (hd, "secrett", 7, msg, strlen (msg));
+    printf ("HMAC-SHA256: '%s'\n", tmp);
+    free (tmp);
+    gcry_mac_close (hd);
+    return 0;
+}
+
+int main () {
+    char *HMAC_SHA256_result;
+    char *Base64_Stringify_result;
+    HMAC_SHA256_result = HMAC_SHA256 ("test", "secret");
+    Base64_Stringify_result = Base64_Stringify (HMAC_SHA256_result, 32);
+    unsigned char arr [32] = {0};
+    memcpy (arr, HMAC_SHA256_result, 32);
+    for (int i = 0; i < 32; i++) {
+        printf ("%#02x, ", arr [i]);
+    }
+    printf ("\n\n");
+    for (int i = 0; i < strlen (Base64_Stringify_result); i++) {
+        printf ("%c", Base64_Stringify_result [i]);
+    }
+    printf ("\n\n");
+    return 0;
+}
+

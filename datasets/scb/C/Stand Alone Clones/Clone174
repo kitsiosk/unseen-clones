@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9871071
+*  Stack Overflow answer #:9871230
+*  And Stack Overflow answer#:9872137
+*/
+int main (void) {
+    struct timeval start, end;
+    long mtime, secs, usecs;
+    gettimeofday (& start, NULL);
+    something_else ();
+    gettimeofday (& end, NULL);
+    secs = end.tv_sec - start.tv_sec;
+    usecs = end.tv_usec - start.tv_usec;
+    mtime = ((secs) *1000 + usecs / 1000.0) + 0.5;
+    printf ("Elapsed time: %ld millisecs\n", mtime);
+    return 0;
+}
+
+int main (void) {
+    clock_t start, end;
+    start = clock ();
+    int c;
+    for (int i = 0; i < 100; i++) {
+        for (int j = 0; j < (1 << 30); j++) {
+            c++;
+        }
+    }
+    end = clock ();
+    printf ("start = %d, end = %d\n", start, end);
+    return 0;
+}
+

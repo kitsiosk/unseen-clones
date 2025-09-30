@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47182554
+*  Stack Overflow answer #:47183998
+*  And Stack Overflow answer#:47183954
+*/
+int main () {
+    char str [100];
+    int n;
+    printf ("Enter a octal number: ");
+    scanf ("%o", & n);
+    printf ("\nBase Value Highest digit\n");
+    for (int i = 2; i < 17; i++) {
+        intToStr (n, i, str);
+        printf ("%d: %s %c\n", i, str, highestDigit (str));
+    }
+}
+
+int main () {
+    int number;
+    printf ("Enter an octal number: ");
+    scanf ("%o", & number);
+    char hexbuffer [50];
+    sprintf (hexbuffer, "%x", number);
+    char large = largestdigit (hexbuffer);
+    printf ("largest digit of hexadecimal representation (%x) of octal number %o : %c\n", number, number, largestdigit (hexbuffer));
+}
+

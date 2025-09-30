@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26401457
+*  Stack Overflow answer #:26401636
+*  And Stack Overflow answer#:26401699
+*/
+int main () {
+    int n = 0, i = 0;
+    int numbers [5];
+    FILE *f = fopen ("Integers.txt", "r");
+    if (f != NULL) {
+        for (i = 0; i < (sizeof (numbers) / sizeof (int)); i++) {
+            if (fscanf (f, "%d\n", &n) > 0)
+                numbers[i] = n;
+            else
+                break;
+        }
+        fclose (f);
+    }
+}
+
+main () {
+    FILE *f = fopen ("Integers.txt", "r");
+    int n, i;
+    int numbers [5];
+    for (i = 0; i < 5; i++) {
+        fscanf (f, "%d", & n)
+        numbers [i] = n;
+    }
+    fclose (f);
+}
+

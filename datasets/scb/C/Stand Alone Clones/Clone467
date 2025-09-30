@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:51648151
+*  Stack Overflow answer #:51648310
+*  And Stack Overflow answer#:51648397
+*/
+int main () {
+    int n, a [4], final;
+    scanf ("%d", & n);
+    for (int i = 3; i >= 0; i--) {
+        a[i] = n % 10 + 2;
+        n /= 10;
+    }
+    final = (a[0] * 1000) + (a[1] * 100) + (a[2] * 10) + a[3];
+    printf ("%d", final);
+    return 0;
+}
+
+int main () {
+    int n;
+    scanf ("%d", & n);
+    int sum = 0;
+    int i = 0;
+    while (n > 0) {
+        sum += ((n % 10) + 2) * power (10, i);
+        i++;
+        n /= 10;
+    }
+    printf ("%d", sum);
+    return 0;
+}
+

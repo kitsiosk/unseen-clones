@@ -1,0 +1,68 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6590593
+*  Stack Overflow answer #:6606908
+*  And Stack Overflow answer#:6591093
+*/
+void main () {
+    clrscr ();
+    int in [10] [10];
+    int out [10] [10];
+    int row, column, i, j;
+    printf ("enter row");
+    scanf ("%d", & row);
+    printf ("Enter column");
+    scanf ("%d", & column);
+    for (i = 1; i <= row; i++) {
+        for (j = 1; j <= column; j++) {
+            printf ("Enter (%d,%d)th value", i, j);
+            scanf ("%d", & in [i - 1] [j - 1]);
+        }
+    }
+    printf ("\ninput is\n\n");
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < column; j++) {
+            printf ("%d\t", in [i] [j]);
+        }
+        printf ("\n");
+    }
+    printf ("\nOutput is\n\n");
+    for (i = 0; i < column; i++) {
+        for (j = 0; j < row; j++) {
+            printf ("%d\t", in [j] [i]);
+            out[i][j] = in[j][i];
+        }
+        printf ("\n");
+    }
+    getch ();
+}
+
+int main () {
+    int **data;
+    int rows = 0, columns = 0;
+    char in [256];
+    int *irow;
+    for (rows = 0; 1; ++rows) {
+        scanf ("%255s", in);
+        if (strcmp (in, "exit") == 0)
+            break;
+        for (int icolumn = 0; 1; ++icolumn) {
+        }
+        if (rows == 0)
+            columns = icolumn;
+        if (columns != icolumns) {
+            printf ("OMG! The user is a hacker!\n");
+            break;
+        }
+        data[rows] = irow;
+    }
+    for (int i = 0; i < columns; ++i) {
+        for (int j = 0; j < rows; ++j) {
+            printf ("%d\t", data [j] [i]);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

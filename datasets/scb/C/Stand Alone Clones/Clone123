@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1149929
+*  Stack Overflow answer #:7615306
+*  And Stack Overflow answer#:1150180
+*/
+void main () {
+    int sub, a, b, carry, temp, c, d;
+    clrscr ();
+    printf ("enter a and b:");
+    scanf ("%d%d", & a, & b);
+    c = a;
+    d = b;
+    while (b) {
+        carry = a & b;
+        a = a ^ b;
+        b = carry << 1;
+    }
+    printf ("add(%d,%d):%d\n", c, d, a);
+    temp = ~d + 1;
+    sub = c + temp;
+    printf ("diff(%d,%d):%d\n", c, d, temp);
+    getch ();
+}
+
+int main (int argc, char **argv) {
+    int from = -100, to = 100;
+    int i, j;
+    for (i = from; i <= to; ++i) {
+        assert (0 - i == negate (i));
+        assert (((i % 2) == 0) == is_even (i));
+        assert (i * 2 == multiply_by_two (i));
+        if (is_even (i)) {
+            assert (i / 2 == divide_by_two (i));
+        }
+    }
+    for (i = from; i <= to; ++i) {
+        for (j = from; j <= to; ++j) {
+            assert (i + j == add (i, j));
+            assert (i - j == subtract (i, j));
+            assert (i * j == multiply (i, j));
+        }
+    }
+    return 0;
+}
+

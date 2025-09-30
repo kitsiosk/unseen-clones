@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45644524
+*  Stack Overflow answer #:45644658
+*  And Stack Overflow answer#:45644573
+*/
+int main (void) {
+    char firstDigit [3];
+    char secondDigit [3];
+    printf ("Enter your first digit: ");
+    if (!fgets (firstDigit, sizeof firstDigit, stdin))
+        return 1;
+    printf ("\nEnter your second digit: ");
+    if (!fgets (secondDigit, sizeof secondDigit, stdin))
+        return 1;
+    printf ("\n\nYour first digit is %s and your second digit is %s.\n", firstDigit, secondDigit);
+    return 0;
+}
+
+int main (void) {
+    char firstDigit [3];
+    char secondDigit [3];
+    printf ("Enter your first digit: ");
+    fgets (firstDigit, sizeof firstDigit, stdin);
+    if (strchr (firstDigit, '\n') == NULL) {
+        int c;
+        while ((c = getchar ()) != '\n' && c != EOF) {
+            continue;
+        }
+    }
+    putchar ('\n');
+    printf ("Enter your second digit: ");
+    fgets (secondDigit, sizeof secondDigit, stdin);
+    if (strchr (secondDigit, '\n') == NULL) {
+        int c;
+        while ((c = getchar ()) != '\n' && c != EOF) {
+            continue;
+        }
+    }
+    puts ("\n");
+    printf ("Your first digit is %c and your second digit is %c.\n", firstDigit [0], secondDigit [0]);
+    return 0;
+}
+

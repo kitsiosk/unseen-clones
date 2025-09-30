@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:15846432
+*  Stack Overflow answer #:15846752
+*  And Stack Overflow answer#:15846664
+*/
+int main () {
+    FILE *file = fopen ("input.txt", "r");
+    int integers [MAX];
+    int i = 0;
+    if (file != NULL) {
+        while (!feof (file) && i < MAX) {
+            if (fscanf (file, "%d", &integers[i++]) != -1) {
+                printf ("%d ", integers [i - 1]);
+            }
+        }
+        fclose (file);
+    }
+    else {
+        printf ("Unable to open file");
+        return EXIT_FAILURE;
+    }
+    return 0;
+}
+
+int main () {
+    FILE *finp;
+    node *head = NULL;
+    finp = fopen ("haha.txt", "r");
+    if (NULL == finp) {
+        printf ("Unable to open file\n");
+        exit (- 1);
+    }
+    createList (finp, & head);
+    printList (& head);
+    deleteList (& head);
+    fclose (finp);
+    return 0;
+}
+

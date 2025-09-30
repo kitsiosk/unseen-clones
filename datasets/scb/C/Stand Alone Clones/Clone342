@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44863295
+*  Stack Overflow answer #:45097709
+*  And Stack Overflow answer#:45002488
+*/
+void main () {
+    figure_t figures [NUM_FIGURES] = {make_rect (0, 0, 40, 40), make_elipse (256, 128, 80, 40),
+    }
+    for (uint32_t x = 0; x < width; ++x) {
+        for (uint32_t y = 0; y < height; ++x) {
+            for (uint32_t figure_ii = 0; figure_ii < NUM_FIGURES; ++figure_ii) {
+                if (figures[figure_ii]->is_pixel_belongs (x, y)) {
+                    image[x][y] = 1;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+int main (void) {
+    int r, c;
+    matrix m = MATRIX_INIT;
+    if (pnm_matrix (stdin, &m)) {
+        fprintf (stderr, "Cannot parse standard input.\n");
+        return EXIT_FAILURE;
+    }
+    fprintf (stderr, "Read %d rows, %d columns, from standard input.\n", m.rows, m.cols);
+    printf ("P5\n%d %d\n255\n", m.cols, m.rows);
+    for (r = 0; r < m.rows; r++)
+        for (c = 0; c < m.cols; c++)
+            if (m.data[r * m.rowstride + c * m.colstride] == 0)
+                putchar (255);
+            else
+                putchar (0);
+    return EXIT_SUCCESS;
+}
+

@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21695323
+*  Stack Overflow answer #:21695941
+*  And Stack Overflow answer#:21698689
+*/
+int main (void) {
+    char first [25];
+    int index = 0, n;
+    printf ("Enter the number of last names :\n");
+    scanf ("%d", & n);
+    printf ("Enter the first name \n");
+    scanf ("%s", first);
+    char last [n] [25];
+    for (int i = 0; i < n; i++)
+        scanf ("%s", last[i]);
+    for (int i = 0; i < n; i++) {
+        if (strcmp (last[i], first) == 0)
+            index++;
+    }
+    if (index == 0)
+        printf ("First name not repeated\n");
+    else
+        printf ("First name repeated %d times", index);
+    return 0;
+}
+
+int main (void) {
+    char last [25], first [25];
+    int index, n, repeated = 0;
+    printf ("Enter n, followed by n Last names (each last name must be a single word) :\n");
+    scanf ("%d", & n);
+    scanf ("%s", first);
+    for (index = 1; index < n; index++) {
+        scanf ("%s", last);
+        if (strcmp (last, first) == 0)
+            repeated = 1;
+    }
+    if (repeated)
+        printf ("First name in list is repeated.\n");
+    else
+        printf ("First name in list is not repeated.\n");
+    return 0;
+}
+

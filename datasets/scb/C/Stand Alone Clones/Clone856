@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47950333
+*  Stack Overflow answer #:47950473
+*  And Stack Overflow answer#:47950458
+*/
+int main (void) {
+    int testcases;
+    int n_lines, m_length;
+    int test, lines, length;
+    printf ("Enter the no. of Test Cases ");
+    if (scanf ("%d", &testcases) != 1) {
+        fprintf (stderr, "%s\n", "Error in input");
+        exit (1);
+    }
+    if (testcases <= 0) {
+        fprintf (stderr, "%s\n", "Enter nonzero integer for testcases");
+        exit (1);
+    }
+    printf ("%d", testcases);
+    for (test = 0; test < testcases; test++) {
+        printf ("Enter the lines and length of the test cases ");
+        if (scanf ("%d%d", &n_lines, &m_length) != 1) {
+            fprintf (stderr, "%s\n", "Error in input");
+            exit (1);
+        }
+        if (n_lines <= 0 || m_length <= 0 || !(n_lines <= MAXSIZE && m_length <= MAXSIZE)) {
+            fprintf (stderr, "%s\n", "Error in input n_lines and m_length");
+            exit (1);
+        }
+        char n_m_matrix [n_lines] [m_length];
+        for (lines = 0; lines < n_lines; lines++) {
+            for (length = 0; length < m_length; length++) {
+                if (scanf (" %c", &n_m_matrix[lines][length]) != 1) {
+                    fprintf (stderr, "%s\n", "Eror in input");
+                    exit (1);
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+int main () {
+    int testcases;
+    int n_lines, m_length;
+    int test, lines, length;
+    printf ("Enter the no. of Test Cases ");
+    scanf ("%d", & testcases);
+    printf ("%d\n", testcases);
+    for (test = 0; test < testcases; test++) {
+        printf ("Enter the lines and length of the test cases ");
+        scanf ("%d%d", & n_lines, & m_length);
+        getc ();
+        char n_m_matrix [n_lines] [m_length];
+        for (lines = 0; lines < n_lines; lines++) {
+            for (length = 0; length < m_length; length++) {
+                scanf ("%c", & n_m_matrix [lines] [length]);
+            }
+        }
+    }
+}
+

@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45077642
+*  Stack Overflow answer #:45078266
+*  And Stack Overflow answer#:45078669
+*/
+int main () {
+    unsigned long num_tests;
+    scanf ("%lu", & num_tests);
+    int *array_n = malloc ((size_t) num_tests * sizeof (*array));
+    if (!array_n) {
+        fputs ("couldn't allocate array_n\n", stderr);
+        return 1;
+    }
+    int *array_b = malloc ((size_t) num_tests * sizeof (*array));
+    if (!array_b) {
+        fputs ("couldn't allocate array_b\n", stderr);
+        free (array_n);
+        return 1;
+    }
+    size_t i, j;
+    for (i = 0; i < num_tests; i++) {
+        scanf ("%d %d", & array_n [i], & array_b [i]);
+    }
+    free (array_b);
+    free (array_n);
+}
+
+int main () {
+    int k, t, N, B, max, num_tests;
+    scanf ("%d", & num_tests);
+    while (num_tests--) {
+        scanf ("%d %d", & N, & B);
+        for (k = N / B, max = 0; k > 0; k--) {
+            t = (N - k * B) * k;
+            if (t > max)
+                max = t;
+        }
+        printf ("%d\n", max);
+    }
+    return 0;
+}
+

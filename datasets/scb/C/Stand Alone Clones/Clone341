@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37129993
+*  Stack Overflow answer #:37132589
+*  And Stack Overflow answer#:37143492
+*/
+int main (void) {
+    char *line1 = NULL, *line2 = NULL;
+    size_t size1 = 0, size2 = 0;
+    getline (& line1, & size1, stdin);
+    getline (& line2, & size2, stdin);
+    size_t len1, len2;
+    char **array1 = split (line1, " \t\n", &len1);
+    char **array2 = split (line2, " \t\n", &len2);
+    qsort (array1, len1, sizeof (* array1), cmp);
+    qsort (array2, len2, sizeof (* array2), cmp);
+    find_diff (array1, array2);
+    drop (array1);
+    drop (array2);
+    free (line1);
+    free (line2);
+    return 0;
+}
+
+int main (void) {
+    char *line1 = NULL;
+    char *line2 = NULL;
+    size_t size1 = 0;
+    size_t size2 = 0;
+    if (getline (&line1, &size1, stdin) > 0 && getline (&line2, &size2, stdin) > 0) {
+        char *w1 [MAX_WORDS];
+        char *w2 [MAX_WORDS];
+        int n1 = split_words (line1, w1, MAX_WORDS);
+        int n2 = split_words (line2, w2, MAX_WORDS);
+        print_unique (w1, n1, w2, n2);
+        print_unique (w2, n2, w1, n1);
+    }
+    free (line1);
+    free (line2);
+    return 0;
+}
+

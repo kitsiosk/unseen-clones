@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19416981
+*  Stack Overflow answer #:19426724
+*  And Stack Overflow answer#:19427994
+*/
+int main () {
+    lua_State *L = luaL_newstate ();
+    luaL_openlibs (L);
+    lua_getglobal (L, "package");
+    lua_getfield (L, - 1, "preload");
+    bool err = luaL_loadbuffer (L, luaJIT_BC_test, luaJIT_BC_test_SIZE, NULL);
+    assert (! err);
+    lua_setfield (L, - 2, "test");
+    lua_settop (L, 0);
+    err = luaL_dostring (L, runtest);
+    assert (! err);
+    lua_close (L);
+}
+
+int main (int argc, char **argv) {
+    int status;
+    lua_State *L = luaL_newstate ();
+    luaL_openlibs (L);
+    lua_getglobal (L, "require");
+    lua_pushliteral (L, "main");
+    status = lua_pcall (L, 1, 0, 0);
+    if (status) {
+        fprintf (stderr, "Error: %s\n", lua_tostring (L, - 1));
+        return 1;
+    }
+    return 0;
+}
+

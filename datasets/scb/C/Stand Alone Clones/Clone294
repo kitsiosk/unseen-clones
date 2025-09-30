@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22530363
+*  Stack Overflow answer #:28022575
+*  And Stack Overflow answer#:54163435
+*/
+int main (void) {
+    size_t n, m;
+    scanf ("%zu %zu", & n, & m);
+    int (*array) [n] [m] = malloc (sizeof *array);
+    for (size_t i = 0; i < n; ++i)
+        for (size_t j = 0; j < m; ++j)
+            (*array)[i][j] = i + j;
+    free (array);
+    return 0;
+}
+
+int main (void) {
+    int a1 [5] [5] = {42};
+    display (5, 5, a1);
+    init (5, 5, a1);
+    display (5, 5, a1);
+    unsigned n = rand () % 10 + 5, m = rand () % 10 + 5;
+    int (*a2) [n] [m] = malloc (sizeof *a2);
+    init (n, m, * a2);
+    display (n, m, * a2);
+    free (a2);
+}
+

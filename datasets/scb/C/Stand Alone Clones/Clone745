@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54038441
+*  Stack Overflow answer #:54038644
+*  And Stack Overflow answer#:54038658
+*/
+void main () {
+    FILE *fp;
+    int num;
+    printf ("enter no of students ");
+    scanf ("%d", & num);
+    char *names = malloc (num *100);
+    printf ("enter the names\n");
+    fp = fopen ("file.txt", "w");
+    fseek (stdin, 0, SEEK_END);
+    for (int i = 0; i < num; i++) {
+        fgets ((names + i * 100), 100, stdin);
+        fprintf (fp, "%s", (names + i * 100));
+        fseek (stdin, 0, SEEK_END);
+    }
+    fclose (fp);
+    fp = fopen ("file.txt", "r");
+    printf ("names stored in *ptr");
+    fclose (fp);
+}
+
+int main () {
+    FILE *fp;
+    int num;
+    char temp [100];
+    printf ("enter no of students");
+    fgets (temp, 100, stdin);
+    sscanf (temp, "%d", & num);
+    char **names = malloc (num * sizeof (char *));
+    printf ("enter the names");
+    fp = fopen ("file.txt", "w");
+    if (fp == NULL) {
+        printf ("Failed to open\n");
+        return 1;
+    }
+    for (int i = 0; i < num; i++) {
+        names[i] = malloc (100);
+        fgets (names [i], 100, stdin);
+        fprintf (fp, "%s\n", names [i]);
+    }
+    fclose (fp);
+    for (int i = 0; i < num; i++) {
+        free (names [i]);
+    }
+    free (names);
+    printf ("names stored in *ptr");
+}
+

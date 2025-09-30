@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19707097
+*  Stack Overflow answer #:19707560
+*  And Stack Overflow answer#:19707555
+*/
+int main (void) {
+    int passed = 0;
+    while (!passed) {
+        if (strcmp (inp, "pass") == 0) {
+            passed = 1;
+        }
+        else {
+            msghere ("error");
+        }
+    }
+}
+
+int main (void) {
+    char inp [256];
+    clrscr ();
+    do {
+        printf ("Type \"pass\": ");
+        fgets (inp, sizeof inp, stdin);
+    }
+    while (strcmp (inp, "pass\n") && msghere ("Error!"));
+    msghere ("Right Answer!");
+    getch ();
+    return 0;
+}
+

@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34703806
+*  Stack Overflow answer #:34704086
+*  And Stack Overflow answer#:34703946
+*/
+int main () {
+    int var1 = 1048575;
+    int var2 = 1048575;
+    char buffer [17];
+    char zeros [] = "0000000000000000";
+    sprintf (buffer, "%x%x", var1, var2);
+    int len = strlen (buffer);
+    if (len < 16) {
+        zeros[16 - len] = 0x0;
+    }
+    else {
+        zeros[0] = 0x0;
+    }
+    printf ("%s%s\n", zeros, buffer);
+    return 0;
+}
+
+int main (void) {
+    int var1 = 1048575;
+    int var2 = 1048575;
+    int length = 0;
+    char buffer [100];
+    char paddedbuffer [100] = "000000000000000";
+    length = sprintf (buffer, "%x%x", var1, var2);
+    char *here = length < 16 ? paddedbuffer + 16 - length : paddedbuffer;
+    sprintf (here, "%s", buffer);
+    printf ("%s\n", paddedbuffer);
+    return 0;
+}
+

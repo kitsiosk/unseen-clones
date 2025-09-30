@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1963677
+*  Stack Overflow answer #:1963696
+*  And Stack Overflow answer#:1963754
+*/
+void traverse (struct ASTNode *root) {
+    if (root != NULL) {
+        switch (root->nodeType) {
+        case OP :
+            printf ("OP \n");
+            if (root->left != NULL) {
+                printf ("left - ");
+                traverse (root -> left);
+            }
+            if (root->right != NULL) {
+                printf ("right - ");
+                traverse (root -> right);
+            }
+            break;
+        case INT :
+            printf ("INT - ");
+            printf ("INT: %d\n", root -> value);
+            break;
+        case CHAR :
+            printf ("CHAR - ");
+            printf ("CHAR: %c\n", root -> chValue);
+        }
+    }
+}
+
+void traverse (struct ASTNode *root) {
+    if (root == NULL)
+        return;
+    if (root->nodeType == OP) {
+        printf ("OP \n");
+        if (root->left != NULL) {
+            printf ("left - ");
+            traverse (root -> left);
+        }
+        if (root->right != NULL) {
+            printf ("right - ");
+            traverse (root -> right);
+        }
+    }
+    else if (root->nodeType == INT) {
+        printf ("INT - ");
+        printf ("INT: %d\n", root -> value);
+    }
+    else if (root->nodeType == CHAR) {
+        printf ("CHAR - ");
+        printf ("CHAR: %c\n", root -> chValue);
+    }
+    else
+        assert ("Unrecognized nodeType" == 0);
+}
+

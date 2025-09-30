@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34361224
+*  Stack Overflow answer #:34361686
+*  And Stack Overflow answer#:34367127
+*/
+int main (void) {
+    int array [10];
+    srand (time (NULL));
+    int i;
+    for (i = 0; i < 10; i++)
+        array[i] = rand () % 100 + 1;
+    int smallestSoFar = array[0];
+    for (i = 1; i < 10; i++)
+        if (smallestSoFar > array[i])
+            smallestSoFar = array[i];
+    printf ("Smallest value: %d\n", smallestSoFar);
+    return 0;
+}
+
+int main (void) {
+    int array [NO_OF_ELEMENTS] = {0};
+    int smallest = 0, largest = 0, i = 0;
+    srand (time (NULL));
+    for (i = 0; i < NO_OF_ELEMENTS; i++) {
+        array[i] = (rand () % 100) + 1;
+        if (largest < array[i]) {
+            largest = array[i];
+        }
+        printf ("\nElement %d: %d", i, array [i]);
+    }
+    smallest = array[0];
+    for (i = 0; i < NO_OF_ELEMENTS; i++) {
+        if (smallest > array[i]) {
+            smallest = array[i];
+        }
+    }
+    printf ("\n\nSmallest element in array is: %d", smallest);
+    printf ("\nLargest element in array is: %d", largest);
+    getchar ();
+    return 0;
+}
+

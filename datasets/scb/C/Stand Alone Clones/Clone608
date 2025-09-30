@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53533022
+*  Stack Overflow answer #:53539439
+*  And Stack Overflow answer#:53549250
+*/
+int change_password (char *username, char *password) {
+    char cmd [32];
+    sprintf (cmd, " passwd %s 2>/dev/null", username);
+    FILE *fp = popen (cmd, "w");
+    fprintf (fp, "%s\n", password);
+    fprintf (fp, "%s\n", password);
+    pclose (fp);
+    return 0;
+}
+
+int change_password (const char *username, const char *password) {
+    FILE *cmd;
+    int status;
+    if (!username || !*username)
+        return errno = EINVAL;
+    if (!password || !*password)
+        return errno = EINVAL;
+    if (strlen (username) != strcspn (username, "\t\n\r:"))
+        return errno = EINVAL;
+    if (strlen (password) != strcspn (password, "\t\n\r"))
+        return errno = EINVAL;
+    setenv ("IFS", "", 1);
+    setenv ("LANG", "C", 1);
+    setenv ("LC_ALL", "C", 1);
+    errno = ENOMEM;
+    cmd = popen ("/usr/sbin/chpasswd >/dev/null 2>/dev/null", "w");
+    if (!cmd)
+        return errno;
+    fprintf (cmd, "%s:%s\n", username, password);
+    if (fflush (cmd) || ferror (cmd)) {
+        const int saved_errno = errno;
+        pclose (cmd);
+        return errno;
+    }
+    status = pclose (cmd);
+    if (!WIFEXITED (status))
+        return errno = ECHILD;
+    if (WEXITSTATUS (status))
+        return errno = EACCES;
+    return 0;
+}
+

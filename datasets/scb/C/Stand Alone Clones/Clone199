@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27521899
+*  Stack Overflow answer #:27522017
+*  And Stack Overflow answer#:27522090
+*/
+int main () {
+    FILE *fp = NULL;
+    int read = 0;
+    int i = 0;
+    char *token = NULL;
+    char buffer [MAXVAL] = {0};
+    float bufferFloat [10] = {0};
+    fp = fopen ("Xvalues.txt", "r");
+    if (fp == NULL) {
+        printf ("error opening the file");
+        return -1;
+    }
+    if (!fgets (buffer, MAXVAL, fp)) {
+        printf ("error reading the file");
+        return -2;
+    }
+    const char *s = " \n";
+    token = strtok (buffer, s);
+    i = 0;
+    while (token != NULL) {
+        bufferFloat[i++] = strtof (token, NULL);
+        token = strtok (NULL, s);
+    }
+    for (i = 0; i < 10; i++) {
+        printf ("float values are%f\n", bufferFloat [i]);
+    }
+    fclose (fp);
+    return 0;
+}
+
+int main () {
+    FILE *fp;
+    char read;
+    fp = fopen ("Xvalues.txt", "r");
+    float array [10];
+    int i;
+    do {
+        read = fscanf (fp, "%f %f %f %f %f %f %f %f %f %f", &array[0], &array[1], &array[2], &array[3], &array[4], &array[5], &array[6], &array[7], &array[8], &array[9]);
+        fclose (fp);
+        for (i = 0; i < 10; i++) {
+            printf ("%f ", array [i]);
+        }
+        printf ("\n");
+    }
+    while (read != EOF);
+    return 0;
+}
+

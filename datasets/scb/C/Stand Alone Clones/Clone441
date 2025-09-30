@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29613916
+*  Stack Overflow answer #:29614629
+*  And Stack Overflow answer#:29615897
+*/
+int find_missing_number (int array [], int n) {
+    char checker [100] = {0};
+    int xor = XOR_OF_1_TO_100;
+    int i;
+    for (i = 0; i < n; i++) {
+        xor ^= (checker[array[i]] ? 0 : array[i] + 1);
+        checker[array[i]] = 1;
+    }
+    return xor - 1;
+}
+
+int find_missing_number (int array [], int n) {
+    char checker [100];
+    register int sum = 0, counter = 0, i, temp;
+    memset (checker, 0, sizeof (checker));
+    for (i = 0; i < n; i++) {
+        if (checker[temp = array[i]] == 0) {
+            checker[temp] = 1;
+            sum += temp;
+            if (++counter == 99)
+                break;
+        }
+    }
+    return 4950 - sum;
+}
+

@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53701613
+*  Stack Overflow answer #:53701746
+*  And Stack Overflow answer#:53701733
+*/
+void menu () {
+    food = ' ';
+    quantity = 0;
+    price = 0;
+    total = 0;
+    choice = 0;
+    printf ("Please select food from the following:\n");
+    printf (" B = Burger, F = French Fries, P = Pizza, S = Sandwiches \n");
+    printf ("Enter food:");
+    scanf ("%c", & food);
+}
+
+char menu (void) {
+    char food;
+    printf ("Please select food from the following:\n");
+    printf (" B = Burger, F = French Fries, P = Pizza, S = Sandwiches \n");
+    printf ("Enter food:");
+    if (scanf (" %c", &food) != 1) {
+        perror ("scanf error");
+        abort ();
+    }
+    return food;
+}
+

@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30253110
+*  Stack Overflow answer #:30254171
+*  And Stack Overflow answer#:30254428
+*/
+void com (int *a, int *t, int len, int i) {
+    if (i == len) {
+        for (int k = 0; k < len; k++)
+            printf ("%d ", t[k]);
+        printf ("\n");
+        return;
+    }
+    while (*a) {
+        t[i] = *a;
+        com (++ a, t, len, i + 1);
+    }
+}
+
+void com (int *a, int *t, int len, int i) {
+    int j, k;
+    int comb = 1;
+    if (len == 0) {
+        comb = check (t);
+        if (comb) {
+            for (k = 0; k < 3; k++) {
+                printf ("%d  ", t [k]);
+            }
+            printf ("\n");
+        }
+        return;
+    }
+    for (j = i; j <= 4 - len; j++) {
+        t[3 - len] = a[j];
+        com (a, t, len - 1, i + 1);
+    }
+}
+

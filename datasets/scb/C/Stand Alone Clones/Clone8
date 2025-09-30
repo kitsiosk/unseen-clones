@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2416483
+*  Stack Overflow answer #:2416744
+*  And Stack Overflow answer#:2419307
+*/
+int main () {
+    mpz_t fact;
+    unsigned long input = 0;
+    char *buf;
+    mpz_init (fact);
+    scanf ("%lu", & input);
+    factorial (fact, input);
+    buf = malloc (mpz_sizeinbase (fact, 10) + 1);
+    assert (buf);
+    mpz_get_str (buf, 10, fact);
+    printf ("%s\n", buf);
+    free (buf);
+    mpz_clear (fact);
+}
+
+int main (int argc, char *argv []) {
+    const char *test_cases [] = {"0", "1", "1", "1", "4", "24", "15", "1307674368000", "30", "265252859812191058636308480000000", "56", "710998587804863451854045647463724949736497978881168458687447040000000000000", NULL, NULL};
+    int index = 0;
+    BIGNUM *bn = NULL;
+    BIGNUM *fact = NULL;
+    char *result_str = NULL;
+    for (index = 0; test_cases[index] != NULL; index += 2) {
+        BN_dec2bn (& bn, test_cases [index]);
+        fact = factorial (bn);
+        result_str = BN_bn2dec (fact);
+        printf ("%3s: %s\n", test_cases [index], result_str);
+        assert (strcmp (result_str, test_cases [index + 1]) == 0);
+        OPENSSL_free (result_str);
+        BN_free (fact);
+        BN_free (bn);
+        bn = NULL;
+    }
+    return 0;
+}
+

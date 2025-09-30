@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3081289
+*  Stack Overflow answer #:3081307
+*  And Stack Overflow answer#:3081405
+*/
+int main () {
+    char line [1024];
+    FILE *fp = fopen ("filename.txt", "r");
+    if (fp == NULL) {
+        return 1;
+    }
+    while (fgets (line, 1024, fp)) {
+        printf ("%s\n", line);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int size = 1024, pos;
+    int c;
+    char *buffer = (char *) malloc (size);
+    FILE *f = fopen ("myfile.txt", "r");
+    if (f) {
+        do {
+            pos = 0;
+            do {
+                c = fgetc (f);
+                if (c != EOF)
+                    buffer[pos++] = (char) c;
+                if (pos >= size - 1) {
+                    size *= 2;
+                    buffer = (char *) realloc (buffer, size);
+                }
+            }
+            while (c != EOF && c != '\n');
+            buffer[pos] = 0;
+            handle_line (buffer);
+        }
+        while (c != EOF);
+        fclose (f);
+    }
+    free (buffer);
+    return 0;
+}
+

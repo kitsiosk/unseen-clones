@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8978935
+*  Stack Overflow answer #:51708131
+*  And Stack Overflow answer#:44567937
+*/
+int main () {
+    if (ntohl (0x12345678) == 0x12345678) {
+        printf ("big-endian\n");
+    }
+    else if (ntohl (0x12345678) == 0x78563412) {
+        printf ("little-endian\n");
+    }
+    else {
+        printf ("(stupid)-middle-endian\n");
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int value;
+    value = endian ();
+    if (value == 1)
+        printf ("The machine is Little Endian\n");
+    else
+        printf ("The machine is Big Endian\n");
+    return 0;
+}
+

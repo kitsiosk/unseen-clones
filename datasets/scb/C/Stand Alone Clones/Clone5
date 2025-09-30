@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31542494
+*  Stack Overflow answer #:54281735
+*  And Stack Overflow answer#:44442811
+*/
+int main () {
+    int c, p;
+    while ((c = getchar ()) != EOF) {
+        if (c == ' ' && p == ' ') {
+            continue;
+        }
+        putchar (c);
+        p = c;
+    }
+    return 0;
+}
+
+int main () {
+    int c, nspaces;
+    nspaces = 0;
+    c = getchar ();
+    while (c != EOF) {
+        if (c == ' ') {
+            if (nspaces > 0) {
+                ++nspaces;
+            }
+            else {
+                putchar (c);
+                ++nspaces;
+            }
+        }
+        else {
+            putchar (c);
+            nspaces = 0;
+        }
+        c = getchar ();
+    }
+    return (0);
+}
+

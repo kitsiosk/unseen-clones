@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6334514
+*  Stack Overflow answer #:6842678
+*  And Stack Overflow answer#:6338377
+*/
+int findNum (node root, int K) {
+    if (root == null)
+        return -1;
+    if (K > root.val) {
+        if (root.right != null)
+            return findNum (root.right, K);
+        else
+            return root.val;
+    }
+    return findNum (root.left, K);
+}
+
+int findNum (Node *node, int K) {
+    Node *last_right_move = NULL;
+    while (node) {
+        if (K <= node->data)
+            node = node->left;
+        else {
+            last_right_move = node;
+            node = node->right;
+        }
+    }
+    if (last_right_move)
+        return last_right_move->data;
+    else
+        return NOT_FOUND;
+}
+

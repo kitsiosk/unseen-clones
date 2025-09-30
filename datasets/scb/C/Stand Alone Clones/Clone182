@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50033111
+*  Stack Overflow answer #:50033196
+*  And Stack Overflow answer#:50033936
+*/
+char *concat (char *first, char *second) {
+    int string1Len = strlen (first);
+    int string2Len = strlen (second);
+    int length = string1Len + string2Len;
+    char *string = malloc (sizeof (char) * length + 1);
+    assert (string);
+    int i = 0;
+    while (i < string1Len) {
+        string[i] = *first;
+        first += 1;
+        i += 1;
+    }
+    while (i < length) {
+        string[i] = *second;
+        second += 1;
+        i += 1;
+    }
+    string[i] = '\0';
+    return string;
+}
+
+char *concat (char *s1, const char *s2) {
+    size_t i = 0;
+    while (*s1++)
+        i++;
+    size_t s1_len = i;
+    i = 0;
+    s1 -= s1_len + 1;
+    while (*s2++)
+        i++;
+    size_t s2_len = i;
+    i = 0;
+    s2 -= s2_len + 1;
+    char *newStr = (char *) malloc ((s1_len + s2_len) + 1);
+    if (!newStr)
+        return newStr;
+    char *ptr = newStr;
+    while (*ptr++ = *s1++)
+        ;
+    *ptr--;
+    while (*ptr++ = *s2++)
+        ;
+    return newStr;
+}
+

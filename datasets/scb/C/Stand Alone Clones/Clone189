@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16989689
+*  Stack Overflow answer #:21850708
+*  And Stack Overflow answer#:26286340
+*/
+private static void permutation (String prefix, String str) {
+    int n = str.length ();
+    if (n == 0) {
+        System.out.println (prefix);
+    }
+    else {
+        for (int i = 0; i < n; i++)
+            permutation (prefix +str.charAt (i), str.substring (0, i) + str.substring (i +1, n));
+    }
+}
+
+void permutation (int cnum) {
+    int mid;
+    int flag = 1;
+    int giga = 0;
+    int dead = 0;
+    int array [50];
+    for (int i = 0; i < len - 1; i++) {
+        array[50] = '\0';
+        dead = 0;
+        for (int j = cnum; j < len + cnum; j++) {
+            mid = j % len;
+            if (mid == cnum && flag == 1) {
+                cout << str[mid];
+                array[dead] = mid;
+                dead++;
+                flag = 0;
+            }
+            else {
+                giga = (i + j) % len;
+                for (int k = 0; k < dead; k++) {
+                    if ((array[k] == giga) && flag == 0) {
+                        giga = (giga + 1) % len;
+                    }
+                }
+                cout << str[giga];
+                array[dead] = giga;
+                dead++;
+            }
+        }
+        cout << endl;
+        flag = 1;
+    }
+}
+

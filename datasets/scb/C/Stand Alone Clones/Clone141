@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37433525
+*  Stack Overflow answer #:37433621
+*  And Stack Overflow answer#:37434038
+*/
+int main () {
+    int *ptr_int = func (3);
+    char *ptr_char = func (4);
+    fprintf (stdout, "int value = %d\n", * ptr_int);
+    fprintf (stdout, "char value = %c\n", * ptr_char);
+    free (ptr_int);
+    free (ptr_char);
+    return 0;
+}
+
+int main (void) {
+    struct group x;
+    srand (time (0));
+    for (int k = 0; k < 20; k++) {
+        x = f1 ();
+        switch (x.lastunionmember) {
+        default :
+            printf ("invalid value\n");
+            break;
+        case 1 :
+            printf ("int value is %d\n", *x.x.intp);
+            break;
+        case 2 :
+            printf ("string is \"%s\"\n", x.x.charp);
+            break;
+        case 3 :
+            printf ("double value is %f\n", x.x.doublev);
+            break;
+        }
+    }
+}
+

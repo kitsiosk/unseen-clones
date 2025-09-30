@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39300434
+*  Stack Overflow answer #:39300921
+*  And Stack Overflow answer#:39300918
+*/
+void xorInput (const char *in, const char *o) {
+    FILE *fp = fopen (in, "rb");
+    if (fp == NULL) {
+        printf ("file '%s' isn't here...\n", in);
+        exit (1);
+    }
+    FILE *fp2 = fopen (o, "wb");
+    if (fp2 == NULL) {
+        fclose (in);
+        printf ("file '%s' isn't here...\n", o);
+        exit (1);
+    }
+    int ch;
+    while ((ch = fgetc (fp)) != EOF) {
+        ch ^= Xor_key;
+        fputc (ch, fp2);
+    }
+    fclose (fp);
+    fclose (fp2);
+}
+
+static void xorInput (char *in_name, char *out_name) {
+    FILE *fp1 = fopen (in_name, "rb");
+    if (fp1 == NULL) {
+        fprintf (stderr, "failed to opn file %s for reading\n", in_name);
+        exit (1);
+    }
+    FILE *fp2 = fopen (out_name, "wb");
+    if (fp2 == NULL) {
+        fprintf (stderr, "failed to open file %s for writing\n", out_name);
+        exit (1);
+    }
+    char buffer [1024];
+    size_t nbytes;
+    while ((nbytes = fread (buffer, 1, sizeof (buffer), fp1)) > 0) {
+        for (size_t i = 0; i < nbytes; ++i)
+            buffer[i] ^= Xor_key;
+        if (fwrite (buffer, 1, nbytes, fp2) != nbytes) {
+            fprintf (stderr, "failed to write %zu bytes to %s\n", nbytes, out_name);
+            exit (1);
+        }
+    }
+    fclose (fp1);
+    fclose (fp2);
+}
+

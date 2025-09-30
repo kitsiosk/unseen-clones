@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9076494
+*  Stack Overflow answer #:9076848
+*  And Stack Overflow answer#:26208539
+*/
+int main (int argc, char **argv) {
+    char buf [100];
+    struct tm e0 = {
+        .tm_year = 70,
+        .tm_mday = 1
+    }, e1, new;
+    time_t pseudo = mktime (&e0);
+    e1 = *gmtime (&pseudo);
+    e0.tm_sec += atoi (argv[1]) - diff_tm (&e1, &e0);
+    mktime (& e0);
+    strftime (buf, sizeof buf, "%c", & e0);
+    puts (buf);
+}
+
+int main (void) {
+    time_t abs_ts, loc_ts, gmt_ts;
+    struct tm loc_time_info, gmt_time_info;
+    time (& abs_ts);
+    localtime_r (& abs_ts, & loc_time_info);
+    gmtime_r (& abs_ts, & gmt_time_info);
+    loc_ts = mktime (&loc_time_info);
+    gmt_ts = mktime (&gmt_time_info);
+    if (gmt_time_info.tm_isdst == 1) {
+        gmt_ts -= 3600;
+    }
+    printf ("Local timestamp: %lu\n" "UTC timestamp: %lu\n" "Difference in hours: %lu\n\n", loc_ts, gmt_ts, (loc_ts - gmt_ts) / 3600);
+    return 0;
+}
+

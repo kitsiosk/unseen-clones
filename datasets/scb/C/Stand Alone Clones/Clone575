@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18266063
+*  Stack Overflow answer #:41808753
+*  And Stack Overflow answer#:18266635
+*/
+void main (void) {
+    copy_boot_params ();
+    console_init ();
+    if (cmdline_find_option_bool ("debug"))
+        puts ("early console in setup code.\n");
+    init_heap ();
+    if (validate_cpu ()) {
+        puts ("Unable to boot - please use a kernel appropriate " "for your CPU.\n");
+        die ();
+    }
+    set_bios_mode ();
+    detect_memory ();
+    keyboard_init ();
+    query_ist ();
+    set_video ();
+    go_to_protected_mode ();
+}
+
+main () {
+    extern schar;
+    register i, *p;
+    updlock = 0;
+    i = *ka6 + USIZE;
+    UISD->r[0] = 077406;
+    for (;;) {
+        if (fuibyte (0) < 0)
+            break;
+        clearsig (i);
+        maxmem++;
+        mfree (coremap, 1, i);
+        i++;
+    }
+    if (cputype == 70) for (i = 0;
+    i < 62;
+    i = + 2) {UBMAP -> r [i] = i << 12;
+    UBMAP->r[i + 1] = 0;
+}
+

@@ -1,0 +1,17 @@
+__pycache__/
+.ipynb_checkpoints
+*.out
+*.err
+*.bin
+utilities/*.ipynb
+astnn/*.ipynb
+.DS_Store
+result-*
+*features*.pickle
+*tokenized*.pickle
+data_for_manual*
+*.bkp
+*.drawio
+.env
+.venv
+llms/cache

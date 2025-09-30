@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2323516
+*  Stack Overflow answer #:2323601
+*  And Stack Overflow answer#:2323605
+*/
+unsigned int umod (int a, unsigned int b) {
+    int ret;
+    if (a >= 0)
+        return a % b;
+    if (b > INT_MAX)
+        return a + b;
+    ret = a % (int) b;
+    if (ret < 0)
+        ret += b;
+    return ret;
+}
+
+unsigned umod (int a, unsigned b) {
+    if (a < 0) {
+        unsigned r = (-a % b);
+        if (r)
+            return b - r;
+        else
+            return 0;
+    }
+    else
+        return a % b;
+}
+

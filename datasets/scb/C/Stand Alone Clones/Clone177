@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49761187
+*  Stack Overflow answer #:49761434
+*  And Stack Overflow answer#:49761261
+*/
+int main () {
+    float m, n, p, max;
+    if (scanf ("%f%f%f", &m, &n, &p) != 3) {
+        puts ("Bad input");
+        return 1;
+    }
+    max = m;
+    if (n > max) {
+        max = n;
+    }
+    if (p > max) {
+        max = p;
+    }
+    printf ("%f", max);
+    return 0;
+}
+
+int main () {
+    float m, n, p;
+    scanf ("%f%f%f", & m, & n, & p);
+    if (m >= n && m >= p) {
+        printf ("%f", m);
+    }
+    else if (n >= p && n >= m) {
+        printf ("%f", n);
+    }
+    else {
+        printf ("%f", p);
+    }
+    return 0;
+}
+

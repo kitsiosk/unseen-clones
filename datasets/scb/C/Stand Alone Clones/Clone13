@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13442561
+*  Stack Overflow answer #:13442587
+*  And Stack Overflow answer#:13442627
+*/
+int main (void) {
+    float a, b, c;
+    double d;
+    printf ("Enter the values of 'a','b' and 'c': ");
+    if (scanf ("%f %f %f", &a, &b, &c) == 3) {
+        d = my_function (a, b, c);
+        printf ("Result: %f\n", d);
+    }
+    else
+        printf ("Oops: I didn't understand what you typed\n");
+}
+
+int main () {
+    float a, b, c;
+    float result;
+    printf ("Enter the values of 'a','b' and 'c':");
+    scanf ("%f %f %f", & a, & b, & c);
+    result = my_function (a, b, c);
+    printf ("\nResult is %f", result);
+    return 0;
+}
+

@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30925112
+*  Stack Overflow answer #:30928143
+*  And Stack Overflow answer#:30926847
+*/
+time_t UniversalTimeStamp_to_time_t (const char *ts) {
+    int y, m, d, H, M, S;
+    char sentinel;
+    if (sscanf (ts, "%d-%2d-%2dT%2d:%2d:%2dZ%c", &y, &m, &d, &H, &M, &S, &sentinel) != 6) {
+        return -1;
+    }
+    long long t = DayNumber (y, m, d, DayNumber1970Jan1);
+    t = t * 24L * 60 * 60 + 3600L * H + 60 * M + S;
+    {
+        printf ("UTC  `%s`\n", ts);
+        time_t tt = t;
+        struct tm tm = *gmtime (&tt);
+        char buf [100];
+        strftime (buf, sizeof buf, "%Y-%m-%dT%H:%M:%S %Z", & tm);
+        printf ("Local %s\n", buf);
+        printf ("Unix  %lld\n\n", t);
+    }
+    return t;
+}
+
+time_t UniversalTimeStamp_to_time_t (const char *ts) {
+    struct tm tm = {0};
+    char sentinel;
+    if (sscanf (ts, "%d-%2d-%2dT%2d:%2d:%2dZ%c", &tm.tm_year, &tm.tm_mon, &tm.tm_mday, &tm.tm_hour, &tm.tm_min, &tm.tm_sec, &sentinel) != 6) {
+        return -1;
+    }
+    tm.tm_year -= 1900;
+    tm.tm_mon--;
+    tm.tm_isdst = 0;
+    tm.tm_sec += Get_TZ_delta (&tm);
+    time_t t = mktime (&tm);
+    {
+        printf ("UTC  `%s`\n", ts);
+        char buf [100];
+        strftime (buf, sizeof buf, "%Y-%m-%dT%H:%M:%S %Z", & tm);
+        printf ("Local %s\n", buf);
+        printf ("Unix  %lld\n\n", (long long) mktime (& tm));
+    }
+    return t;
+}
+

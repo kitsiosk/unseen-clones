@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34803447
+*  Stack Overflow answer #:34805487
+*  And Stack Overflow answer#:34803487
+*/
+int main (int argc, char **argv) {
+    int (*array) [MAX] = {NULL};
+    int **arraydp = NULL;
+    size_t i, n;
+    n = argc > 1 ? atoi (argv[1]) : 5;
+    array = (int (*)[MAX]) alloc_fill (n);
+    arraydp = alloc_fill_dp (n);
+    if (!array || !arraydp) {
+        fprintf (stderr, "error: alloc_fill failed.\n");
+        return 1;
+    }
+    printf ("\n elements of '%zu' arrays:\n\n", n);
+    prn_array (array, n);
+    printf ("\n elements of '%zu' arrays:\n\n", n);
+    prn_array_dp (arraydp, n, MAX);
+    free (array);
+    for (i = 0; i < n; i++)
+        free (arraydp[i]);
+    free (arraydp);
+    return 0;
+}
+
+int main () {
+    double **A;
+    double B [10] [10];
+    int i, j;
+    A = malloc (10 * sizeof (*A));
+    for (i = 0; i < 10; i++) {
+        A[i] = malloc (10 * sizeof (*A[i]));
+        for (j = 0; j < 10; j++) {
+            A[i][j] = i * j;
+        }
+    }
+    foo (A, B);
+    return 0;
+}
+

@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46933277
+*  Stack Overflow answer #:46935235
+*  And Stack Overflow answer#:46990859
+*/
+main () {
+    for (int i = 0; i < n; i++) {
+        used[i] = true;
+        slot[i] = 0;
+        solve (1, cost [i] [0]);
+        used[i] = false;
+    }
+    print (ats);
+}
+
+int main (void) {
+    struct drill dr = {0};
+    fscanf (stdin, "%d", & dr.n);
+    for (int j = 0; j < dr.n; j++) {
+        for (int i = 0; i < dr.n; i++) {
+            scanf ("%d", & dr.tool [j].cost [i]);
+        }
+    }
+    for (int i = 1; i < dr.n; i++) {
+        int a, b;
+        scanf ("%d", & a);
+        scanf ("%d", & b);
+        dr.tool[a].conn[dr.tool[a].nconn++] = b;
+        dr.tool[b].conn[dr.tool[b].nconn++] = a;
+    }
+    while (dr.tool[dr.root].nconn > 1)
+        dr.root++;
+    dr.tool[dr.root].used = 1;
+    descend (& dr, dr.tool [dr.root].conn [0]);
+    optimize (& dr);
+    printf ("%d\n", dr.opt);
+    return 0;
+}
+

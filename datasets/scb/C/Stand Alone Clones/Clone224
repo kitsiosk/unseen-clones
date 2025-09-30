@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2553522
+*  Stack Overflow answer #:2557802
+*  And Stack Overflow answer#:2731848
+*/
+int isRotation (const char *s1, const char *s2) {
+    assert (s1 && s2);
+    size_t s1Len = strlen (s1);
+    if (s1Len != strlen (s2))
+        return 0;
+    char s1SelfConcat [2 * s1Len + 1];
+    sprintf (s1SelfConcat, "%s%s", s1, s1);
+    return (strstr (s1SelfConcat, s2) ? 1 : 0);
+}
+
+private boolean isRotation (String s1, String s2) {
+    if (s1.length () != s2.length ())
+        return false;
+    for (int i = 0; i < s1.length () - 1; i++) {
+        s1 = new StringBuilder (s1.substring (1)).append (s1.charAt (0)).toString ();
+        if (s1.equals (s2))
+            return true;
+    }
+    return false;
+}
+

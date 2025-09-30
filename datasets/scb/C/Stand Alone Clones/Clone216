@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32860697
+*  Stack Overflow answer #:32861156
+*  And Stack Overflow answer#:32861324
+*/
+int main (void) {
+    char *str = "12 45 16 789 99";
+    char *end = str;
+    int numbers [MAX_NUMBERS];
+    int i, count = 0;
+    for (i = 0; i < MAX_NUMBERS; i++) {
+        numbers[i] = (int) strtol (end, &end, 10);
+        count++;
+        if (*end == '\0')
+            break;
+    }
+    for (i = 0; i < count; i++) {
+        printf ("%d\n", numbers [i]);
+    }
+    return 0;
+}
+
+int main (void) {
+    const char *str = "10 202 3215 1";
+    int i = 0;
+    unsigned int count = 0, tmp = 0;
+    printf ("%s\n", str);
+    while (sscanf (&str[count], "%d %n", &i, &tmp) != EOF) {
+        count += tmp;
+        printf ("number %d\n", i);
+    }
+    return 0;
+}
+

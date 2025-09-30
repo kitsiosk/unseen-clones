@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31891095
+*  Stack Overflow answer #:31891174
+*  And Stack Overflow answer#:31891306
+*/
+char *get_line (FILE *f, int maxchar) {
+    char *string = malloc (maxchar +1);
+    int c;
+    int i = 0;
+    while ((c = fgetc (f)) != EOF && c != '\n' && i < maxchar) {
+        *(string + i++) = c;
+    }
+    *(string + i) = '\0';
+    return string;
+}
+
+char *get_line (FILE *f, size_t maxchar) {
+    char *record = NULL;
+    if (maxchar && !feof (f) && (record = malloc (maxchar)) != NULL) {
+        int c;
+        size_t i = 0;
+        while (i < maxchar - 1 && (c = fgetc (f)) != EOF && c != '\n') {
+            record[i++] = c;
+        }
+        record[i] = '\0';
+    }
+    return record;
+}
+

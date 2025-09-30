@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44444850
+*  Stack Overflow answer #:44445310
+*  And Stack Overflow answer#:44445493
+*/
+int main (void) {
+    struct x *ab;
+    int i;
+    ab = my_func ();
+    for (i = 0; i < 3; i++) {
+        printf ("a[%d] = %d\n", i, ab -> a [i]);
+        printf ("b[%d] = %d\n", i, ab -> b [i]);
+    }
+    free (ab -> a);
+    free (ab -> b);
+    free (ab);
+    return 0;
+}
+
+int main (void) {
+    int *a;
+    int *b;
+    multiple_alloc ((int * * []) {& a, & b}, N, M);
+    if (a) {
+        for (size_t i = 0; i < M; i++)
+            printf ("%d ", a[i]);
+        putchar ('\n');
+    }
+    if (b) {
+        for (size_t i = 0; i < M; i++)
+            printf ("%d ", b[i]);
+        putchar ('\n');
+    }
+    free (a);
+    free (b);
+    return 0;
+}
+

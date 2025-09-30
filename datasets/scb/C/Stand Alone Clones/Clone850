@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34361464
+*  Stack Overflow answer #:34362640
+*  And Stack Overflow answer#:34364507
+*/
+int main (void) {
+    int inputNumber, i, j, prod = 1;
+    int numberOfInputs;
+    scanf ("%d", & numberOfInputs);
+    for (i = 1; i <= numberOfInputs; i++) {
+        scanf ("%d", & inputNumber);
+        for (j = 1; j < inputNumber; j++) {
+            if (inputNumber % j == 0) {
+                prod = prod * j;
+            }
+        }
+        printf ("%04d\n", prod % 10000);
+    }
+    return 0;
+}
+
+int main () {
+    int co = 0, inputNumber, i, j, prod = 1, number = 0, ten = 10, newValue;
+    int numberOfInputs;
+    scanf ("%d", & numberOfInputs);
+    for (i = 1; i <= numberOfInputs; i++) {
+        scanf ("%d", & inputNumber);
+        prod = 1;
+        for (j = 1; j < inputNumber; j++) {
+            if (inputNumber % j == 0) {
+                prod = prod * j;
+                if (prod <= 0) {
+                    break;
+                }
+            }
+        }
+        if (prod <= 0) {
+            printf ("Overflow\n");
+        }
+        else if (prod < 10000) {
+            printf ("%04d\n", prod);
+        }
+        else {
+            newValue = prod;
+            while ((int) prod / 10 != 0) {
+                prod = (int) prod / 10;
+                co++;
+                number = newValue % ten;
+                ten *= 10;
+                if (co == 4) {
+                    printf ("%04d \n", number);
+                    break;
+                }
+            }
+        }
+    }
+    return 0;
+}
+

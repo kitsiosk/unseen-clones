@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32300071
+*  Stack Overflow answer #:32300661
+*  And Stack Overflow answer#:32300733
+*/
+int dequeue () {
+    int item = NULL;
+    if (front == rear) {
+        printf ("\nQueue is empty. Dequeue not possible.\n");
+    }
+    else {
+        item = queue[front];
+        queue[front] = NULL;
+        front++;
+        if (front > rear) {
+            front = -1;
+            rear = -1;
+        }
+    }
+    return (item);
+}
+
+int dequeue () {
+    if (size == 0) {
+        printf ("Queue is empty");
+        return 0;
+    }
+    read %= SIZE;
+    size--;
+    return queue[read++];
+}
+

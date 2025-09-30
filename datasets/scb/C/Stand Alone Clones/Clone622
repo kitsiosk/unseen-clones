@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:25794636
+*  And Stack Overflow answer#:43222767
+*/
+int split (char *str, char delim, char ***array, int *length) {
+    char *p;
+    char **res;
+    int count = 0;
+    int k = 0;
+    p = str;
+    while ((p = strchr (p, delim)) != NULL) {
+        *p = 0;
+        p++;
+        count++;
+    }
+    res = calloc (1, count * sizeof (char *));
+    if (!res)
+        return -1;
+    p = str;
+    for (k = 0; k < count; k++) {
+        if (*p)
+            res[k] = p;
+        p = strchr (p, 0);
+        p++;
+    }
+    *array = res;
+    *length = count;
+    return 0;
+}
+
+int split (char *str, const char delimeter, char ***args) {
+    int cnt = 1;
+    char *t = str;
+    while (*t == delimeter)
+        t++;
+    char *t2 = t;
+    while (*(t2++))
+        if (*t2 == delimeter && *(t2 + 1) != delimeter && *(t2 + 1) != 0)
+            cnt++;
+    (*args) = malloc (sizeof (char *) * cnt);
+    for (int i = 0; i < cnt; i++) {
+        char *ts = t;
+        while (*t != delimeter && *t != 0)
+            t++;
+        int len = (t - ts + 1);
+        (*args)[i] = malloc (sizeof (char) * len);
+        memcpy ((* args) [i], ts, sizeof (char) * (len - 1));
+        (*args)[i][len - 1] = 0;
+        while (*t == delimeter)
+            t++;
+    }
+    return cnt;
+}
+

@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28049794
+*  Stack Overflow answer #:28052961
+*  And Stack Overflow answer#:28050390
+*/
+char *byte_to_binary (unsigned long int x) {
+    int bitcount = 0;
+    for (unsigned long z = MOST_SIGNIF_UL; z > 0; z >>= 1)
+        bitcount++;
+    char *b = malloc (bitcount +1);
+    for (unsigned long int k = 0, z = MOST_SIGNIF_UL; z > 0; k++, z >>= 1) {
+        b[k] = (x & z) ? '1' : '0';
+    }
+    b[bitcount] = '\0';
+    return b;
+}
+
+const char *byte_to_binary (mytype x) {
+    static char b [8 * sizeof (mytype) + 1];
+    mytype z = 1 << (8 * sizeof (mytype) - 1);
+    b[0] = 0;
+    while (z) {
+        strcat (b, (x & z) ? "1" : "0");
+        z >>= 1;
+    }
+    return b;
+}
+

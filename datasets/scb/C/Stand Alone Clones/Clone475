@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38946291
+*  Stack Overflow answer #:38946482
+*  And Stack Overflow answer#:38946648
+*/
+struct Node *addRow (struct Node *bottomLeft) {
+    if (bottomLeft == NULL) {
+        return NULL;
+    }
+    else {
+        struct Node *newNode = malloc (sizeof (struct Node));
+        newNode->value = 0;
+        newNode->up = bottomLeft;
+        newNode->right = addRow (bottomLeft->right);
+        return newNode;
+    }
+}
+
+struct Node *addRow (struct Node *mat) {
+    struct Node *res = NULL, **pp = &res;
+    for (; mat; mat = mat->right) {
+        *pp = malloc (sizeof **pp);
+        (*pp)->value = 0;
+        (*pp)->up = mat;
+        pp = &(*pp)->right;
+    }
+    *pp = NULL;
+    return res;
+}
+

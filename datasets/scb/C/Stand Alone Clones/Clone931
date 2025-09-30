@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20314906
+*  Stack Overflow answer #:20315118
+*  And Stack Overflow answer#:20315723
+*/
+int negate (int num) {
+    unsigned int bitMask = 0xFFFFFFFF;
+    for (unsigned int bit = 0x80000000; bit != 0; bit >>= 1) {
+        if (bit & num)
+            break;
+        bitMask /= 2;
+    }
+    return ~num & bitMask;
+}
+
+int negate (unsigned int a) {
+    if (a == 0)
+        ;
+    else if (a == 1)
+        a = 0;
+    else if (a < 4)
+        a ^= 0x0003;
+    else if (a < 8)
+        a ^= 0x0007;
+    else if (a < 16)
+        a ^= 0x000f;
+    else if (a < 32)
+        a ^= 0x001f;
+    else if (a < 64)
+        a ^= 0x003f;
+    else if (a < 128)
+        a ^= 0x007f;
+    else if (a < 256)
+        a ^= 0x00ff;
+    else if (a < 512)
+        a ^= 0x01ff;
+    else if (a < 1024)
+        a ^= 0x03ff;
+    else if (a < 2048)
+        a ^= 0x07ff;
+    else if (a < 4096)
+        a ^= 0x0fff;
+    else if (a < 8192)
+        a ^= 0x1fff;
+    else if (a < 16384)
+        a ^= 0x3fff;
+    else if (a < 32768)
+        a ^= 0x7fff;
+    else
+        a ^= 0xffff;
+    return a;
+}
+

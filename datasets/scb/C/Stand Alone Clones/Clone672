@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10203425
+*  Stack Overflow answer #:10203626
+*  And Stack Overflow answer#:10203486
+*/
+main () {
+    int a, b, c;
+    printf ("enter three numbers: ");
+    scanf ("%d %d %d", & a, & b, & c);
+    if (a >= b) {
+        if (a >= c) {
+            printf ("%d is greatest", a);
+        }
+        else {
+            printf ("%d is greatest", c);
+        }
+    }
+    else {
+        if (b >= c) {
+            printf ("%d is greatest", b);
+        }
+        else {
+            printf ("%d is greatest", c);
+        }
+    }
+}
+
+main () {
+    int a, b, c;
+    printf ("enter three numbers: ");
+    scanf ("%d %d %d", & a, & b, & c);
+    if (a > b && a > c)
+        printf ("%d is greatest", a);
+    else if (b > a && b > c)
+        printf ("%d is greatest", b);
+    else
+        printf ("%d is greatest", c);
+}
+

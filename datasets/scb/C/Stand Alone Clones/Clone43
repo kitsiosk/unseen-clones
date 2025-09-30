@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:63776
+*  Stack Overflow answer #:64626
+*  And Stack Overflow answer#:74332
+*/
+int main (int argc, char **argv) {
+    int32_t x;
+    if (argc != 2) {
+        printf ("Usage: %s hexadecimal\n", argv [0]);
+        return 1;
+    }
+    sscanf (argv [1], "%x", & x);
+    x = (x & 0xAAAAAAAA) >> 1 | (x & 0x55555555) << 1;
+    x = (x & 0xCCCCCCCC) >> 2 | (x & 0x33333333) << 2;
+    x = (x & 0xF0F0F0F0) >> 4 | (x & 0x0F0F0F0F) << 4;
+    x = (x & 0xFF00FF00) >> 8 | (x & 0x00FF00FF) << 8;
+    x = (x & 0xFFFF0000) >> 16 | (x & 0x0000FFFF) << 16;
+    printf ("0x%x\n", x);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    TYPE x;
+    TYPE b = (TYPE) -1;
+    int bits;
+    if (argc != 2) {
+        printf ("Usage: %s hexadecimal\n", argv [0]);
+        return 1;
+    }
+    for (bits = 1; b; b <<= 1, bits++)
+        ;
+    --bits;
+    printf ("TYPE has %d bits\n", bits);
+    sscanf (argv [1], "%x", & x);
+    printf ("0x%x\n", reverse (x, bits));
+    return 0;
+}
+

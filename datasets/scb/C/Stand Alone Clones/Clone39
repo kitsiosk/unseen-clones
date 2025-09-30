@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16615206
+*  Stack Overflow answer #:16615270
+*  And Stack Overflow answer#:16615386
+*/
+char *rrev_str (char *str) {
+    int i, r;
+    int str_len = strlen (str);
+    char *revd_str = malloc (str_len +1);
+    memset (revd_str, 0, str_len + 1);
+    for (i = str_len - 1, r = 0; i >= 0; i--, r++) {
+        revd_str[r] = str[i];
+    }
+    return revd_str;
+}
+
+char *rrev_str (char *src, char *dest) {
+    int srcLength = strlen (src);
+    int destLength = strlen (dest);
+    int i;
+    if (srcLength > destLength) {
+        return NULL;
+    }
+    dest[srcLength] = '\0';
+    srcLength--;
+    for (i = 0; srcLength >= 0; i++, srcLength--) {
+        dest[i] = src[srcLength];
+    }
+    return dest;
+}
+

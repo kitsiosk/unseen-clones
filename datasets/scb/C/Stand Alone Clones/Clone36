@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1801549
+*  Stack Overflow answer #:1801746
+*  And Stack Overflow answer#:1801703
+*/
+int main (void) {
+    int i;
+    struct node *newnode;
+    for (i = 0; i < 5; i++) {
+        newnode = malloc (sizeof (struct node));
+        newnode->data = i;
+        newnode->link = first;
+        first = newnode;
+    }
+    dumpNodes ();
+    reverse ();
+    dumpNodes ();
+    printf ("==========\n");
+    return 0;
+}
+
+int main () {
+    Node d = {'d', 0};
+    Node c = {'c', &d};
+    Node b = {'b', &c};
+    Node a = {'a', &b};
+    Node *root = &a;
+    print_list (root);
+    root = reverse (root);
+    print_list (root);
+    return 0;
+}
+

@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8429940
+*  Stack Overflow answer #:8437436
+*  And Stack Overflow answer#:8433897
+*/
+int main () {
+    char input [] = "v=0 o=sip_user IN 10230 22472 IP4 10.10.10.44 s=SIP_CALL c=IN IP4 10.10.10.44 m=audio 49152 RTP/AVP 0 8 a=rtpmap:0 PCMU/8000 a=rtpmap:8 PCMA/8000";
+    char *parts [16] = {0};
+    int top = 0;
+    int i;
+    char *s = input;
+    while (top < 15 && (s = strchr (s, '='))) {
+        parts[top++] = s - 1;
+        s++;
+    }
+    for (i = 1; parts[i]; i++)
+        parts[i][-1] = '\0';
+    for (i = 0; parts[i]; i++)
+        printf ("%s\n", parts[i]);
+    return 0;
+}
+
+int main () {
+    char source [] = "v=0 o=sip_user IN 10230 22472 IP4 10.10.10.44 s=SIP_CALL c=IN IP4 10.10.10.44 m=audio 49152 RTP/AVP 0 8 a=rtpmap:0 PCMU/8000 a=rtpmap:8 PCMA/8000";
+    char *str [7];
+    char *pf = source, *ps;
+    int i;
+    for (i = 0; i < 7; i++) {
+        pf = strchr (pf, '=');
+        ps = strchr (pf +1, '=');
+        if (ps == NULL)
+            ps = source + sizeof (source) / sizeof (char);
+        else
+            ps -= 2;
+        pf -= 1;
+        str[i] = (char *) malloc ((ps - pf + 1) * sizeof (char));
+        strncpy (str [i], pf, ps - pf);
+        pf += 2;
+    }
+    for (i = 0; i < 7; i++)
+        printf ("str%d %s\n", i +1, str[i]);
+    for (i = 0; i < 7; i++)
+        free (str[i]);
+    return 0;
+}
+

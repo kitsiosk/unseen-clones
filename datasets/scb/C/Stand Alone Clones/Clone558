@@ -1,0 +1,62 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20553088
+*  Stack Overflow answer #:20553427
+*  And Stack Overflow answer#:20553177
+*/
+int main () {
+    char c;
+    while (scanf ("%c", &c) > 0) {
+        switch (c) {
+        case 'q' :
+        case 'Q' :
+            break;
+        default :
+            printf ("%c", c);
+        }
+    }
+}
+
+int main (void) {
+    printf ("\nIntroducing Space\n");
+    printf ("Brought to you in part by Free Time\n\n\n");
+    int space;
+    int subspace1;
+    int subspace2;
+    while (1) {
+        printf ("What would you like to do in Space?\n");
+        printf ("\nDIRECTORY\n\n");
+        printf ("1. What is space?\n");
+        printf ("2. Tell me how cool I am\n");
+        printf ("3. no more question. I want to get out\n");
+        printf ("Enter the number to your desired space\n");
+        scanf ("%d", & space);
+        if (space == 0)
+            exit (0);
+        else if (space == 1) {
+            printf ("First go to wikipedia and read about the space\n\n");
+        }
+        else if (space == 2) {
+            printf ("Although I have never met you, anyone in space would be considered    cool to the average eye. I mean lets be real, its space.\n\n");
+            printf ("Do you have any interesting hobbies or tidbits about yourself?\n\n");
+            printf ("1. I can play the flute blindfolded\n");
+            printf ("2. I can eat twelve pounds of salt water taffy in one sitting\n");
+            printf ("3. My uncle drives an RV\n");
+            scanf ("%i", & subspace2);
+            if (subspace2 == 1) {
+                printf ("\n The flute huh? You're somethin' else\n");
+            }
+            if (subspace2 == 2) {
+                printf ("\n But let's be honest who likes salt water taffy these days anyway?\n");
+            }
+            if (subspace2 == 3) {
+                printf ("\n An RV? Now adays they call that 'homeless' but hey whatever floats your boat chief\n");
+            }
+        }
+        else
+            printf ("Please enter the choice properly\n\n");
+    }
+    return 0;
+}
+

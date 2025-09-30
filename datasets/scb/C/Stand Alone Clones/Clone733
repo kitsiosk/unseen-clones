@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:51556986
+*  Stack Overflow answer #:51561460
+*  And Stack Overflow answer#:51561651
+*/
+int main (void) {
+    int field_count;
+    do {
+        char str [80];
+        char tail;
+        field_count = scanf ("%79[^ \n]%c", str, & tail)
+        );
+        if (field_count == 0) {
+            field_count = scanf ("%c", &tail);
+            if (field_count != 1 || tail == '\n') {
+                break;
+            }
+        }
+        else if (field_count > 0) {
+            printf ("%s", str);
+            if (field_count == 2) {
+                if (tail == '\n') {
+                    break;
+                }
+                else if (tail != ' ') {
+                    putchar (tail);
+                }
+            }
+        }
+    }
+    while (field_count != EOF);
+}
+
+int main (void) {
+    int c;
+    while ((c = getchar ()) != EOF) {
+        if (c != ' ') {
+            putchar (c);
+        }
+        if (c == '\n') {
+            break;
+        }
+    }
+    return 0;
+}
+

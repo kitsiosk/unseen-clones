@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5546874
+*  Stack Overflow answer #:5546894
+*  And Stack Overflow answer#:5546913
+*/
+int main (void) {
+    char a, b, cstring [99];
+    printf ("please enter something");
+    fgets (cstring, 35, stdin);
+    sscanf (cstring, "%c %c", & a, & b);
+    printf ("thanks, now some more");
+    fgets (cstring, 35, stdin);
+    return 0;
+}
+
+int main (void) {
+    char a, b, cstring [35];
+    int c;
+    printf ("please enter something");
+    scanf ("%c %c", & a, & b);
+    while ((c = getchar ()) != EOF && c != '\n')
+        ;
+    printf ("thanks, now some more");
+    fgets (cstring, 35, stdin);
+    printf ("OK: I got %c and %c and <<%s>>\n", a, b, cstring);
+    return 0;
+}
+

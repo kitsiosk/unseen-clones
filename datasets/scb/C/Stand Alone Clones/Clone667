@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32778816
+*  Stack Overflow answer #:32781023
+*  And Stack Overflow answer#:32779165
+*/
+int main () {
+    int i, j;
+    for (i = 1; i <= 5; i++) {
+        int temp = 4;
+        int sum = 0;
+        for (j = 1; j <= i; j++) {
+            if (j == 1)
+                sum = i;
+            else {
+                sum = sum + temp--;
+            }
+            printf ("%d ", sum);
+        }
+        printf ("\n");
+    }
+}
+
+int main () {
+    int i, j, k;
+    for (i = 1; i <= 5; i++) {
+        k = i;
+        for (j = 1; j <= i; j++) {
+            printf ("%d ", k);
+            k += 5 - j;
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

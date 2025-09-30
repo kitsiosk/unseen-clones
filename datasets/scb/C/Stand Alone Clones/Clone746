@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27540346
+*  Stack Overflow answer #:27540602
+*  And Stack Overflow answer#:27540928
+*/
+int main (int argc, const char *argv []) {
+    int histogram [10000] = {0};
+    int i;
+    int *rectPtr = histogram;
+    int size = 0;
+    int retval = 0;
+    printf ("Enter the number of elements \n");
+    while ((retval = scanf ("%d", &size)) != EOF && (retval == 1)) {
+        rectPtr = histogram;
+        if (!size)
+            return 0;
+        printf ("Enter %d elements\n", size);
+        for (i = 0; i < size; ++i) {
+            scanf ("%d", rectPtr);
+            rectPtr++;
+        }
+        printf ("%d\n", 1111111);
+        printf ("Enter the number of elements: \n");
+    }
+    return 0;
+}
+
+int main (void) {
+    enum {MAX_VALUES = 10000};
+    int histogram [MAX_VALUES];
+    int size;
+    while (printf ("Number of items: ") > 0 && scanf ("%d", &size) == 1 && size > 0 && size <= MAX_VALUES) {
+        int *rectPtr = histogram;
+        for (int i = 0; i < size; ++i) {
+            if (scanf ("%d", rectPtr) != 1) {
+                gobble ();
+                return 1;
+            }
+            rectPtr++;
+        }
+        printf ("size %d items read\n", size);
+    }
+    return 0;
+}
+

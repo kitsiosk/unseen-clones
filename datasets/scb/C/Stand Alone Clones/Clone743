@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38650241
+*  Stack Overflow answer #:38650287
+*  And Stack Overflow answer#:38650263
+*/
+int main () {
+    char first [20];
+    char last [20];
+    char full [40];
+    printf ("Your first name?: ");
+    fgets (first, sizeof (first), stdin);
+    printf ("your last name?: ");
+    fgets (last, sizeof (last), stdin);
+    first[strlen (first) - 1] = '\0';
+    strcpy (full, first);
+    strcat (full, " ");
+    strcat (full, last);
+    printf ("Your full name is: %s", full);
+}
+
+int main (void) {
+    char first [20];
+    char last [20];
+    char full [40];
+    printf ("Your first name? ");
+    if (!fgets (first, sizeof (first), stdin))
+        return 1;
+    printf ("your last name? ");
+    if (!fgets (last, sizeof (last), stdin))
+        return 1;
+    first[strlen (first) - 1] = '\0';
+    snprintf (full, sizeof full, "%s %s", first, last);
+    printf ("Your full name is: %s", full);
+    return 0;
+}
+

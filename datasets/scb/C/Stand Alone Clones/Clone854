@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27495346
+*  Stack Overflow answer #:27495433
+*  And Stack Overflow answer#:27495579
+*/
+int compare_info (char *array1, char *array2) {
+    int i;
+    i = 0;
+    if ((array1 == NULL) || (array2 == NULL))
+        return 0;
+    while ((array1[i] != '\0') && (array2[i] != '\0') && (array1[i] == array2[i])) {
+        i++;
+    }
+    return (array1[i] == array2[i]);
+}
+
+int compare_info (char *array1, char *array2) {
+    int i;
+    int response = 0;
+    i = 0;
+    while (array1[i] == array2[i] && response == 0) {
+        if (array1[i] == '\0' || array2[i] == '\0') {
+            response = 1;
+        }
+        i++;
+    }
+    return response;
+}
+

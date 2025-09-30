@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31508360
+*  Stack Overflow answer #:31509206
+*  And Stack Overflow answer#:31508932
+*/
+void rec (int n, int i) {
+    static int prime [500], cp;
+    if (n > 999)
+        return;
+    if (prime[i] == 0 || prime[i] * prime[i] > n) {
+        printf ("%d, ", n);
+        prime[cp++] = n;
+        rec (n + 1 + (n != 2), 0);
+        return;
+    }
+    if (n % prime[i] == 0) {
+        rec (n + 1 + (n != 2), 0);
+        return;
+    }
+    rec (n, i + 1);
+}
+
+void rec (int n, int x) {
+    depth++;
+    if (depth > maxdepth)
+        maxdepth = depth;
+    if (x > 860) {
+        depth--;
+        return;
+    }
+    if (n == x) {
+        printf ("%d ,", x);
+        rec (2, x + 1);
+        depth--;
+        return;
+    }
+    if (x % n == 0) {
+        rec (2, x + 1);
+        depth--;
+        return;
+    }
+    rec (n + 1, x);
+    depth--;
+}
+

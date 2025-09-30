@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4880819
+*  Stack Overflow answer #:4881704
+*  And Stack Overflow answer#:4881108
+*/
+void pad_image (int *img, int cols, int rows) {
+    for (int i = 0; i < cols; ++i) {
+        img[i] = img[i + cols];
+        img[i + cols * (rows - 1)] = img[i + cols * (rows - 1) - cols];
+    }
+    for (int j = 0; j < rows; ++j) {
+        img[j * cols] = img[j * cols + 1];
+        img[j * cols + cols - 1] = img[j * cols + cols - 2];
+    }
+}
+
+void pad_image (int img [], int n_cols, int n_rows) {
+    int row;
+    if (n_cols < 3 || n_rows < 3)
+        return;
+    for (row = 1; row < (n_rows - 1); row++) {
+        img[row * n_cols] = img[row * n_cols + 1];
+        img[row * n_cols + n_cols - 1] = img[row * n_cols + n_cols - 2];
+    }
+    memcpy (& img [0 * n_cols], & img [1 * n_cols], n_cols * sizeof img [0]);
+    memcpy (& img [(n_rows - 1) * n_cols], & img [(n_rows - 2) * n_cols], n_cols * sizeof img [0]);
+}
+

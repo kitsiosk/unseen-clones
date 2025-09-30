@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8313956
+*  Stack Overflow answer #:8314221
+*  And Stack Overflow answer#:8316501
+*/
+int main () {
+    const char fileOrig [32] = "myOriginalFile.txt";
+    const char fileRepl [32] = "myReplacedFile.txt";
+    const char text2find [80] = "lookforme";
+    const char text2repl [80] = "REPLACE_WITH_THIS";
+    char buffer [MAX_LEN_SINGLE_LINE + 2];
+    char *buff_ptr, *find_ptr;
+    FILE *fp1, *fp2;
+    size_t find_len = strlen (text2find);
+    fp1 = fopen (fileOrig, "r");
+    fp2 = fopen (fileRepl, "w");
+    while (fgets (buffer, MAX_LEN_SINGLE_LINE +2, fp1)) {
+        buff_ptr = buffer;
+        while ((find_ptr = strstr (buff_ptr, text2find))) {
+            while (buff_ptr < find_ptr)
+                fputc ((int) *buff_ptr++, fp2);
+            fputs (text2repl, fp2);
+            buff_ptr += find_len;
+        }
+        fputs (buff_ptr, fp2);
+    }
+    fclose (fp2);
+    fclose (fp1);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    if (argc == 5) {
+        searchAndReplace (argv [1], argv [2], argv [3], argv [4]);
+    }
+    else if (argc == 1) {
+        char origin_file [128];
+        char destination_file [128];
+        char search_string [128];
+        char replacement_string [128];
+        askUserForInput (origin_file, "Enter origin file please");
+        askUserForInput (destination_file, "Enter destination file please");
+        askUserForInput (search_string, "Enter search string please");
+        askUserForInput (replacement_string, "Enter replacement string please");
+        searchAndReplace (origin_file, destination_file, search_string, replacement_string);
+    }
+    else {
+        printf ("Usage:\n %s <original_filename> <modified_filename> <string_to_search> <replacement_string>\n or" "%s without parameter for asking for input", argv [0], argv [0]);
+        exit (1);
+    }
+    return 0;
+}
+

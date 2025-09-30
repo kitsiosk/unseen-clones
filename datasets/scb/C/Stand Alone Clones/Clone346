@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50419673
+*  Stack Overflow answer #:50546001
+*  And Stack Overflow answer#:50457120
+*/
+G_MODULE_EXPORT void gutter_renderer_query_data (GtkSourceGutterRenderer *renderer, GtkTextIter *start, GtkTextIter *end, GtkSourceGutterRendererState state) {
+    GtkSourceView *view = NULL;
+    GtkSourceBuffer *buffer = NULL;
+    GSList *marks = NULL;
+    GdkPixbuf *pixbuf = NULL;
+    view = GTK_SOURCE_VIEW (gtk_source_gutter_renderer_get_view (renderer));
+    buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+    marks = gtk_source_buffer_get_source_marks_at_iter (buffer, start, NULL);
+    if (marks != NULL) {
+        char *category = gtk_source_mark_get_category (marks->data);
+        if (!g_strcmp0 (category, "CERTAIN_CATEGORY"))
+            pixbuf = gtk_image_get_pixbuf (gtk_image_new_from_file ("icon_file_here"));
+        g_slist_free (marks);
+    }
+    g_object_set (G_OBJECT (renderer), "pixbuf", pixbuf, "yalign", 0.5, NULL);
+}
+
+static void gutter_renderer_query_data (GtkSourceGutterRenderer *renderer, GtkTextIter *start, GtkTextIter *end, GtkSourceGutterRendererState state) {
+    GSList *marks;
+    GdkPixbuf *pixbuf = NULL;
+    view = GTK_SOURCE_VIEW (gtk_source_gutter_renderer_get_view (renderer));
+    buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+    marks = gtk_source_buffer_get_source_marks_at_iter (buffer, start, NULL);
+    if (marks != NULL) {
+        size = measure_line_height (view);
+        pixbuf = composite_marks (view, marks, size);
+        g_slist_free (marks);
+    }
+    g_object_set (G_OBJECT (renderer), "pixbuf", pixbuf, NULL);
+}
+

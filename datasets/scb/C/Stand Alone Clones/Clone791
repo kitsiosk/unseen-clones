@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36556132
+*  Stack Overflow answer #:36556327
+*  And Stack Overflow answer#:36556930
+*/
+int main () {
+    double array [MAX_LEN];
+    FILE *fp = fopen (FILE_NAME, "r");
+    if (!fp) {
+        perror ("Can Not Open The File");
+        return 1;
+    }
+    int i = 0;
+    while (fscanf (fp, "%lf", &array[i++]) != EOF) {
+        if (i == MAX_LEN) {
+            printf ("The file is huge, you should define larger array");
+            break;
+        }
+    }
+    int j = 0;
+    while (j < i)
+        printf ("%d: %lf\n", j, array[j++]);
+}
+
+int main (int argc, char **argv) {
+    float *fltarr = NULL;
+    size_t i = 0, nflts = NFLTS;
+    FILE *fp = argc > 1 ? fopen (argv[1], "r") : stdin;
+    if (!fp) {
+        fprintf (stderr, "error: file open failed '%s'.\n", argv [1]);
+        return 1;
+    }
+    if (!(fltarr = malloc (NFLTS * sizeof *fltarr))) {
+        fprintf (stderr, "error: virtual memory exhausted.\n");
+        return 1;
+    }
+    while (fscanf (fp, "%f", &fltarr[i]) == 1) {
+        if (i + 1 == nflts) {
+            void *tmp = realloc (fltarr, sizeof *fltarr * nflts * 2);
+            if (!tmp) {
+                fprintf (stderr, "error: realloc memory exhausted.\n");
+                break;
+            }
+            fltarr = tmp;
+            nflts *= 2;
+        }
+        i++;
+    }
+    if (fp != stdin)
+        fclose (fp);
+    nflts = i;
+    for (i = 0; i < nflts; i++)
+        printf (" fltarr[%2zu] : %.2f\n", i, fltarr[i]);
+    free (fltarr);
+    return 0;
+}
+

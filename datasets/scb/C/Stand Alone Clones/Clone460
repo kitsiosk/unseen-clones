@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42431763
+*  Stack Overflow answer #:42433855
+*  And Stack Overflow answer#:42433877
+*/
+int main () {
+    char line [200];
+    size_t len = 0;
+    FILE *f;
+    f = fopen ("test.txt", "r");
+    if (f == NULL) {
+        printf ("Can't open file\n");
+        return 1;
+    }
+    int line_no = 0;
+    while (fgets (line, sizeof line, f)) {
+        ++line_no;
+        for (int i = 0; i < (sizeof words) / sizeof *words; i++) {
+            if (strstr (line, words[i]) != NULL) {
+                printf ("found %s in line %d\n", words [i], line_no);
+            }
+        }
+    }
+    fclose (f);
+}
+
+int main (void) {
+    const char *words [] = {"cat", "dog", "snake", "bee"};
+    FILE *fptr;
+    char *line = NULL, *word = NULL;
+    const char *delim = " \n";
+    size_t len = 0, lineno = 0;
+    ssize_t read;
+    fptr = fopen ("somewords.txt", "r");
+    if (fptr == NULL) {
+        fprintf (stderr, "Error reading file\n");
+        exit (EXIT_FAILURE);
+    }
+    while ((read = getline (&line, &len, fptr)) != -1) {
+        lineno++;
+        word = strtok (line, delim);
+        while (word != NULL) {
+            for (size_t i = 0; i < ARRAYSIZE (words); i++) {
+                if (strcmp (word, words[i]) == 0) {
+                    printf ("Found matched word: %s, Line number: %zu\n", word, lineno);
+                }
+            }
+            word = strtok (NULL, delim);
+        }
+    }
+    free (line);
+    fclose (fptr);
+    return 0;
+}
+

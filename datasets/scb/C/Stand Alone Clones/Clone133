@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10764286
+*  Stack Overflow answer #:45494262
+*  And Stack Overflow answer#:10766752
+*/
+int main () {
+    int arr [] = {601, 602, 603, 604, 605, 605, 606, 607};
+    int n = sizeof (arr) / sizeof (arr[0]);
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int res = arr[i] ^ arr[j];
+            if (res == 0) {
+            std :
+                : cout << "Repeated Element in array = " << arr [i] << std : : endl;
+            }
+        }
+    }
+    return 0;
+}
+
+void main () {
+    int a [8] = {601, 602, 603, 604, 605, 605, 606, 607};
+    int k, i, j = 601;
+    for (i = 602; i <= 607; i++) {
+        j = j ^ i;
+    }
+    for (k = 0; k < 8; k++) {
+        j = j ^ a[k];
+    }
+    printf ("%d", j);
+}
+

@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:43443529
+*  Stack Overflow answer #:43443842
+*  And Stack Overflow answer#:43444046
+*/
+long getData (char *data) {
+    char *end;
+    errno = 0;
+    long x = strtol (data, &end, 10);
+    if ((errno == ERANGE && (x == LONG_MAX || x == LONG_MIN)) || (errno != 0 && x == 0)) {
+        errno = ERANGE;
+        return LONG_MIN;
+    }
+    return x;
+}
+
+int getData (const char *data) {
+    char *endptr;
+    errno = 0;
+    long x = strtol (data, &end, 10);
+    if (data == end) {
+        printf ("No conversion <%s>\n", data);
+    }
+    else if (errno) {
+        printf ("Overflow/implementation defined error, %d, <%s>\n", errno == ERANGE, data);
+    }
+    if (x < INT_MIN || x > INT_MAX) {
+        printf ("Overflow (long to int), %ld <%s>\n", x, data);
+        x = x < 0 ? INT_MIN : INT_MAX;
+        errno = ERANGE;
+    }
+    return (int) x;
+}
+

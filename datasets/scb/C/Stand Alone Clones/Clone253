@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37233560
+*  Stack Overflow answer #:37234011
+*  And Stack Overflow answer#:37233867
+*/
+int main () {
+    FILE *pfile1 = NULL, *pfile2 = NULL;
+    char *sto1 = NULL, *sto2 = NULL, line [MAX];
+    double ep, si;
+    pfile1 = fopen ("dS.txt", "r");
+    pfile2 = fopen ("dR.txt", "w");
+    if (pfile1 != NULL || pfile2 != NULL) {
+        while (fgets (line, 255, pfile1) != NULL) {
+            sscanf (line, "%s %s %Lf %Lf", & sto1, & sto2, & ep, & si);
+            fprintf (pfile2, "%s %s %2.5Lf %2.8Lf\n", & sto1, & sto2, ep, si);
+        }
+        fclose (pfile1);
+        fclose (pfile2);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    FILE *fpt1, *fpt2;
+    fpt1 = fopen ("data1.txt", "r");
+    fpt2 = fopen ("data2.txt", "w");
+    int i;
+    double ep, si;
+    char sto1 [100], sto2 [100];
+    for (i = 0; i < 2; i++) {
+        fscanf (fpt1, "%s", sto1);
+        fscanf (fpt1, "%s", sto2);
+        fscanf (fpt1, "%lf", & ep);
+        fscanf (fpt1, "%lf", & si);
+        fprintf (fpt2, "%s %s %2.8lf %2.8lf\n", sto1, sto2, ep, si);
+    }
+    fclose (fpt1);
+    fclose (fpt2);
+    return 0;
+}
+

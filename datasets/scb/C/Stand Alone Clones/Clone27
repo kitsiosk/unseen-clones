@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21313700
+*  Stack Overflow answer #:21313835
+*  And Stack Overflow answer#:21313869
+*/
+void myFunc (int n, ... ) {
+    va_list ap;
+    int arg;
+    va_start (ap, n);
+    while (--n)
+        arg = va_arg (ap, int);
+    va_end (ap);
+    arg++;
+}
+
+void myFunc (int n, ... ) {
+    va_list args;
+    va_start (args, n);
+    int temp;
+    for (n; n; --n) {
+        temp = va_arg (vl, int);
+    }
+    temp++;
+    va_end (args);
+}
+

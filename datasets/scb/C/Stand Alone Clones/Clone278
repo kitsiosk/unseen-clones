@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33510561
+*  Stack Overflow answer #:33510785
+*  And Stack Overflow answer#:33510808
+*/
+int main () {
+    FILE *pfile;
+    int data;
+    pfile = fopen ("test.txt", "r");
+    printf ("Opening file...\n");
+    if (pfile == NULL) {
+        printf ("Error!\n");
+    }
+    while ((data = fgetc (pfile)) != EOF) {
+        if (data >= 65 && data <= 90) {
+            printf ("%c\n", data);
+        }
+    }
+    fclose (pfile);
+    return 0;
+}
+
+int main () {
+    char string [BUFFER_SIZE] = {0};
+    char ostring [BUFFER_SIZE] = {0};
+    FILE *fp = NULL;
+    fp = fopen (INPUT_FILE, "r");
+    fscanf (fp, "%s", string);
+    extractCaps (string, ostring, 0, 0);
+    printf ("%s", ostring);
+    return 0;
+}
+

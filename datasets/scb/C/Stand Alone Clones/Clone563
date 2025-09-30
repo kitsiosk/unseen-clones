@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33325876
+*  Stack Overflow answer #:33326403
+*  And Stack Overflow answer#:33326351
+*/
+int main (void) {
+    int a = 20;
+    int b = 20;
+    struct doStuffRet returnedObject;
+    returnedObject = doStuff (a, b);
+    a = returnedObject.arr[0];
+    b = returnedObject.arr[1];
+    printf ("%d %d\n", a, b);
+    return 0;
+}
+
+int main () {
+    int a = 20;
+    int b = 20;
+    int option;
+    printf ("Enter option (1 or 2):\n");
+    scanf ("%d", & option);
+    printf ("BEFORE doStuff() :: a = %d, b = %d\n", a, b);
+    doStuff (& a, & b, option);
+    printf ("AFTER doStuff() :: a = %d, b = %d\n", a, b);
+    return 0;
+}
+

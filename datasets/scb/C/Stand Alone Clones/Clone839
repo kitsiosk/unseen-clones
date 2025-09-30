@@ -1,0 +1,75 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41081634
+*  Stack Overflow answer #:41081777
+*  And Stack Overflow answer#:41084336
+*/
+int main (int argc, char *argv []) {
+    int size;
+    int rank;
+    const int VERY_LARGE_INT = 999999;
+    const int ROOT = 0;
+    int tag = 1234;
+    MPI_Init (& argc, & argv);
+    MPI_Comm_size (MPI_COMM_WORLD, & size);
+    MPI_Comm_rank (MPI_COMM_WORLD, & rank);
+    int count = N / size;
+    int *localArray = (int *) malloc (count * sizeof (int));
+    int localMin;
+    int globalMin;
+    if (rank == ROOT) {
+        for (int i = 0; i < N; i++) {
+            A[i] = rand () % 10;
+        }
+        for (int i = 0; i < count; i++)
+            localArray[i] = A[i];
+        for (int dest = 1; dest < size; ++dest) {
+            MPI_Send (& A [dest * count], count, MPI_INT, dest, tag, MPI_COMM_WORLD);
+            printf ("P0 sent a %d elements to P%d.\n", count, dest);
+        }
+        localMin = VERY_LARGE_INT;
+        for (int source = 1; source < size; source++) {
+            MPI_Recv (localArray, count, MPI_INT, source, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+            printf ("Received results from task %d\n", source);
+        }
+    }
+    else {
+        MPI_Recv (localArray, count, MPI_INT, ROOT, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Send (localArray, count, MPI_INT, ROOT, 2, MPI_COMM_WORLD);
+    }
+    MPI_Finalize ();
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int size;
+    int rank;
+    const int ROOT = 0;
+    MPI_Init (& argc, & argv);
+    MPI_Comm_size (MPI_COMM_WORLD, & size);
+    MPI_Comm_rank (MPI_COMM_WORLD, & rank);
+    int remainder = N % size;
+    int local_counts [size], offsets [size];
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        local_counts[i] = N / size;
+        if (remainder > 0) {
+            local_counts[i] += 1;
+            remainder--;
+        }
+        offsets[i] = sum;
+        sum += local_counts[i];
+    }
+    int localArray [local_counts[rank]];
+    if (rank == ROOT) {
+        for (int i = 0; i < N; i++) {
+            A[i] = rand () % 10;
+        }
+    }
+    MPI_Scatterv (A, local_counts, offsets, MPI_INT, localArray, local_counts [rank], MPI_INT, ROOT, MPI_COMM_WORLD);
+    MPI_Gatherv (localArray, local_counts [rank], MPI_INT, A, local_counts, offsets, MPI_INT, ROOT, MPI_COMM_WORLD);
+    MPI_Finalize ();
+    return 0;
+}
+

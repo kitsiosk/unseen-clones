@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2425013
+*  Stack Overflow answer #:22677063
+*  And Stack Overflow answer#:2425041
+*/
+int main () {
+    int ch, i;
+    pthread_t *t;
+    printf ("Enter the number of threads you want to create : ");
+    scanf ("%d", & ch);
+    t = (pthread_t *) malloc (ch * sizeof (pthread_t));
+    for (i = 0; i < ch; i++) {
+        pthread_create (& t [i], NULL, print, NULL);
+    }
+    for (i = 0; i < ch; i++) {
+        pthread_join (t [i], NULL);
+    }
+}
+
+int main (int argc, char *argv []) {
+    pthread_t thread1, thread2;
+    char *message1 = "Thread 1";
+    char *message2 = "Thread 2";
+    int iret1, iret2;
+    iret1 = pthread_create (&thread1, NULL, print_message_function, (void *) message1);
+    iret2 = pthread_create (&thread2, NULL, print_message_function, (void *) message2);
+    pthread_join (thread1, NULL);
+    pthread_join (thread2, NULL);
+    printf ("Thread 1 returns: %d\n", iret1);
+    printf ("Thread 2 returns: %d\n", iret2);
+    exit (0);
+}
+

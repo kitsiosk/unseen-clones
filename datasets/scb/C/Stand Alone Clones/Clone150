@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3408706
+*  Stack Overflow answer #:15784664
+*  And Stack Overflow answer#:3409211
+*/
+In main () {
+    printf ("enter string :\n");
+    fgets (buf, 200, stdin);
+    unsigned char str_len = strlen (buf);
+    k = 0;
+    unsigned char bytearray [100];
+    for (j = 0; j < str_len - 1; j = j + 2) {
+        bytearray[k++] = converttohex (&buffer[j]);
+        printf (" %02X", bytearray [k - 1]);
+    }
+}
+
+int main (int argc, char **argv) {
+    const char hexstring [] = "DEadbeef10203040b00b1e50", *pos = hexstring;
+    unsigned char val [12];
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++) {
+        sscanf (pos, "%2hhx", & val [count]);
+        pos += 2;
+    }
+    printf ("0x");
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++)
+        printf ("%02x", val[count]);
+    printf ("\n");
+    return 0;
+}
+

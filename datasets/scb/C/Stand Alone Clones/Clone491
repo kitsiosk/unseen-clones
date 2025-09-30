@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18568365
+*  Stack Overflow answer #:18568652
+*  And Stack Overflow answer#:18569222
+*/
+int main () {
+    int n, reverse = 0;
+    printf ("Enter a number to reverse\n");
+    scanf ("%d", & n);
+    while (n != 0) {
+        reverse = reverse * 10;
+        reverse = reverse + n % 10;
+        n = n / 10;
+    }
+    printf ("Reverse of entered number is = %d\n", reverse);
+    return 0;
+}
+
+int main (void) {
+    int ary [] = {1, 2, 3, 4};
+    int size = sizeof (ary) / sizeof (ary[0]);
+    reverse (ary, size);
+    for (int i = 0; i < size; i++)
+        printf ("%d ", ary[i]);
+    printf ("\n");
+    return 0;
+}
+

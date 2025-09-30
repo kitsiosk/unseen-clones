@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27323555
+*  Stack Overflow answer #:27323932
+*  And Stack Overflow answer#:27323902
+*/
+int main (void) {
+    char buf [80];
+    char oper;
+    int number, result;
+    fgets (buf, sizeof (buf), stdin);
+    sscanf (buf, "%d", & number);
+    printf ("   saw input: %d\n", number);
+    result = number;
+    do {
+        fgets (buf, sizeof (buf), stdin);
+        sscanf (buf, "%c %d", & oper, & number);
+        printf ("   saw input: %c %d\n", oper, number);
+        printf ("   computing: %d %c %d\n", result, oper, number);
+        if (oper == '+') {
+            result = result + number;
+        }
+        else if (oper == '*') {
+            result = result * number;
+        }
+        else if (oper == '%') {
+            result = result % number;
+        }
+        printf ("   result   : %d\n", result);
+    }
+    while (oper != '%');
+    return 0;
+}
+
+int main (void) {
+    char operator;
+    int number, previous, result;
+    scanf ("%d", & number);
+    result = number;
+    while (scanf (" %c", &operator) != EOF) {
+        previous = result;
+        scanf ("%d", & number);
+        if (operator == '+') {
+            result += number;
+        }
+        else if (operator == '-') {
+            result -= number;
+        }
+        else if (operator == '*') {
+            result *= number;
+        }
+        else if (operator == '/') {
+            result /= number;
+        }
+        else if (operator == '%') {
+            result %= number;
+        }
+        printf ("%d %c %d = %d\n", previous, operator, number, result);
+    }
+    return 0;
+}
+

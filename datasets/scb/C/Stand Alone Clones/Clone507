@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3401138
+*  Stack Overflow answer #:3407870
+*  And Stack Overflow answer#:3401555
+*/
+int main (void) {
+    uint32_t f [NPER + 1];
+    uint32_t p [NPER];
+    uint32_t r, s;
+    fact (NPER, f);
+    for (r = 0; r < f[NPER]; r++) {
+        perm (r, NPER, f, p);
+        for (s = 0; s < NPER; s++)
+            printf ("%s, ", DukeQuote[p[s]]);
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    const char *allStrings [8] = {"0", "1", "2", "3", "4", "5", "6", "7"};
+    static const char *allPermutations [322560];
+    const char *permBuffer [8];
+    unsigned long nextOutputIdx = 0;
+    CalculatePermutations (8, allStrings, permBuffer, 0, allPermutations, & nextOutputIdx);
+    for (unsigned long i = 0; i < 322560; ++i) {
+        printf ("%s", allPermutations [i]);
+        if (i % 8 == 7) {
+            printf ("\n");
+        }
+        else {
+            printf (", ");
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32845127
+*  Stack Overflow answer #:32845459
+*  And Stack Overflow answer#:32845476
+*/
+int main () {
+    int i, c = 0, value = 4567, r, arr [10];
+    while (value) {
+        r = value % 10;
+        arr[c++] = r;
+        value /= 10;
+    }
+    for (i = c - 1; i >= 0; i--) {
+        printf ("%d", arr [i]);
+    }
+    return 0;
+}
+
+int main () {
+    using namespace std;
+    queue < int > digit;
+    int number;
+    cin >> number;
+    while (number != 0) {
+        digit.push (number % 10);
+        number /= 10;
+    }
+    while (!digit.empty ()) {
+        cout << digit.top () << " ";
+        digit.pop ();
+    }
+    cout << endl;
+    return 0;
+}
+

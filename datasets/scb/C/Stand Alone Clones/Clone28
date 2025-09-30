@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45554639
+*  Stack Overflow answer #:45554836
+*  And Stack Overflow answer#:45555413
+*/
+int main () {
+    char *number = "5.53 garbanzo beans";
+    char *foo;
+    double d = strtod (number, &foo);
+    if (foo == number) {
+        printf ("invalid number.");
+    }
+    else if (foo[strspn (foo, " \t\r\n")] != '\0') {
+        printf ("invalid (non-white-space) trailing characters.");
+    }
+    else {
+        printf ("valid number: %lf", d);
+    }
+}
+
+int main (void) {
+    test_float ("5.23.fkdj");
+    test_float ("   255.   ");
+    test_float ("255.123456");
+    test_float ("255.12E456");
+    test_float ("   .255   ");
+    test_float ("   Inf    ");
+    test_float (" Infinity ");
+    test_float ("   Nan    ");
+    test_float ("   255   ");
+    test_float (" 0x1.23P-24 ");
+    test_float (" 0x1.23 ");
+    test_float (" 0x123 ");
+    test_float ("abc");
+    test_float ("");
+    test_float ("   ");
+    return 0;
+}
+

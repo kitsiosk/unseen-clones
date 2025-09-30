@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30294129
+*  Stack Overflow answer #:30295610
+*  And Stack Overflow answer#:30295426
+*/
+int main (void) {
+    char data [] = "to=myself@gmail.com&cc=youself@gmail.com&title=&content=how are you?&signature=best regards.";
+    char *key = data;
+    do {
+        int key_length = strcspn (key, "&=");
+        char *value = key + key_length + (key[key_length] == '=');
+        int value_length = strcspn (value, "&");
+        printf ("Key:   %.*s\n" "Value: %.*s\n\n", key_length, key, value_length, value);
+        key = value + value_length + (value[value_length] == '&');
+    }
+    while (*key);
+    return 0;
+}
+
+int main (void) {
+    char data [] = "to=myself@gmail.com&cc=youself@gmail.com&title=&content=how are you?&signature=best regards.";
+    char *tags [] = {"to", "cc", "title", "content", "signature"};
+    enum {NUM_TAGS = sizeof (tags) / sizeof (tags[0])};
+    printf ("\nCompare variants on strtok()\n");
+    {
+        int i = NUM_TAGS - 1;
+        printf ("strtok():\n");
+        parsePostData1 (tags [i], data, strtok);
+        printf ("strtok_single():\n");
+        parsePostData1 (tags [i], data, strtok_single);
+        printf ("strtok_fixed():\n");
+        parsePostData1 (tags [i], data, strtok_fixed);
+    }
+    printf ("\nCompare variants on strtok()\n");
+    for (int i = 0; i < NUM_TAGS; i++) {
+        char *value1 = parsePostData2 (tags[i], data, strtok);
+        printf ("strtok: [%s] = [%s]\n", tags [i], value1);
+        char *value2 = parsePostData2 (tags[i], data, strtok_single);
+        printf ("single: [%s] = [%s]\n", tags [i], value2);
+        char *value3 = parsePostData2 (tags[i], data, strtok_fixed);
+        printf ("fixed:  [%s] = [%s]\n", tags [i], value3);
+    }
+    return 0;
+}
+

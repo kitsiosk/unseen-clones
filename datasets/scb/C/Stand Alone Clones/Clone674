@@ -1,0 +1,73 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38378946
+*  Stack Overflow answer #:38379023
+*  And Stack Overflow answer#:38379700
+*/
+int main (void) {
+    int digit;
+    printf ("Choose a number.\n");
+    int num = GetInt ();
+    if (num < 0) {
+        num = -num;
+        printf ("minus ");
+    }
+    printNumber (num, 0);
+    printf ("\n");
+}
+
+int main (void) {
+    int digit;
+    printf ("Choose a number.\n");
+    int num = GetInt ();
+    if (num < 0) {
+        num = -num;
+        printf ("minus ");
+    }
+    int place;
+    for (place = 1; place <= num / 10; place *= 10)
+        ;
+    do {
+        digit = num / place;
+        switch (digit) {
+        case 0 :
+            printf ("Zero ");
+            break;
+        case 1 :
+            printf ("One ");
+            break;
+        case 2 :
+            printf ("Two ");
+            break;
+        case 3 :
+            printf ("Three ");
+            break;
+        case 4 :
+            printf ("Four ");
+            break;
+        case 5 :
+            printf ("Five ");
+            break;
+        case 6 :
+            printf ("Six ");
+            break;
+        case 7 :
+            printf ("Seven ");
+            break;
+        case 8 :
+            printf ("Eight ");
+            break;
+        case 9 :
+            printf ("Nine ");
+            break;
+        default :
+            break;
+        }
+        num %= place;
+        place /= 10;
+    }
+    while (place != 0);
+    printf ("\n");
+}
+

@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29583743
+*  Stack Overflow answer #:29584111
+*  And Stack Overflow answer#:29583759
+*/
+int main (void) {
+    char *input = "((1828,299),(2729,2553),(2797,2929),(2200,1383),(2894,876))";
+    int i, n = count (input);
+    if (n == 0) {
+        printf ("invalid format!\n");
+        exit (EXIT_FAILURE);
+    }
+    struct x arr [n];
+    set (arr, input);
+    for (i = 0; i < n; ++i) {
+        printf ("(%4d, %4d)\n", arr [i].a, arr [i].b);
+    }
+    return 0;
+}
+
+int main (void) {
+    char input [] = "((1828,299),((2729,2553),(2797,2929),(2200,1383),(2894,876))";
+    size_t count = 0;
+    struct point *points = NULL;
+    size_t index = 0;
+    parse (input, & points, & count);
+    for (index = 0; index < count; ++index)
+        fprintf (stdout, "%zu: %d, %d\n", index, points[index].x, points[index].y);
+    free (points);
+    return 0;
+}
+

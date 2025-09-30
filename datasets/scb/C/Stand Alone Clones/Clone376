@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14001907
+*  Stack Overflow answer #:14001919
+*  And Stack Overflow answer#:14002310
+*/
+void main () {
+    fp = fopen ("26.txt", "r");
+    char buffer [128];
+    int a [100];
+    int i = 0;
+    freopen ("26.txt", "r", stdin);
+    while (scanf ("%i", &a[i]) == 1 && buffer[i] != EOF)
+        ++i;
+    for (int j = 0; j < i; ++j)
+        printf ("[%i]: %i\n", j, a[j]);
+    fclose (stdin);
+}
+
+int main (void) {
+    char buffer [10000];
+    char *pbuff;
+    int value;
+    while (1) {
+        if (!fgets (buffer, sizeof buffer, stdin))
+            break;
+        printf ("Line contains");
+        pbuff = buffer;
+        while (1) {
+            if (*pbuff == '\n')
+                break;
+            value = strtol (pbuff, &pbuff, 10);
+            printf (" %d", value);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

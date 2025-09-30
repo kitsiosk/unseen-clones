@@ -1,0 +1,110 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44742209
+*  Stack Overflow answer #:44742846
+*  And Stack Overflow answer#:44742409
+*/
+int main (void) {
+    int i, number, guess, ret;
+    char answer;
+    printf ("Welcome to the game of Guess It!\n" "I will choose a number between %d and %d.\n" "You will try to guess that number.\n" "I will tell you if you guessed too high or too low.\n" "You have %d tries to get the number.\n\n" "OK, I am thinking of a number. Try to guess it.\n\n", LOW, HIGH, TRIES);
+    srand (time (NULL));
+    while (1) {
+        number = rand () % HIGH + 1;
+        for (i = 0; i < TRIES; i++) {
+            while (1) {
+                printf ("Your guess no. %d? ", i + 1);
+                if ((ret = scanf (" %d", &guess)) != 1) {
+                    if (ret == EOF) {
+                        printf ("input canceled, exiting.\n");
+                        return 0;
+                    }
+                    fprintf (stderr, "  error: invalid input.\n");
+                    fflushstdin ();
+                    continue;
+                }
+                if (guess < LOW || guess > HIGH)
+                    printf ("Illegal guess. Your guess must be between " "%d and %d.\nTry again. Your guess?", LOW, HIGH);
+                break;
+            }
+            if (guess == number) {
+                printf ("\n**** CORRECT  ****\n\nWant to play again(y/n) ");
+                fflushstdin ();
+                while ((ret = scanf (" %c", &answer)) != 1 || (answer != 'y' && answer != 'n')) {
+                    fprintf (stderr, "error: invalid answer, play again (y/n) ");
+                    if (ret == EOF) {
+                        printf ("input canceled, exiting.\n");
+                        return 0;
+                    }
+                    fflushstdin ();
+                }
+                if (answer == 'y')
+                    goto done;
+                printf ("Goodbye, It was fun. Play again soon.\n");
+                return 0;
+            }
+            if (guess > number)
+                printf ("Too high!\n");
+            if (guess < number)
+                printf ("Too low!\n");
+        }
+        printf ("Sorry, you exhausted all your tries, number was: %d\n" "play again (y/n) ", number);
+        fflushstdin ();
+        while ((ret = scanf (" %c", &answer)) != 1 || (answer != 'y' && answer != 'n')) {
+            fprintf (stderr, "error: invalid answer, play again (y/n) ");
+            if (ret == EOF) {
+                printf ("input canceled, exiting.\n");
+                return 0;
+            }
+            fflushstdin ();
+        }
+        if (answer != 'y')
+            break;
+    done :
+        ;
+    }
+    return 0;
+}
+
+int main (void) {
+    srand (time (0));
+    for (;;) {
+        int number = rand () % 200 + 1;
+        int tries = 5;
+        int found = 0;
+        while (tries--) {
+            int guess = INVALIDINPUT;
+            while (guess < 1 || guess > 200) {
+                fputs ("guess [1..200]: ", stdout);
+                guess = readPositiveNumber ();
+                if (guess == READERROR)
+                    return EXIT_FAILURE;
+            }
+            if (guess == number) {
+                puts ("Correct!");
+                found = 1;
+                break;
+            }
+            else if (guess < number)
+                puts ("Too low!");
+            else
+                puts ("Too high!");
+        }
+        if (!found) {
+            puts ("No luck!");
+        }
+        int yn = INVALIDINPUT;
+        while (yn < 0) {
+            fputs ("play again (y/n)? ", stdout);
+            yn = readYesNo ();
+            if (yn == READERROR)
+                return EXIT_FAILURE;
+        }
+        if (!yn) {
+            puts ("Bye!");
+            return EXIT_SUCCESS;
+        }
+    }
+}
+

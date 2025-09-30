@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42517844
+*  Stack Overflow answer #:42518238
+*  And Stack Overflow answer#:42517928
+*/
+int main () {
+    int a;
+    do {
+        printf ("Give an intiger\n");
+        if (scanf ("%d", &a)) {
+            break;
+        }
+        if (scanf ("%*[^\n]") == EOF) {
+            break;
+        }
+    }
+    while (1);
+}
+
+int main (void) {
+    long int value;
+    char line [100];
+    while (fgets (line, sizeof (line), stdin) != NULL) {
+        char *endptr;
+        value = strtol (line, &endptr, 10);
+        if ((isspace (*endptr) != 0) && (endptr != line))
+            break;
+    }
+    fprintf (stdout, "%ld\n", value);
+    return 0;
+}
+

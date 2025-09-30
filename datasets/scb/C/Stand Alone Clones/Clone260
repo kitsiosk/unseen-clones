@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52795781
+*  Stack Overflow answer #:52796069
+*  And Stack Overflow answer#:52796054
+*/
+int main () {
+    int a, b, s, c;
+    printf ("Enter two proper numbers: ");
+    for (;;) {
+        s = scanf ("%d%d", &a, &b);
+        if (s == 2)
+            break;
+        if (s == EOF) {
+            printf ("unexpected end of file\n");
+            return 1;
+        }
+        while ((c = getchar ()) != EOF && c != '\n')
+            continue;
+        printf ("Invalid input. Try again: ");
+    }
+    printf ("The values are %d and %d\n", a, b);
+    return 0;
+}
+
+int main (void) {
+    int a, b;
+    char str [42];
+    do {
+        printf ("Enter 2 numeric values\n");
+        if (fgets (str, sizeof str, stdin) == NULL) {
+            exit (1);
+        }
+    }
+    while (sscanf (str, "%d%d", &a, &b) != 2);
+    printf ("Numbers are %d and %d\n", a, b);
+}
+

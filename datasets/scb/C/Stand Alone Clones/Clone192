@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9613960
+*  Stack Overflow answer #:9614379
+*  And Stack Overflow answer#:9615396
+*/
+int main (void) {
+    int a [11] = {1, 2, 3, 4, 5, 11, 11, 11, 11, 16, 16};
+    int a_size = sizeof (a) / sizeof (a[0]);
+    print (a, a_size, "Before", "a");
+    a_size = compact (a, a_size);
+    print (a, a_size, "After", "a");
+    int b [11] = {11, 1, 11, 3, 16, 2, 5, 11, 4, 11, 16};
+    int b_size = sizeof (b) / sizeof (b[0]);
+    print (b, b_size, "Before", "b");
+    qsort (b, b_size, sizeof (b [0]), intcmp);
+    print (b, b_size, "Sorted", "b");
+    b_size = compact (b, b_size);
+    print (b, b_size, "After", "b");
+    return 0;
+}
+
+int main () {
+    bool duplicate = false;
+    int a [11] = {1, 2, 3, 4, 5, 11, 11, 11, 11, 16, 16};
+    int b [11];
+    int index = 0;
+    for (int i = 0; i < arraysize (a); i++) {
+        for (int j = 0; j < index; j++) {
+            if (a[i] == b[j]) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (!duplicate) {
+            b[index] = a[i];
+            index++;
+        }
+        duplicate = false;
+    }
+    int c [index];
+    for (int k = 0; k < index; k++) {
+        c[k] = b[k];
+    }
+}
+

@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28121740
+*  Stack Overflow answer #:28121805
+*  And Stack Overflow answer#:28122093
+*/
+unsigned long reverse_long (unsigned long x) {
+    unsigned long rc = 0;
+    int i = 8;
+    do {
+        rc = (rc << 8) | (unsigned char) x;
+        x >>= 8;
+    }
+    while (--i);
+    return rc;
+}
+
+uint64_t reverse_long (uint64_t n) {
+    uint8_t *a = (uint8_t *) &n;
+    uint8_t *b = a + 7;
+    while (a < b) {
+        uint8_t t = *b;
+        *b-- = *a;
+        *a++ = t;
+    }
+}
+

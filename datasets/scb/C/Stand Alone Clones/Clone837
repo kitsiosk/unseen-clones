@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46499205
+*  Stack Overflow answer #:46499326
+*  And Stack Overflow answer#:46499401
+*/
+int main (void) {
+    char input [100];
+    int tokens [20], counter = 0;
+    fgets (input, sizeof (input), stdin);
+    input[strcspn (input, "\n")] = 0;
+    char *pch = strtok (input, " ");
+    while (pch != NULL) {
+        int isNumber = 1;
+        for (size_t i = 0; i < strlen (pch); ++i)
+            if (!isdigit (pch[i]))
+                isNumber = 0;
+        if (isNumber)
+            tokens[counter++] = atoi (pch);
+        pch = strtok (NULL, " ");
+    }
+    qsort (tokens, counter, sizeof (int), compare);
+    for (int i = 0; i < counter; ++i)
+        printf ("%d ", tokens[i]);
+    if (!counter)
+        printf ("NONE FOUND");
+    printf ("\n");
+    return 0;
+}
+
+int main (void) {
+    char inText [] = "hello hi 123  789 45 hi";
+    char *pch;
+    char *strArray [1024];
+    char *ResText = RemoveCharac (inText);
+    int i = 0, j;
+    printf ("The result is %s\n", ResText);
+    pch = strtok (ResText, " ,.-");
+    while (pch != NULL) {
+        strArray[i] = malloc (strlen (pch) +1);
+        strcpy (strArray [i], pch);
+        printf ("%s ", pch);
+        pch = strtok (NULL, " ,.-");
+        i++;
+    }
+    printf ("\n");
+    qsort (strArray, i, sizeof (char *), CompareElements);
+    for (j = 0;
+    j < i;
+    j ++) {printf ("\t %s", strArray [j]);
+}
+

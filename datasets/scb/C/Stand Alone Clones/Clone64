@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33861464
+*  Stack Overflow answer #:33861559
+*  And Stack Overflow answer#:33861577
+*/
+void foo () {
+    int ID;
+    char answer;
+    FILE *input = fopen ("Dane.txt", "w");
+    do {
+        printf ("Give ID: ");
+        scanf ("%d", & ID);
+        fprintf (input, "%d\n", ID);
+        printf ("Exit? y/n ");
+        scanf (" %c", & answer);
+        fflush (NULL);
+    }
+    while (answer == 'n');
+    fclose (input);
+}
+
+void foo () {
+    int ID;
+    char answer [4];
+    FILE *output = fopen ("Dane.txt", "w");
+    if (output == NULL)
+        return;
+    do {
+        printf ("Give ID: ");
+        if (scanf ("%d", &ID) != 1)
+            break;
+        fprintf (output, "%d\n", ID);
+        printf ("Exit? y/n ");
+        if (scanf ("%3s", answer) != 1)
+            break;
+        fflush (NULL);
+    }
+    while (answer[0] != 'y');
+    fclose (output);
+}
+

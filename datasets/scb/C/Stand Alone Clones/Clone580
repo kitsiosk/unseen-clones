@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:25903176
+*  Stack Overflow answer #:25904483
+*  And Stack Overflow answer#:25916596
+*/
+int *reverse (int *array, int arrayLength) {
+    if (arrayLength == 1) {
+        int *out = (int *) malloc (sizeof (int));
+        out[0] = array[0];
+        return out;
+    }
+    int *left = reverse (array +arrayLength / 2, arrayLength -arrayLength / 2);
+    int *right = reverse (array, arrayLength / 2);
+    int *out = (int *) realloc (left, sizeof (int) * arrayLength);
+    memcpy (out + arrayLength / 2, right, sizeof (int) * (arrayLength / 2));
+    free (right);
+    return out;
+}
+
+int *reverse (int *array, int arrayLength) {
+    if (array == NULL || arrayLength < 0) {
+    }
+    int *y = malloc (arrayLength * sizeof *y);
+    if (y == NULL) {
+    }
+    if (arrayLength <= 1) {
+        memcpy (y, array, arrayLength * sizeof * y);
+        return y;
+    }
+    int halflength = arrayLength / 2;
+    int *left = reverse (array, halflength);
+    int *right = reverse (&array[halflength], halflength);
+    memcpy (y, right, halflength * sizeof * y);
+    memcpy (& y [halflength], left, halflength * sizeof * y);
+    free (right);
+    free (left);
+    return y;
+}
+

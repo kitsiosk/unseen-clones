@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3337455
+*  Stack Overflow answer #:3337812
+*  And Stack Overflow answer#:23296724
+*/
+int fib (int n) {
+    int a = 0;
+    int b = 1;
+    while (n-- > 1) {
+        int t = a;
+        a = b;
+        b += t;
+    }
+    return b;
+}
+
+static int fib (int n) {
+    if (n < 2)
+        return n;
+    if (n == 2)
+        return 1;
+    int k = n / 2;
+    int a = fib (k +1);
+    int b = fib (k);
+    if (n % 2 == 1)
+        return a * a + b * b;
+    else
+        return b * (2 * a - b);
+}
+

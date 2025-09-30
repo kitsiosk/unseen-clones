@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11463455
+*  Stack Overflow answer #:11463632
+*  And Stack Overflow answer#:11463511
+*/
+int main (void) {
+    double **dataA;
+    int i, j, dim = 10;
+    dataA = init_data (dim, dim);
+    for (i = 0; i < dim; i++)
+        for (j = 0; j < dim; j++)
+            printf ("%f\n", dataA[i][j]);
+    for (i = 0; i < dim; i++)
+        free (dataA[i]);
+    free (dataA);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int xSize, ySize;
+    int **board;
+    xSize = ySize = 5;
+    printf ("X: %u; Y: %u\n", xSize, ySize);
+    board = calloc (xSize, sizeof (int *));
+    printf ("%p\n", board);
+    int **temp = board;
+    for (i = 0; i < xSize; i++) {
+        board[i] = calloc (ySize, sizeof (int));
+        printf ("%d %p\n", i, board [i]);
+    }
+    initializeBoard (board, xSize, ySize);
+    temp = board;
+    for (i = 0; i < xSize; i++) {
+        free (*temp);
+        (temp)++;
+    }
+    free (board);
+    return 0;
+}
+

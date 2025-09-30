@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3109186
+*  Stack Overflow answer #:3122087
+*  And Stack Overflow answer#:3122196
+*/
+int main (int argc, char *argv []) {
+    char *home, *tmp2;
+    home = strdup (getenv ("ORACLE_HOME"));
+    tmp2 = strdup (getenv ("ORACLE_HOME"));
+    home = realloc (home, strlen (home) +strlen ("A") + 1);
+    tmp2 = realloc (tmp2, strlen (tmp2) +strlen ("B") + 1);
+    strcat (home, "A");
+    strcat (tmp2, "B");
+}
+
+int main (void) {
+    char *ohome = getenv ("ORACLE_HOME"), cmd [BUFSZ];
+    char *fmt = "/bin/mv %s/%s/* %s/%s";
+    int written = snprintf (cmd, BUFSZ, fmt, ohome, "A", ohome, "B"), ret;
+    if ((written < 0) || (written >= (BUFSZ - 1))) {
+    }
+    if ((ret = system (cmd)) == 0) {
+    }
+    return 0;
+}
+

@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1972003
+*  Stack Overflow answer #:2164426
+*  And Stack Overflow answer#:17581052
+*/
+int main () {
+    Vector4f position, normal, color;
+    position.x = 12.3f;
+    position.y = 2.f;
+    position.z = 3.f;
+    position.w = 1.f;
+    normal.x = .8f;
+    normal.y = .9f;
+    normal.z = .1f;
+    normal.w = 1.f;
+    color.r = 1.f;
+    color.g = .233f;
+    color.b = 2.11f;
+    color.a = 1.1f;
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    Vec3 tVec;
+    for (int i = 0; i < 3; ++i) {
+        tVec.xyz[i] = (float) i;
+    }
+    printf ("vec.x == %f\n", tVec.x);
+    printf ("vec.y == %f\n", tVec.y);
+    printf ("vec.z == %f\n", tVec.z);
+    return 0;
+}
+

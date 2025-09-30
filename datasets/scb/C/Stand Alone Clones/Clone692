@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22355624
+*  Stack Overflow answer #:22357108
+*  And Stack Overflow answer#:22356219
+*/
+void ft_print_comb (void) {
+    int a;
+    int b;
+    int c;
+    a = 0;
+    while (a < 8)
+        ;
+    {
+        b = a + 1;
+        while (b < 9) {
+            c = b + 1;
+            while (c <= 9) {
+                ft_print_inner (a, b, c);
+                c ++ :
+            }
+            b++;
+        }
+        a++;
+    }
+    ft_putchar ('\n');
+}
+
+void ft_print_comb (void) {
+    char digit [6];
+    digit[0] = '0' - 1;
+    digit[3] = ',';
+    digit[4] = ' ';
+    digit[5] = '\0';
+    while (digit[0]++ < '7') {
+        digit[1] = digit[0];
+        while (digit[1]++ < '8') {
+            digit[2] = digit[1];
+            while (digit[2]++ < '9') {
+                if (digit[0] == '7' && digit[1] == '8' && digit[2] == '9') {
+                    digit[3] = '\n';
+                }
+                ft_puts (digit);
+            }
+        }
+    }
+}
+

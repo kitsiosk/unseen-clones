@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40984047
+*  Stack Overflow answer #:40984481
+*  And Stack Overflow answer#:40984785
+*/
+void remove_element (int **array, int number, int *array_length) {
+    int sameValues = 0;
+    for (int i = 0; i < *array_length; i++) {
+        while ((*array)[i] == number) {
+            *array_length--;
+            sameValues++;
+        }
+        if (sameValues > 0) {
+            if (i < *array_length) {
+                memmove (& (* array) [i], & (* array) [i + sameValues], (* array_length - i) * sizeof (int));
+            }
+            realloc (* array, * array_length);
+            sameValues = 0;
+        }
+    }
+}
+
+void remove_element (int number, int *arr, size_t *size) {
+    int arrTemp [*size];
+    long unsigned int j = 0, c;
+    for (size_t i = 0; i < *size; i++) {
+        if (arr[i] == number) {
+            continue;
+        }
+        else {
+            arrTemp[j] = arr[i];
+            j++;
+        }
+    }
+    for (size_t k = 0; k < j; k++) {
+        arr[k] = arrTemp[k];
+    }
+    c = j;
+    while (*size > c) {
+        arr[c] = 0;
+        c++;
+    }
+    *size = j;
+}
+

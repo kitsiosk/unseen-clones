@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11273591
+*  Stack Overflow answer #:11273647
+*  And Stack Overflow answer#:11273677
+*/
+void getstring (char str [], char rtn []) {
+    int i = 0, j = 0;
+    while (i < strlen (str)) {
+        if (str[i] != ' ' && str[i] != '$')
+            rtn[j++] = str[i];
+        i++;
+    }
+    rtn[j] = '\0';
+}
+
+void getstring (char *str) {
+    int j, i = 0, len = strlen (str);
+    while (i < len) {
+        char ch = str[i];
+        if (ch == ' ' || ch == '$') {
+            for (j = i; j < len + 1; j++) {
+                str[j] = str[j + 1];
+            }
+            len--;
+            i--;
+        }
+        i++;
+    }
+    str[len] = 0;
+}
+

@@ -1,0 +1,75 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31057175
+*  Stack Overflow answer #:31064568
+*  And Stack Overflow answer#:31064934
+*/
+int main (int argc, char **argv) {
+    if (argc < 2) {
+        fprintf (stderr, "error: insufficient input, usage: %s <filename>\n", argv [0]);
+        return 1;
+    }
+    char **array = NULL;
+    char *ln = NULL;
+    size_t n = 0;
+    ssize_t nchr = 0;
+    size_t idx = 0;
+    size_t it = 0;
+    size_t lmax = LMAX;
+    FILE *fp = NULL;
+    if (!(fp = fopen (argv[1], "r"))) {
+        fprintf (stderr, "error: file open failed '%s'.", argv [1]);
+        return 1;
+    }
+    if (!(array = calloc (LMAX, sizeof *array))) {
+        fprintf (stderr, "error: memory allocation failed.");
+        return 1;
+    }
+    while ((nchr = getline (&ln, &n, fp)) != -1) {
+        while (nchr > 0 && (ln[nchr - 1] == '\n' || ln[nchr - 1] == '\r'))
+            ln[--nchr] = 0;
+        array[idx++] = strdup (ln);
+        if (idx == lmax) {
+            char **tmp = realloc (array, lmax *2 * sizeof *array);
+            if (!tmp)
+                return -1;
+            array = tmp;
+            lmax *= 2;
+        }
+    }
+    if (fp)
+        fclose (fp);
+    if (ln)
+        free (ln);
+    printf ("\nLines in file:\n\n");
+    for (it = 0; it < idx; it++)
+        printf ("  array [%3zu]  %s\n", it, array[it]);
+    printf ("\n");
+    for (it = 0; it < idx; it++)
+        free (array[it]);
+    free (array);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    FILE *fpInputFile = NULL;
+    unsigned long ulSize = 0;
+    unsigned long ulIteration = 0;
+    unsigned char *ucBuffer;
+    if (argc != 2) {
+        printf ("Enter ihe file name \n");
+        return -1;
+    }
+    fpInputFile = fopen (argv[1], "r");
+    if (!fpInputFile) {
+        fprintf (stderr, "File opening failed");
+    }
+    fseek (fpInputFile, 0, SEEK_END);
+    ulSize = ftell (fpInputFile);
+    fseek (fpInputFile, 0, SEEK_SET);
+    ucBuffer = (unsigned char *) malloc (ulSize);
+    fread (ucBuffer, 1, ulSize, fpInputFile);
+    fclose (fpInputFile);
+}
+

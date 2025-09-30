@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9889492
+*  Stack Overflow answer #:10082316
+*  And Stack Overflow answer#:29838852
+*/
+int main () {
+    unsigned char text [] = "hello world!";
+    unsigned char enc_out [80];
+    unsigned char dec_out [80];
+    AES_KEY enc_key, dec_key;
+    AES_set_encrypt_key (key, 128, & enc_key);
+    AES_encrypt (text, enc_out, & enc_key);
+    AES_set_decrypt_key (key, 128, & dec_key);
+    AES_decrypt (enc_out, dec_out, & dec_key);
+    int i;
+    printf ("original:\t");
+    for (i = 0; *(text + i) != 0x00; i++)
+        printf ("%X ", *(text + i));
+    printf ("\nencrypted:\t");
+    for (i = 0; *(enc_out + i) != 0x00; i++)
+        printf ("%X ", *(enc_out + i));
+    printf ("\ndecrypted:\t");
+    for (i = 0; *(dec_out + i) != 0x00; i++)
+        printf ("%X ", *(dec_out + i));
+    printf ("\n");
+    return 0;
+}
+
+int main (int arc, char *argv []) {
+    OpenSSL_add_all_algorithms ();
+    ERR_load_crypto_strings ();
+    static const unsigned char key [] = "01234567890123456789012345678901";
+    static const unsigned char iv [] = "0123456789012345";
+    unsigned char plaintext [] = "The quick brown fox jumps over the lazy dog";
+    static const unsigned char aad [] = "Some AAD data";
+    unsigned char ciphertext [128];
+    unsigned char decryptedtext [128];
+    unsigned char tag [16];
+    int decryptedtext_len = 0, ciphertext_len = 0;
+    ciphertext_len = encrypt (plaintext, strlen (plaintext), aad, strlen (aad), key, iv, ciphertext, tag);
+    printf ("Ciphertext is:\n");
+    BIO_dump_fp (stdout, ciphertext, ciphertext_len);
+    printf ("Tag is:\n");
+    BIO_dump_fp (stdout, tag, 14);
+    decryptedtext_len = decrypt (ciphertext, ciphertext_len, aad, strlen (aad), tag, key, iv, decryptedtext);
+    if (decryptedtext_len < 0) {
+        printf ("Decrypted text failed to verify\n");
+    }
+    else {
+        decryptedtext[decryptedtext_len] = '\0';
+        printf ("Decrypted text is:\n");
+        printf ("%s\n", decryptedtext);
+    }
+    ERR_free_strings ();
+    return 0;
+}
+

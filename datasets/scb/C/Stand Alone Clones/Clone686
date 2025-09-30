@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3430743
+*  Stack Overflow answer #:3430993
+*  And Stack Overflow answer#:3431668
+*/
+int main (int argc, char **argv) {
+    char *fname = strdup (argv[1]);
+    char *outdir = argv[1];
+    char *dotpos;
+    int new_size = strlen (fname) + strlen (extra);
+    char *new_fname = malloc (new_size);
+    dotpos = strchr (fname, '.');
+    if (dotpos)
+        *dotpos = '\0';
+    new_fname = malloc (new_size);
+    snprintf (new_fname, new_size, "%s%s", fname, extra);
+    printf ("%s\n", new_fname);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char *fname;
+    char *outdir;
+    if (argc < 3) {
+        fprintf (stderr, "I want more command line arguments\n");
+        return 1;
+    }
+    fname = argv[1];
+    outdir = argv[2];
+    char *fname_base_begin = strrchr (fname, DIR_SYM);
+    if (!fname_base_begin) {
+        fname_base_begin = fname;
+    }
+    char *fname_base_end = strrchr (fname_base_begin, EXT_SYM);
+    if (!fname_base_end) {
+        fprintf (stderr, "I don't know what you want to do when there is no extension\n");
+        return 1;
+    }
+    *fname_base_end = '\0';
+    printf ("string=%s%c%s_test%c%s\n", outdir, DIR_SYM, fname_base_begin, EXT_SYM, NEW_EXT);
+    printf ("string=%s%c%s_test%c%s\n", outdir, DIR_SYM, fname_base_begin, EXT_SYM, fname_base_end + 1);
+    return 0;
+}
+

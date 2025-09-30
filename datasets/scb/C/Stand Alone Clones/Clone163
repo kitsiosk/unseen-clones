@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6154539
+*  Stack Overflow answer #:6156106
+*  And Stack Overflow answer#:6155499
+*/
+int main () {
+    int i = 4;
+    for (; i; --i) {
+        pthread_t *tcb = malloc (sizeof (*tcb));
+        pthread_create (tcb, NULL, threadfunc, (void *) i);
+    }
+    sleep (40);
+    return 0;
+}
+
+int main () {
+    for (i = 0; i < num_threads; i++) {
+        pthread_mutex_lock (& running_mutex);
+        running_threads++;
+        pthread_mutex_unlock (& running_mutex);
+    }
+    while (running_threads > 0) {
+        sleep (1);
+    }
+}
+

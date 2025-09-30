@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4697540
+*  Stack Overflow answer #:4697901
+*  And Stack Overflow answer#:4697588
+*/
+int main () {
+    float f = 1.0f;
+    float f2 = exp (log (f) +COUNT * log (COEFF));
+    int i;
+    for (i = 0; i < COUNT; i++)
+        f *= COEFF;
+    printf ("results for %d iters with %f: LOOP: %g and LOG: %g\n", COUNT, COEFF, f, f2);
+    return 0;
+}
+
+int main (void) {
+    float x = 1.0f;
+    unsigned int count = 0;
+    while (x > 0.0f && count < 200) {
+        x *= MULTIPLIER;
+        printf ("%g %a\n", x, x);
+        count++;
+    }
+    return 0;
+}
+

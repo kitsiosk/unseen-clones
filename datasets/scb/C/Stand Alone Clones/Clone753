@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8465006
+*  Stack Overflow answer #:31072377
+*  And Stack Overflow answer#:8465127
+*/
+int main () {
+    char s1 [] = "oppa";
+    char s2 [] = "gangnam";
+    char s3 [] = "style";
+    {
+        char result [STR_SIZE] = {0};
+        snprintf (result, sizeof (result), "%s %s %s", s1, s2, s3);
+        printf ("%s\n", result);
+    }
+}
+
+int main (void) {
+    const char str1 [] = "First";
+    const char str2 [] = "Second";
+    char *res;
+    res = malloc (strlen (str1) +strlen (str2) + 1);
+    if (!res) {
+        fprintf (stderr, "malloc() failed: insufficient memory!\n");
+        return EXIT_FAILURE;
+    }
+    strcpy (res, str1);
+    strcat (res, str2);
+    printf ("Result: '%s'\n", res);
+    free (res);
+    return EXIT_SUCCESS;
+}
+

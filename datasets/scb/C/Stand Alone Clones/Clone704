@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2019923
+*  Stack Overflow answer #:2019932
+*  And Stack Overflow answer#:2020019
+*/
+int main () {
+    char *a = malloc (10);
+    char *b = malloc (10);
+    char *c = malloc (10);
+    memset (a, 'a', 4095);
+    memset (b, 'b', 4095);
+    memset (c, 'c', 4095);
+    puts (a);
+    memset (c, 0xc3, 10);
+    mprotect (c, 10, PROT_READ | PROT_EXEC);
+    b[0] = 'H';
+    char *d = mmap (0, 4096, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANON, -1, 0);
+    memset (d, 0xc3, 4096);
+    ((void (*)(void)) d) ();
+    ((void (*)(void)) c) ();
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int what;
+    charp = malloc (10101);
+    memset (charp, 0xc3, 10101);
+    mprotect (charp, 10101, PROT_EXEC | PROT_READ | PROT_WRITE);
+    __asm__ ("leal charp, %eax"
+    ) __asm__ ("call (%eax)"
+    ) printf ("am I alive?\n");
+    char *more = strdup ("more heap operations");
+    printf ("%s\n", more);
+    FILE *f = fopen ("foo", "rb");
+    fseek (f, 0, SEEK_END);
+    unsigned int len = ftell (f);
+    fseek (f, 0, SEEK_SET);
+    bin = (char *) malloc (len);
+    printf ("read in %d\n", fread (bin, 1, len, f));
+    printf ("%p\n", bin);
+    fclose (f);
+    mprotect (& bin, 10101, PROT_EXEC | PROT_READ | PROT_WRITE);
+    asm volatile ("movl %0, %%eax"
+        :
+        : "g" (bin)
+    ) __asm__ ("addl $0x674, %eax"
+    ) __asm__ ("call %eax"
+    ) fflush (stdout);
+    return 0;
+}
+

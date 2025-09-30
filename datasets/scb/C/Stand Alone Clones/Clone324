@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5597513
+*  Stack Overflow answer #:5597639
+*  And Stack Overflow answer#:5597593
+*/
+int main () {
+    FILE *pFile;
+    const int n = 5;
+    char mystring [n];
+    int lineLength = 0;
+    pFile = fopen ("myfile.txt", "r");
+    if (pFile == NULL) {
+        perror ("Error opening file");
+    }
+    else {
+        do {
+            fgets (mystring, n, pFile);
+            puts (mystring);
+            lineLength += strlen (mystring);
+        }
+        while (mystring[strlen (mystring) - 1] != '\n' && !feof (pFile));
+        fclose (pFile);
+    }
+    printf ("Line Length: %d\n", lineLength);
+    return 0;
+}
+
+int main () {
+    string line;
+    ifstream myfile ("example.txt");
+    if (myfile.is_open ()) {
+        while (myfile.good ()) {
+            getline (myfile, line);
+            cout << line << endl;
+        }
+        myfile.close ();
+    }
+    else
+        cout << "Unable to open file";
+    return 0;
+}
+

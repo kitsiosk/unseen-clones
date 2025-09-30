@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19792580
+*  Stack Overflow answer #:19793525
+*  And Stack Overflow answer#:19792840
+*/
+int main (void) {
+    long long i;
+    char text [] = "a;lskdddddddd;js;'";
+    buf = malloc (1000000);
+    strcat (buf, "a;lskdddddddd;js;dlkag;lkjsda;gkl;sdfja;klagj;aglkjaf;d");
+    i = 1;
+    while (strlen (buf) < i * 1000000) {
+        strcat (buf, text);
+        if (strlen (buf) > (i * 10000) - 10) {
+            i++;
+            buf = realloc (buf, 10000000 * i);
+        }
+    }
+    return 0;
+}
+
+int main () {
+    int *arr = NULL;
+    int arrLen;
+    scanf ("%d", & arrLen);
+    arr = malloc (arrLen * sizeof (int));
+    if (arr == NULL) {
+        fprintf (stderr, "Not enough heap-mem for %d ints\n", arrLen);
+        exit (EXIT_FAILURE);
+    }
+    free (arr);
+    return 0;
+}
+

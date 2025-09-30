@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41334775
+*  Stack Overflow answer #:41334984
+*  And Stack Overflow answer#:41334871
+*/
+struct multi_type *foo (int i, char c, char *s) {
+    struct multi_type *result = malloc (sizeof (*result));
+    if (result == NULL) {
+        return NULL;
+    }
+    result->i = i;
+    result->c = c;
+    result->s = s;
+    return result;
+}
+
+uint8_t *foo (int i, char c, char *s) {
+    size_t offset1 = GET_ALIGNED_OFFSET (sizeof i, char);
+    size_t offset2 = GET_ALIGNED_OFFSET (offset1 + sizeof c, char *);
+    uint8_t *r = malloc (offset2 + sizeof s);
+    *(int*) r = i;
+    *(char*) (r + offset1) = c;
+    *(char**) (r + offset2) = s;
+    return r;
+}
+

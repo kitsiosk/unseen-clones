@@ -1,0 +1,71 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47317781
+*  Stack Overflow answer #:47317898
+*  And Stack Overflow answer#:47320765
+*/
+int main () {
+    const char *spaces = "\n\t ";
+    int myArray [240] [30];
+    char line [240];
+    char *token;
+    int i, n, j;
+    FILE *fp;
+    fp = fopen ("array_list.txt", "rt");
+    i = 0;
+    while (fgets (line, sizeof (line), fp)) {
+        j = 1;
+        token = strtok (line, spaces);
+        while (token) {
+            n = atoi (token);
+            myArray[i][j] = n;
+            j++;
+            printf ("%d ", myArray [i] [j]);
+            token = strtok (NULL, spaces);
+        }
+        myArray[i][0] = j;
+        printf ("\n");
+        i++;
+    }
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int arr [AMAX] = {0}, n = 0;
+    char buf [BUF_SIZ] = "";
+    FILE *fp = argc > 1 ? fopen (argv[1], "r") : stdin;
+    if (!fp) {
+        fprintf (stderr, "error: file open failed '%s'.\n", argv [1]);
+        return 1;
+    }
+    while (fgets (buf, BUF_SIZ, fp)) {
+        char *p = buf, *ep = p;
+        size_t len = strlen (buf);
+        if (len == BUF_SIZ - 1 && buf[len - 1] != '\n') {
+            fprintf (stderr, "error: line too long.\n");
+            break;
+        }
+        while (n < AMAX && *p) {
+            errno = 0;
+            long tmp = strtol (p, &ep, BASE);
+            if (p != ep) {
+                if (!errno && INT_MIN <= tmp && tmp <= INT_MAX)
+                    arr[n++] = (int) tmp;
+                p = ep;
+            }
+            for (; *p; p++) {
+                if ('0' <= *p && *p <= '9')
+                    break;
+                if ((*p == '+' || *p == '-') && '0' <= *(p + 1) && *(p + 1) <= '9')
+                    break;
+            }
+        }
+    }
+    if (fp != stdin)
+        fclose (fp);
+    for (int i = 0; i < n; i++)
+        printf (" arr[%3d] = %d\n", i, arr[i]);
+    return 0;
+}
+

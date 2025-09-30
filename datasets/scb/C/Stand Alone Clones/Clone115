@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52955008
+*  Stack Overflow answer #:52956653
+*  And Stack Overflow answer#:52961898
+*/
+int main () {
+    int dec_num;
+    int i = 0;
+    printf ("type in 3 digits number to convert to binary\n");
+    int flag = scanf ("%d", &dec_num);
+    if (flag != 1) {
+        printf ("Input is not recognized as an integer");
+        return 0;
+    }
+    int size = 0;
+    int array [120] = {0};
+    while (dec_num > 0) {
+        if (dec_num % TWO != 0) {
+            array[i] = 1;
+        }
+        else if (dec_num % TWO == 0) {
+            array[i] = 0;
+        }
+        size = ++i;
+        dec_num = dec_num / TWO;
+    }
+    for (i = size - 1; i >= 0; i--)
+        printf ("%d", array[i]);
+    return 0;
+}
+
+int main () {
+    int dec_num;
+    printf ("type in a 3 digit number to convert to binary\n");
+    if (scanf ("%d", &dec_num) != 1) {
+        printf ("invalid input\n");
+        return 1;
+    }
+    if (dec_num < 0 || dec_num > 999) {
+        printf ("invalid value: must have at most 3 digits\n");
+        return 1;
+    }
+    for (;;) {
+        if (dec_num % 2 != 0) {
+            printf ("1");
+        }
+        else {
+            printf ("0");
+        }
+        dec_num = dec_num / 2;
+        if (dec_num == 0)
+            break;
+    }
+    printf ("\n");
+    return 0;
+}
+

@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53287260
+*  Stack Overflow answer #:53287562
+*  And Stack Overflow answer#:53287542
+*/
+void test (void) {
+    s2g = malloc (sizeof *s2g + ELEMENTS * sizeof *s2g->stud_roll);
+    if (!s2g) {
+        perror ("malloc-s2g");
+        exit (EXIT_FAILURE);
+    }
+    s2g->foo = 1;
+    s2g->bar = 2;
+    for (int i = 0; i < ELEMENTS; i++)
+        s2g->stud_roll[i] = i + 1;
+}
+
+void test (void) {
+    s2g = malloc (sizeof (struct S2) + STUD_ROLL_SIZE * sizeof (int));
+    if (s2g == NULL) {
+        fprintf (stderr, "Abort ship! Abort ship!\n");
+        exit (- 1);
+    }
+    s2g->stud_roll[0] = 1;
+    free (s2g);
+}
+

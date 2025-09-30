@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35680416
+*  Stack Overflow answer #:35680940
+*  And Stack Overflow answer#:35680462
+*/
+int main (void) {
+    char ***szData;
+    unsigned int n, m;
+    unsigned int i, j;
+    printf ("Rows: ");
+    scanf ("%u", & n);
+    szData = (char ***) malloc (n * sizeof (char **));
+    for (i = 0; i < n; i++) {
+        printf ("Col: ");
+        scanf ("%u", & m);
+        szData[i] = (char **) calloc ((m + 1), sizeof (char *));
+        for (j = 0; j < m; j++) {
+            char temp [25];
+            printf ("string[%u][%u] = ", i, j);
+            scanf ("%24s", temp);
+            szData[i][j] = (char *) malloc (strlen (temp) +1);
+            strcpy (szData [i] [j], temp);
+        }
+    }
+    printf ("\n");
+    for (i = 0; i < n; i++) {
+        for (j = 0; szData[i][j] != NULL; j++)
+            printf ("%10s", szData[i][j]);
+        printf ("\n");
+    }
+    for (i = 0; i < n; i++) {
+        for (j = 0; szData[i][j] != NULL; j++)
+            free (szData[i][j]);
+        free (szData [i]);
+    }
+    free (szData);
+    return 0;
+}
+
+int main (void) {
+    char ***szData;
+    char temp [500];
+    int i, j, k, x, n, m, index;
+    printf ("Rows:");
+    scanf ("%d", & n);
+    szData = malloc (n * sizeof (char **));
+    for (i = 0; i < n; i++) {
+        printf ("Col: ");
+        scanf ("%d", & m);
+        szData[i] = malloc (m * sizeof (char *));
+        for (j = 0; j < m; j++) {
+            printf ("string[%d][%d]=", i, j);
+            scanf ("%499s", temp);
+            szData[i][j] = malloc ((strlen (temp) + 1) * sizeof (char));
+            strcpy (szData [i] [j], temp);
+        }
+    }
+    printf ("memmory[%d][%d]=%s\n", 0, 2, szData [0] [2]);
+    return 0;
+}
+

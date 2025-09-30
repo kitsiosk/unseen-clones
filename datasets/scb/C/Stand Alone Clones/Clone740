@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4052940
+*  Stack Overflow answer #:12290229
+*  And Stack Overflow answer#:4201472
+*/
+BOOL CreateHGLRC (HWND hWnd) {
+    PIXELFORMATDESCRIPTOR pfd = {sizeof (PIXELFORMATDESCRIPTOR), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_SUPPORT_COMPOSITION | PFD_DOUBLEBUFFER, PFD_TYPE_RGBA, 32, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 24, 8, 0, PFD_MAIN_PLANE, 0, 0, 0, 0};
+    HDC hdc = GetDC (hWnd);
+    int PixelFormat = ChoosePixelFormat (hdc, &pfd);
+    if (PixelFormat == 0) {
+        assert (0);
+        return FALSE;
+    }
+    BOOL bResult = SetPixelFormat (hdc, PixelFormat, &pfd);
+    if (bResult == FALSE) {
+        assert (0);
+        return FALSE;
+    }
+    m_hrc = wglCreateContext (hdc);
+    if (!m_hrc) {
+        assert (0);
+        return FALSE;
+    }
+    ReleaseDC (hWnd, hdc);
+    return TRUE;
+}
+
+BOOL CreateHGLRC () {
+    DWORD dwFlags = PFD_SUPPORT_OPENGL | PFD_DRAW_TO_BITMAP;
+    PIXELFORMATDESCRIPTOR pfd;
+    memset (& pfd, 0, sizeof (PIXELFORMATDESCRIPTOR));
+    pfd.nSize = sizeof (PIXELFORMATDESCRIPTOR);
+    pfd.nVersion = 1;
+    pfd.dwFlags = dwFlags;
+    pfd.iPixelType = PFD_TYPE_RGBA;
+    pfd.cColorBits = 24;
+    pfd.cDepthBits = 32;
+    pfd.iLayerType = PFD_MAIN_PLANE;
+    int PixelFormat = ChoosePixelFormat (pdcDIB, &pfd);
+    if (PixelFormat == 0) {
+        assert (0);
+        return FALSE;
+    }
+    BOOL bResult = SetPixelFormat (pdcDIB, PixelFormat, &pfd);
+    if (bResult == FALSE) {
+        assert (0);
+        return FALSE;
+    }
+    m_hrc = wglCreateContext (pdcDIB);
+    if (!m_hrc) {
+        assert (0);
+        return FALSE;
+    }
+    return TRUE;
+}
+

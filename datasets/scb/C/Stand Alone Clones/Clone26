@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16022220
+*  Stack Overflow answer #:16022696
+*  And Stack Overflow answer#:16022734
+*/
+int main (int argc, const char *argv []) {
+    char sentence [] = "this is a sentence";
+    size_t len = strlen (sentence);
+    char *newSentence = malloc (len +1);
+    char *ptr_src = sentence;
+    char *ptr_dst = newSentence;
+    while (ptr_src) {
+        char *next, *t;
+        next = strchr (ptr_src, ' ');
+        if (!next)
+            next = sentence + len;
+        for (t = next; t > ptr_src;) {
+            *ptr_dst++ = *--t;
+        }
+        if (*next) {
+            *ptr_dst++ = *next++;
+            ptr_src = next;
+        }
+        else {
+            *ptr_dst = 0;
+            break;
+        }
+    }
+    printf ("[%s]", newSentence);
+    return 0;
+}
+
+int main (void) {
+    char sentence [] = "this is a sentence";
+    char *newSentence;
+    int i, j, start, len;
+    start = 0;
+    len = strlen (sentence);
+    newSentence = malloc (len +1);
+    *newSentence = '\0';
+    for (i = 0; i <= len; i++) {
+        if (sentence[i] == ' ' || sentence[i] == '\0') {
+            char *word = malloc ((i - start) + 1);
+            int c = 0;
+            for (j = i - 1; j >= start; j--) {
+                word[c++] = sentence[j];
+            }
+            word[c] = '\0';
+            strcat (newSentence, word);
+            if (sentence[i] == ' ')
+                strcat (newSentence, " ");
+            start = i + 1;
+            free (word);
+        }
+    }
+    printf ("%s", newSentence);
+    return 0;
+}
+

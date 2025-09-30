@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29239645
+*  Stack Overflow answer #:29239944
+*  And Stack Overflow answer#:29240068
+*/
+int main (int argc, char **argv) {
+    if (argc != 2) {
+        return 1;
+    }
+    char *err_pos = NULL;
+    long n = strtol (argv[1], &err_pos, 10);
+    if (err_pos == argv[1] || *err_pos || n < 0) {
+        return 2;
+    }
+    return alloc_vars (n, NULL);
+}
+
+int main (int argc, char **argv) {
+    if (argc < 2) {
+        fprintf (stderr, "error: insufficient input.  usage: %s int (no. of array elements)\n", argv [0]);
+        return 1;
+    }
+    size_t nelements = atoi (argv[1]);
+    size_t i = 0;
+    if (nelements < 1 || nelements > MAXELE) {
+        fprintf (stderr, "error: input not within 1 - %d.\n", MAXELE);
+        return 1;
+    }
+    int *array = calloc (nelements, sizeof *array);
+    if (!array) {
+        fprintf (stderr, "error: memory allocation failed.\n");
+        return 1;
+    }
+    for (i = 0; i < nelements; i++)
+        array[i] = (i + 2) * i;
+    for (i = 0; i < nelements; i++)
+        printf (" array[%2zu]  %d\n", i, array[i]);
+    if (array)
+        free (array);
+    return 0;
+}
+

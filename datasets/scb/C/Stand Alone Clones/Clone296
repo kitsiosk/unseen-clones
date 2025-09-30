@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35927323
+*  Stack Overflow answer #:35927977
+*  And Stack Overflow answer#:35927984
+*/
+int main () {
+    uint32_t r = 0;
+    float result;
+    for (int i = 0; i < 20; i++) {
+        syscall (SYS_getrandom, & r, sizeof (uint32_t), 0);
+        result = (float) (r & ((1 << FLT_MANT_DIG) - 1)) / (1 << FLT_MANT_DIG);
+        printf ("%f\n", result);
+    }
+    return 0;
+}
+
+int main (void) {
+    FILE *istream = fopen ("/dev/urandom", "rb");
+    assert (istream);
+    unsigned long seed = 0;
+    for (unsigned i = 0; i < sizeof seed; i++) {
+        seed *= (UCHAR_MAX + 1);
+        int ch = fgetc (istream);
+        assert (ch != EOF);
+        seed += (unsigned) ch;
+    }
+    fclose (istream);
+    srand (seed);
+    for (int i = 0; i < 20; i++) {
+        printf ("%f\n", rand_01 ());
+    }
+    return 0;
+}
+

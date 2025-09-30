@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30745397
+*  Stack Overflow answer #:30746329
+*  And Stack Overflow answer#:30746628
+*/
+int main (void) {
+    float celsius, fahrenheit;
+    while (1) {
+        printf ("Please input a temperature in Celsius (type 'stop' to stop): ");
+        if (scanf ("%f", &celsius) != 1)
+            break;
+        fahrenheit = (1.8 * celsius) + 32;
+        printf ("Temperature in Fahrenheit: %f\n", fahrenheit);
+    }
+    return (0);
+}
+
+int main (int argc, char **argv) {
+    char buffer [BUFFER_SIZE];
+    char *exitword = "stop";
+    float celsius, fahrenheit;
+    while (0x01) {
+        memset (buffer, 0x00, BUFFER_SIZE);
+        printf ("Please input a temperature in Celsius (type '%s' to stop): ", exitword);
+        if (fgets (buffer, BUFFER_SIZE -0x01, stdin) == NULL) {
+            fprintf (stderr, "Unable to read user input!\n");
+            fprintf (stderr, "Please try again\n");
+            continue;
+        }
+        if (strncmp (buffer, exitword, strlen (exitword)) == 0x00) {
+            printf ("Good bye!\n");
+            break;
+        }
+        if ((celsius = strtof (buffer, NULL)) == 0) {
+            fprintf (stderr, "Unable to convert user input to floating point number\n");
+            fprintf (stderr, "Please try again\n");
+            continue;
+        }
+        fahrenheit = (1.8 * celsius) + 32;
+        printf ("Temperature in Fahrenheit: %f\n", fahrenheit);
+    }
+    return EXIT_SUCCESS;
+}
+

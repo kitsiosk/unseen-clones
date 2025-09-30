@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41892767
+*  Stack Overflow answer #:41908328
+*  And Stack Overflow answer#:41892877
+*/
+size_t read (int **v, FILE *f) {
+    size_t length;
+    if (1 != fscanf (f, "%lu", &length)) {
+        perror ("fscanf failed");
+        exit (EXIT_FAILURE);
+    }
+    *v = malloc (length * sizeof (int));
+    if (!v) {
+        perror ("malloc failed");
+        fclose (f);
+        exit (EXIT_FAILURE);
+    }
+    for (size_t i = 0; i < length; ++i) {
+        if (1 != fscanf (f, "%d", (*v) + i)) {
+            perror ("fscanf for array values failed");
+            free (*v);
+            fclose (f);
+            exit (EXIT_FAILURE);
+        }
+    }
+    return length;
+}
+
+int read (int **v, FILE *f) {
+    int i, length;
+    fscanf (f, "%d", & length);
+    int *arr = (int *) malloc (length * sizeof (int));
+    for (i = 0; i < length; ++i)
+        fscanf (f, "%d", arr +i);
+    *v = arr;
+    return length;
+}
+

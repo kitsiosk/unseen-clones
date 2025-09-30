@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17590835
+*  Stack Overflow answer #:17591124
+*  And Stack Overflow answer#:17590969
+*/
+int main () {
+    float a = 1E+37f;
+    float b = log (a);
+    float c = 3242325445.0f;
+    cout << "Hello world!" << endl;
+    if (c > b) {
+        cout << "you should not take exp of " << c << endl;
+    }
+    else {
+        cout << "go on" << endl;
+    }
+    return 0;
+}
+
+int main () {
+    int my_input = 0;
+    int my_exp = 0;
+std :
+    : cout << "Enter test value\n";
+std :
+    : cin >> my_input;
+std :
+    : cout << "Enter test exponent\n";
+std :
+    : cin >> my_exp;
+    bool exp_unsafe = 1;
+    exp_unsafe = is_exp_overflow (my_input, my_exp);
+    if (!exp_unsafe)
+        runExp (my_input, my_exp);
+    else
+    std :
+    : cout << "Code is unsafe\n";
+    return 0;
+}
+

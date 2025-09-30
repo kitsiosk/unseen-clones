@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6964392
+*  Stack Overflow answer #:25322551
+*  And Stack Overflow answer#:7037750
+*/
+int main () {
+    for (int i = 0; i < 1000; i++) {
+        using namespace std : : chrono;
+        auto start = high_resolution_clock : : now ();
+        auto result = euler12 ();
+        auto end = high_resolution_clock : : now ();
+        double time_elapsed = duration_cast < milliseconds > (end - start).count ();
+        cout << result << " " << time_elapsed << '\n';
+    }
+    return 0;
+}
+
+int main () {
+    int triangle = 1;
+    int index = 1;
+    while (factorCount (triangle) < 1001) {
+        index++;
+        triangle += index;
+    }
+    printf ("%d\n", triangle);
+}
+

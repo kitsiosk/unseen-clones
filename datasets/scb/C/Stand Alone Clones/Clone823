@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17120195
+*  Stack Overflow answer #:17121604
+*  And Stack Overflow answer#:17120507
+*/
+int add (int value) {
+    FILE *fp;
+    int pv = 0;
+    fp = fopen ("temp.bin", "r+b");
+    if (fp == NULL) {
+        fp = fopen ("temp.bin", "wb+");
+        fwrite (& pv, sizeof (int), 1, fp);
+        rewind (fp);
+    }
+    fread (& pv, sizeof (int), 1, fp);
+    pv += value;
+    rewind (fp);
+    fwrite (& pv, sizeof (int), 1, fp);
+    fclose (fp);
+    return pv;
+}
+
+int add (int a) {
+    FILE *state_file;
+    int result int prev_result;
+    state_file = fopen ("state.txt", "r");
+    prev_result = get_value_from_file (state_file);
+    fclose (state_file);
+    result = a + prev_result;
+    state_file = fopen ("state.txt", "w");
+    write_value_to_file (state_file, result);
+    fclose (state_file);
+    return result;
+}
+

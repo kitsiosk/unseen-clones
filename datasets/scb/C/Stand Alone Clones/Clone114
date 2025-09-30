@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44320451
+*  Stack Overflow answer #:44320603
+*  And Stack Overflow answer#:44320717
+*/
+int main () {
+    int n;
+    char str [100] [100];
+    scanf ("%d\n", & n);
+    for (int i = 0; i < n; i++) {
+        scanf ("%s", str [i]);
+    }
+    for (int i = 0; i < n; i++)
+        printf ("%s\n", str[i]);
+    getchar ();
+    return 0;
+}
+
+int main () {
+    int counter;
+    scanf ("%d\n", & n);
+    strs = (char **) calloc (n, sizeof (char *));
+    if (strs == 0) {
+        printf ("outer allocation failed!")
+        return -1;
+    }
+    for (counter = 0; counter < n; counter++) {
+        strs[counter] = (char *) malloc (MAX * sizeof (char));
+        if (strs[counter] == 0) {
+            printf ("allocate buffer %d failed!", counter)
+            releaseMemory ();
+            return -1;
+        }
+        scanf ("%s", & strs [counter]);
+    }
+    getchar ();
+    releaseMemory ();
+    return 0;
+}
+

@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39559411
+*  Stack Overflow answer #:39559623
+*  And Stack Overflow answer#:39559680
+*/
+int main () {
+    struct timespec time1, time2;
+    int temp = 0;
+    clock_gettime (CLOCK_PROCESS_CPUTIME_ID, & time1);
+    for (int i = 0; i < 242000000; i++)
+        temp += temp;
+    clock_gettime (CLOCK_PROCESS_CPUTIME_ID, & time2);
+    printf ("Time difference: %ld [s] %ld [ns]", (long) diff (time1, time2).tv_sec, (long) diff (time1, time2).tv_nsec);
+    return 0;
+}
+
+int main () {
+    int i, j, a [1000000] = {0};
+    clock_t start, stop;
+    srand (0xdeadbeef);
+    start = clock ();
+    for (j = 0; j < 100; j++) {
+        for (i = 0; i < 1000000; i++) {
+            a[i] = rand () % 123;
+            a[i] += 123;
+        }
+    }
+    stop = clock ();
+    printf ("Time %.10f seconds\n", (double) (stop - start) / CLOCKS_PER_SEC);
+    exit (EXIT_SUCCESS);
+}
+

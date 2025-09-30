@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45931613
+*  Stack Overflow answer #:45933256
+*  And Stack Overflow answer#:45931726
+*/
+int main (void) {
+    while (1) {
+        int c;
+        printf ("Enter a character (press q to exit): ");
+        c = getchar ();
+        if (c == '\n')
+            continue;
+        if (c == EOF) {
+            putchar ('\n');
+            break;
+        }
+        if (c == 'q')
+            break;
+        printf ("'%c' is integer: %d\n", c, c);
+        if (empty_stdin () == EOF) {
+            putchar ('\n');
+            break;
+        }
+    }
+    return 0;
+}
+
+int main (void) {
+    int c;
+    printf ("Enter a series of characters (q will exit): ");
+    for (;;) {
+        c = getchar ();
+        if ((c == 'q') || (c == EOF))
+            break;
+        if (c != '\n')
+            printf ("%d\n", c);
+    }
+    printf ("End of the program");
+    return 0;
+}
+

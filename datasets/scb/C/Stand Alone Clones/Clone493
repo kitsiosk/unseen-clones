@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:23280119
+*  Stack Overflow answer #:23280808
+*  And Stack Overflow answer#:23280538
+*/
+int main () {
+    char path [] = "./home/user/dir1/dir2/";
+    size_t count = countInstances (path, '/');
+    char **dirs = malloc (sizeof (*dirs) * count);
+    char *dir;
+    size_t i = 0;
+    dir = strtok (path, "/");
+    while (dir && i < count) {
+        dirs[i] = dir;
+        printf ("%s\n", dir);
+        dir = strtok (NULL, "/");
+        i++;
+    }
+    free (dirs);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char path [] = "./home/user/dir1/dir2";
+    char *start = path;
+    char *end = start + strlen (path);
+    while (start < end) {
+        char *slash = strchr (start, '/');
+        if (slash) {
+            if (slash > path && *(slash - 1) == '\\') {
+                start = slash + 1;
+                continue;
+            }
+            *slash = 0;
+        }
+        if (strcmp (start, ".") != 0) {
+            printf ("going to make %s\n", path);
+        }
+        if (!slash) {
+            break;
+        }
+        *slash = '/';
+        start = slash + 1;
+    }
+    return 0;
+}
+

@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16327662
+*  Stack Overflow answer #:16327901
+*  And Stack Overflow answer#:16328113
+*/
+int main (void) {
+    int64_t number = 2001000200030LL;
+    char data [24];
+    char digit [5] = {0}, *p;
+    int len, r;
+    len = sprintf (data, "%lld", number);
+    p = data;
+    r = len % 4;
+    if (r) {
+        strncpy (digit, p, r);
+        printf ("%s\n", digit);
+        len -= r;
+        p += r;
+    }
+    while (len != 0) {
+        strncpy (digit, p, 4);
+        printf ("%s\n", digit);
+        len -= 4;
+        p += 4;
+    }
+    return 0;
+}
+
+int main (void) {
+    long long number = 2001000200030LL;
+    long long currentDigit = 1LL;
+    while ((currentDigit * 10LL) < number)
+        currentDigit *= 10LL;
+    printf ("First digit = %lld\n", number / currentDigit);
+    number %= currentDigit;
+    while (currentDigit >= 10000LL) {
+        long long nextFour;
+        currentDigit /= 10000LL;
+        nextFour = number / currentDigit;
+        number %= currentDigit;
+        printf ("Next four = %04lld\n", nextFour);
+    }
+    if (currentDigit > 1LL) {
+        printf ("Remaining digits = ");
+        for (currentDigit /= 10LL; currentDigit > 1LL; currentDigit /= 10LL) {
+            printf ("%lld", (number / currentDigit) % 10LL);
+        }
+        printf ("%lld\n", number % 10LL);
+    }
+    return 0;
+}
+

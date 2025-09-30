@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:9214240
+*  And Stack Overflow answer#:35071091
+*/
+int main (int argc, char *argv []) {
+    const char *str = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
+    char *strCpy;
+    char **split;
+    int num;
+    int i;
+    strCpy = malloc (strlen (str) * sizeof (*strCpy));
+    strcpy (strCpy, str);
+    split = str_split (strCpy, ',', &num);
+    if (split == NULL) {
+        puts ("str_split returned NULL");
+    }
+    else {
+        printf ("%i Results: \n", num);
+        for (i = 0; i < num; i++) {
+            puts (split [i]);
+        }
+    }
+    free (split);
+    free (strCpy);
+    return 0;
+}
+
+int main () {
+    int i;
+    int c = 0;
+    char **arr = NULL;
+    int count = 0;
+    char str [80] = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
+    c = dtmsplit (str, ",", &arr, &count);
+    printf ("Found %d tokens.\n", count);
+    for (i = 0; i < count; i++)
+        printf ("string #%d: %s\n", i, arr[i]);
+    return (0);
+}
+

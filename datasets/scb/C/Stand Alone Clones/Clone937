@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3862191
+*  Stack Overflow answer #:42482427
+*  And Stack Overflow answer#:3928241
+*/
+int main (int argc, char *argv []) {
+    const char *src = (argc > 1) ? argv[1] : "123456789";
+    int len = strlen (src);
+    char dest [len], destbits [len];
+    memset (destbits, 0, sizeof destbits);
+    int total = perm (src, len, dest, destbits, 0);
+    printf ("%d combinations\n", total);
+    return 0;
+}
+
+int main () {
+    char set [10] = "0123456789";
+    char scratch;
+    int lastpermutation = 0;
+    int i, j, k, l;
+    printf ("%s\n", set);
+    while (!lastpermutation) {
+        j = -1;
+        for (i = 0; i < 10; i++) {
+            if (set[i + 1] > set[i]) {
+                j = i;
+            }
+        }
+        if (j == -1) {
+            lastpermutation = 1;
+        }
+        if (!lastpermutation) {
+            for (i = j + 1; i < 10; i++) {
+                if (set[i] > set[j]) {
+                    l = i;
+                }
+            }
+            scratch = set[j];
+            set[j] = set[l];
+            set[l] = scratch;
+            k = (9 - j) / 2;
+            for (i = 0; i < k; i++) {
+                scratch = set[j + 1 + i];
+                set[j + 1 + i] = set[9 - i];
+                set[9 - i] = scratch;
+            }
+            printf ("%s\n", set);
+        }
+    }
+    return 0;
+}
+

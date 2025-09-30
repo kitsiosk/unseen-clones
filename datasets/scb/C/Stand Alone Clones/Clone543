@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53474700
+*  Stack Overflow answer #:53474902
+*  And Stack Overflow answer#:53474816
+*/
+int main (void) {
+    int num;
+    while (1) {
+        printf ("Input the value of integer: ");
+        int result = scanf (" %d", &num);
+        if (result == EOF) {
+            printf (" user canceled input (manual EOF)\n");
+            break;
+        }
+        else if (result == 0) {
+            printf ("ERROR-Not an integer.\n");
+            empty_stdin ();
+        }
+        else if (num < 0) {
+            printf ("ERROR- Not positive.\n");
+        }
+        else
+            break;
+    }
+    return 0;
+}
+
+int main () {
+    int num;
+    int result;
+    while (printf ("Please input an unsigned integer: "), (result = scanf (" %d", &num)) != 1 || num < 0) {
+        if (result != 1)
+            fputs ("ERROR: Not an integer.\n", stderr);
+        else
+            fputs ("ERROR: Not positive.\n", stderr);
+        int ch;
+        while ((ch = getchar ()) != '\n' && ch != EOF)
+            ;
+    }
+    printf ("You entered: %d\n", num);
+}
+

@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:24589821
+*  Stack Overflow answer #:24590084
+*  And Stack Overflow answer#:24589846
+*/
+int main (void) {
+    int a [10] = {1, 0, 3, 10, 20, 0, 7, 8, 15, 14};
+    size_t i;
+    const char *format = "%d";
+    fputs ("{", stdout);
+    for (i = 0; i < 10; i++) {
+        printf (format, a [i]);
+        format = ", %d";
+    }
+    fputs ("}\n", stdout);
+    return 0;
+}
+
+main () {
+    int [10] a = {1, 0, 3, 10, 20, 0, 7, 8, 15, 14};
+    printf ("{");
+    for (int i = 0; i < 10; i++) {
+        printf ("%d", a [i]);
+        if (i < 9)
+            printf (",");
+    }
+    printf ("}");
+}
+

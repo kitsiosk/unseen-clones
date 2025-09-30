@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:51393780
+*  Stack Overflow answer #:51394402
+*  And Stack Overflow answer#:51394745
+*/
+int main (void) {
+    myPortfolio.balance = 12.34;
+    myPortfolio.myStocks[3].shares = 111.222;
+    printf ("My portfolio balance is %lf", myPortfolio.balance);
+    for (int i = 0; i < (MAX_MY_STOCKS + 1); i++) {
+        PrintPortfolio (i);
+    }
+    printf ("\n\n\n Lets use a pointer!");
+    Portfolio *pmyPortfolio;
+    pmyPortfolio = &myPortfolio;
+    printf ("\n\nMy portfolio balance is %lf", pmyPortfolio -> balance);
+    return 0;
+}
+
+int main (void) {
+    Stock a = {
+        .ticker = "Whatever",
+        .shares = 0.0
+    };
+    printf ("Stock a has ticker %s and shares %f\n", a.ticker, a.shares);
+    snprintf (a.ticker, sizeof a.ticker, "%s", "Meh");
+    a.shares = 42.0;
+    a = (Stock) {"under ten", -1.};
+    a = (Stock) {
+    .shares = 9001.,
+    .ticker = "to the moon"};
+    while (scanf ("%9[^ ] %lf", a.ticker, &a.shares) == 2) {
+        printf ("You entered the ticker: { %9s, %lf }\n", a.ticker, a.shares);
+    }
+}
+

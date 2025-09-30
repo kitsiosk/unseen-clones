@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36806540
+*  Stack Overflow answer #:36816103
+*  And Stack Overflow answer#:36810451
+*/
+int main (void) {
+    int a [] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    size_t i;
+    rev3 (a, sizeof a / sizeof * a);
+    for (i = 0; i < sizeof a / sizeof *a; i++)
+        printf (" %2d", a[i]);
+    putchar ('\n');
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int a [] = {0, 1, 2, 3, 4, 5};
+    int i, err, mod;
+    for (mod = 1; mod < 5; mod++) {
+        err = reverse_array_mod (a, 6, mod);
+        if (err) {
+            fprintf (stderr, "Error %d, modulus %d invalid\n", err, mod);
+            return err;
+        }
+        for (i = 0; i < 6; i++)
+            printf ("%d\n", a[i]);
+        printf ("\n");
+    }
+    return 0;
+}
+

@@ -1,0 +1,27 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49459963
+*  Stack Overflow answer #:49460077
+*  And Stack Overflow answer#:49460053
+*/
+int main (void) {
+    int arr [] = {0, 6, 88, 54};
+    char buffer [1000] = {0};
+    for (size_t i = 0; i < sizeof arr / sizeof *arr; ++i)
+        sprintf (buffer, "%s%d", buffer, arr[i]);
+    int val = strtol (buffer, NULL, 10);
+    printf ("%d\n", val);
+    return 0;
+}
+
+int main () {
+    char dummy [100];
+    int answer;
+    int input [4] = {3, 4, 0, 345};
+    sprintf (dummy, "%d%d%d%d", input [0], input [1], input [2], input [3]);
+    answer = atoi (dummy);
+    printf ("%d\n", answer);
+    return 0;
+}
+

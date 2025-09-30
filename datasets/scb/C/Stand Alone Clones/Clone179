@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5200879
+*  Stack Overflow answer #:5200926
+*  And Stack Overflow answer#:5200931
+*/
+int main () {
+    unsigned int *l;
+    unsigned int n;
+    cout << "Ingrese tope de criba" << endl;
+    cin >> n;
+    l = new unsigned int [n];
+    initialize (l, n);
+    cout << "Esta es la lista" << endl;
+    show_list (l, n);
+    criba (l, n);
+    cout << "Estos son los primos" << endl;
+    show_list (l, n);
+}
+
+int main () {
+std :
+    : vector < int > primes;
+    primes.push_back (2);
+    for (int i = 3; i < 100; i++) {
+        bool prime = true;
+        for (int j = 0; j < primes.size () && primes[j] * primes[j] <= i; j++) {
+            if (i % primes[j] == 0) {
+                prime = false;
+                break;
+            }
+        }
+        if (prime) {
+            primes.push_back (i);
+            cout << i << " ";
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,60 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37091965
+*  Stack Overflow answer #:37092609
+*  And Stack Overflow answer#:37092563
+*/
+int main () {
+    char c;
+    FILE *fp;
+    fp = fopen ("test.txt", "w+");
+    for (int i = 0; i < 10; i++) {
+        fprintf (fp, "Test line %i\n", i);
+    }
+    rewind (fp);
+    do {
+        do {
+            fscanf (fp, "%c", & c);
+            if (c == ' ')
+                break;
+            printf ("%c", c);
+        }
+        while (c != ' ');
+        do {
+            fscanf (fp, "%c", & c);
+            printf ("%c", c);
+        }
+        while (c != '\n');
+    }
+    while ((c = fgetc (fp)) != EOF ? printf ("%c", c) : 0);
+    fclose (fp);
+}
+
+int main (void) {
+    FILE *fp;
+    char line [MAXLEN];
+    char *ptr;
+    if ((fp = fopen ("test.txt", "rt")) == NULL)
+        return 0;
+    while (fgets (line, MAXLEN, fp) != NULL) {
+        ptr = line;
+        while (*ptr && !isdigit (*ptr)) {
+            ptr++;
+        }
+        while (*ptr && isdigit (*ptr)) {
+            printf ("%c", * ptr ++);
+        }
+        printf (" ");
+        while (*ptr && !isdigit (*ptr)) {
+            ptr++;
+        }
+        while (*ptr && isdigit (*ptr)) {
+            printf ("%c", * ptr ++);
+        }
+        printf ("\n");
+    }
+    fclose (fp);
+    return 0;
+}
+

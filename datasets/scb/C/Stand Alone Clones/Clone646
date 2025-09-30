@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2741859
+*  Stack Overflow answer #:2747910
+*  And Stack Overflow answer#:2743250
+*/
+static int linear (const int *arr, int n, int key) {
+    static int previous_key = INT_MIN;
+    static int previous_i = 0;
+    i = key >= previous_key ? previous_i : 0;
+    while (i < n) {
+        if (arr[i] >= key)
+            break;
+        ++i;
+    }
+    previous_key = key;
+    previous_i = i;
+    return i;
+}
+
+int linear (const int *array, int n, int key) {
+    const int *end = &array[n];
+    int result = 0;
+    switch (n % 8) {
+        do {
+        case 0 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 7 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 6 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 5 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 4 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 3 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 2 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        case 1 :
+            if (*(array++) >= key)
+                break;
+            ++result;
+        }
+        while (array < end);
+    }
+    return result;
+}
+

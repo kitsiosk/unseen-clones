@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2817848
+*  Stack Overflow answer #:2818750
+*  And Stack Overflow answer#:2817907
+*/
+int main () {
+    const int sum = 1000;
+    int a;
+    for (a = 1; a <= sum / 3; a++) {
+        int b;
+        for (b = a + 1; b <= sum / 2; b++) {
+            int c = sum - a - b;
+            if (a * a + b * b == c * c)
+                printf ("a=%d, b=%d, c=%d\n", a, b, c);
+        }
+    }
+    return 0;
+}
+
+int main () {
+    int a, b, c;
+    for (a = 0; a <= 1000; a++) {
+        for (b = a + 1; b <= 1000; b++) {
+            for (c = b + 1; c <= 1000; c++) {
+                if (((a * a + b * b == c * c) && ((a + b + c) == 1000)))
+                    printf ("a=%d, b=%d, c=%d", a, b, c);
+            }
+        }
+    }
+    return 0;
+}
+

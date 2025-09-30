@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28774152
+*  Stack Overflow answer #:28774678
+*  And Stack Overflow answer#:28774784
+*/
+int addNode (size_t t, Node **ht) {
+    Node *n = (Node *) malloc (sizeof (Node));
+    int hashVal = hash (t);
+    n->value = t;
+    if (ht[hashVal] != NULL) {
+        Node *nptr = ht[hashVal];
+        while (nptr != NULL) {
+            if (nptr->value == t) {
+                free (n);
+                return 0;
+            }
+            nptr = nptr->next;
+        }
+    }
+    n->next = ht[hashVal];
+    ht[hashVal] = n;
+    return 1;
+}
+
+int addNode (size_t t, Node **ht) {
+    int hashVal = hash (t);
+    Node *n = ht[hashVal];
+    while (NULL != n) {
+        if (n->value == t)
+            return 0;
+        n = n->next;
+    }
+    if (NULL == (n = malloc (sizeof (Node))))
+        return -1;
+    n->value = t;
+    n->next = ht[hashVal];
+    ht[hashVal] = n;
+    return 1;
+}
+

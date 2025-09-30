@@ -1,0 +1,27 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32016815
+*  Stack Overflow answer #:32017185
+*  And Stack Overflow answer#:32016977
+*/
+int main (void) {
+    int n = 123456;
+    int divider = 1;
+    for (int i = 0; i < getNumberOfDigits (n) / 2; i++) {
+        divider *= 10;
+    }
+    printf ("%d, %d\n", n / divider, n % divider);
+    return 0;
+}
+
+int main (void) {
+    int x, y = 0, len, digit;
+    int n = 123456;
+    len = floor (log10 (abs (n))) + 1;
+    x = n / pow (10, len / 2);
+    y = n - x * pow (10, len / 2;
+    printf ("First Half = %d", x);
+    printf ("\nSecond Half = %d", y);
+}
+

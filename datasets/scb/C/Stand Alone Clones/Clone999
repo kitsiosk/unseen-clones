@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34635980
+*  Stack Overflow answer #:34636204
+*  And Stack Overflow answer#:34636093
+*/
+void insert (node **head, int x) {
+    node **ptr_new = head;
+    while (*ptr_new != NULL) {
+        ptr_new = &((*ptr_new)->next);
+    }
+    *ptr_new = malloc (sizeof (node));
+    if (*ptr_new != NULL) {
+        (*ptr_new)->next = NULL;
+        (*ptr_new)->data = x;
+    }
+}
+
+void insert (node **head, int x) {
+    node *new = (node *) malloc (sizeof (node));
+    if (!new) {
+        printf ("Memory allocation failed!\n");
+        exit (1);
+    }
+    new->data = x;
+    new->next = NULL;
+    node *temp = *head;
+    if (!temp)
+        *head = new;
+    else {
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new;
+    }
+    return;
+}
+

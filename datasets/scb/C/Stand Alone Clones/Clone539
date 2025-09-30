@@ -1,0 +1,62 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7292642
+*  Stack Overflow answer #:7292659
+*  And Stack Overflow answer#:44281043
+*/
+int main () {
+    int link [2];
+    pid_t pid;
+    char foo [4096];
+    if (pipe (link) == -1)
+        die ("pipe");
+    if ((pid = fork ()) == -1)
+        die ("fork");
+    if (pid == 0) {
+        dup2 (link [1], STDOUT_FILENO);
+        close (link [0]);
+        close (link [1]);
+        execl ("/bin/ls", "ls", "-1", (char *) 0);
+        die ("execl");
+    }
+    else {
+        close (link [1]);
+        int nbytes = read (link[0], foo, sizeof (foo));
+        printf ("Output: (%.*s)\n", nbytes, foo);
+        wait (NULL);
+    }
+    return 0;
+}
+
+int main () {
+    int link [2];
+    pid_t pid;
+    char foo [4096 + 1];
+    memset (foo, 0, 4096);
+    if (pipe (link) == -1)
+        die ("pipe");
+    if ((pid = fork ()) == -1)
+        die ("fork");
+    if (pid == 0) {
+        dup2 (link [1], STDOUT_FILENO);
+        close (link [0]);
+        close (link [1]);
+        execl ("/bin/ls", "ls", "-1", (char *) 0);
+        die ("execl");
+    }
+    else {
+        close (link [1]);
+        int nbytes = 0;
+    std :
+        : string totalStr;
+        while (0 != (nbytes = read (link[0], foo, sizeof (foo)))) {
+            totalStr = totalStr + foo;
+            printf ("Output: (%.*s)\n", nbytes, foo);
+            memset (foo, 0, 4096);
+        }
+        wait (NULL);
+    }
+    return 0;
+}
+

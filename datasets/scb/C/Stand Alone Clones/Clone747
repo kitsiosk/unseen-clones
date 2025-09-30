@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12914917
+*  Stack Overflow answer #:45829947
+*  And Stack Overflow answer#:48846270
+*/
+int main () {
+    LinkedList list;
+    init_list (& list);
+    Employee *samuel = (Employee *) malloc (sizeof (Employee));
+    strcpy (samuel -> name, "Samuel");
+    samuel->age = 23;
+    Employee *sally = (Employee *) malloc (sizeof (Employee));
+    strcpy (sally -> name, "Sally");
+    sally->age = 19;
+    Employee *susan = (Employee *) malloc (sizeof (Employee));
+    strcpy (susan -> name, "Susan");
+    susan->age = 14;
+    Employee *jessie = (Employee *) malloc (sizeof (Employee));
+    strcpy (jessie -> name, "Jessie");
+    jessie->age = 18;
+    add_head (& list, samuel);
+    add_head (& list, sally);
+    add_head (& list, susan);
+    add_tail (& list, jessie);
+    display_list (& list, (DISPLAY) display_employee);
+    NODE *n = get_node (&list, (COMPARE) compare_employee, sally);
+    printf ("name is %s, age is %d.\n", ((Employee *) n -> data) -> name, ((Employee *) n -> data) -> age);
+    printf ("\n");
+    delete_node (& list, samuel);
+    display_list (& list, (DISPLAY) display_employee);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    node_t *head;
+    head = create_list ();
+    print_list (head);
+    remove_from_list (8, & head);
+    print_list (head);
+    destroy_list (& head);
+    assert (head == NULL);
+    return EXIT_SUCCESS;
+}
+

@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16728680
+*  Stack Overflow answer #:16728939
+*  And Stack Overflow answer#:16728722
+*/
+int getline (char s [], int lim) {
+    int c, i;
+    for (i = 0; i < lim - 1 && (c = getchar ()) != EOF && c != '\n'; i++)
+        s[i] = c;
+    if (c == '\n') {
+        s[i] = c;
+        ++i;
+    }
+    s[i] = '\0';
+    return i;
+}
+
+int getline (char line [], int maxline) {
+    int c, i;
+    for (i = 0; i < maxline - 1 && (c = getchar ()) != EOF && c != '\n'; i++) {
+        line[i] = c;
+        if (c == '\n') {
+            line[i] = c;
+            ++i;
+        }
+        line[i] = '\0';
+        return i;
+    }
+    return 0;
+#return some appropriate value when doesn't enter in for loop.
+}
+

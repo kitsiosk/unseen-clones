@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38572140
+*  Stack Overflow answer #:38572440
+*  And Stack Overflow answer#:38572450
+*/
+int main () {
+    int na [10] = {0};
+    int n [MaxL] [MaxC], i = 0;
+    srand ((unsigned) time (NULL));
+    while (i < MaxL) {
+        int j = 0;
+        while (j < MaxC) {
+            int r = rand () % 10;
+            if (na[r] < 2) {
+                ++na[r];
+                n[i][j] = r;
+                printf (" %3d ", n [i] [j]);
+                ++j;
+            }
+        }
+        ++i;
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main () {
+    int c [10] = {0};
+    int i = 0, j = 0, r;
+    int n [MaxL] [MaxC];
+    srand (time (NULL));
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 4; j++) {
+            do {
+                r = (rand () % 10);
+            }
+            while (c[r] > 2);
+            ++c[r];
+            n[i][j] = r;
+            printf (" %3d ", n [i] [j]);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

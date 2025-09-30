@@ -1,0 +1,69 @@
+public class Clone451 {
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3911966
+*  Stack Overflow answer #:18461763
+*  And Stack Overflow answer#:18461763
+*/
+public String getName (String value) {
+    StringBuilder buffer = new StringBuilder ();
+    String high, low;
+    if (value.length () < getPartDivider ()) {
+        high = "";
+        low = value;
+    } else {
+        int index = value.length () - getPartDivider ();
+        high = value.substring (0, index);
+        low = value.substring (index);
+    }
+    String highName = getHighProcessor ().getName (high);
+    String lowName = getLowProcessor ().getName (low);
+    if (! "".equals (highName)) {
+        buffer.append (highName);
+        buffer.append (SEPARATOR);
+        buffer.append (getToken ());
+        if (! "".equals (lowName)) {
+            buffer.append (SEPARATOR);
+        }
+    }
+    if (! "".equals (lowName)) {
+        buffer.append (lowName);
+    }
+    return buffer.toString ();
+}
+
+public String getName (String value) {
+    boolean negative = false;
+    if (value.startsWith ("-")) {
+        negative = true;
+        value = value.substring (1);
+    }
+    int decimals = value.indexOf (".");
+    String decimalValue = null;
+    if (0 <= decimals) {
+        decimalValue = value.substring (decimals + 1);
+        value = value.substring (0, decimals);
+    }
+    String name = processor.getName (value);
+    if ("".equals (name)) {
+        name = ZERO_TOKEN;
+    } else if (negative) {
+        name = MINUS.concat (SEPARATOR).concat (name);
+    }
+    if (! (null == decimalValue || "".equals (decimalValue))) {
+        String zeroDecimalValue = "";
+        for (int i = 0;
+        i < decimalValue.length (); i ++) {
+            zeroDecimalValue = zeroDecimalValue + "0";
+        }
+        if (decimalValue.equals (zeroDecimalValue)) {
+            name = name.concat (SEPARATOR).concat (UNION_AND).concat (SEPARATOR).concat ("zero").concat (SEPARATOR).concat (SCALE.getName (- decimalValue.length ()));
+        } else {
+            name = name.concat (SEPARATOR).concat (UNION_AND).concat (SEPARATOR).concat (processor.getName (decimalValue)).concat (SEPARATOR).concat (SCALE.getName (- decimalValue.length ()));
+        }
+    }
+    return name;
+}
+
+}

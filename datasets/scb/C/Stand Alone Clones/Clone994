@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2251452
+*  Stack Overflow answer #:20031237
+*  And Stack Overflow answer#:2251472
+*/
+int main () {
+    pthread_t tid;
+    thread_data tdata;
+    tdata.a = 10;
+    tdata.b = 32;
+    pthread_create (& tid, NULL, myThread, (void *) & tdata);
+    pthread_join (tid, NULL);
+    printf ("%d + %d = %d\n", tdata.a, tdata.b, tdata.result);
+    return 0;
+}
+
+int main () {
+    pthread_t tid;
+    void *status = 0;
+    int result;
+    pthread_create (& tid, NULL, myThread, & result);
+    pthread_join (tid, & status);
+    if (status != 0) {
+        printf ("%d\n", result);
+    }
+    else {
+        printf ("thread failed\n");
+    }
+    return 0;
+}
+

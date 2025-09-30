@@ -1,0 +1,223 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6853548
+*  Stack Overflow answer #:6884889
+*  And Stack Overflow answer#:6853750
+*/
+int main (int argc, char **argv) {
+    if (!(argc > 1))
+        return 1;
+    unsigned char *progmem = argv[1];
+    unsigned char *cellmem = malloc (sizeof (char) * CELLSPACE);
+    if (cellmem == NULL)
+        return 1;
+    unsigned char **loopdepth = malloc (sizeof (char *) * MAXLOOPDEPTH);
+    if (loopdepth == NULL)
+        return 1;
+    unsigned char *origcellmem = cellmem;
+    unsigned char **origloopdepth = loopdepth;
+    for (;;) {
+        switch (*progmem) {
+        case '+' :
+            ++*cellmem;
+            break;
+        case '-' :
+            --*cellmem;
+            break;
+        case '>' :
+            cellmem++;
+            break;
+        case '<' :
+            cellmem--;
+            break;
+        case '[' :
+            *loopdepth = progmem - 1;
+            loopdepth++;
+            break;
+        case ']' :
+            loopdepth--;
+            if (*cellmem) {
+                progmem = *loopdepth;
+            }
+            break;
+        case '.' :
+            putc (*cellmem, stdout);
+            break;
+        case ',' :
+            *cellmem = getc (stdin);
+            break;
+        case '\0' :
+            free (origcellmem);
+            free (origloopdepth);
+            return 0;
+        }
+        progmem++;
+    }
+}
+
+int main (int argc, char **argv) {
+    unsigned instruction_count = 0;
+    long ci = 0, cn = 4096, cw = BF_END_WRAP, ia = 4096, ii = 0, in = 0, la = 4096, ln = 0, va = 0, vb = 255, vw = BF_END_WRAP;
+    instruction *im = malloc (sizeof (instruction) * ia);
+    long *cm = NULL;
+    long *ls = malloc (sizeof (long) * la);
+    FILE *fp = NULL;
+    int i;
+    while ((i = getopt (argc, argv, "a:b:c:f:hv:w:")) != -1) {
+        switch (i) {
+        case 'a' :
+            va = atol (optarg);
+            break;
+        case 'b' :
+            vb = atol (optarg);
+            break;
+        case 'c' :
+            cn = atol (optarg);
+            break;
+        case 'f' :
+            fp = fopen (optarg, "r");
+            if (!fp)
+                die ("%s: %s", optarg, strerror (errno));
+            break;
+        case 'h' :
+            fputs ("brief: a flexible brainfuck interpreter\n" "usage: brief [options]\n\n" "options:\n" "   -a  set minimum cell value (default 0)\n" "   -b  set maximum cell value (default 255)\n" "   -c  set cells to allocate (default 4096)\n" "   -f  source file name (required)\n" "   -h  this help output\n" "   -v  value over/underflow behaviour\n" "   -w  cell pointer over/underflow behaviour\n\n", stderr);
+            fputs ("cells are 'long int' values, so do not use -a with a " "value less than -2^31 or -2^63, and do not use -b with a " "value more than 2^31-1 or 2^63-1, depending on your " "architecture's 'long int' size.\n\n" "over/underflow behaviours can be one of:\n" "   e   throw an error and quit upon over/underflow\n" "   i   do nothing when attempting to over/underflow\n" "   w   wrap-around to other end upon over/underflow\n", stderr);
+            exit (1);
+            break;
+        case 'v' :
+            vw = optarg[0];
+            break;
+        case 'w' :
+            cw = optarg[0];
+            break;
+        default :
+            break;
+        }
+    }
+    if (!fp)
+        die ("no source file specified; use -f");
+    for (ii = 0; (i = getc (fp)) != EOF; ++ii) {
+        if (++in > ia) {
+            ia *= 2;
+            im = realloc (im, sizeof (*im) * ia);
+        }
+        switch (i) {
+        case BF_OP_LSTART :
+            if (ln >= la)
+                ls = realloc (ls, sizeof (*ls) * (la *= 2));
+            ls[ln++] = ii;
+            im[in - 1].instruction = C_OP_LSTART;
+            break;
+        case BF_OP_LEND :
+            im[in - 1].loop = ls[--ln];
+            im[ls[ln]].loop = ii;
+            im[in - 1].instruction = C_OP_LEND;
+            break;
+        case BF_OP_VINC :
+            im[in - 1].instruction = C_OP_VINC;
+            break;
+        case BF_OP_VDEC :
+            im[in - 1].instruction = C_OP_VDEC;
+            break;
+        case BF_OP_PINC :
+            im[in - 1].instruction = C_OP_PINC;
+            break;
+        case BF_OP_PDEC :
+            im[in - 1].instruction = C_OP_PDEC;
+            break;
+        case BF_OP_IN :
+            im[in - 1].instruction = C_OP_IN;
+            break;
+        case BF_OP_OUT :
+            im[in - 1].instruction = C_OP_OUT;
+            break;
+        }
+    }
+    cm = memset (malloc (cn * sizeof (long)), 0, cn * sizeof (long));
+    for (ii = 0; ii < in; ii++) {
+        ++instruction_count;
+        switch (im[ii].instruction) {
+        case C_OP_VINC :
+            if (cm[ci] == vb)
+                switch (vw) {
+                case BF_END_ERROR :
+                    die ("value overflow");
+                    break;
+                case BF_END_IGNORE :
+                    break;
+                case BF_END_WRAP :
+                    cm[ci] = 0;
+                    break;
+                }
+            else
+                ++cm[ci];
+            break;
+        case C_OP_VDEC :
+            if (cm[ci] == 0)
+                switch (vw) {
+                case BF_END_ERROR :
+                    die ("value underflow");
+                    break;
+                case BF_END_IGNORE :
+                    break;
+                case BF_END_WRAP :
+                    cm[ci] = vb;
+                    break;
+                }
+            else
+                --cm[ci];
+            break;
+        case C_OP_PINC :
+            if (ci == cn - 1)
+                switch (cw) {
+                case BF_END_ERROR :
+                    die ("cell index overflow");
+                    break;
+                case BF_END_IGNORE :
+                    break;
+                case BF_END_WRAP :
+                    ci = 0;
+                    break;
+                }
+            else
+                ++ci;
+            break;
+        case C_OP_PDEC :
+            if (ci == 0)
+                switch (cw) {
+                case BF_END_ERROR :
+                    die ("cell index underflow");
+                    break;
+                case BF_END_IGNORE :
+                    break;
+                case BF_END_WRAP :
+                    ci = cn - 1;
+                    break;
+                }
+            else
+                --ci;
+            break;
+        case C_OP_IN :
+            cm[ci] = getchar ();
+            break;
+        case C_OP_OUT :
+            putchar (cm[ci]);
+            break;
+        case C_OP_LSTART :
+            if (!cm[ci])
+                ii = im[ii].loop;
+            break;
+        case C_OP_LEND :
+            if (cm[ci])
+                ii = im[ii].loop;
+            break;
+        default :
+            break;
+        }
+    }
+    fprintf (stderr, "Executed %d instructions\n", instruction_count);
+    free (cm);
+    return 0;
+}
+

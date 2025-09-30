@@ -1,0 +1,117 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36397182
+*  Stack Overflow answer #:36399272
+*  And Stack Overflow answer#:36398442
+*/
+int main (void) {
+    enum {EAST, NORTH, WEST, SOUTH} dir;
+    char *names [] = {"EAST", "NORTH", "WEST", "SOUTH"};
+    char input [MAXC] = "";
+    char *init = "init";
+    int x, y;
+    for (;;) {
+        char *p, *ep = NULL;
+        printf ("Enter the commmand: ");
+        fgets (input, MAXC, stdin);
+        if (strncmp (input, init, strlen (init))) {
+            help ();
+            continue;
+        }
+        if (!(p = strchr (input, ' ') + 1)) {
+            help ();
+            continue;
+        }
+        while (*p && *p != 'E' && *p != 'N' && *p != 'W' && *p != 'S')
+            p++;
+        if (!*p || !(ep = strchr (p, ' '))) {
+            help ();
+            continue;
+        }
+        *ep = 0;
+        switch (*p) {
+        case 'E' :
+            if (strcmp (p, "EAST")) {
+                help ();
+                continue;
+            }
+            else
+                dir = EAST;
+            break;
+        case 'N' :
+            if (strcmp (p, "NORTH")) {
+                help ();
+                continue;
+            }
+            else
+                dir = NORTH;
+            break;
+        case 'W' :
+            if (strcmp (p, "WEST")) {
+                help ();
+                continue;
+            }
+            else
+                dir = WEST;
+            break;
+        case 'S' :
+            if (strcmp (p, "SOUTH")) {
+                help ();
+                continue;
+            }
+            else
+                dir = SOUTH;
+            break;
+        default :
+            help ();
+            continue;
+        }
+        *ep = ' ';
+        p = ep + 1;
+        while (*p && (*p < '0' || '9' < *p))
+            p++;
+        if (!*p) {
+            help ();
+            continue;
+        }
+        x = *p++ - '0';
+        while (*p && (*p < '0' || '9' < *p))
+            p++;
+        if (!*p) {
+            help ();
+            continue;
+        }
+        y = *p - '0';
+        break;
+    }
+    printf ("\n direction '%s', x '%d', y '%d'\n\n", names [dir], x, y);
+    return 0;
+}
+
+int main (void) {
+    char input [256];
+    printf ("Enter the command...\n");
+    if (fgets (input, sizeof (input), stdin) != NULL) {
+        char *tok;
+        if ((tok = strtok (input, " ")) != NULL) {
+            if (strcmp (tok, "init") != 0)
+                ;
+        }
+        else
+            ;
+        if ((tok = strtok (NULL, " ")) != NULL) {
+        }
+        else
+            ;
+        if ((tok = strtok (NULL, " ")) != NULL) {
+        }
+        else
+            ;
+        if ((tok = strtok (NULL, " \n")) != NULL) {
+        }
+        else
+            ;
+    }
+}
+

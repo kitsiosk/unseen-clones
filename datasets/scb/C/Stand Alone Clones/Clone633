@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40579481
+*  Stack Overflow answer #:40579581
+*  And Stack Overflow answer#:40579738
+*/
+int findSubString (const char *original, const char *toFind) {
+    size_t originalLength = strlen (original);
+    size_t toFindLength = strlen (toFind);
+    if (toFindLength <= originalLength) {
+        for (size_t i = 0; i <= originalLength - toFindLength; i++) {
+            for (size_t j = 0;; j++) {
+                if (toFind[j] == '\0') {
+                    return i;
+                }
+                if (original[i + j] != toFind[j]) {
+                    break;
+                }
+            }
+        }
+    }
+    return -1;
+}
+
+long long int findSubString (const char original [], const char toFind []) {
+    size_t n = strlen (original);
+    size_t m = strlen (toFind);
+    long long int success = -1;
+    if (!(n < m)) {
+        n = n - m + 1;
+        for (size_t i = 0; success == -1 && i < n; i++) {
+            size_t j = 0;
+            while (j < m && original[i + j] == toFind[j])
+                j++;
+            if (j == m)
+                success = i;
+        }
+    }
+    return success;
+}
+

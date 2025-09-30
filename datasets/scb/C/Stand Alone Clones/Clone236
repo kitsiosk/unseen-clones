@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:421860
+*  Stack Overflow answer #:423643
+*  And Stack Overflow answer#:28614859
+*/
+main () {
+    int i = 0;
+    intc = '';
+    system ("stty raw -echo");
+    printf ("enter 'q' to quit \n");
+    for (; c != 'q'; i++) {
+        if (kbhit ()) {
+            c = getchar ();
+            printf ("\n got %c, on iteration %d", c, i);
+        }
+    }
+    system ("stty cooked echo");
+}
+
+main () {
+    char ch;
+    system ("stty raw");
+    while (1) {
+        ch = getchar ();
+        if (ch == '~') {
+            system ("stty cooked");
+            exit (0);
+        }
+        printf ("you pressed %c\n ", ch);
+    }
+}
+

@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29788983
+*  Stack Overflow answer #:29789069
+*  And Stack Overflow answer#:29789623
+*/
+int main (void) {
+    char str [] = "This is abc test abc string";
+    char *in = str;
+    char *delim = "abc";
+    char *token;
+    do {
+        token = strstr (in, delim);
+        if (token)
+            *token = '\0';
+        printf ("%s\n", in);
+        in = token + strlen (delim);
+    }
+    while (token != NULL);
+    return 0;
+}
+
+int main () {
+    multi_tok_t s = init ();
+    char input [] = "this is abc a big abc input string abc to split up";
+    char *token = multi_tok (input, &s, "abc");
+    while (token != NULL) {
+        printf ("%s\n", token);
+        token = multi_tok (NULL, &s, "abc");
+    }
+}
+

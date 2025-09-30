@@ -1,0 +1,81 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:757059
+*  Stack Overflow answer #:757112
+*  And Stack Overflow answer#:762605
+*/
+unsigned GetLowestBitPos (unsigned value) {
+    if (value & 1)
+        return 1;
+    if (value & 2)
+        return 2;
+    if (value & 4)
+        return 3;
+    if (value & 8)
+        return 4;
+    if (value & 16)
+        return 5;
+    if (value & 32)
+        return 6;
+    if (value & 64)
+        return 7;
+    if (value & 128)
+        return 8;
+    if (value & 256)
+        return 9;
+    if (value & 512)
+        return 10;
+    if (value & 1024)
+        return 11;
+    if (value & 2048)
+        return 12;
+    if (value & 4096)
+        return 13;
+    if (value & 8192)
+        return 14;
+    if (value & 16384)
+        return 15;
+    if (value & 32768)
+        return 16;
+    if (value & 65536)
+        return 17;
+    if (value & 131072)
+        return 18;
+    if (value & 262144)
+        return 19;
+    if (value & 524288)
+        return 20;
+    if (value & 1048576)
+        return 21;
+    if (value & 2097152)
+        return 22;
+    if (value & 4194304)
+        return 23;
+    if (value & 8388608)
+        return 24;
+    if (value & 16777216)
+        return 25;
+    if (value & 33554432)
+        return 26;
+    if (value & 67108864)
+        return 27;
+    if (value & 134217728)
+        return 28;
+    if (value & 268435456)
+        return 29;
+    if (value & 536870912)
+        return 30;
+    return 31;
+}
+
+unsigned GetLowestBitPos (unsigned value) {
+    union {
+        int i [2];
+        double d;
+    } temp = {
+        .d = value ^ (value - !!value)
+    };
+    return (temp.i[1] >> 20) - 1023;
+}
+

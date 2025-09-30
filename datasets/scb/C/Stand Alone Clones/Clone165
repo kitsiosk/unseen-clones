@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3039513
+*  Stack Overflow answer #:3043668
+*  And Stack Overflow answer#:17674145
+*/
+int main (void) {
+    struct ll_node *head = NULL;
+    head = ll_unshift_value (head, int, 1);
+    head = ll_unshift_value (head, int, 2);
+    head = ll_unshift_value (head, int, 3);
+    printf ("%i\n", ll_get_value (head, 0, int));
+    printf ("%i\n", ll_get_value (head, 1, int));
+    printf ("%i\n", ll_get_value (head, 2, int));
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    LIST_ELEMENT (mytype)
+    el1;
+    LIST_ELEMENT (mytype)
+    el2;
+    LIST_ELEMENT (mytype)
+    *pEl;
+    el1.value.a = 1;
+    el1.value.b = 2;
+    el2.value.a = 3;
+    el2.value.b = 4;
+    LINK_LIST_ELEMENT (mytype, & el1, & el2);
+    TERMINATE_LIST_AT_ELEMENT (mytype, & el2);
+    printf ("Testing.\n");
+    SET_POINTER_TO_LIST_ELEMENT (mytype, pEl, & el1);
+    if (pEl->value.a != 1)
+        printf ("pEl->value.a != 1: %d.\n", pEl->value.a);
+    ADVANCE_POINTER_TO_LIST_ELEMENT (mytype, pEl);
+    if (pEl->value.a != 3)
+        printf ("pEl->value.a != 3: %d.\n", pEl->value.a);
+    ADVANCE_POINTER_TO_LIST_ELEMENT (mytype, pEl);
+    if (pEl != NULL)
+        printf ("pEl != NULL.\n");
+    printf ("Done.\n");
+    return 0;
+}
+

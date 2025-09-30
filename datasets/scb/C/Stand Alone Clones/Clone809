@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5501501
+*  Stack Overflow answer #:5502283
+*  And Stack Overflow answer#:5501597
+*/
+int main (void) {
+    char str [15];
+    if (fgets (str, sizeof str, stdin) != NULL) {
+        size_t r, w;
+        printf ("Original: \"%s\"\n", str);
+        for (r = 0, w = 0; str[r] != 0; r++) {
+            if (!isspace (str[r]))
+                str[w++] = str[r];
+        }
+        str[w] = 0;
+        printf ("Stripped: \"%s\"\n", str);
+    }
+    return 0;
+}
+
+int main () {
+    char str [15];
+    int i = 0;
+    int j = 0;
+    gets (str);
+    while (str[i] != 0 && str[j] != 0) {
+        while (str[j] == 32) {
+            j++;
+        }
+        if (str[j] == 0) {
+            break;
+        }
+        str[i] = str[j];
+        i++;
+    }
+    str[strlen (i)] = '\0';
+    printf ("%s", str);
+    return 0;
+}
+

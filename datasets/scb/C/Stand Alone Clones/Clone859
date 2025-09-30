@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2397792
+*  Stack Overflow answer #:39260146
+*  And Stack Overflow answer#:13045126
+*/
+int main () {
+    int arr [5] = {4, 5, 6, 7, 8};
+    int (*pa) [5] = &arr;
+    int *pi = arr;
+    for (int i = 0; i < 5; i++) {
+        printf ("\n%d %d", arr [i], (* pa) [i]);
+    }
+    printf ("\n0x%x -- 0x%x", pi, pa);
+    pi++;
+    pa++;
+    printf ("\n0x%x -- 0x%x", pi, pa);
+}
+
+int main () {
+    int i, j, k = 1;
+    int (*q) [MAXCOL];
+    q = (int (*)[MAXCOL]) malloc (MAXROW * sizeof (*q));
+    for (i = 0; i < MAXROW; i++)
+        for (j = 0; j < MAXCOL; j++)
+            q[i][j] = k++;
+    for (i = 0; i < MAXROW; i++) {
+        for (j = 0; j < MAXCOL; j++)
+            printf (" %2d ", q[i][j]);
+        printf ("\n");
+    }
+}
+

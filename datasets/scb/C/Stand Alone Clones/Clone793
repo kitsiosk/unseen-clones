@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32741705
+*  Stack Overflow answer #:32745695
+*  And Stack Overflow answer#:32743347
+*/
+void removetree (Node *node) {
+    while (node != NULL) {
+        Node *next = node->child;
+        node->child = NULL;
+        if (next == NULL) {
+            next = node->next != NULL ? node->next : node->parent;
+            remove (node);
+        }
+        node = next;
+    }
+}
+
+void removetree (Node *root) {
+    struct Node *node = root;
+    struct Node *up = NULL;
+    while (node != NULL) {
+        if (node->child != NULL) {
+            struct Node *child = node->child;
+            node->child = up;
+            up = node;
+            node = child;
+        }
+        else if (node->next != NULL) {
+            struct Node *next = node->next;
+            node->child = up;
+            node->next = NULL;
+            up = node;
+            node = next;
+        }
+        else {
+            if (up == NULL) {
+                free (node);
+                node = NULL;
+            }
+            while (up != NULL) {
+                free (node);
+                if (up->next != NULL) {
+                    node = up->next;
+                    up->next = NULL;
+                    break;
+                }
+                else {
+                    node = up;
+                    up = up->child;
+                }
+            }
+        }
+    }
+}
+

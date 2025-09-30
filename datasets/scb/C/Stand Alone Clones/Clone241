@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1335786
+*  Stack Overflow answer #:13085122
+*  And Stack Overflow answer#:1336461
+*/
+int main () {
+    char amessage [] = "now is the time";
+    char *pmessage = "now is the time";
+    pmessage = NULL;
+    amessage = NULL;
+    printf ("%d\n", sizeof (amessage));
+    printf ("%d\n", sizeof (pmessage));
+    printf ("%p, %p\n", pmessage, & pmessage);
+    printf ("%p, %p\n", amessage, & amessage);
+    if (pmessage == amessage) {
+        printf ("A string literal is defined only once. You are sharing space");
+        "now is the time"[0] = 'W';
+        printf ("You have modified both!! %s == %s \n", amessage, pmessage);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char amessage [] = "now is the time";
+    char *pmessage = "now is the time";
+    printf ("&amessage   : %#016" PRIxPTR "\n", (uintptr_t) & amessage);
+    printf ("&amessage[0]: %#016" PRIxPTR "\n", (uintptr_t) & amessage [0]);
+    printf ("&pmessage   : %#016" PRIxPTR "\n", (uintptr_t) & pmessage);
+    printf ("&pmessage[0]: %#016" PRIxPTR "\n", (uintptr_t) & pmessage [0]);
+    printf ("&\"now is the time\": %#016" PRIxPTR "\n", (uintptr_t) & "now is the time");
+    return 0;
+}
+

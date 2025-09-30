@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34440038
+*  Stack Overflow answer #:34441510
+*  And Stack Overflow answer#:34440448
+*/
+void replaceSubstring (char *str, char *SubStr) {
+    int i = 0, equals = 0, j = 0, k = 0;
+    for (i = 0; i < strlen (str); i++) {
+        j = i;
+        equals = 1;
+        k = 0;
+        while (k < strlen (SubStr) && (equals == 1)) {
+            if (SubStr[k] != str[j]) {
+                equals = 0;
+            }
+            k++;
+            j++;
+        }
+        if (equals == 1) {
+            for (j = i; j < i + k; j++) {
+                str[j] -= 32;
+            }
+        }
+    }
+    puts (str);
+    getchar ();
+}
+
+void replaceSubstring (char *str, char *SubStr) {
+    int i = 0, found = 1, j = 0, k = 0;
+    while (i < strlen (str)) {
+        if (str[i] == SubStr[0]) {
+            found = 1;
+            for (k = 0; k < strlen (SubStr); k++) {
+                if (str[i + k] != SubStr[k]) {
+                    found = 0;
+                    break;
+                }
+            }
+            if (found) {
+                for (k = 0; k < strlen (SubStr); k++) {
+                    str[i + k] -= 32;
+                }
+                i += strlen (SubStr);
+            }
+            else
+                i++;
+        }
+        else
+            i++;
+    }
+    puts (str);
+    getchar ();
+}
+

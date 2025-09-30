@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6804101
+*  Stack Overflow answer #:6804914
+*  And Stack Overflow answer#:6804399
+*/
+void convert (uint8_t *orig, size_t imagesize, uint8_t *dest) {
+    assert ((uintptr_t) orig % 16 == 0);
+    assert (imagesize % 16 == 0);
+    __m128i shuf0 = _mm_set_epi8 (-128, -128, -128, -128, 13, 14, 15, 9, 10, 11, 5, 6, 7, 1, 2, 3);
+    __m128i shuf1 = _mm_set_epi8 (7, 1, 2, 3, -128, -128, -128, -128, 13, 14, 15, 9, 10, 11, 5, 6);
+    __m128i shuf2 = _mm_set_epi8 (10, 11, 5, 6, 7, 1, 2, 3, -128, -128, -128, -128, 13, 14, 15, 9);
+    __m128i shuf3 = _mm_set_epi8 (13, 14, 15, 9, 10, 11, 5, 6, 7, 1, 2, 3, -128, -128, -128, -128);
+    __m128i mask0 = _mm_set_epi32 (0, -1, -1, -1);
+    __m128i mask1 = _mm_set_epi32 (0, 0, -1, -1);
+    __m128i mask2 = _mm_set_epi32 (0, 0, 0, -1);
+    uint8_t *end = orig + imagesize * 4;
+    for (; orig != end; orig += 64, dest += 48) {
+        __m128i a = _mm_shuffle_epi8 (_mm_load_si128 ((__m128i *) orig), shuf0);
+        __m128i b = _mm_shuffle_epi8 (_mm_load_si128 ((__m128i *) orig + 1), shuf1);
+        __m128i c = _mm_shuffle_epi8 (_mm_load_si128 ((__m128i *) orig + 2), shuf2);
+        __m128i d = _mm_shuffle_epi8 (_mm_load_si128 ((__m128i *) orig + 3), shuf3);
+        _mm_stream_si128
+        ((__m128i *) dest, _mm_or_si128 (_mm_and_si128 (a, mask0), _mm_andnot_si128 (b, mask0));
+        _mm_stream_si128
+        ((__m128i *) dest + 1, _mm_or_si128 (_mm_and_si128 (b, mask1), _mm_andnot_si128 (c, mask1));
+        _mm_stream_si128
+        ((__m128i *) dest + 2, _mm_or_si128 (_mm_and_si128 (c, mask2), _mm_andnot_si128 (d, mask2));
+    }
+}
+
+void convert (uint8_t *orig, size_t imagesize, uint8_t *dest) {
+    assert ((uintptr_t) orig % 16 == 0);
+    assert (imagesize % 4 == 0);
+    __m128i mask = _mm_set_epi8 (-128, -128, -128, -128, 13, 14, 15, 9, 10, 11, 5, 6, 7, 1, 2, 3);
+    uint8_t *end = orig + imagesize * 4;
+    for (; orig != end; orig += 16, dest += 12) {
+        _mm_storeu_si128 ((__m128i *) dest, _mm_shuffle_epi8 (_mm_load_si128 ((__m128i *) orig), mask));
+    }
+}
+

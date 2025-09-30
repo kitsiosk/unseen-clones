@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:310363
+*  Stack Overflow answer #:37530208
+*  And Stack Overflow answer#:310374
+*/
+int main () {
+    using namespace std : : chrono;
+    using namespace date;
+    auto base = make_zoned ("Pacific/Easter", sys_seconds {1142085600s});
+    for (int i = 0; i < 4; ++i) {
+    std :
+        : cout << format ("%a %b %d %T %Y %Z", base) << '\n';
+        base = base.get_local_time () + days {1};
+    }
+}
+
+int main () {
+    time_t base = 1142085600;
+    for (int i = 0; i < 4; ++i) {
+        struct tm *tm = localtime (&base);
+        tm->tm_mday += i;
+        time_t next = mktime (tm);
+    std :
+        : cout << ctime (& next);
+    }
+    return 0;
+}
+

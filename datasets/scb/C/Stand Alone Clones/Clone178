@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21136364
+*  Stack Overflow answer #:21136536
+*  And Stack Overflow answer#:21136436
+*/
+int main (int argc, char *argv []) {
+    FILE *f;
+    int i;
+    memset (chunk, 0, CHUNK);
+    f = fopen ("/tmp/myfile", "w");
+    if (f == NULL)
+        return 1;
+    for (i = 0; i < NUMCHUNKS; ++i) {
+        fwrite (chunk, CHUNK, 1, f);
+    }
+    fclose (f);
+    return 0;
+}
+
+int main () {
+    FILE *pFile;
+    pFile = fopen ("example.txt", "wb");
+    fputs ("This is an apple.", pFile);
+    fseek (pFile, 1024 * 1024, SEEK_SET);
+    fputs (" sam", pFile);
+    fclose (pFile);
+    return 0;
+}
+

@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8106765
+*  Stack Overflow answer #:8106894
+*  And Stack Overflow answer#:8107930
+*/
+int main () {
+    char **tokens = tokenize ("test string.");
+    char **it;
+    for (it = tokens; it && *it; ++it) {
+        printf ("%s\n", * it);
+        free (*it);
+    }
+    free (tokens);
+    return 0;
+}
+
+int main () {
+    char str [] = "test string.";
+    char *firstname = strtok (str, " ");
+    char *lastname = strtok (NULL, " ");
+    if (!lastname)
+        lastname = "";
+    printf ("%s, %s\n", lastname, firstname);
+    return 0;
+}
+

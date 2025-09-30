@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22246915
+*  Stack Overflow answer #:22247305
+*  And Stack Overflow answer#:22246999
+*/
+int main () {
+    char temp [] = "sumit";
+    printf ("Program started\n");
+    my_name.first_name = temp;
+    your_name = my_name;
+    NAME abc = my_name;
+    printf ("my_name=%s\n", my_name.first_name);
+    printf ("your_name=%s\n", your_name.first_name);
+    printf ("abc=%s\n", abc.first_name);
+}
+
+int main () {
+    char str1 [] = "Sample string";
+    char str2 [40];
+    char str3 [40];
+    strcpy (str2, str1);
+    strcpy (str3, "copy successful");
+    printf ("str1: %s\nstr2: %s\nstr3: %s\n", str1, str2, str3);
+    return 0;
+}
+

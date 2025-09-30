@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13520067
+*  Stack Overflow answer #:14636260
+*  And Stack Overflow answer#:13540879
+*/
+void rot13 (char *s) {
+    if (s == NULL)
+        return;
+    int i;
+    for (i = 0; s[i]; i++) {
+        if (s[i] >= 'a' && s[i] <= 'm') {
+            s[i] += 13;
+            continue;
+        }
+        if (s[i] >= 'A' && s[i] <= 'M') {
+            s[i] += 13;
+            continue;
+        }
+        if (s[i] >= 'n' && s[i] <= 'z') {
+            s[i] -= 13;
+            continue;
+        }
+        if (s[i] >= 'N' && s[i] <= 'Z') {
+            s[i] -= 13;
+            continue;
+        }
+    }
+}
+
+int rot13 (int c) {
+    if ('a' <= c && c <= 'z') {
+        return rot13b (c, 'a');
+    }
+    else if ('A' <= c && c <= 'Z') {
+        return rot13b (c, 'A');
+    }
+    else {
+        return c;
+    }
+}
+

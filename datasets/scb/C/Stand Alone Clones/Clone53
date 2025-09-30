@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50704494
+*  Stack Overflow answer #:50705365
+*  And Stack Overflow answer#:50705067
+*/
+int main () {
+    int flag;
+    printf ("Prime numbers:  2\t");
+    for (int i = 3; i <= 100; i++) {
+        flag = 0;
+        for (int j = 2; j < i; j++) {
+            if (i % j == 0) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 0) {
+            printf ("%d\t", i);
+        }
+    }
+    getch ();
+    return 0;
+}
+
+int main () {
+    printf ("2\n");
+    for (int i = 3; i <= 100; i += 2) {
+        if (is_prime (i)) {
+            printf ("%d\n", i);
+        }
+    }
+    return 0;
+}
+

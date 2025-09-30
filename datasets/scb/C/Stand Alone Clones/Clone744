@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3723658
+*  Stack Overflow answer #:3723677
+*  And Stack Overflow answer#:3723670
+*/
+int main () {
+    int var;
+    scanf ("%d", & var);
+    if (var > 5)
+        printf ("var > 5\n");
+    else
+        printf ("var <= 5\n");
+    return 0;
+}
+
+int main (void) {
+    int var;
+    char buff [100];
+    printf ("Enter number> ");
+    fflush (stdout);
+    if (fgets (buff, sizeof (buff), stdin) == NULL) {
+        printf ("\nfgets() failed\n");
+        return 1;
+    }
+    if (sscanf (buff, "%d", &var) != 1) {
+        printf ("\nsscanf() failed\n");
+        return 1;
+    }
+    if (var > 5)
+        printf ("%d is greater than 5\n", var);
+    else
+        printf ("%d is less than 6\n", var);
+    return 0;
+}
+

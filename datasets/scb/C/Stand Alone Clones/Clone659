@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3757800
+*  Stack Overflow answer #:3758290
+*  And Stack Overflow answer#:3758052
+*/
+char *find_sum (char *a, char *b) {
+    int lenA = strlen (a), lenB = strlen (b);
+    int max = lenA > lenB ? lenA : lenB;
+    char *res = (char *) malloc (max +2);
+    memset (res, '0', max + 1);
+    res[max + 1] = '\0';
+    int i = lenA - 1, j = lenB - 1, k = max;
+    for (; i >= 0 || j >= 0; --i, --j, --k) {
+        int sum = 0;
+        if (i >= 0 && j >= 0)
+            sum = a[i] - '0' + b[j] - '0' + res[k] - '0';
+        else if (j >= 0)
+            sum = b[j] - '0' + res[k] - '0';
+        else if (i >= 0)
+            sum = a[i] - '0' + res[k] - '0';
+        res[k] = sum % 10 + '0';
+        res[k - 1] = sum / 10 + '0';
+    }
+    return res;
+}
+
+char *find_sum (char *a, char *b) {
+    int l1 = strlen (a), l2 = strlen (b);
+    int cmdLen = l1 + l2 + 30;
+    char *cmd = malloc (cmdLen);
+    snprintf (cmd, cmdLen, "echo \"%s+%s\"|bc", a, b);
+    FILE *fp = popen (cmd, "r");
+    int max = (l1 > l2) ? l1 : l2;
+    max += 2;
+    char *result = malloc (max);
+    fgets (result, max, fp);
+    return result;
+}
+

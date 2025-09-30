@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35731365
+*  Stack Overflow answer #:35731656
+*  And Stack Overflow answer#:35731647
+*/
+int main () {
+    char str [5] [100];
+    for (int i = 0; i < 5; i++) {
+        fgets (str [i], 100, stdin);
+    }
+    for (int j = 0; j < 5; j++) {
+        printf ("%s\n", str [j]);
+    }
+    return 0;
+}
+
+int main () {
+    char *line = NULL;
+    char *lines [5];
+    size_t linecap = 0;
+    for (int i = 0; i < 5; i++) {
+        getline (& line, & linecap, stdin);
+        lines[i] = strdup (line);
+    }
+    free (line);
+    for (int i = 0; i < 5; i++) {
+        printf ("%s\n", lines [i]);
+    }
+    for (int i = 0; i < 5; i++) {
+        free (lines [i]);
+    }
+    return 0;
+}
+

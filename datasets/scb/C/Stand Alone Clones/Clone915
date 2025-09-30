@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16164620
+*  Stack Overflow answer #:16183024
+*  And Stack Overflow answer#:29971007
+*/
+int main (void) {
+    printf ("%+g\n", Ieee754SingleDigits2DoubleCheat ("110000101100010010000000000000000"));
+    printf ("%+g\n", Ieee754SingleDigits2DoubleNoCheat ("010000101100010010000000000000000"));
+    printf ("%+g\n", Ieee754SingleDigits2DoubleCheat ("000000000100000000000000000000000"));
+    printf ("%+g\n", Ieee754SingleDigits2DoubleNoCheat ("100000000100000000000000000000000"));
+    printf ("%+g\n", Ieee754SingleDigits2DoubleCheat ("000000000000000000000000000000000"));
+    printf ("%+g\n", Ieee754SingleDigits2DoubleNoCheat ("000000000000000000000000000000000"));
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    if (argc < 2) {
+        fprintf (stderr, "error: insufficient input. Usage: %s float\n", argv [0]);
+        return 1;
+    }
+    char *dp = strchr (argv[1], '.');
+    int dec = atoi (argv[1]);
+    int frc = (dp) ? atoi (dp +1) : 0;
+    printf ("\nString Values:\n");
+    printf (" string   : %s\n whole    : %d\n fraction : %d\n\n", argv [1], dec, frc);
+    float fvalue = xstrtof (argv[1]);
+    float ffrc = fvalue - dec;
+    int signbit = (fvalue >= 0) ? 0 : 1;
+    printf ("Float Values:\n");
+    printf (" decimal  : %d\n fraction : %f\n\n", dec, ffrc);
+    char *fstring = fpfrc_bin (fvalue);
+    char *bs = binstr ((unsigned long) dec);
+    printf ("Binary Values:\n");
+    printf (" decimal  : %s\n fraction : %s\n sign bit : %d\n\n", bs, fstring, signbit);
+    int bias = (int) strlen (bs) - 1;
+    int biasexp = 127 + bias;
+    char *binexp = binstr ((unsigned long) biasexp);
+    printf ("Normalization for biased exponent:\n");
+    printf ("\n %s.%s  =>  %s.%s%s\n\n", bs, fstring, "1", (bs + 1), fstring);
+    printf ("     exponent bias: %d\n unbiased exponent: 127\n", bias);
+    printf (" __________________+____\n\n");
+    printf ("   biased exponent: %3d\n   binary exponent: %s\n\n", biasexp, binexp);
+    printf ("Conversion to 'hidden bit' format to form mantissa:\n\n");
+    printf (" %s.%s%s  =>  %s%s\n\n", "1", (bs + 1), fstring, (bs + 1), fstring);
+    char *ieee754str = form_ieee754SPstr (signbit, binexp, bs, fstring);
+    printf ("IEEE-754 Single Precision Floating Point Representation (caclulated value)\n\n");
+    show_ieee754str (ieee754str);
+    printf ("IEEE-754 Single Precision Floating Point Representation (memory value)\n\n");
+    show_ieee754 (fvalue);
+    show_fltmem (fvalue);
+    if (bs)
+        free (bs);
+    if (binexp)
+        free (binexp);
+    if (ieee754str)
+        free (ieee754str);
+    return 0;
+}
+

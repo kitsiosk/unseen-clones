@@ -1,0 +1,65 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21447366
+*  Stack Overflow answer #:21447639
+*  And Stack Overflow answer#:21447523
+*/
+void my_int (int x) {
+    int n = 1000000000;
+    if (x == 0) {
+        my_char ('0');
+        return;
+    }
+    if (x == INT_MIN) {
+        my_char ('-');
+        my_char ('2');
+        my_char ('1');
+        my_char ('4');
+        my_char ('7');
+        my_char ('4');
+        my_char ('8');
+        my_char ('3');
+        my_char ('6');
+        my_char ('4');
+        my_char ('8');
+        return;
+    }
+    if (x < 0) {
+        x *= -1;
+        my_char ('-');
+    }
+    while (n > x)
+        n /= 10;
+    while (n != 0) {
+        my_char (x / n % 10 + '0');
+        n /= 10;
+    }
+}
+
+void my_int (int x) {
+    int n;
+    int copy;
+    char digit;
+    if (!x) {
+        my_char ('0');
+        return;
+    }
+    if (x < 0) {
+        x = x * -1;
+        my_char ('-');
+    }
+    n = 1;
+    copy = x / 10;
+    while (copy) {
+        n *= 10;
+        copy /= 10;
+    }
+    while (n) {
+        digit = x / n;
+        my_char (digit + '0');
+        x -= digit * n;
+        n /= 10;
+    }
+}
+

@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29079011
+*  Stack Overflow answer #:29082484
+*  And Stack Overflow answer#:29079060
+*/
+int File_Copy (char FileSource [], char FileDestination []) {
+    char c [4096];
+    FILE *stream_R = fopen (FileSource, "r");
+    FILE *stream_W = fopen (FileDestination, "w");
+    while (!feof (stream_R)) {
+        size_t bytes = fread (c, 1, sizeof (c), stream_R);
+        if (bytes) {
+            fwrite (c, 1, bytes, stream_W);
+        }
+    }
+    fclose (stream_R);
+    fclose (stream_W);
+    return 0;
+}
+
+int File_Copy (char FileSource [], char FileDestination []) {
+    int c;
+    FILE *stream_R;
+    FILE *stream_W;
+    stream_R = fopen (FileSource, "r");
+    if (stream_R == NULL)
+        return -1;
+    stream_W = fopen (FileDestination, "w");
+    if (stream_W == NULL) {
+        fclose (stream_R);
+        return -2;
+    }
+    while ((c = fgetc (stream_R)) != EOF)
+        fputc (c, stream_W);
+    fclose (stream_R);
+    fclose (stream_W);
+    return 0;
+}
+

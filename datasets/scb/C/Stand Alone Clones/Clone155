@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53889306
+*  Stack Overflow answer #:53889439
+*  And Stack Overflow answer#:53889498
+*/
+int minDepth (struct TreeNode *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    if (root->left == NULL && root->right == NULL) {
+        return 1;
+    }
+    int minDepth_left = minDepth (root->left);
+    int minDepth_right = minDepth (root->right);
+    if (!root->left) {
+        return minDepth_right + 1;
+    }
+    if (!root->right) {
+        return minDepth_left + 1;
+    }
+    if (minDepth_right > minDepth_left) {
+        return minDepth_left + 1;
+    }
+    else {
+        return minDepth_right + 1;
+    }
+}
+
+int minDepth (struct TreeNode *root) {
+    if (root == NULL) {
+        return 0;
+    }
+    if (root->left == NULL) {
+        return (root->right == NULL) ? 1 : minDepth (root->right) + 1;
+    }
+    if (root->right == NULL) {
+        return minDepth (root->left) + 1;
+    }
+    int r = minDepth (root->right);
+    int l = minDepth (root->left);
+    return ((r > l) ? l : r) + 1;
+}
+

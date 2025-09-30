@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50042818
+*  Stack Overflow answer #:50043432
+*  And Stack Overflow answer#:50043945
+*/
+int main () {
+    list l;
+    TLV *tag;
+    unsigned char test2 [2] = {1, 2};
+    unsigned char test3 [3] = {1, 2, 3};
+    unsigned char test4 [4] = {1, 2, 3, 4};
+    listNew (& l, sizeof (TLV *), listFree, Print);
+    tag = allocateTLV (2, sizeof (test2), test2);
+    if (tag != NULL) {
+        listPushFront (& l, & tag);
+    }
+    tag = allocateTLV (3, sizeof (test3), test3);
+    if (tag != NULL) {
+        listPushFront (& l, & tag);
+    }
+    tag = allocateTLV (4, sizeof (test4), test4);
+    if (tag != NULL) {
+        listPushFront (& l, & tag);
+    }
+    listPrint (& l);
+    listDestroy (& l);
+    return 0;
+}
+
+int main (void) {
+    const char *str [] = {"0x0001", "0x0002", "0x0003",};
+    node *head = NULL;
+    node *tail = NULL;
+    lst_nodeAdd (& head, & tail, str [0], strlen (str [0]) + 1);
+    lst_nodeAdd (& head, & tail, str [1], strlen (str [1]) + 1);
+    lst_nodeAdd (& head, & tail, str [2], strlen (str [2]) + 1);
+    lst_nodePrint (head, print_string);
+    lst_nodeFree (head);
+    head = NULL;
+    tail = NULL;
+    int int_array [] = {0, 1, 2,};
+    lst_nodeAdd (& head, & tail, & int_array [0], sizeof (int));
+    lst_nodeAdd (& head, & tail, & int_array [1], sizeof (int));
+    lst_nodeAdd (& head, & tail, & int_array [2], sizeof (int));
+    lst_nodePrint (head, print_int);
+    lst_nodeFree (head);
+    head = NULL;
+    tail = NULL;
+    system ("PAUSE");
+    return 0;
+}
+

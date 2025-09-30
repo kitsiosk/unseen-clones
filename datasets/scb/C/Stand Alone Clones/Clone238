@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42186565
+*  Stack Overflow answer #:42186612
+*  And Stack Overflow answer#:42187719
+*/
+int main (int argc, char **argv) {
+    int *num_arr = malloc ((argc - 1) * sizeof *num_arr);
+    for (int i = 0; i < argc - 1; ++i)
+        num_arr[i] = atoi (argv[i + 1]);
+    int sum = array_sum (num_arr, argc -1);
+    printf ("array_sum: %i\n", sum);
+    free (num_arr);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int *arr = NULL;
+    char *endptr = NULL;
+    int check, sum;
+    size_t ndigits = (size_t) argc - 1;
+    arr = malloc (ndigits * sizeof *arr);
+    if (arr == NULL) {
+        fprintf (stderr, "Cannot %zu spaces for integers\n", ndigits);
+        exit (EXIT_FAILURE);
+    }
+    for (size_t i = 0; i < ndigits; i++) {
+        check = strtol (argv[i + 1], &endptr, BASE);
+        if (endptr != argv[i + 1] && *endptr == '\0') {
+            arr[i] = check;
+        }
+    }
+    sum = array_sum (arr, ndigits);
+    printf ("array_sum: %d\n", sum);
+    free (arr);
+    arr = NULL;
+    return 0;
+}
+

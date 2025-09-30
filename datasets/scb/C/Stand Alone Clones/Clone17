@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33019818
+*  Stack Overflow answer #:33020199
+*  And Stack Overflow answer#:33023072
+*/
+int main () {
+    char string [100];
+    int i, j;
+    printf ("\nEnter string: ");
+    gets (string);
+    if (isalpha (string[0])) {
+        string[0] = toupper (string[0]);
+        for (i = 1; i < strlen (string); i++) {
+            if (string[i - 1] == ' ' && isalnum (string[i]))
+                string[i] = toupper (string[i]);
+        }
+        i = strlen (string);
+        while (i) {int j = i;
+        while (j && j != ' ')
+            j--;
+        printf ("%.*s ", i - j, string + j);
+        i = j;
+    }
+    return 0;
+}
+
+int main (void) {
+    int i, l, m, upper = 1;
+    char c;
+    char buff [] = "this is a simple string";
+    l = strlen (buff);
+    printf ("Original string:\n\t'%s'\n\n", buff);
+    for (i = 0; i < l; i++) {
+        if (upper)
+            buff[i] = toupper (buff[i]);
+        upper = isspace (buff[i]);
+    }
+    printf ("Capitalized:\n\t'%s'\n\n", buff);
+    for (i = 0; i < (l / 2); i++) {
+        c = buff[i];
+        buff[i] = buff[l - (i + 1)];
+        buff[l - (i + 1)] = c;
+    }
+    printf ("Reversed:\n\t'%s'\n\n", buff);
+    return 0;
+}
+

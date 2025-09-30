@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39058656
+*  Stack Overflow answer #:39059135
+*  And Stack Overflow answer#:39059166
+*/
+int main () {
+    double seconds, days;
+    time_t currentDate;
+    struct tm *xmas, today;
+    time (& currentDate);
+    today = *localtime (&currentDate);
+    xmas = localtime (&currentDate);
+    xmas->tm_mon = 11;
+    xmas->tm_mday = 25;
+    if (today.tm_mday > 25 && today.tm_mon == 11)
+        xmas->tm_year = today.tm_year + 1;
+    seconds = difftime (mktime (xmas), currentDate);
+    days = seconds / 86400;
+    printf ("%g days\n", days);
+    return 0;
+}
+
+int main (void) {
+    time_t now;
+    time_t christmas;
+    struct tm tmp;
+    double seconds;
+    double days;
+    time (& now);
+    tmp.tm_sec = 0;
+    tmp.tm_min = 0;
+    tmp.tm_hour = 0;
+    tmp.tm_mday = 25;
+    tmp.tm_mon = 11;
+    tmp.tm_year = 116;
+    tmp.tm_isdst = -1;
+    christmas = mktime (&tmp);
+    seconds = difftime (christmas, now);
+    days = seconds / 86400;
+    printf ("%g days untils christmas.\n", days);
+    return 0;
+}
+

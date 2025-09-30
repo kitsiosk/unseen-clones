@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33325876
+*  Stack Overflow answer #:33326765
+*  And Stack Overflow answer#:33326351
+*/
+struct result doStuff (int a, int b) {
+    struct result ret = {a, b};
+    ...case 1 : ret.x = a - 2;
+    break;
+case 2 :
+    ret.y = b - 2;
+    break;
+    ...return ret;
+}
+
+void doStuff (int *a, int *b, int option) {
+    switch (option) {
+    case 1 :
+        *a = *a - 2;
+        break;
+    case 2 :
+        *b = *b - 2;
+        break;
+    default :
+        break;
+    }
+}
+

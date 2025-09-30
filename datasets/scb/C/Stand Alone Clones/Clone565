@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2828648
+*  Stack Overflow answer #:2829335
+*  And Stack Overflow answer#:2828878
+*/
+void print (int a [] [4]) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+        std :
+            : cout << a [i] [j] << std : : endl;
+        std :
+            : cout << * (* (a) + i * 4 + j) << std : : endl;
+        }
+    }
+}
+
+void print (int **a, int numRows, int numCols) {
+    int row, col;
+    for (int row = 0; row < numRows; row++) {
+        for (int col = 0; col < numCols; col++) {
+            printf ("%5d, ", a [row] [col]);
+        }
+        puts ("");
+    }
+}
+

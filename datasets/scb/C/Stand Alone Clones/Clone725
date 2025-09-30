@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1777990
+*  Stack Overflow answer #:17796727
+*  And Stack Overflow answer#:36322735
+*/
+int main (void) {
+    int i = 1;
+    void *the_label_pointer;
+the_label :
+    the_label_pointer = &&the_label;
+    if (i--)
+        jumpto (the_label_pointer);
+    return 0;
+}
+
+int main (void) {
+    void *fns [3] = {&&one, &&two, &&three};
+    char p;
+    p = -1;
+    goto start;
+end :
+    return 0;
+start :
+    p++;
+    goto *fns[p];
+one :
+    printf ("hello ");
+    goto start;
+two :
+    printf ("World. \n");
+    goto start;
+three :
+    goto end;
+}
+

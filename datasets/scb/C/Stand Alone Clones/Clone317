@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4002049
+*  Stack Overflow answer #:32853084
+*  And Stack Overflow answer#:4002276
+*/
+int main () {
+    typedef exprtk : : expression < double > expression_t;
+    typedef exprtk : : parser < double > parser_t;
+std :
+    : string expression_string = "12 + (3.0 * (4) - 1) / sqrt(121)";
+    expression_t expression;
+    parser_t parser;
+    if (parser.compile (expression_string, expression)) {
+        double result = expression.value ();
+        printf ("Result: %19.15\n", result);
+    }
+    else
+        printf ("Error in expression\n.");
+    return 0;
+}
+
+int main () {
+std :
+    : string expression = "12+(3.0*(4)-1)/math.sqrt(121)";
+    lua_State *L = lua_open ();
+    luaopen_math (L);
+    if (luaL_dostring (L, ("return " + expression).c_str ()) != 0) {
+    std :
+        : cout << "ERROR : " << lua_tostring (L, - 1) << std : : endl;
+    }
+    if (lua_type (L, -1) == LUA_TNUMBER) {
+    std :
+        : cout << "GOT " << lua_tonumber (L, - 1) << std : : endl;
+    }
+    lua_close (L);
+}
+

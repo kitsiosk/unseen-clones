@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26695133
+*  Stack Overflow answer #:26695554
+*  And Stack Overflow answer#:26695402
+*/
+int main () {
+    int i;
+    char A [6] [10] = {"John", "David", "Michael", "Steve", "Sam", "Claire"};
+    int B [6] = {12, 30, 12, 12, 19, 12};
+    int C [6] = {2, 1, 2, 1, 2, 1};
+    for (i = 0; i < 6; i++)
+        printf ("%s\t%d\t%d\n", A[i], B[i], C[i]);
+    printf ("\n");
+    sortarray (6, A, B, C);
+    for (i = 0; i < 6; i++)
+        printf ("%s\t%d\t%d\n", A[i], B[i], C[i]);
+}
+
+int main () {
+    char A [6] [10] = {"John", "David", "Michael", "Steve", "Sam", "Claire"};
+    int B [6] = {12, 30, 12, 12, 19, 12};
+    int C [6] = {2, 1, 2, 1, 2, 1};
+    int index [6] = {0, 1, 2, 3, 4, 5};
+    int i = 0;
+    bool swapped;
+    for (i = 0; i < 6; i++) {
+        printf ("%s\t%d\t%d\n", A [i], B [i], C [i]);
+    }
+    while (1) {
+        swapped = false;
+        for (i = 0; i < 6 - 1; i++) {
+            if (isDes (index[i], index[i + 1], A, B, C)) {
+                int temp = index[i];
+                index[i] = index[i + 1];
+                index[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (swapped == false) {
+            break;
+        }
+    }
+    printf ("\nnew list\n\n");
+    for (i = 0; i < 6; i++) {
+        printf ("%s\t%d\t%d\n", A [index [i]], B [index [i]], C [index [i]]);
+    }
+    return 0;
+}
+

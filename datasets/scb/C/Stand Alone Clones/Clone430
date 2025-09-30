@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30879912
+*  Stack Overflow answer #:30880254
+*  And Stack Overflow answer#:30880351
+*/
+int main () {
+    int Sum [12] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    int Choice;
+    printf ("Pick Your Time's Table\n");
+    printf ("|2|3|4|5|6|7|8|9|10|11|12|\n");
+    printf ("===========================\n");
+    scanf ("%d", & Choice);
+    int i;
+    for (i = 0; i < 12; i++) {
+        printf ("%d X %d = %d\n", Choice, Sum [i], Choice * Sum [i]);
+    }
+    return 0;
+}
+
+int main () {
+    int choice = 1;
+    int randomNumber;
+    printf ("Pick Your Times Table\n");
+    printf ("|2|3|4|5|6|7|8|9|10|11|12|\n");
+    printf ("===========================\n");
+    printf ("Enter 0 to quit.\n");
+    while (choice != 0) {
+        scanf_s ("%d", & choice);
+        randomNumber = rand () % 12 + 1;
+        printf ("%d x %d = ?\n", choice, randomNumber);
+        system ("pause");
+        printf ("= %d\n", choice * randomNumber);
+        printf ("Pick Your Times Table\n");
+        printf ("|2|3|4|5|6|7|8|9|10|11|12|\n");
+        printf ("===========================\n");
+        printf ("Enter 0 to quit.\n");
+    }
+    return 0;
+}
+

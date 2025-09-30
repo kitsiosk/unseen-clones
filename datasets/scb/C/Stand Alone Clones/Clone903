@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7916411
+*  Stack Overflow answer #:7916661
+*  And Stack Overflow answer#:7916905
+*/
+int main () {
+    omp_set_num_threads (10);
+    for (int i = 0; i < 5; i++) {
+        printf ("x %d\n", i);
+    }
+    for (int i = 0; i < 5; i++) {
+        printf (". %d\n", i);
+    }
+}
+
+int main () {
+    omp_set_num_threads (2);
+    omp_set_nested (1);
+    {
+        int gtid = omp_get_thread_num ();
+        {
+            doTask1 (gtid);
+            doTask2 (gtid);
+        }
+    }
+}
+

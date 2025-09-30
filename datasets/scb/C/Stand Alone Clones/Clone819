@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35445192
+*  Stack Overflow answer #:35473465
+*  And Stack Overflow answer#:52693246
+*/
+int cmp3 (int32_t a, int32_t b, int32_t c, int32_t d, int32_t e, int32_t f) {
+    int32_t __attribute__ ((aligned (16))) vec1 [4];
+    int32_t __attribute__ ((aligned (16))) vec2 [4];
+    int32_t __attribute__ ((aligned (16))) vec3 [4];
+    int32_t __attribute__ ((aligned (16))) vec4 [4];
+    int32_t __attribute__ ((aligned (16))) r1 [4];
+    int32_t __attribute__ ((aligned (16))) r2 [4];
+    int32_t __attribute__ ((aligned (16))) r3 [4];
+    vec1[0] = a;
+    vec1[1] = b;
+    vec1[2] = c;
+    vec2[0] = vec2[1] = vec2[2] = d;
+    vec3[0] = vec3[1] = vec3[2] = e;
+    vec4[0] = vec4[1] = vec4[2] = f;
+    __m128i v1 = _mm_load_si128 ((__m128i *) vec1);
+    __m128i v2 = _mm_load_si128 ((__m128i *) vec2);
+    __m128i v3 = _mm_load_si128 ((__m128i *) vec3);
+    __m128i v4 = _mm_load_si128 ((__m128i *) vec4);
+    __m128i vcmp1 = _mm_cmpeq_epi32 (v1, v2);
+    __m128i vcmp2 = _mm_cmpeq_epi32 (v1, v3);
+    __m128i vcmp3 = _mm_cmpeq_epi32 (v1, v4);
+    _mm_store_si128 ((__m128i *) r1, vcmp1);
+    _mm_store_si128 ((__m128i *) r2, vcmp2);
+    _mm_store_si128 ((__m128i *) r3, vcmp3);
+    return r1[0] | r1[1] | r1[2] | r2[0] | r2[1] | r2[2] | r3[0] | r3[1] | r3[2];
+}
+
+int cmp3 (int *a, int *b) {
+    typedef __INT32_TYPE__ i32x4 __attribute__ ((__vector_size__ (16), aligned (4), __may_alias__));
+    i32x4 x = *(i32x4*) a, cmp, tmp, y0 = y0 ^ y0, y1 = y0, y2 = y0;
+    y0 += b[0];
+    y1 += b[1];
+    y2 += b[2];
+    cmp = x == y0;
+    tmp = x == y1;
+    cmp |= tmp;
+    tmp = x == y2;
+    cmp |= tmp;
+    cmp &= (i32x4) {0xffffffff, 0xffffffff, 0xffffffff, 0};
+    return hastrue128 (&cmp);
+}
+

@@ -1,0 +1,70 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3056307
+*  Stack Overflow answer #:3056510
+*  And Stack Overflow answer#:3056992
+*/
+int main (int argc, char *argv []) {
+    mqd_t mq;
+    struct mq_attr ma;
+    int status = 0;
+    int a = 5;
+    int b = 0;
+    printf ("a = %d, b = %d\n", a, b);
+    ma.mq_flags = 0;
+    ma.mq_maxmsg = 16;
+    ma.mq_msgsize = sizeof (int);
+    ma.mq_curmsgs = 0;
+    mq = mq_open ("/test_queue", O_RDWR | O_CREAT, 0700, &ma);
+    if (mq == -1) {
+        printf ("Failed to create queue.\n");
+        status = 1;
+    }
+    if (status == 0) {
+        status = mq_send (mq, (char *) (&a), sizeof (int), 1);
+    }
+    if (status == 0) {
+        status = mq_receive (mq, (char *) (&b), sizeof (int), NULL);
+    }
+    if ((status == 0) && (mq_close (mq) == -1)) {
+        printf ("Error closing message queue.\n");
+        status = 1;
+    }
+    if ((status == 0) && (mq_unlink ("test_queue") == -1)) {
+        printf ("Error deleting message queue.\n");
+        status = 1;
+    }
+    printf ("a = %d, b = %d\n", a, b);
+    return status;
+}
+
+int main (int argc, char **argv) {
+    mqd_t mq;
+    struct mq_attr attr;
+    char buffer [MAX_SIZE + 1];
+    int must_stop = 0;
+    attr.mq_flags = 0;
+    attr.mq_maxmsg = 10;
+    attr.mq_msgsize = MAX_SIZE;
+    attr.mq_curmsgs = 0;
+    mq = mq_open (QUEUE_NAME, O_CREAT | O_RDONLY, 0644, &attr);
+    CHECK ((mqd_t) - 1 != mq);
+    do {
+        ssize_t bytes_read;
+        bytes_read = mq_receive (mq, buffer, MAX_SIZE, NULL);
+        CHECK (bytes_read >= 0);
+        buffer[bytes_read] = '\0';
+        if (!strncmp (buffer, MSG_STOP, strlen (MSG_STOP))) {
+            must_stop = 1;
+        }
+        else {
+            printf ("Received: %s\n", buffer);
+        }
+    }
+    while (!must_stop);
+    CHECK ((mqd_t) - 1 != mq_close (mq));
+    CHECK ((mqd_t) - 1 != mq_unlink (QUEUE_NAME));
+    return 0;
+}
+

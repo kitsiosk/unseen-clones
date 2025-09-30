@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40592090
+*  Stack Overflow answer #:40592405
+*  And Stack Overflow answer#:40592848
+*/
+int main (void) {
+    gint16 frame [5] = {10, 2, 3, 7, 5};
+    char *str = gint16_to_string (frame, 5);
+    printf ("encoded string: %s\n", str);
+    gint16 n_oframe [5];
+    string_to_gint16 (n_oframe, 5, str);
+    printf ("n_oframe: ");
+    for (int i = 0; i < 5; i++) {
+        printf ("%d, ", n_oframe [i]);
+    }
+    printf ("\n");
+    free (str);
+    return 0;
+}
+
+int main () {
+    int16_t frame [5] = {10, 2, 3, 7, 5};
+    char *str = malloc (3 * (sizeof (frame) / sizeof (frame[0]) + 1));
+    char *strp = str;
+    size_t j;
+    for (j = 0; j < sizeof (frame) / sizeof (frame[0]); j++) {
+        snprintf (strp, 3, "%02x", frame [j]);
+        strp += 2;
+    }
+    strp = str;
+    printf ("str = %s\n", str);
+    int16_t n_oframe [5];
+    size_t i_m;
+    char *d = (char *) malloc (3);
+    for (i_m = 0; i_m < 5; i_m++) {
+        strncpy (d, str, 2);
+        n_oframe[i_m] = (int16_t) strtol (d, NULL, 16);
+        str = str + 2;
+    }
+    for (j = 0; j < 5; j++) {
+        printf ("%d ", n_oframe [j]);
+    }
+    putchar ('\n');
+    free (d);
+    free (strp);
+    exit (EXIT_SUCCESS);
+}
+

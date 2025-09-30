@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39300744
+*  Stack Overflow answer #:39300859
+*  And Stack Overflow answer#:39301001
+*/
+int main (int argc, char *argv []) {
+    int N = atoi (argv[1]);
+    pthread_t *thread = malloc (N * sizeof (pthread_t));
+    for (int i = 0; i < N; i++) {
+        struct thread_arg arg;
+        arg.value1 = i;
+        arg.value2 = 'f';
+        arg.value3 = i / 10.0;
+        struct thread_arg *p = malloc (sizeof *p);
+        *p = arg;
+        pthread_create (& thread [i], NULL, foo, p);
+    }
+    free (thread);
+    pthread_exit (NULL);
+}
+
+int main (int argc, char *argv []) {
+    int N;
+    if (argc < 2) {
+        exit (1);
+    }
+    N = atoi (argv[1]);
+    if (N < 0 || N > THREAD_LIMIT) {
+        exit (1);
+    }
+    struct thread_arg args [N];
+    pthread_t threads [N];
+    for (int i = 0; i < N; i++) {
+        args[i].value1 = i;
+        args[i].value2 = 'f';
+        args[i].value3 = i / 10;
+        if (pthread_create (&threads[i], NULL, foo, &args[i])) {
+        }
+    }
+    for (int i = 0; i < N; i++) {
+        pthread_join (threads [i], NULL);
+    }
+    pthread_exit (NULL);
+}
+

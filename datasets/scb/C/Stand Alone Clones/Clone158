@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4102423
+*  Stack Overflow answer #:4110620
+*  And Stack Overflow answer#:36794116
+*/
+void main () {
+    for (int i = 0; i < N; i++) {
+        dividends[i] = rand ();
+        do
+            divisors[i] = rand ();
+        while (divisors[i] == 0);
+    }
+    LARGE_INTEGER t0, t1;
+    QueryPerformanceCounter (& t0);
+    for (int j = 0; j < M; j++)
+        for (int i = 0; i < N; i++)
+            results[i] = floordiv_signcheck (dividends[i], divisors[i]);
+    QueryPerformanceCounter (& t1);
+    printf ("signcheck    : %9llu\n", t1.QuadPart - t0.QuadPart);
+    QueryPerformanceCounter (& t0);
+    for (int j = 0; j < M; j++)
+        for (int i = 0; i < N; i++)
+            results[i] = floordiv_signcheck2 (dividends[i], divisors[i]);
+    QueryPerformanceCounter (& t1);
+    printf ("signcheck2   : %9llu\n", t1.QuadPart - t0.QuadPart);
+    QueryPerformanceCounter (& t0);
+    for (int j = 0; j < M; j++)
+        for (int i = 0; i < N; i++)
+            results[i] = floordiv_signmultiply (dividends[i], divisors[i]);
+    QueryPerformanceCounter (& t1);
+    printf ("signmultiply : %9llu\n", t1.QuadPart - t0.QuadPart);
+    QueryPerformanceCounter (& t0);
+    for (int j = 0; j < M; j++)
+        for (int i = 0; i < N; i++)
+            results[i] = floordiv_floatingpoint (dividends[i], divisors[i]);
+    QueryPerformanceCounter (& t1);
+    printf ("floatingpoint: %9llu\n", t1.QuadPart - t0.QuadPart);
+}
+
+int main (int argc, char **argv) {
+    int n, i, *q, *p, *r;
+    double st;
+    n = 10000000;
+    p = malloc (sizeof (*p) * n);
+    q = malloc (sizeof (*q) * n);
+    r = malloc (sizeof (*r) * n);
+    for (i = 0; i < n; i++) {
+        p[i] = (rand () % 1000000) - 500000;
+        q[i] = (rand () % 1000000) + 1;
+    }
+    st = ntime ();
+    for (i = 0; i < 100; i++)
+        timediv (n, p, q, r);
+    printf ("%g\n", ntime () - st);
+    return (0);
+}
+

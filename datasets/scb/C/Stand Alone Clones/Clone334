@@ -1,0 +1,69 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14364627
+*  Stack Overflow answer #:14376061
+*  And Stack Overflow answer#:14367406
+*/
+int main (int argc, char **argv) {
+    GtkWidget *window, *table;
+    gboolean leds [NUM_LEDS];
+    int i = 0;
+    gtk_init (& argc, & argv);
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (window), "LEDs");
+    gtk_signal_connect (GTK_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
+    led_on = gdk_pixbuf_new_from_file ("on.png", NULL);
+    led_off = gdk_pixbuf_new_from_file ("off.png", NULL);
+    int n_rows = (NUM_LEDS / MAX_LEDS_PER_LINE) + 1;
+    int n_cols = (NUM_LEDS / MAX_LEDS_PER_LINE) + 1;
+    table = gtk_table_new (n_rows, n_cols, FALSE);
+    for (i = 0; i < NUM_LEDS; i++) {
+        leds[i] = FALSE;
+        GtkWidget *image = gtk_image_new ();
+        gtk_image_set_from_pixbuf (GTK_IMAGE (image), led_off);
+        GtkWidget *eb = gtk_event_box_new ();
+        g_signal_connect (G_OBJECT (eb), "button-press-event", G_CALLBACK (click_handler), & leds [i]);
+        gtk_container_add (GTK_CONTAINER (eb), image);
+        int row = i / MAX_LEDS_PER_LINE;
+        int col = i % MAX_LEDS_PER_LINE;
+        gtk_table_attach (GTK_TABLE (table), eb, row, row + 1, col, col + 1, 0, 0, 0, 0);
+    }
+    gtk_container_add (GTK_CONTAINER (window), table);
+    gtk_widget_show_all (window);
+    gtk_main ();
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    GtkWidget *window, *layout;
+    int i = 0, x, y;
+    gtk_init (& argc, & argv);
+    led_on = gdk_pixbuf_new_from_file ("led-on.png", NULL);
+    led_off = gdk_pixbuf_new_from_file ("led-off.png", NULL);
+    for (x = 0; x < 50; x++) {
+        for (y = 0; y < 50; y++) {
+            leds[i].img = gtk_image_new ();
+            leds[i].pos.x = x * ICON_WIDTH;
+            leds[i].pos.y = y * ICON_HEIGHT;
+            leds[i].status = OFF;
+            gtk_image_set_from_pixbuf (GTK_IMAGE (leds [i].img), led_off);
+            i++;
+        }
+    }
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (window), "LEDs");
+    gtk_signal_connect (GTK_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
+    layout = gtk_layout_new (NULL, NULL);
+    for (i = 0; i < NUM_LEDS; i++) {
+        GtkWidget *eb = gtk_event_box_new ();
+        g_signal_connect (G_OBJECT (eb), "button_press_event", G_CALLBACK (click_handler), & leds [i]);
+        gtk_container_add (GTK_CONTAINER (eb), leds [i].img);
+        gtk_layout_put (GTK_LAYOUT (layout), eb, leds [i].pos.x, leds [i].pos.y);
+    }
+    gtk_container_add (GTK_CONTAINER (window), layout);
+    gtk_widget_show_all (window);
+    gtk_main ();
+    return 0;
+}
+

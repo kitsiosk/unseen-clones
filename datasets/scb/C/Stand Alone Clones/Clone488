@@ -1,0 +1,66 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9699406
+*  Stack Overflow answer #:9699869
+*  And Stack Overflow answer#:9699908
+*/
+int main () {
+    {
+        FILE *fp;
+        B n;
+        n.m.a = 12;
+        n.m.b = 'a';
+        n.c = 13;
+        n.d = 'b';
+        fp = fopen ("x.dat", "wb");
+        assert (0 != fp);
+        if (1 != fwrite (&n, sizeof (B), 1, fp)) {
+            fprintf (stderr, "Failed to fwrite(): %s\n", strerror (errno));
+            return 1;
+        }
+        fclose (fp);
+        printf ("wrote: ");
+        print_B (& n);
+        printf ("\n");
+    }
+    {
+        FILE *fp;
+        B q;
+        fp = fopen ("x.dat", "rb");
+        assert (0 != fp);
+        if (1 != fread (&q, sizeof (B), 1, fp)) {
+            fprintf (stderr, "Failed to fread(): %s\n", strerror (errno));
+            return 1;
+        }
+        fclose (fp);
+        printf ("read : ");
+        print_B (& q);
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main () {
+    FILE *fd;
+    B n, q;
+    n.m.a = 12;
+    n.m.b = 'a';
+    n.c = 13;
+    n.d = 'b';
+    if ((fd = fopen ("test.dat", "wb")) == NULL) {
+        fprintf (stderr, "Error opening file: %s\n", strerror (errno));
+        exit (- 1);
+    }
+    fwrite (& n, sizeof (n), 1, fd);
+    fclose (fd);
+    if ((fd = fopen ("test.dat", "rb")) == NULL) {
+        fprintf (stderr, "Error opening file: %s\n", strerror (errno));
+        exit (- 1);
+    }
+    fread (& q, sizeof (q), 1, fd);
+    fclose (fd);
+    printf ("n.m.a: %d, q.m.a: %d; n.m.b: %c, q.m.b: %c; n.c: %d, q.c: %d; n.d: %c, q.d: %c\n", n.m.a, q.m.a, n.m.b, q.m.b, n.c, q.c, n.d, q.d);
+    return 0;
+}
+

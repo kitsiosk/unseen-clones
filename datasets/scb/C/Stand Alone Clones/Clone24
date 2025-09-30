@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40446207
+*  Stack Overflow answer #:40446252
+*  And Stack Overflow answer#:40446241
+*/
+int main (void) {
+    char *pA;
+    char *pB;
+    puts (strA);
+    pA = strA;
+    puts (pA);
+    pB = strB;
+    putchar ('\n');
+    while (*pA != '\0') {
+        *pB++ = *pA++;
+    }
+    *pB = '\0';
+    puts (strB);
+    return 0;
+}
+
+int main (void) {
+    struct ITEM items [10];
+    for (int i = 0; i < 10; i++) {
+        items[i].number = i;
+        printf ("BEFORE:: %d\n", items [i].number);
+    }
+    changeValues (items);
+    for (int i = 0; i < 10; i++) {
+        printf ("AFTER:: %d\n", items [i].number);
+    }
+    return 0;
+}
+

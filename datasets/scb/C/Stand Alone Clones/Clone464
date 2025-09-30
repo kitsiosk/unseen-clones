@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28045172
+*  Stack Overflow answer #:41302920
+*  And Stack Overflow answer#:28058216
+*/
+int main (void) {
+    char input [] = ".- -... -.-.";
+    morse_table_t table [] = {{".-", "A"}, {"-...", "B"}, {"-.-.", "C"}};
+    char *segment;
+    int i;
+    segment = strtok (input, " ");
+    while (segment) {
+        for (i = 0; i < ARRAY_SIZE (table); ++i) {
+            if (!strcmp (segment, table[i].morse))
+                puts (table[i].ascii);
+        }
+        segment = strtok (NULL, " ");
+    }
+    return 0;
+}
+
+int main (void) {
+    make_tree ();
+    encode_out ("HELLO WORLD");
+    encode_out ("JOKE");
+    decode_out (".... . .-.. .-.. --- / .-- --- .-. .-.. -..");
+    decode_out (".--- --- -.- .");
+    drop_tree ();
+    return 0;
+}
+

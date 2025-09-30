@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53592719
+*  Stack Overflow answer #:53593078
+*  And Stack Overflow answer#:53593034
+*/
+void main () {
+    int i, j, limit;
+    printf ("Input limit : ");
+    scanf ("%d", & limit);
+    for (i = 1; i <= limit; i++) {
+        if (i % 2 == 0) {
+            for (j = lineMax (i); j >= lineMax (i -1) + 1; j--)
+                printf ("%d ", j);
+        }
+        else {
+            for (j = lineMax (i -1) + 1; j <= lineMax (i); j++)
+                printf ("%d ", j);
+        }
+        printf ("\n");
+    }
+}
+
+int main (void) {
+    int rows;
+    int i, j;
+    int n = 0;
+    printf ("How many rows do you want? ");
+    if (scanf ("%d", &rows) != 1 || rows < 1)
+        return EXIT_FAILURE;
+    printf ("\n");
+    for (i = 1; i <= rows; ++i) {
+        for (j = 0; j < i; ++j) {
+            printf ("%4d", n + (i % 2 == 0 ? i - j : j + 1));
+        }
+        printf ("\n");
+        n = n + i;
+    }
+    return EXIT_SUCCESS;
+}
+

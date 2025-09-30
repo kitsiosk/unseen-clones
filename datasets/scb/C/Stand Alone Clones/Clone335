@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44974592
+*  Stack Overflow answer #:44977075
+*  And Stack Overflow answer#:44977151
+*/
+int main (int argc, char const *argv []) {
+    int k = 1;
+    int n = 5;
+    char a [] = "HELLO";
+    reverse (& a [n - k], k);
+    reverse (a, n - k);
+    reverse (a, n);
+    for (int i = 0;
+    i < n;
+    i ++) {printf ("%c\n", a [i]);
+}
+
+int main (int argc, char *argv []) {
+    ssize_t rshift;
+    char *s;
+    if (argc != 3) {
+        fprintf (stderr, "usage: %s N STR\n" "Rotate STR right by N or left by -N\n", argv [0]);
+        return 2;
+    }
+    rshift = strtol (argv[1], NULL, 10);
+    s = argv[2];
+    printf ("%s\n", rotatestr (s, rshift));
+    return 0;
+}
+

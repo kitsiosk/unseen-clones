@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38260105
+*  Stack Overflow answer #:38261095
+*  And Stack Overflow answer#:38262175
+*/
+int main (void) {
+    char c_min = CHAR_MIN;
+    char c_max = CHAR_MAX;
+    unsigned char uc = '45';
+    printf ("'1'=%d\n", '1');
+    printf ("'45'=%d\n", '45');
+    printf ("'0'=%d\n", '0');
+    printf ("lowest possible value for char=%d\n", c_min);
+    printf ("highest possible value for char=%d\n", c_max);
+    printf ("'45' converted to an (unsigned) char=%u\n", uc);
+    return 0;
+}
+
+int main () {
+    int i, ans, j;
+    char st [3] [3] = {{'1'}, {'4', '5'}, {'0'}};
+    for (j = 0; j < 3; j++) {
+        for (i = 0; st[j][i] >= 48 && st[j][i] <= 57; i++) {
+            ans = st[j][i] - '0';
+            printf ("%d", ans);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

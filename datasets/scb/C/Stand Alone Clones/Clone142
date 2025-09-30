@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32935754
+*  Stack Overflow answer #:32936500
+*  And Stack Overflow answer#:32938053
+*/
+void inum_to_filename (int inode_arg, char *pathBuffer, int size_arg) {
+    DIR *dir_ptr = opendir (".");
+    struct dirent *dirent_ptr = readdir (dir_ptr);
+    int counter = 0;
+    memset (pathBuffer, 0, size_arg);
+    while (counter != 1) {
+        if (inode_arg == dirent_ptr->d_ino) {
+            strcat (pathBuffer, "/");
+            strcat (pathBuffer, dirent_ptr -> d_name);
+            counter = counter + 1;
+            return;
+        }
+        else {
+            dirent_ptr = readdir (dir_ptr);
+        }
+    }
+    closedir (dir_ptr);
+}
+
+static void inum_to_filename (ino_t inode_arg, char *pathBuffer, size_t size_arg) {
+    assert (size_arg > 0);
+    DIR *dir_ptr = opendir (".");
+    if (dir_ptr == 0) {
+        fprintf (stderr, "Failed to open directory '.' (%d: %s)\n", errno, strerror (errno));
+        exit (EXIT_FAILURE);
+    }
+    struct dirent *dirent_ptr;
+    while ((dirent_ptr = readdir (dir_ptr)) != 0) {
+        if (inode_arg == dirent_ptr->d_ino) {
+            if (strlen (dirent_ptr->d_name) >= size_arg) {
+                fprintf (stderr, "File name %s too long (%zu vs %zu max)\n", dirent_ptr -> d_name, strlen (dirent_ptr -> d_name), size_arg);
+                exit (EXIT_FAILURE);
+            }
+            strcpy (pathBuffer, dirent_ptr -> d_name);
+            break;
+        }
+    }
+    closedir (dir_ptr);
+}
+

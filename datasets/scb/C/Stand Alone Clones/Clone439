@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29812778
+*  Stack Overflow answer #:29813010
+*  And Stack Overflow answer#:29812928
+*/
+int main (void) {
+    int start;
+    if (scanf ("%d", &start) != 1)
+        exit (1);
+    int end = start;
+    while (scanf ("%d", &end) == 1)
+        ;
+    for (int i = start; i <= end; i++)
+        printf ("%d\n", i);
+}
+
+int main () {
+    int previous = 0;
+    int num;
+    scanf ("%hd", & previous);
+    while (scanf ("%hd", &num) != EOF) {
+        for (int i = previous; i < num; i++) {
+            printf ("%d\n", i);
+        }
+        previous = num;
+    }
+    printf ("%d\n", previous);
+    return 0;
+}
+

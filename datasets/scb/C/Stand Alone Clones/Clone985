@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4823177
+*  Stack Overflow answer #:4823234
+*  And Stack Overflow answer#:15713419
+*/
+char *readFile (char *fileName) {
+    FILE *file;
+    int i = 0;
+    char *code = malloc (1000 * sizeof (char));
+    file = fopen (fileName, "r");
+    do {
+        code[i++] = (char) fgetc (file);
+    }
+    while (code[i - 1] != EOF);
+    code [i] = '\0' return code;
+}
+
+char *readFile (char *fileName) {
+    FILE *file = fopen (fileName, "r");
+    char *code;
+    size_t n = 0;
+    int c;
+    if (file == NULL)
+        return NULL;
+    fseek (file, 0, SEEK_END);
+    long f_size = ftell (file);
+    fseek (file, 0, SEEK_SET);
+    code = malloc (f_size);
+    while ((c = fgetc (file)) != EOF) {
+        code[n++] = (char) c;
+    }
+    code[n] = '\0';
+    return code;
+}
+

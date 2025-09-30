@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name="generalization-study"
+#SBATCH --mail-user=yourmail@example.com
+#SBATCH --mail-type=end,fail
+#SBATCH --time=01:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=8G
+#SBATCH --gres gpu:1
+#SBATCH --error=siamese-scb-bcb-%j.err
+#SBATCH --output=siamese-scb-bcb-%j.out
+
+module purge all
+module load gpu
+module load mamba
+
+. <path-to-venv>/bin/activate
+source activate cudasupport
+
+srun python bcb_scb_siamese.py --train_on scb

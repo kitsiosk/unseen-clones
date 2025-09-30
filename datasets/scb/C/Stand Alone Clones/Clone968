@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5248915
+*  Stack Overflow answer #:46025887
+*  And Stack Overflow answer#:5249100
+*/
+int main () {
+    clock_t begin = clock ();
+    int i;
+    for (i = 0; i < 100000; i++) {
+        printf ("%d", i);
+    }
+    clock_t end = clock ();
+    printf ("Time taken:%lf", (double) (end - begin) / CLOCKS_PER_SEC);
+}
+
+int main (void) {
+    time_t start, end;
+    double first, second;
+    time (& start);
+    first = CPU_TIME;
+    ...time (& end);
+    second = CPU_TIME;
+    printf ("cpu  : %.2f secs\n", second - first);
+    printf ("user : %d secs\n", (int) (end - start));
+}
+

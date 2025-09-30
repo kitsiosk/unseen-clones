@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30038093
+*  Stack Overflow answer #:30038545
+*  And Stack Overflow answer#:30042371
+*/
+int main () {
+    char * string = read from file int len = strlen (string);
+    rev (string, 0, len);
+    for (int i = 0; i < len;) {
+        int l = 0;
+        int j = i;
+        while (j < len && string[j] != ' ')
+            ++j;
+        rev (string, i, j - i);
+        i = j + 1;
+    }
+}
+
+int main (void) {
+    FILE *fp = stdin;
+    char toReverse [1000] = " ";
+    char outputArray [1000];
+    while (1 == fscanf (fp, "%998[^\n]%*c", &toReverse[1])) {
+        proc_rev (toReverse, outputArray);
+        puts (outputArray);
+    }
+    return 0;
+}
+

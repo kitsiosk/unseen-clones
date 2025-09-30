@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3929282
+*  Stack Overflow answer #:3929345
+*  And Stack Overflow answer#:3929505
+*/
+int main () {
+    int i, j, length;
+    char space = ' ';
+    char phrase [80];
+    printf ("Give me the phrase: ");
+    gets (phrase);
+    length = strlen (phrase);
+    for (i = 0, j = length - 1; i < j; i++, j--) {
+        while (phrase[i] == space)
+            i++;
+        while (phrase[j] == space)
+            j--;
+        if (phrase[i] != phrase[j]) {
+            printf ("It's not a palindrome\n");
+            return 0;
+        }
+    }
+    printf ("It's a palindrome\n");
+    return 0;
+}
+
+int main () {
+    int i, j, length, halfLength;
+    char space = ' ';
+    char phrase1 [80], phrase2 [80];
+    printf ("Give me the phrase: ");
+    gets (phrase1);
+    length = strlen (phrase1);
+    for (i = 0, j = 0; i <= length; ++i) {
+        if (phrase1[i] != space) {
+            phrase2[j++] = phrase1[i];
+        }
+    }
+    length = strlen (phrase2);
+    halfLength = length / 2;
+    for (i = 0, j = length - 1; i < halfLength; ++i, --j) {
+        if (phrase2[i] != phrase2[j]) {
+            printf ("It's not a palindrome\n");
+            return 0;
+        }
+    }
+    printf ("It's a palindrome\n");
+    return 0;
+}
+

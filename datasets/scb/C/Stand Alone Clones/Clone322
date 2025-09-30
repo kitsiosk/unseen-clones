@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52324847
+*  Stack Overflow answer #:52328370
+*  And Stack Overflow answer#:52324959
+*/
+int main (int argc, char *argv []) {
+    int fragments = 0, characters = 0, in_fragment = 0, c;
+    while ((c = getchar ()) != EOF) {
+        if (!isspace (c)) {
+            ++characters;
+            if (!in_fragment)
+                ++fragments;
+        }
+        in_fragment = !isspace (c);
+    }
+    printf ("%d fragments read, %d characters in total\n", fragments, characters);
+    return EXIT_SUCCESS;
+}
+
+int main () {
+    int i = 0;
+    char str [] = " aa aaa ";
+    int charCount = 0;
+    int countFragment = 0;
+    int pos = OUT;
+    while (str[i]) {
+        while ((str[i] != ' ') && (str[i])) {
+            if (pos != IN) {
+                pos = IN;
+                ++countFragment;
+            }
+            ++charCount;
+            ++i;
+        }
+        while (str[i] == ' ') {
+            if (pos != OUT)
+                pos = OUT;
+            ++i;
+        }
+    }
+    printf ("FRAGMENT: %d\n CHARACTERS: %d", countFragment, charCount);
+    return 0;
+}
+

@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5206840
+*  Stack Overflow answer #:5206935
+*  And Stack Overflow answer#:6794677
+*/
+void main (int argc, char **argv) {
+    int myargc = argc;
+    char **myargv = malloc ((argc - 1) * sizeof (void *));
+    int i;
+    for (i = 1; i < argc; i++) {
+        int len = strlen (argv[i]);
+        myargv[i - 1] = malloc (len +1);
+        memcpy (myargv [i - 1], argv [i], len + 1);
+    }
+    getch ();
+}
+
+main (int argc, char **argv, char **envp) {
+    int retcode;
+    char **e;
+    char **myargv;
+    setenv ("LD_LIBRARY_PATH", MYLIBS, 1);
+    setenv ("_", PYBINARY, 1);
+    int i = 0;
+    myargv = (char **) malloc (sizeof (char *) * 100);
+    for (; argv[i] != NULL; i++) {
+        myargv[i + 1] = (char *) malloc (sizeof (char) * (strlen (argv[i]) + 1));
+        memcpy (myargv [i + 1], argv [i], strlen (argv [i]));
+    }
+    myargv[i + 1] = NULL;
+    myargv[0] = LDSO;
+    myargv[1] = PYBINARY;
+    e = myargv;
+    while (*e != NULL) {
+        printf ("arg: %s\n", * e ++);
+    }
+    retcode = execve (LDSO, myargv, environ);
+    perror ("exec2: execve() failed");
+    exit (1);
+}
+

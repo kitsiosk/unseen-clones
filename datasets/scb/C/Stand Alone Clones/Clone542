@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1516122
+*  Stack Overflow answer #:27559151
+*  And Stack Overflow answer#:1516414
+*/
+int main () {
+    setup_terminal ();
+    printf ("Press Q to quit...\n");
+    for (;;) {
+        int key = next_input ();
+        if (key != -1) {
+            if ((key == 113) || (key == 81)) {
+                printf ("\nNormal exit\n");
+                break;
+            }
+        }
+    }
+    reset_terminal ();
+    return 0;
+}
+
+int main () {
+    setvbuf (stdout, NULL, _IONBF, 0);
+    struct termios old_termios, new_termios;
+    tcgetattr (0, & old_termios);
+    signal (SIGINT, sig_hnd);
+    new_termios = old_termios;
+    new_termios.c_cc[VEOF] = 3;
+    new_termios.c_cc[VINTR] = 4;
+    tcsetattr (0, TCSANOW, & new_termios);
+    char line [256];
+    int len;
+    do {
+        len = read (0, line, 256);
+        line[len] = '\0';
+        if (len < 0)
+            printf ("(len: %i)", len);
+        if (len == 0)
+            printf ("(VEOF)");
+        if (len > 0) {
+            if (line[len - 1] == 10)
+                printf ("(line:'%.*s')\n", len -1, line);
+            if (line[len - 1] != 10)
+                printf ("(partial line:'%s')", line);
+        }
+    }
+    while (line[0] != 'q');
+    tcsetattr (0, TCSANOW, & old_termios);
+}
+

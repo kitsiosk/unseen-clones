@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3408706
+*  Stack Overflow answer #:3409211
+*  And Stack Overflow answer#:31007189
+*/
+int main (int argc, char **argv) {
+    const char hexstring [] = "DEadbeef10203040b00b1e50", *pos = hexstring;
+    unsigned char val [12];
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++) {
+        sscanf (pos, "%2hhx", & val [count]);
+        pos += 2;
+    }
+    printf ("0x");
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++)
+        printf ("%02x", val[count]);
+    printf ("\n");
+    return 0;
+}
+
+void main () {
+    char *examples [] = {"", "5", "D", "5D", "5Df", "deadbeef10203040b00b1e50", "02invalid55"};
+    unsigned char byte_array [128];
+    int i = 0;
+    for (; i < sizeof (examples) / sizeof (char *); i++) {
+        int size = convert (examples[i], byte_array, 128);
+        if (size < 0) {
+            printf ("Failed to convert '%s'\n", examples [i]);
+        }
+        else if (size == 0) {
+            printf ("Nothing to convert for '%s'\n", examples [i]);
+        }
+        else {
+            print (byte_array, size);
+        }
+    }
+}
+

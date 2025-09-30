@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47585955
+*  Stack Overflow answer #:47585976
+*  And Stack Overflow answer#:47586017
+*/
+int main (void) {
+    int i, size;
+    printf ("Enter total number of elements (1 to 100): \n");
+    if (scanf ("%d", &size) != 1) {
+        fprintf (stderr, "Error in input");
+        exit (1);
+    }
+    if (size < 1 && size > 100) {
+        fprintf (stderr, "Wrong input.");
+        exit (1);
+    }
+    float num [size];
+    for (i = 0; i < size; i++) {
+        printf ("Enter Number %d: ", i);
+        if (scanf ("%f", &num[i]) != 1) {
+            fprintf (stderr, "Error in input");
+            exit (1);
+        }
+    }
+    printf ("Largest Number: %f", mymaximum (size, num));
+    return 0;
+}
+
+int main () {
+    int i, size;
+    printf ("Enter total number of elements (1 to 100): \n");
+    scanf ("%d", & size);
+    float num [100];
+    for (i = 0; i < size; i++) {
+        printf ("Enter Number %d: ", i);
+        scanf ("%f", & num [i]);
+    }
+    printf ("Largest Number: %f", maximum (num, size);
+}
+

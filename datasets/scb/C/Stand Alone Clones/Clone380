@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:492384
+*  Stack Overflow answer #:32951430
+*  And Stack Overflow answer#:5655614
+*/
+int main () {
+    int i;
+    Array *negativeTest, *days = NewArray (5);
+    double moreDays [] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    for (i = 0; i < days->length; i++)
+        days->array[i] = i + 1;
+    PrintArray (days);
+    SetArray (days, 10, moreDays);
+    PrintArray (days);
+    negativeTest = NewArray (-5);
+    PrintArray (negativeTest);
+    return 0;
+}
+
+int main () {
+    days_t days;
+    days_t *ptr = &days;
+    printf ("SIZEOF_DAYS:  %u\n", SIZEOF_DAYS);
+    printf ("sizeof(days): %u\n", sizeof (days));
+    printf ("sizeof(*ptr): %u\n", sizeof (* ptr));
+    printf ("sizeof(ptr):  %u\n", sizeof (ptr));
+    return 0;
+}
+

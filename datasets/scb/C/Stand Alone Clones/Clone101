@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9554146
+*  Stack Overflow answer #:9554580
+*  And Stack Overflow answer#:9554209
+*/
+int main () {
+    int i = 1, fibonacci = 1;
+    do {
+        printf ("The %2dst Fibonacci number is %3d\n", i, fibonacci);
+        fibonacci = Fibonacci (++i);
+    }
+    while (fibonacci <= 100);
+    return 0;
+}
+
+int main () {
+    int i = 2, fibonacci = 0, fParcialone = 1, fParcialtwo = 0;
+    printf ("The %2dst Fibonacci number is %3d\n", i - 1, fibonacci + 1);
+    fibonacci = fParcialone + fParcialtwo;
+    while (fibonacci <= 100) {
+        printf ("The %2dst Fibonacci number is %3d\n", i, fibonacci);
+        fParcialtwo = fParcialone;
+        fParcialone = fibonacci;
+        fibonacci = fParcialone + fParcialtwo;
+        i++;
+    }
+    return 0;
+}
+

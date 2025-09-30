@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29812778
+*  Stack Overflow answer #:29813224
+*  And Stack Overflow answer#:29812928
+*/
+int main (void) {
+    int num = 0;
+    int first = (1U << 31) - 1;
+    int last = (-first - 1);
+    while (scanf (" %d", &num) != EOF) {
+        first = num < first ? num : first;
+        last = num > last ? num : last;
+    }
+    for (num = first; num <= last; num++)
+        printf ("%d\n", num);
+    return 0;
+}
+
+int main () {
+    int previous = 0;
+    int num;
+    scanf ("%hd", & previous);
+    while (scanf ("%hd", &num) != EOF) {
+        for (int i = previous; i < num; i++) {
+            printf ("%d\n", i);
+        }
+        previous = num;
+    }
+    printf ("%d\n", previous);
+    return 0;
+}
+

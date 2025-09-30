@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31331326
+*  Stack Overflow answer #:31331950
+*  And Stack Overflow answer#:31332743
+*/
+int fun (int n) {
+    if (n == 0)
+        return a[0];
+    int max_till_j = fun (n -1);
+    if (a[n] > a[n] + max_till_j) {
+        maxherearray[n] = a[n];
+        if (maxherearray[n] > max_sum) {
+            start_idx = end_idx = n;
+            max_sum = maxherearray[n];
+        }
+    }
+    else {
+        maxherearray[n] = a[n] + max_till_j;
+        if (maxherearray[n] > max_sum) {
+            end_idx = n;
+            max_sum = maxherearray[n];
+        }
+    }
+    return maxherearray[n];
+}
+
+int fun (int n, int *result) {
+    int max_here = 0;
+    if (n == 0) {
+        return a[n];
+    }
+    max_here = max (a[n], a[n] + fun (n -1, result));
+    *result = max (*result, max_here);
+    return max_here;
+}
+

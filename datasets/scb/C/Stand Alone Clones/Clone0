@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18836512
+*  Stack Overflow answer #:18839588
+*  And Stack Overflow answer#:18836951
+*/
+int main (int argc, char **argv) {
+    int tree1 = 14;
+    int tree2 = 7;
+    int tree3 = 16;
+    int limit = 11;
+    int cutamounttotal = 0;
+    cutamounttotal += CUTAMOUNT (tree1, limit);
+    cutamounttotal += CUTAMOUNT (tree2, limit);
+    cutamounttotal += CUTAMOUNT (tree3, limit);
+    printf ("Amount to remove: %d\n", cutamounttotal);
+    return 0;
+}
+
+int main (void) {
+    int tree [3] = {0};
+    int max = 0;
+    int cut = 0;
+    printf ("Max Height: "), scanf ("%d", &max);
+    for (int i = 0; i < 3; ++i) {
+        printf ("Tree%d: ", i +1), scanf ("%d", &tree[i]);
+    }
+    for (int i = 0; i < 3; ++i) {
+        cut += (tree[i] % max) % tree[i];
+    }
+    printf ("Amount to remove: %d\n", cut);
+    getchar ();
+    return 0;
+}
+

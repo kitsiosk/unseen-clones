@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11015672
+*  Stack Overflow answer #:11105198
+*  And Stack Overflow answer#:11015785
+*/
+int main (void) {
+    volatile int y = 1;
+    if (y)
+        goto exit;
+handler :
+    __asm__ __volatile__ ("jmp 0x0"
+    );
+exit :
+    return 0;
+}
+
+int main (void) {
+    int x = 0;
+    __asm__ __volatile__ ("" : "=r" (x));
+    if (x) {
+    handler :
+        __asm__ __volatile__ ("jmp $0x0"
+        );
+    }
+    return 0;
+}
+

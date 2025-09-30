@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28117439
+*  Stack Overflow answer #:28117643
+*  And Stack Overflow answer#:28117613
+*/
+int main () {
+    size_t k;
+    char string [] = "example string with spaces";
+    char **list;
+    list = split (string, " ");
+    if (list == NULL)
+        return -1;
+    k = 0;
+    while (list[k] != NULL) {
+        printf ("%s\n", list [k]);
+        free (list [k]);
+        k++;
+    }
+    free (list);
+    return 0;
+}
+
+int main () {
+    char example_input [80] = "psdwd /home/user/directory/file.ext";
+    const char s [2] = "-";
+    char *command = strchr (example_input, ' ');
+    char *argument = NULL;
+    if (command != NULL) {
+        *(command) = '\0';
+        if (*(command + 1) != '\0')
+            argument = command + 1;
+    }
+    command = example_input;
+    if (strcmp (command, "ls") == 0) {
+        cmd_ls (argument);
+    }
+    else if (strcmp (command, "pwd") == 0) {
+        cmd_pwd (argument);
+    }
+    else {
+        printf ("Unrecognised command!\n");
+    }
+    return (0);
+}
+

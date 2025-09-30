@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41332855
+*  Stack Overflow answer #:41333090
+*  And Stack Overflow answer#:41333085
+*/
+int main (void) {
+    int x, n, b, num = 0, i;
+    scanf ("%d", & b);
+    scanf ("%d", & n);
+    for (i = 1; i <= n; i++) {
+        scanf ("%d", & x);
+        num += x * pow (b, n -i);
+    }
+    printf ("m=%d", num);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int base, n, i, x, sum = 0, power;
+    printf ("Enter base: ");
+    if (scanf ("%d", &base) != 1) {
+        printf ("Invalid base.\n");
+        exit (EXIT_FAILURE);
+    }
+    printf ("Enter n: ");
+    if (scanf ("%d", &n) != 1) {
+        printf ("Invalid n.\n");
+        exit (EXIT_FAILURE);
+    }
+    power = n - 1;
+    printf ("Enter numbers: ");
+    for (i = 0; i < n; i++) {
+        if (scanf ("%d", &x) != 1) {
+            printf ("Invalid value.\n");
+            exit (EXIT_FAILURE);
+        }
+        sum += x * pow (base, power);
+        power--;
+    }
+    printf ("Sum = %d\n", sum);
+    return 0;
+}
+

@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54102668
+*  Stack Overflow answer #:54102799
+*  And Stack Overflow answer#:54102813
+*/
+int main () {
+    int arr5 [] [3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    for (int j = 0; j < 3; j++) {
+        printf ("%d%c", * ((arr5 + 1) + j), (j == 2) ? '\n' : ' ');
+    }
+    for (int j = 0; j < 3; j++) {
+        printf ("%d%c", * (* (arr5 + 1) + j), (j == 2) ? '\n' : ' ');
+    }
+    return 0;
+}
+
+int main (void) {
+    int arr5 [] [3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, *row1 = *arr5, *row2 = *(arr5 + 1), *row3 = *(arr5 + 2);
+    size_t nrow = sizeof arr5 / sizeof *arr5, ncol = sizeof *arr5 / sizeof **arr5;
+    puts ("By row:");
+    for (size_t j = 0; j < ncol; j++)
+        printf ("%3d", *(row1 + j));
+    putchar ('\n');
+    for (size_t j = 0; j < ncol; j++)
+        printf ("%3d", *(row2 + j));
+    putchar ('\n');
+    for (size_t j = 0; j < ncol; j++)
+        printf ("%3d", *(row3 + j));
+    putchar ('\n');
+    puts ("\nBy array:");
+    for (size_t i = 0; i < nrow; i++) {
+        for (size_t j = 0; j < ncol; j++)
+            printf ("%3d", *(*(arr5 + i) + j));
+        putchar ('\n');
+    }
+}
+

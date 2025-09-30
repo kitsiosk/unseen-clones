@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39245576
+*  Stack Overflow answer #:39245731
+*  And Stack Overflow answer#:39245697
+*/
+void freq (int size, const int *numbers) {
+    unsigned int counts [10] = {0};
+    for (int i = 0; i < size; ++i) {
+        const int here = numbers[i];
+        if (here >= 1 && here <= 9)
+            counts[here]++;
+    }
+    for (int i = 1; i < 10; ++i)
+        printf ("%d occurs %u times\n", i, counts[i]);
+}
+
+void freq (int size, int numArray []) {
+    int one = 0, two = 0, thr = 0;
+    int i;
+    for (i = 0; i < size; i++) {
+        if (numArray[i] == 1) {
+            one += 1;
+        }
+        else if (numArray[i] == 2) {
+            two += 1;
+        }
+        else if (numArray[i] == 3) {
+            thr += 1;
+        }
+    }
+    printf ("1 occurs %d times.\n", one);
+    printf ("2 occurs %d times.\n", two);
+    printf ("3 occurs %d times.\n", thr);
+}
+

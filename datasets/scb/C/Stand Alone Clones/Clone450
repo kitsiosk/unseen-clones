@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39056942
+*  Stack Overflow answer #:39057588
+*  And Stack Overflow answer#:39060125
+*/
+int main () {
+    int n1, n2, sum, tmp, digit, dec_digits;
+    printf ("Enter the lower limit: ");
+    scanf ("%d", & n1);
+    printf ("\nEnter the upper limit: ");
+    scanf ("%d", & n2);
+    while (n1 <= n2) {
+        sum = 0;
+        dec_digits = decimal_digits (n1);
+        tmp = n1;
+        while (tmp != 0) {
+            digit = tmp % 10;
+            sum += (int) uipow ((uint32_t) digit, (uint32_t) dec_digits);
+            tmp = tmp / 10;
+        }
+        if (sum == n1) {
+            printf ("%d\n", n1);
+        }
+        n1++;
+    }
+    exit (EXIT_SUCCESS);
+}
+
+int main (int argc, char *argv []) {
+    unsigned long long n0, n1, n2, narcissistic [MORE_THAN_ENOUGH];
+    if (argc > 1) {
+        n1 = strtoull (argv[1], NULL, 0);
+    }
+    else {
+        printf ("Enter the lower limit: ");
+        scanf ("%llu", & n1);
+    }
+    if (argc > 2) {
+        n2 = strtoull (argv[2], NULL, 0);
+    }
+    else {
+        printf ("Enter the upper limit: ");
+        scanf ("%llu", & n2);
+    }
+    char scratch [MORE_THAN_ENOUGH];
+    size_t lower_limit = sprintf (scratch, "%llu", n1);
+    size_t upper_limit = sprintf (scratch, "%llu", n2);
+    for (size_t places = lower_limit; places <= upper_limit; places++) {
+        size_t count = generate_narcissistic (places, narcissistic);
+        for (size_t i = 0; i < count; i++) {
+            n0 = narcissistic[i];
+            if (n0 >= n1 && n0 <= n2) {
+                printf ("%llu\n", n0);
+            }
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10468128
+*  Stack Overflow answer #:24542015
+*  And Stack Overflow answer#:10468181
+*/
+int main (int argc, char **argv) {
+    typedef struct {
+        char *firstName;
+        char *lastName;
+        int day;
+        int month;
+        int year;
+    } STUDENT;
+    int numStudents = 3;
+    int x;
+    STUDENT *students = malloc (numStudents * sizeof *students);
+    for (x = 0; x < numStudents; x++) {
+        students[x].firstName = (char *) malloc (sizeof (char *));
+        scanf ("%s", students [x].firstName);
+        students[x].lastName = (char *) malloc (sizeof (char *));
+        scanf ("%s", students [x].lastName);
+        scanf ("%d", & students [x].day);
+        scanf ("%d", & students [x].month);
+        scanf ("%d", & students [x].year);
+    }
+    for (x = 0; x < numStudents; x++)
+        printf ("first name: %s, surname: %s, day: %d, month: %d, year: %d\n", students[x].firstName, students[x].lastName, students[x].day, students[x].month, students[x].year);
+    return (EXIT_SUCCESS);
+}
+
+int main () {
+    int a, b;
+    for (a = 0; a < n; a++) {
+        for (b = 0; b < 3; b++) {
+            bodies[a].p[b] = 0;
+            bodies[a].v[b] = 0;
+            bodies[a].a[b] = 0;
+        }
+        bodies[a].mass = 0;
+        bodies[a].radius = 1.0;
+    }
+    return 0;
+}
+

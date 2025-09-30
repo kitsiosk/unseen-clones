@@ -1,0 +1,66 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49606737
+*  Stack Overflow answer #:49606970
+*  And Stack Overflow answer#:49609210
+*/
+int main (void) {
+    FILE *fp = fopen ("test_data.txt", "r");
+    if (fp == NULL) {
+        perror ("fopen");
+        exit (EXIT_FAILURE);
+    }
+    Data *tmp;
+    tmp = malloc (sizeof (*tmp) * 50);
+    if (tmp == NULL) {
+        perror ("malloc");
+        exit (EXIT_FAILURE);
+    }
+    char buf [512];
+    int i = 0;
+    while ((i < 50) && (fgets (buf, sizeof buf, fp))) {
+        sscanf (buf, "%d%99s%99s%lf%lf%7d", & tmp [i].date, tmp [i].currency, tmp [i].exchange, & tmp [i].low, & tmp [i].high, & tmp [i].daily_cap);
+        i++;
+    }
+    fclose (fp);
+    free (tmp);
+    return 0;
+}
+
+int main (void) {
+    char buf [MAXC] = "";
+    size_t n = 0;
+    data_t data [MAXD] = {{
+            .currency = NULL
+        }
+    };
+    while (n < MAXD && fgets (buf, MAXC, stdin)) {
+        char curr [MAXE] = "", exch [MAXE] = "";
+        int havecurr = 0, haveexch = 0;
+        data_t tmp = {
+            .currency = NULL
+        };
+        if (sscanf (buf, "%u %31s %31s %lf %lf %u", &tmp.date, curr, exch, &tmp.low, &tmp.high, &tmp.daily_cap) == 6) {
+            for (int i = 0; i < NELEM (currency); i++) {
+                if (strcmp (currency[i], curr) == 0) {
+                    tmp.currency = currency[i];
+                    havecurr = 1;
+                    break;
+                }
+            }
+            for (int i = 0; i < NELEM (exchange); i++) {
+                if (strcmp (exchange[i], exch) == 0) {
+                    tmp.exchange = exchange[i];
+                    haveexch = 1;
+                    break;
+                }
+            }
+            if (havecurr & haveexch)
+                data[n++] = tmp;
+        }
+    }
+    for (size_t i = 0; i < n; i++)
+        printf ("%u  %-10s  %-10s  %8.4f  %8.4f  %6u\n", data[i].date, data[i].currency, data[i].exchange, data[i].low, data[i].high, data[i].daily_cap);
+}
+

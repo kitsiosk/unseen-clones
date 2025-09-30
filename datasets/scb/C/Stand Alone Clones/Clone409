@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9243312
+*  Stack Overflow answer #:9243464
+*  And Stack Overflow answer#:20516071
+*/
+int main () {
+    register int count;
+    int n;
+    long factorial;
+    printf ("Compute the factorial of what number? ");
+    scanf ("%d", & n);
+    for (factorial = 1L, count = 1; count <= n; count++)
+        factorial *= count;
+    printf ("%d! = %ld\n", n, factorial);
+    return 0;
+}
+
+void main () {
+    clrscr ();
+    int number, counter;
+label1 :
+    cout << "\n Enter the Number = ";
+    cin >> number;
+    if (number < 0) {
+        cout << "\n Enter a non negative number, please!";
+        goto label1;
+    }
+    cout << "\n\n ----------- Results ------------";
+    cout << "\n\n The Factorial of the number " << number << "\n is " << factorial (number);
+    getch ();
+}
+

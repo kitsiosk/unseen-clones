@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29430807
+*  Stack Overflow answer #:31634093
+*  And Stack Overflow answer#:29432809
+*/
+main () {
+    int odd = 0, even = 0, no, count = 20;
+    printf ("Enter the 20 numbers...\n");
+here :
+    scanf ("%d", &no);
+    (no % 2 == 0) ? odd++ : even++;
+    ` count --;
+    if (count > 0)
+        goto here;
+    printf ("No of odd numbers... :%d\n", odd);
+    printf ("No of even numbers... :%d\n", even);
+}
+
+int main () {
+    int n;
+    int odd = 0;
+    int even = 0;
+    printf ("\nEnter any number \n");
+    while (scanf ("%d", &n))
+        (n % 2) ? (++odd) : (++even);
+    printf ("\n odd%d / even%d", odd, even);
+}
+

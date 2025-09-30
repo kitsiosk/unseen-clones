@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18764136
+*  Stack Overflow answer #:18764361
+*  And Stack Overflow answer#:18765947
+*/
+int main () {
+    char *name = malloc (sizeof (char) * LENGTH);
+    int n;
+    printf ("\nenter the string\n");
+    scanf ("%s", name);
+    n = strlen (name);
+    printf ("%d", n);
+    free (name);
+}
+
+int main (int argc, char **argv) {
+    char *name = null;
+    if ((name = malloc (sizeof (char) * LENGTH_OF_YOUR_LARGER_INPUT)) == null)
+        return;
+    int n;
+    printf ("\nenter the string\n");
+    scanf ("%s", name);
+    n = strlen (name);
+    printf ("%d", n);
+    free (name);
+}
+

@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41266467
+*  Stack Overflow answer #:41266963
+*  And Stack Overflow answer#:41275314
+*/
+int main (void) {
+    char text [] = "123 123 123 abcdef/456->ghijklm/789 123 123";
+    char *ptr = strtok (text, " ");
+    char *slash;
+    char *str1;
+    char *str2;
+    while (ptr) {
+        if (slash = strstr (ptr, "/")) {
+            *slash = '\0';
+            str1 = ptr;
+            ptr = ++slash;
+            break;
+        }
+        ptr = strtok (NULL, " ");
+    }
+    str2 = strtok (ptr, "><![CDATA[");
+    while (ptr) {
+        if (slash = strstr (ptr, "/")) {
+            *slash = '\0';
+            str2 = ptr;
+            break;
+        }
+        ptr = strtok (NULL, " ");
+    }
+    printf ("Found a: %s; and b: %s\n", str1, str2);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char data [] = "123 123 123 abcdef/456->ghijklm/789 123 123";
+    char *word;
+    const char *delim = " /->";
+    int i, validlet, strnum = 1;
+    word = strtok (data, delim);
+    while (word) {
+        validlet = 0;
+        for (i = 0; word[i]; i++) {
+            if (!isalpha (word[i])) {
+                break;
+            }
+            validlet++;
+        }
+        if (validlet == strlen (word)) {
+            printf ("Found str %d: %s\n", strnum, word);
+            strnum++;
+        }
+        word = strtok (NULL, delim);
+    }
+    return 0;
+}
+

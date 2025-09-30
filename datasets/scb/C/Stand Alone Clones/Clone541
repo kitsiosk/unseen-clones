@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8464936
+*  Stack Overflow answer #:16374718
+*  And Stack Overflow answer#:42152871
+*/
+void caesar (char cipher [], int shift) {
+    int i = 0;
+    while (cipher[i] != '\0') {
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {
+            char newletter = cipher[i] - 'A';
+            newletter += shift;
+            newletter = newletter % 26;
+            cipher[i] = newletter + 'A';
+        }
+        i++;
+    }
+    printf ("%s", cipher);
+}
+
+void caesar (char cipher [], int shift) {
+    int i = 0;
+    while (cipher[i] != '\0') {
+        if (cipher[i] >= 'A' && cipher[i] <= 'Z') {
+            char newletter = cipher[i] - 'A' + 26;
+            newletter += shift;
+            newletter = newletter % 26;
+            cipher[i] = newletter + 'A';
+        }
+        else if (cipher[i] >= '0' && cipher[i] <= '9') {
+            char newletter = cipher[i] - '0' + 10;
+            newletter += shift;
+            newletter = newletter % 10;
+            cipher[i] = newletter + '0';
+        }
+        i++;
+    }
+    printf ("%s\n", cipher);
+}
+

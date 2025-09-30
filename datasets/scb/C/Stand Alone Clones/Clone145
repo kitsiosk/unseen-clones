@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26437049
+*  Stack Overflow answer #:26437472
+*  And Stack Overflow answer#:26437085
+*/
+int main () {
+    const char *s = "/products/product_code1233213/image.jpg";
+    const char *p = s, *begin = s, *end = s;
+    char *result;
+    size_t len;
+    while (p) {
+        p = strchr (p, '/');
+        if (p) {
+            begin = end;
+            end = ++p;
+        }
+    }
+    if (begin != end) {
+        len = end - begin - 1;
+        result = malloc (len +1);
+        memcpy (result, begin, len);
+        result[len] = '\0';
+        printf ("%s\n", result);
+        free (result);
+    }
+    return 0;
+}
+
+int main () {
+    char str [] = "/products/product_code1233213/image.jpg";
+    char s [2] = "/";
+    char *token;
+    token = strtok (str, s);
+    while (token != NULL) {
+        printf (" %s\n", token);
+        token = strtok (NULL, s);
+    }
+    return (0);
+}
+

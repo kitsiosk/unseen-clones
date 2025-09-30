@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26695133
+*  Stack Overflow answer #:26695554
+*  And Stack Overflow answer#:26697103
+*/
+int main () {
+    int i;
+    char A [6] [10] = {"John", "David", "Michael", "Steve", "Sam", "Claire"};
+    int B [6] = {12, 30, 12, 12, 19, 12};
+    int C [6] = {2, 1, 2, 1, 2, 1};
+    for (i = 0; i < 6; i++)
+        printf ("%s\t%d\t%d\n", A[i], B[i], C[i]);
+    printf ("\n");
+    sortarray (6, A, B, C);
+    for (i = 0; i < 6; i++)
+        printf ("%s\t%d\t%d\n", A[i], B[i], C[i]);
+}
+
+main () {
+    Person people [] = {{"John", 12, 2}, {"David", 30, 1}, {"Michael", 12, 2}, {"Steve", 12, 1}, {"Sam", 19, 2}, {"Claire", 12, 1}};
+    int i = 0;
+    int n = 0;
+    for (i = 0; i < DIM (people); i++)
+        printf ("%s\t%d\t%d\n", people[i].name, people[i].age, people[i].group);
+    n = DIM (people) - 1;
+    while (1) {
+        bool swapped = false;
+        for (i = 0; i < n; i++) {
+            if (people[i].age > people[i + 1].age) {
+                Person temp = people[i];
+                people[i] = people[i + 1];
+                people[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        n--;
+        if (!swapped)
+            break;
+    }
+    printf ("\nnew list\n");
+    for (i = 0; i < DIM (people); i++)
+        printf ("%s\t%d\t%d\n", people[i].name, people[i].age, people[i].group);
+}
+

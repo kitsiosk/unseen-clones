@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35218154
+*  Stack Overflow answer #:35218462
+*  And Stack Overflow answer#:35218583
+*/
+int main () {
+    int license [20];
+    char *hex = "0x020x000x000x000x000x000x680x000x000x000x020x000x000x000x000x00";
+    int used = 0;
+    int i = 0;
+    while ((sscanf (hex +used, "%x", &license[i])) == 1) {
+        printf ("%x", license [i]);
+        i++;
+        used += 4;
+    }
+}
+
+int main (int argc, char **argv) {
+    FILE *fp = argc > 1 ? fopen (argv[1], "r") : stdin;
+    char line [MAXL] = {0};
+    unsigned values [MAXL] = {0};
+    int base = argc > 2 ? atoi (argv[2]) : 16;
+    size_t i, idx = 0;
+    if (!fp) {
+        fprintf (stderr, "error: file open failen '%s'.\n", argv [1]);
+        return 1;
+    }
+    while (fgets (line, MAXL, fp)) {
+        char *p = line;
+        char *ep = p;
+        char digits [3] = {0};
+        errno = 0;
+        while (errno == 0) {
+            if (!(p = strchr (p, 'x')))
+                break;
+            strncpy (digits, ++ p, 2);
+            digits[2] = 0;
+            values[idx++] = (unsigned) xstrtoul (digits, &ep, base);
+            if (errno || idx == MAXL) {
+                fprintf (stderr, "warning: MAXL values reached.\n");
+                break;
+            }
+            p += 2;
+        }
+    }
+    if (fp != stdin)
+        fclose (fp);
+    for (i = 0; i < idx; i++)
+        printf (" values[%2zu] : 0x%02x\n", i, values[i]);
+    return 0;
+}
+

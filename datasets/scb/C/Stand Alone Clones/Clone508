@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3401138
+*  Stack Overflow answer #:3401368
+*  And Stack Overflow answer#:3401555
+*/
+int main (void) {
+    int i, j;
+    x[0] = -1;
+    unsigned mask = -1;
+    for (i = 0;;) {
+        for (j = x[i] + 1; j < N; j++) {
+            if ((mask >> j) & 1) {
+                x[i] = j;
+                mask ^= (1 << x[i]);
+                if (++i >= N) {
+                    for (j = 0; j < N; j++)
+                        printf ("%3i", x[j]);
+                    printf ("\n");
+                }
+                else
+                    x[i] = -1;
+                break;
+            }
+        }
+        if ((j >= N) || (i >= N)) {
+            if (--i < 0)
+                break;
+            mask ^= (1 << x[i]);
+        }
+    }
+}
+
+int main (int argc, char **argv) {
+    const char *allStrings [8] = {"0", "1", "2", "3", "4", "5", "6", "7"};
+    static const char *allPermutations [322560];
+    const char *permBuffer [8];
+    unsigned long nextOutputIdx = 0;
+    CalculatePermutations (8, allStrings, permBuffer, 0, allPermutations, & nextOutputIdx);
+    for (unsigned long i = 0; i < 322560; ++i) {
+        printf ("%s", allPermutations [i]);
+        if (i % 8 == 7) {
+            printf ("\n");
+        }
+        else {
+            printf (", ");
+        }
+    }
+    return 0;
+}
+

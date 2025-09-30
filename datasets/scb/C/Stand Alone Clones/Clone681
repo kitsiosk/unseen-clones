@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54798014
+*  Stack Overflow answer #:54799053
+*  And Stack Overflow answer#:54798825
+*/
+int main (int argc, char *argv []) {
+    char *input = "void statement(int y){a";
+    char *delims = " (){";
+    char *remaining = input;
+    char *token;
+    while ((token = strpbrk (remaining, delims)) != NULL) {
+        if (token - remaining > 0) {
+            printf ("%.*s\n", token - remaining, remaining);
+        }
+        printf ("%c\n", * token);
+        remaining = token + 1;
+    }
+    printf ("%s\n", remaining);
+    return 0;
+}
+
+int main (void) {
+    int c, last = 0;
+    const char *delims = " (){}";
+    while ((c = getchar ()) != EOF) {
+        if (strchr (delims, c)) {
+            if (last && !strchr (delims, last))
+                putchar ('\n');
+            if (c != ' ') {
+                putchar (c);
+                putchar ('\n');
+            }
+        }
+        else
+            putchar (c);
+        last = c;
+    }
+}
+

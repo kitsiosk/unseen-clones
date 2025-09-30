@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54408929
+*  Stack Overflow answer #:54409319
+*  And Stack Overflow answer#:54409353
+*/
+int main (int argc, const char *argv []) {
+    char str [] = "aeixaewwii";
+    int length = strlen (str);
+    int start_index = 0, end_index = 0;
+    bool wasVowel = false;
+    for (int x = 0; x <= length; x++) {
+        char c = str[x];
+        if (isVowel (c) == false) {
+            end_index = x;
+            if (wasVowel)
+                substr (str, start_index, end_index -1);
+            start_index = end_index + 1;
+            wasVowel = false;
+        }
+        else
+            wasVowel = true;
+    }
+    return 0;
+}
+
+int main () {
+    char my_str [] = "auiouxxxxxxaeibaou";
+    int todo_newline = 1;
+    for (int i = 0; my_str[i] != '\0'; i++) {
+        if (isVowel (my_str[i]) == 1) {
+            printf ("%c", my_str [i]);
+            todo_newline = 1;
+        }
+        else {
+            if (todo_newline == 1) {
+                printf ("%c", '\n');
+                todo_newline = -1;
+            }
+        }
+    }
+}
+

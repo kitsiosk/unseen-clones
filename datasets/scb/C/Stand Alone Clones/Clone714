@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52715808
+*  Stack Overflow answer #:52716195
+*  And Stack Overflow answer#:52716595
+*/
+int main (int arg_c, char **args) {
+    int i = 100;
+    pthread_t loop;
+    pthread_create (& loop, NULL, timer, & i);
+    while (i > 0) {
+        i++;
+        getchar ();
+        printf ("inc counter: %d \n", i);
+    }
+    printf ("%d after\n", i);
+    pthread_join (loop, NULL);
+    return 0;
+}
+
+int main () {
+    int counter = 0;
+    char ch;
+    struct termios orig_attr, new_attr;
+    tcgetattr (fileno (stdin), & orig_attr);
+    memcpy (& new_attr, & orig_attr, sizeof (new_attr));
+    new_attr.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr (fileno (stdin), TCSANOW, & new_attr);
+    pthread_t pid;
+    if (pthread_create (&pid, NULL, thread, &counter)) {
+        fprintf (stderr, "Create thread failed");
+        exit (1);
+    }
+    while (1) {
+        char c = getchar ();
+        __sync_add_and_fetch (& counter, 1);
+        printf ("add: %d\n", counter);
+    }
+    return 0;
+}
+

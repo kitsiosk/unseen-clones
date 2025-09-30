@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:15030011
+*  Stack Overflow answer #:15030425
+*  And Stack Overflow answer#:15031244
+*/
+int crc32 (char *addr, int num, int crc) {
+    int i;
+    for (; num > 0; num--) {
+        crc = crc ^ *addr++;
+        for (i = 0; i < 8; i++) {
+            if (crc & 1)
+                crc = (crc >> 1) ^ poly;
+            else
+                crc >>= 1;
+        }
+    }
+    return (crc);
+}
+
+static uint32_t crc32 (uint32_t crc, unsigned char *buf, size_t len) {
+    crc = ~crc;
+    while (len--) {
+        crc ^= *buf++;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+        crc = crc & 1 ? (crc >> 1) ^ 0xedb88320 : crc >> 1;
+    }
+    return ~crc;
+}
+

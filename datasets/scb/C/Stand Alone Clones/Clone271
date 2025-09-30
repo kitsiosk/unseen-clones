@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48265716
+*  Stack Overflow answer #:48267266
+*  And Stack Overflow answer#:48267287
+*/
+void copy (int in, int out, char *buffer, size_t bufsize) {
+    for (;;) {
+        ssize_t bytes_read = read (in, buffer, bufsize);
+        if (bytes_read <= 0) {
+            break;
+        }
+        ssize_t bytes_written = write (out, buffer, bytes_read);
+        if (bytes_written != bytes_read) {
+        }
+    }
+}
+
+size_t copy (int in, int out, char *buffer, size_t taille) {
+    ssize_t t;
+    ssize_t bytes = 0;
+    while ((t = read (in, buffer, taille)) > 0) {
+        if (write (out, buffer, t) != t)
+            return 0;
+        bytes += t;
+    }
+    if (t < 0)
+        perror ("read");
+    return bytes;
+}
+

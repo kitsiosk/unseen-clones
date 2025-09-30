@@ -1,0 +1,67 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42877617
+*  Stack Overflow answer #:42879608
+*  And Stack Overflow answer#:42879599
+*/
+int main (void) {
+    char s [1000], alp [1000];
+    int num [1000];
+    int m = 0, n = 0;
+    int i, j;
+    unsigned char ch;
+    scanf ("%999[^\n]", s);
+    for (i = 0; ch = s[i]; i++) {
+        if (isalpha (ch)) {
+            alp[n++] = s[i];
+        }
+        else if (isdigit (ch)) {
+            num[m] = 0;
+            while (isdigit (ch = s[i])) {
+                num[m] = num[m] * 10 + s[i] - '0';
+                ++i;
+            }
+            ++m;
+            --i;
+        }
+        else {
+            printf ("include invalid character (%c).\n", ch);
+            return -1;
+        }
+    }
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < num[i]; j++)
+            printf ("%c", alp[i]);
+    }
+    puts ("");
+    return 0;
+}
+
+int main (void) {
+    char s [1000], alp [1000];
+    int num [1000];
+    int i, k = 0, m, n;
+    if (scanf ("%999[^\n]", s) == 1) {
+        for (i = 0; s[i]; i++) {
+            n = 1;
+            if (isdigit ((unsigned char) s[i])) {
+                for (n = s[i++] - '0'; isdigit ((unsigned char) s[i]); i++) {
+                    n = n * 10 + s[i] - '0';
+                }
+            }
+            if (isalpha ((unsigned char) s[i])) {
+                alp[k] = s[i];
+                num[k] = n;
+                k += 1;
+            }
+        }
+        for (i = 0; i < k; i++) {
+            for (m = 0; m < num[i]; m++)
+                putchar (alp[i]);
+        }
+    }
+    putchar ('\n');
+    return 0;
+}
+

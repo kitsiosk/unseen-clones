@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3401138
+*  Stack Overflow answer #:3407870
+*  And Stack Overflow answer#:3401368
+*/
+int main (void) {
+    uint32_t f [NPER + 1];
+    uint32_t p [NPER];
+    uint32_t r, s;
+    fact (NPER, f);
+    for (r = 0; r < f[NPER]; r++) {
+        perm (r, NPER, f, p);
+        for (s = 0; s < NPER; s++)
+            printf ("%s, ", DukeQuote[p[s]]);
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main (void) {
+    int i, j;
+    x[0] = -1;
+    unsigned mask = -1;
+    for (i = 0;;) {
+        for (j = x[i] + 1; j < N; j++) {
+            if ((mask >> j) & 1) {
+                x[i] = j;
+                mask ^= (1 << x[i]);
+                if (++i >= N) {
+                    for (j = 0; j < N; j++)
+                        printf ("%3i", x[j]);
+                    printf ("\n");
+                }
+                else
+                    x[i] = -1;
+                break;
+            }
+        }
+        if ((j >= N) || (i >= N)) {
+            if (--i < 0)
+                break;
+            mask ^= (1 << x[i]);
+        }
+    }
+}
+

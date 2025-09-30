@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44768659
+*  Stack Overflow answer #:44768928
+*  And Stack Overflow answer#:44768859
+*/
+int main () {
+    int i;
+    const int array_a [3] = {2, 4, 6}, array_b [3] = {1, 3, 5};
+    int array_c [6];
+    concat (array_a, array_b, array_c, 3);
+    for (i = 0; i < 6; i++) {
+        printf ("array_c[%d]=%d\n", i, array_c [i]);
+    }
+    return 0;
+}
+
+int main (void) {
+    int array_a [N1] = {2, 4, 6};
+    int array_b [N2] = {1, 3, 5};
+    int array_c [N3];
+    int *p_a = array_a;
+    int *p_b = array_b;
+    int *p_c = array_c;
+    int *result = concat (p_c, p_b, N2, p_a, N1);
+    for (const int *p = p_c; p != result; ++p) {
+        printf ("%d ", * p);
+    }
+    putchar ('\n');
+    return 0;
+}
+

@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7215921
+*  Stack Overflow answer #:7216709
+*  And Stack Overflow answer#:7215986
+*/
+void ircsocket_print (const char *fmt, ... ) {
+    va_list args;
+    va_start (args, fmt);
+    int len = vsnprintf (0, 0, message, args);
+    va_end (args);
+    char buffer [len + 1];
+    va_start (args, fmt);
+    int len = vsnprintf (buffer, len +1, message, args);
+    va_end (args);
+    send (ircsocket_connection, buffer, len, 0);
+}
+
+int ircsocket_print (char *message, ... ) {
+    char buf [512];
+    char *buffer;
+    int len;
+    va_list va;
+    buffer = buf;
+    va_start (va, message);
+    len = vsnprintf (buffer, 512, message, va);
+    va_end (va);
+    if (len >= 512) {
+        buffer = (char *) malloc (len +1);
+        va_start (va, message);
+        len = vsnprintf (buffer, len +1, message, va);
+        va_end (va);
+    }
+    send (ircsocket_connection, buffer, len, 0);
+    if (buffer != buf)
+        free (buffer);
+    return 1;
+}
+

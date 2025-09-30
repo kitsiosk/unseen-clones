@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32293200
+*  Stack Overflow answer #:32293399
+*  And Stack Overflow answer#:32300606
+*/
+int main () {
+    while (1) {
+        int userInput;
+        printHelp (false);
+        if (scanf ("%d", &userInput) == 0) {
+            char ch;
+            bool reachedNewline = false;
+            do {
+                if (reachedNewline) {
+                    printHelp (true);
+                    reachedNewline = false;
+                }
+                ch = getchar ();
+                if (ch == '\n')
+                    reachedNewline = true;
+            }
+            while (!isdigit (ch));
+            ungetc (ch, stdin);
+            continue;
+        }
+        if (userInput == 1)
+            printf ("ABCD\n");
+        else if (userInput == 3) {
+            printf ("Breaking!\n");
+            break;
+        }
+        else
+            printHelp (true);
+    }
+    return 0;
+}
+
+int main (void) {
+    int ch = 0;
+    while (ch != EOF) {
+        int userInput;
+        printf ("Press '1':To Print\n");
+        int fields_scanned = scanf ("%d", &userInput);
+        if (fields_scanned == 1) {
+            printf ("ABCD %d\n", userInput);
+        }
+        else if (fields_scanned == 0) {
+            printf ("WARNING:Pressed invalid key\n");
+        }
+        while ((ch = fgetc (stdin)) != '\n' && ch != EOF) {
+        }
+    }
+    return 0;
+}
+

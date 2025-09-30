@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27510155
+*  Stack Overflow answer #:27510644
+*  And Stack Overflow answer#:27510908
+*/
+int main () {
+    int x;
+    d_t *root, *head;
+    scanf ("%d", & x);
+    head = NULL;
+    while (x == 1) {
+        root = (d_t *) malloc (sizeof (d_t));
+        root->x = 1;
+        root->next = head;
+        head = root;
+        scanf ("%d", & x);
+    }
+    root = head;
+    while (root) {
+        printf ("%d\n", root -> x);
+        root = root->next;
+    }
+}
+
+int main (void) {
+    d_t *head = NULL;
+    d_t **current = &head;
+    int x;
+    while (scanf ("%d", &x) == 1 && x == 1) {
+        *current = malloc (sizeof (d_t));
+        (*current)->x = x;
+        (*current)->next = NULL;
+        current = &(*current)->next;
+    }
+    for (current = &head; *current != NULL; *current = (*current)->next) {
+        printf ("%d --> ", (* current) -> x);
+    }
+    return 0;
+}
+

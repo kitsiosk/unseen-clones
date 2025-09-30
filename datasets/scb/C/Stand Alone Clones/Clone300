@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27863675
+*  Stack Overflow answer #:27863813
+*  And Stack Overflow answer#:27863926
+*/
+void append (char *s, char del, char *substring) {
+    char origin [256];
+    strcpy (origin, s);
+    int i = 0, j = 0, z = 0;
+    for (; origin[i]; ++i) {
+        if (origin[i] != del) {
+            s[j++] = origin[i];
+        }
+        else {
+            for (; substring[z]; ++z) {
+                s[j++] = substring[z];
+            }
+            s[j++] = origin[i];
+        }
+    }
+    s[j] = '\0';
+}
+
+void append (char *str, char c) {
+    char firststr [60];
+    char therest [30];
+    strcpy (firststr, strtok (str, "/"));
+    strcpy (therest, strtok (NULL, "/"));
+    strcat (firststr, & c);
+    strcat (firststr, "/");
+    strcat (firststr, therest);
+    strcpy (str, firststr);
+}
+

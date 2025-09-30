@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26620388
+*  Stack Overflow answer #:26620524
+*  And Stack Overflow answer#:26642551
+*/
+int main (void) {
+    const char *str = "Polly";
+    const size_t len = strlen (str);
+    char buffer [len + 1];
+    for (size_t start = 0; start < len; ++start) {
+        for (int end = len - 1; end >= (int) start; --end) {
+            slice_str (str, buffer, start, end);
+            printf ("%s\n", buffer);
+        }
+    }
+    return 0;
+}
+
+int main () {
+    const char *s = "madam";
+    size_t i, n;
+    size_t len = strlen (s);
+    for (i = 0; i < len; ++i) {
+        for (n = 1; n <= len - i; ++n) {
+            const char *start = s + i;
+            switch (ispalin (start, start +n)) {
+            case -1 :
+                fprintf (stderr, "error: %p >= %p\n", (void *) start, (void *) (start + n));
+                break;
+            case 0 :
+                printf ("Not a palindrome: %.*s\n", (int) n, start);
+                break;
+            case 1 :
+                printf ("Palindrome: %.*s\n", (int) n, start);
+                break;
+            }
+        }
+    }
+}
+

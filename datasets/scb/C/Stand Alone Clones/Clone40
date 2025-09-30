@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28918949
+*  Stack Overflow answer #:28919173
+*  And Stack Overflow answer#:28919180
+*/
+int main (void) {
+    char str [100] = {0};
+    int len;
+    scanf ("%99s", str);
+    len = strlen (str);
+    if (len != strspn (str, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"))
+        printf ("Your string contains non-alphabet characters.\n");
+    else
+        printf ("Your string is good.\n");
+    return 0;
+}
+
+int main () {
+    char cname [CNAME_MAX_LEN + 1];
+    if (inputName (cname)) {
+        perror ("error reading in name!\n");
+        return 1;
+    }
+    printf ("cname is '%s'\n", cname);
+    return 0;
+}
+

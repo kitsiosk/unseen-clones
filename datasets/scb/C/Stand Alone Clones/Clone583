@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26581022
+*  Stack Overflow answer #:26581056
+*  And Stack Overflow answer#:26581250
+*/
+int main (void) {
+    int i;
+    int j;
+    int side;
+    printf ("Enter side\n");
+    scanf ("%d", & side);
+    for (int m = 0; m < side; m++) {
+        for (j = 0; j < side; j++) {
+            for (i = 0; i < side; i++) {
+                for (int k = 0; k < side; k++)
+                    printf ("*");
+                printf (" ");
+            }
+            printf ("\n");
+        }
+        printf ("\n");
+    }
+    system ("Pause");
+    return 0;
+}
+
+int main (void) {
+    int row, column, height, length;
+    int i, j, k, m;
+    scanf ("%d %d %d %d", & row, & column, & height, & length);
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < height; j++) {
+            for (k = 0; k < column; k++) {
+                for (m = 0; m < length; m++) {
+                    printf ("*");
+                }
+                printf (" ");
+            }
+            printf ("\n");
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+

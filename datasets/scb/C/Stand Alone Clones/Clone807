@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:15652181
+*  Stack Overflow answer #:15652453
+*  And Stack Overflow answer#:15652916
+*/
+static void quicksort (int *array, int length) {
+    if (length < 2) {
+        return;
+    }
+    PartRet part = partition (array, array +length - 1);
+    int firstHalfLength = (int) (part.v0 - array);
+    dump_array (stdout, "First half partition", array, firstHalfLength);
+    quicksort (array, firstHalfLength);
+    int *onePastEnd = array + length;
+    int secondHalfLength = (int) (onePastEnd - part.v1);
+    dump_array (stdout, "Second half partition", part.v1, secondHalfLength);
+    quicksort (part.v1, secondHalfLength);
+}
+
+void quicksort (int *lo, int *hi) {
+    size_t len = (hi - lo) + 1;
+    if (len <= 1)
+        return;
+    swap (lo + len / 2, hi);
+    int *pvt = lo, *left = lo;
+    for (; left != hi; ++left)
+        if (*left <= *hi)
+            swap (left, pvt++);
+    swap (pvt, hi);
+    quicksort (lo, pvt - 1);
+    quicksort (pvt + 1, hi);
+}
+

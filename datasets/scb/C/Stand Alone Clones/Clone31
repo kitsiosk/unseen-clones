@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22906049
+*  Stack Overflow answer #:22906174
+*  And Stack Overflow answer#:22906124
+*/
+int main () {
+    int n, i;
+    char str [20] [20];
+    scanf ("%d", & n);
+    for (i = 0; i < n; i++) {
+        scanf ("%s", str [i]);
+    }
+    for (i = 0; i < n; i++) {
+        printf ("%s", str [i]);
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main () {
+    int n, i;
+    char **str;
+    scanf ("%d", & n);
+    str = malloc (n * sizeof (char *));
+    for (i = 0; i < n; i++) {
+        str[i] = malloc ((MAX_STRING_SIZE + 1) * sizeof (char));
+        memset (str [i], 0, MAX_STRING_SIZE + 1);
+    }
+    for (i = 0; i < n; i++) {
+        scanf ("%s", str [i]);
+    }
+    for (i = 0; i < n; i++) {
+        printf ("%s\n", str [i]);
+    }
+    for (i = 0; i < n; i++)
+        free (str[i]);
+    free (str);
+    return 0;
+}
+

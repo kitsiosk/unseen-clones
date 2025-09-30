@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9524342
+*  Stack Overflow answer #:9534769
+*  And Stack Overflow answer#:9525276
+*/
+int main (void) {
+    enum insn some_insn = sysenter;
+    char *insn = "sysenter";
+    uint64_t val = 0;
+    strncpy ((char *) & val, insn, sizeof (uint64_t));
+    printf ("size: %" PRIuPTR "\n", sizeof (enum insn));
+    if (some_insn == val) {
+        puts ("Works");
+    }
+    else {
+        puts ("Doesn't work");
+    }
+    return EXIT_SUCCESS;
+}
+
+int main (void) {
+    const char *s1 = "abcd";
+    const char *s2 = "abcdefgh";
+    printf ("'abcd'     = 0x%x\n", (unsigned) 'abcd');
+    printf ("'abcdefgh' = 0x%x\n", (unsigned) 'abcdefgh');
+    printf ("*(unsigned*)s1 = 0x%x\n", * (unsigned *) s1);
+    printf ("*(unsigned*)s2 = 0x%x\n", * (unsigned *) s2);
+    return 0;
+}
+

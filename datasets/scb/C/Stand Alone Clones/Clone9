@@ -1,0 +1,62 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3974416
+*  Stack Overflow answer #:3974487
+*  And Stack Overflow answer#:3974568
+*/
+int main (void) {
+    int c, last, state;
+    last = 0;
+    state = OUT;
+    while ((c = getchar ()) != EOF) {
+        if (c == ' ' || c == '\n' || c == '\t') {
+            if (last != ' ' && last != '\n' && last != '\t' && last != 0) {
+                state = OUT;
+                printf ("\n");
+            }
+        }
+        else if (state == OUT) {
+            state = IN;
+        }
+        if (state == IN) {
+            putchar (c);
+        }
+        last = c;
+    }
+    return 0;
+}
+
+int main (void) {
+    int c, state;
+    state = OUT;
+    while ((c = getchar ()) != EOF) {
+        switch (state) {
+        case OUT :
+            switch (c) {
+            case ' ' :
+            case '\n' :
+            case '\t' :
+                break;
+            default :
+                putchar (c);
+                state = IN;
+            }
+            break;
+        case IN :
+            switch (c) {
+            case ' ' :
+            case '\n' :
+            case '\t' :
+                putchar ('\n');
+                state = OUT;
+                break;
+            default :
+                putchar (c);
+            }
+            break;
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47722411
+*  Stack Overflow answer #:47723888
+*  And Stack Overflow answer#:47722531
+*/
+int main () {
+    char input [3];
+    printf ("\nHit the pass code!\npass code: ");
+    while (input != "ZZZ") {
+        scanf ("%s", & input);
+        if (strcmp (input, "ZZZ") == 0) {
+            printf ("\nYou crack the pass code!!\n\n");
+            break;
+        }
+        else {
+            printf ("Wroooong!\n pass code: ");
+        }
+    }
+    return 0;
+}
+
+int main () {
+    char passcode [] = "ZZZ";
+    char input [50];
+    int check;
+    do {
+        printf ("What is the password?\n");
+        fgets (input, sizeof (input), stdin);
+        check = strcmp (passcode, input);
+    }
+    while (check != 0);
+    printf ("You crack the pass code!");
+    return 0;
+}
+

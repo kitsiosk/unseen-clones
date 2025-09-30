@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48151445
+*  Stack Overflow answer #:48152728
+*  And Stack Overflow answer#:48151685
+*/
+void rotate (char *str, int r) {
+    int start, end;
+    int words = getStrCount (str);
+    r = r % words;
+    if (r == 0)
+        return;
+    char *result = malloc (1024);
+    strcpy (result, "{ ");
+    char *w [words];
+    int i;
+    for (i = 0; i < words; ++i) {
+        w[i] = malloc (1024);
+        getStrN (str, i + 1, & start, & end);
+        memcpy (w [i], & str [start], end - start + 1);
+        w[i][end - start + 1] = '\0';
+    }
+    int j = words - r;
+    for (i = 0; i < words; ++i) {
+        if (i != 0)
+            strcat (result, ", ");
+        strcat (result, w [j]);
+        ++j;
+        if (j == words)
+            j = 0;
+    }
+    strcat (result, " }");
+    strcpy (str, result);
+    free (result);
+    for (i = 0; i < words; ++i) {
+        free (w [i]);
+    }
+}
+
+void rotate (char *sa [4], int rotate) {
+    int i, j, count;
+    char *temp = {0};
+    count = sizeof (*sa) / sizeof (*sa[0]);
+    for (i = 0; i < rotate; i++) {
+        temp = sa[0];
+        for (j = 0; j < count - 1; j++) {
+            sa[j] = sa[j + 1];
+        }
+        sa[j] = temp;
+    }
+}
+

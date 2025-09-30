@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:980702
+*  Stack Overflow answer #:980783
+*  And Stack Overflow answer#:980903
+*/
+int mod (int n, int d) {
+    int dx = d;
+    while (((dx << 1) >> 1) == dx)
+        dx <<= 1;
+    while (dx >= d) {
+        while (n >= dx)
+            n -= dx;
+        dx >>= 1;
+    }
+    return n;
+}
+
+int mod (int a, int b) {
+    int s = b;
+    while (s <= a) {
+        s <<= 1;
+    }
+    int r = a;
+    while (r >= b) {
+        s >>= 1;
+        if (s <= r) {
+            r -= s;
+        }
+    }
+    return r;
+}
+

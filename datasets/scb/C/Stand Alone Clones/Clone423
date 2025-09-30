@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20738324
+*  Stack Overflow answer #:20738479
+*  And Stack Overflow answer#:20739382
+*/
+int main () {
+    int a;
+    int b;
+    char c [5] = {'\0'};
+    printf ("Enter the two values you like to compare, type stop to end.\n");
+    while (strcmp (c, "stop")) {
+        scanf ("%d%d%s", & a, & b, c);
+        if (!(a ^ b)) {
+            printf ("both are equal\n");
+            getchar ();
+        }
+        else {
+            printf ("both are not equal\n");
+            getchar ();
+        }
+    }
+    printf ("Thanks for playing.");
+    getchar ();
+    return 0;
+}
+
+int main () {
+    int a;
+    int b;
+    char c [5] = {'\0'};
+    do {
+        printf ("Enter the two values you like to compare, type stop to end.\n");
+        scanf ("%d%d%s", & a, & b, c);
+        if (!(a ^ b)) {
+            printf ("both are equal\n");
+            getchar ();
+        }
+        else {
+            printf ("both are not equal\n");
+            getchar ();
+        }
+    }
+    while (strcmp (c, "stop"));
+    printf ("Thanks for playing.");
+    getchar ();
+    return 0;
+}
+

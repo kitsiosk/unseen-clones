@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39623081
+*  Stack Overflow answer #:39626304
+*  And Stack Overflow answer#:39627199
+*/
+int main (int argc, char *argv []) {
+    int src [argc], dest [argc];
+    int cur, max = 0, n = argc - 1;
+    for (int i = 0; i < n; i++) {
+        src[i] = cur = atoi (argv[i + 1]);
+        if (max < cur)
+            max = cur;
+    }
+    if (max < 9) {
+        encode9 (dest, src, n);
+    }
+    else {
+        encode64 (dest, src, n);
+    }
+    for (int i = 0; i < n; i++) {
+        printf ("%d ", dest [i]);
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int naive [argc], compact [argc];
+    int n = argc - 1;
+    for (int i = 0; i < n; i++) {
+        naive[i] = atoi (argv[i + 1]);
+    }
+    encode16 (compact, naive, n);
+    for (int i = 0; i < n; i++) {
+        printf ("%d ", compact [i]);
+    }
+    printf ("\n");
+    decode16 (naive, compact, n);
+    for (int i = 0; i < n; i++) {
+        printf ("%d ", naive [i]);
+    }
+    printf ("\n");
+    return 0;
+}
+

@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1131625
+*  Stack Overflow answer #:1131700
+*  And Stack Overflow answer#:1132239
+*/
+int main (void) {
+    struct tm *local;
+    time_t t;
+    t = time (NULL);
+    local = localtime (&t);
+    printf ("Local time and date: %s\n", asctime (local));
+    local = gmtime (&t);
+    printf ("UTC time and date: %s\n", asctime (local));
+    return 0;
+}
+
+int main (void) {
+    struct tm future;
+    time_t t;
+    future.tm_sec = 0;
+    future.tm_min = 0;
+    future.tm_hour = 0;
+    future.tm_mday = 1;
+    future.tm_mon = 6;
+    future.tm_year = 2038 - 1900;
+    future.tm_isdst = 0;
+    t = mktime (&future);
+    if (-1 == t) {
+        printf ("Error converting 1 July 2038 to time_t time since Epoch\n");
+        return EXIT_FAILURE;
+    }
+    printf ("UTC time and date: %s\n", asctime (& future));
+    return EXIT_SUCCESS;
+}
+

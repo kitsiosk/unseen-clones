@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12767485
+*  Stack Overflow answer #:12768237
+*  And Stack Overflow answer#:12768124
+*/
+void loopTokens (PInfo *p, char *textLine) {
+    char *tok;
+    int index = 0;
+    if (!strcmp (textLine, "\n"))
+        return;
+    for (tok = strtok (textLine, "|"); tok; tok = strtok (NULL, "|")) {
+        switch (index++) {
+        case 0 :
+            p->Name = strdup (tok);
+            break;
+        case 1 :
+            p->Phone = strdup (tok);
+            break;
+        case 2 :
+            p->address = strdup (tok);
+            break;
+        case 3 :
+            p->city = strdup (tok);
+            break;
+        case 4 :
+            p->state = strdup (tok);
+            break;
+        case 5 :
+            p->zip = 0;
+            p->zip = atoi (tok);
+            break;
+        default :
+            return;
+        }
+    }
+}
+
+void loopTokens (PInfo *p, char *textLine) {
+    char *buffer;
+    int index = 0;
+    p->Name = malloc (80);
+    buffer = strtok (textLine, "|");
+    while (buffer != NULL && strcmp (textLine, "\n")) {if (index == 0) {p -> Name = buffer;
+    buffer = strtok (NULL, "|");
+    index++;
+}
+

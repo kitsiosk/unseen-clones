@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7804768
+*  Stack Overflow answer #:7804924
+*  And Stack Overflow answer#:7805141
+*/
+void removeDuplicates (char *ptr) {
+    int exists [256] = {0};
+    int end;
+    int current = 0;
+    int length = strlen (ptr);
+    for (end = 0; end < length; end++) {
+        if (exists[ptr[end]])
+            break;
+        exists[ptr[end]] = 1;
+        ptr[current++] = ptr[end];
+    }
+    ptr[current] = '\0';
+}
+
+void removeDuplicates (char *src) {
+    char bitfield [32] = {0};
+    char *dest = src;
+    while (*src) {
+        char ch = *src;
+        int pos = ch >> 3;
+        int bit = ch & 0x7;
+        char mask = 1 << bit;
+        if (!(bitfield[pos] & mask)) {
+            bitfield[pos] |= mask;
+            *dest++ = ch;
+        }
+        ++src;
+    }
+    *dest = 0;
+}
+

@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52797274
+*  Stack Overflow answer #:52797460
+*  And Stack Overflow answer#:52797916
+*/
+void fus (int *A, int *B, int *C, int n, int m) {
+    int i = 0, j = 0, k = 0;
+    for (; j < m && i < n; k++)
+        C[k] = A[i] < B[j] ? A[i++] : B[j++];
+    for (; i < n; i++, k++)
+        C[k] = A[i];
+    for (; j < m; j++, k++)
+        C[k] = B[j];
+}
+
+void fus (const int *A, const int *B, int *C, int n, int m) {
+    int i = 0, j = 0, k = 0;
+    if (i < n && j < m) {
+        for (;;) {
+            if (A[i] <= B[j]) {
+                C[k++] = A[i++];
+                if (i == n)
+                    break;
+            }
+            else {
+                C[k++] = B[j++];
+                if (j == m)
+                    break;
+            }
+        }
+    }
+    while (i < n)
+        C[k++] = A[i++];
+    while (j < m)
+        C[k++] = B[j++];
+}
+

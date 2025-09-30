@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:111928
+*  Stack Overflow answer #:39401342
+*  And Stack Overflow answer#:4007806
+*/
+int main (void) {
+    uint8_t c1 = 0xff, c2 = 0x44;
+    uint8_t c3 = c1 + c2;
+    printb (c1);
+    printb ((char) 0xff);
+    printb ((short) 0xff);
+    printb (0xff);
+    printb (c2);
+    printb (0x44);
+    printb (0x4411ff01);
+    printb ((uint16_t) c3);
+    printf ("\n");
+    return 0;
+}
+
+void main () {
+    clrscr ();
+    printf ("Welcome\n\n\n");
+    unsigned char x = 'A';
+    char ch_array [8];
+    for (int i = 0; x != 0; i++) {
+        ch_array[i] = x & 1;
+        x = x >> 1;
+    }
+    for (--i; i >= 0; i--)
+        printf ("%d", ch_array[i]);
+    getch ();
+}
+

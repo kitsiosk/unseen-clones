@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6083337
+*  Stack Overflow answer #:10008252
+*  And Stack Overflow answer#:6083624
+*/
+void *malloc (size_t size) {
+    static int initializing = 0;
+    if (myfn_malloc == NULL) {
+        if (!initializing) {
+            initializing = 1;
+            init ();
+            initializing = 0;
+            fprintf (stdout, "jcheck: allocated %lu bytes of temp memory in %lu chunks during initialization\n", tmppos, tmpallocs);
+        }
+        else {
+            if (tmppos + size < sizeof (tmpbuff)) {
+                void *retptr = tmpbuff + tmppos;
+                tmppos += size;
+                ++tmpallocs;
+                return retptr;
+            }
+            else {
+                fprintf (stdout, "jcheck: too much memory requested during initialisation - increase tmpbuff size\n");
+                exit (1);
+            }
+        }
+    }
+    void *ptr = myfn_malloc (size);
+    return ptr;
+}
+
+void *malloc (size_t size) {
+    if (real_malloc == NULL) {
+        mtrace_init ();
+    }
+    void *p = NULL;
+    fprintf (stderr, "malloc(%d) = ", size);
+    p = real_malloc (size);
+    fprintf (stderr, "%p\n", p);
+    return p;
+}
+

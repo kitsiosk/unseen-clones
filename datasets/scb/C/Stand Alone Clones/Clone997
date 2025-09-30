@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39558725
+*  Stack Overflow answer #:39558883
+*  And Stack Overflow answer#:39558917
+*/
+int main (void) {
+    char *lastName, *firstName, *depart, *arrive;
+    printf ("Please enter passenger's last name: ");
+    scanf ("%ms", & lastName);
+    printf ("Please enter passenger's first name: ");
+    scanf ("%ms", & firstName);
+    printf ("Which airport are you departing from? ");
+    scanf ("%ms", & depart);
+    printf ("Which airport will you be heading to? ");
+    scanf ("%ms", & arrive);
+    printf ("LAST NAME: %s FIRST NAME: %s FROM: %s TO: %s\n", lastName, firstName, depart, arrive);
+    free (lastName);
+    free (firstName);
+    free (depart);
+    free (arrive);
+    return 0;
+}
+
+int main () {
+    char lname [MAXLNAME + 1], fname [MAXFNAME + 1], srcAirport [MAXAIRPORT + 1], destAirport [MAXAIRPORT + 1];
+    printf ("Last name\n");
+    fgets (lname, sizeof lname, stdin);
+    printf ("First name\n");
+    fgets (fname, sizeof fname, stdin);
+    printf ("Source airport\n");
+    fgets (srcAirport, sizeof srcAirport, stdin);
+    printf ("Destination airport\n");
+    fgets (destAirport, sizeof destAirport, stdin);
+    return 0;
+}
+

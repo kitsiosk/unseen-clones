@@ -1,0 +1,86 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14739186
+*  Stack Overflow answer #:14739523
+*  And Stack Overflow answer#:14739948
+*/
+int main () {
+    map < int, map < int, string > > used;
+    vector < char > usable;
+    for (char ch = 'A'; ch <= 'Z'; ch++) {
+        usable.push_back (ch);
+    }
+    for (char ch = 'a'; ch <= 'z'; ch++) {
+        usable.push_back (ch);
+    }
+    for (int a = 0; a < usable.size (); a++) {
+        for (int b = a; b < usable.size (); b++) {
+            for (int c = b; c < usable.size (); c++) {
+                for (int d = c; d < usable.size (); d++) {
+                    int sum = usable[a] + usable[b] + usable[c] + usable[d];
+                    int prod = usable[a] * usable[b] * usable[c] * usable[d];
+                    if (used.count (sum) && used[sum].count (prod)) {
+                        cout << "Conflict found: " << usable[a] << usable[b] << usable[c] << usable[d] << " conflicts with " << used[sum][prod] << endl;
+                    }
+                    used[sum][prod] = string () + usable[a] + usable[b] + usable[c] + usable[d];
+                }
+            }
+        }
+    }
+}
+
+int main (void) {
+    size_t pos, end;
+    struct anahash *wp, **pp;
+    HashVal val;
+    memset (hashtab, 0, sizeof hashtab);
+    while (fgets (buff, sizeof buff, stdin)) {
+        for (pos = 0; pos < sizeof buff && buff[pos];) {
+            for (end = pos; end < sizeof buff && buff[end]; end++) {
+                if (buff[end] < 'A' || buff[end] > 'z')
+                    break;
+                if (buff[end] > 'Z' && buff[end] < 'a')
+                    break;
+            }
+            if (end > pos) {
+                wp = new_word (buff +pos, end -pos);
+                if (!wp) {
+                    pos = end;
+                    continue;
+                }
+                pp = hash_find (wp);
+                if (!*pp)
+                    *pp = wp;
+                else if ((*pp)->hash == wp->hash && !strcmp ((*pp)->word, wp->word))
+                    free (wp);
+                else {
+                    wp->next = *pp;
+                    *pp = wp;
+                }
+                (*pp)->freq += 1;
+            }
+            pos = end;
+            for (end = pos; end < sizeof buff && buff[end]; end++) {
+                if (buff[end] >= 'A' && buff[end] <= 'Z')
+                    break;
+                if (buff[end] >= 'z' && buff[end] <= 'a')
+                    break;
+            }
+            pos = end;
+        }
+    }
+    for (pos = 0; pos < COUNTOF (hashtab); pos++) {
+        if (!&hashtab[pos])
+            continue;
+        for (pp = &hashtab[pos]; wp = *pp; pp = &wp->next) {
+            if (val != wp->hash) {
+                fprintf (stdout, "\nSlot:%u:\n", pos);
+                val = wp->hash;
+            }
+            fprintf (stdout, "\t%llx:%u:%s\n", wp -> hash, wp -> freq, wp -> word);
+        }
+    }
+    return 0;
+}
+

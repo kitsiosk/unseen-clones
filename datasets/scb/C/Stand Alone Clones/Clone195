@@ -1,0 +1,77 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:980702
+*  Stack Overflow answer #:984636
+*  And Stack Overflow answer#:988313
+*/
+int mod25 (int x) {
+    static int divisors [] = {2147483625, 244140625, 9765625, 390625, 15625, 625, 25};
+    int i;
+    for (i = 0; i < sizeof (divisors) / sizeof (int); i++) {
+        int divisor = divisors[i];
+        while (x >= divisor) {
+            x -= divisor;
+        }
+    }
+    return x;
+}
+
+int mod25 (int x) {
+    if (x >= 1677721600)
+        x -= 1677721600;
+    if (x >= 838860800)
+        x -= 838860800;
+    if (x >= 419430400)
+        x -= 419430400;
+    if (x >= 209715200)
+        x -= 209715200;
+    if (x >= 104857600)
+        x -= 104857600;
+    if (x >= 52428800)
+        x -= 52428800;
+    if (x >= 26214400)
+        x -= 26214400;
+    if (x >= 13107200)
+        x -= 13107200;
+    if (x >= 6553600)
+        x -= 6553600;
+    if (x >= 3276800)
+        x -= 3276800;
+    if (x >= 1638400)
+        x -= 1638400;
+    if (x >= 819200)
+        x -= 819200;
+    if (x >= 409600)
+        x -= 409600;
+    if (x >= 204800)
+        x -= 204800;
+    if (x >= 102400)
+        x -= 102400;
+    if (x >= 51200)
+        x -= 51200;
+    if (x >= 25600)
+        x -= 25600;
+    if (x >= 12800)
+        x -= 12800;
+    if (x >= 6400)
+        x -= 6400;
+    if (x >= 3200)
+        x -= 3200;
+    if (x >= 1600)
+        x -= 1600;
+    if (x >= 800)
+        x -= 800;
+    if (x >= 400)
+        x -= 400;
+    if (x >= 200)
+        x -= 200;
+    if (x >= 100)
+        x -= 100;
+    if (x >= 50)
+        x -= 50;
+    if (x >= 25)
+        x -= 25;
+    return x;
+}
+

@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30023867
+*  Stack Overflow answer #:30023868
+*  And Stack Overflow answer#:30024088
+*/
+int main () {
+    {
+        int i, n = 6;
+        arr m = makearr (1, (int []) {n});
+        for (i = 0; i < n; i++)
+            *elem (m, i) = i;
+        for (i = 0; i < n; i++, printf (" "))
+            printf ("%d", *elem (m, i));
+    }
+    puts ("\n");
+    {
+        int i, j, n = 4;
+        arr m = makearr (2, (int []) {n, n});
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                *elem (m, i, j) = i * n + j;
+        for (i = 0; i < n; i++, printf ("\n"))
+            for (j = 0; j < n; j++, printf (" "))
+                printf ("%d", *elem (m, i, j));
+    }
+    puts ("\n");
+    {
+        int i, j, k, n = 3;
+        arr m = makearr (3, (int []) {n, n, n});
+        for (i = 0; i < n; i++)
+            for (j = 0; j < n; j++)
+                for (k = 0; k < n; k++)
+                    *elem (m, i, j, k) = (i * n + j) * n + k;
+        for (i = 0; i < n; i++, printf ("\n"))
+            for (j = 0; j < n; j++, printf ("\n"))
+                for (k = 0; k < n; k++, printf (" "))
+                    printf ("%d", *elem (m, i, j, k));
+    }
+    return 0;
+}
+
+int main () {
+    int i, j, k;
+    a = malloc (N *N * N * sizeof (int));
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            for (k = 0; k < N; k++) {
+                a[i][j][k] = (i * 10 + j) * 10 + k;
+            }
+        }
+    }
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+            for (k = 0; k < N; k++) {
+                printf ("%2d ", a [i] [j] [k]);
+            }
+            printf ("\n");
+        }
+        printf ("\n");
+    }
+}
+

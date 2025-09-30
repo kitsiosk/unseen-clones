@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35411471
+*  Stack Overflow answer #:35412839
+*  And Stack Overflow answer#:35412038
+*/
+int main (void) {
+    do {
+        int boundary = getBoundary ();
+        int ssq = computeSSQ (boundary);
+        printf ("The sum of the squares of integers from 0 to %d is %d\n", boundary, ssq);
+    }
+    while (again ());
+    return 0;
+}
+
+int main (void) {
+    int boundary, choice, isq, ssq;
+    while (1) {
+        printf ("Enter an integer: ");
+        scanf ("%d", & boundary);
+        ssq = 0;
+        for (isq = 1; isq <= boundary; isq++) {
+            ssq = ssq + (isq * isq);
+        }
+        printf ("The sum of the squares of integers from 0 to %d is %d\n", boundary, ssq);
+        printf ("Would you like to go again? (1 for yes, 0 for no): ");
+        scanf ("%d", & choice);
+        if (choice == 0)
+            break;
+    }
+    return 0;
+}
+

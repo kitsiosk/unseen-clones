@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2348374
+*  Stack Overflow answer #:2348438
+*  And Stack Overflow answer#:2348577
+*/
+Node *MergeLists (Node *list1, Node *list2) {
+    Node *list = NULL, **pnext = &list;
+    if (list2 == NULL)
+        return list1;
+    while (list1 != NULL) {
+        if (list1->data > list2->data)
+            SWAP_PTRS (list1, list2);
+        *pnext = list1;
+        pnext = &list1->next;
+        list1 = *pnext;
+    }
+    *pnext = list2;
+    return list;
+}
+
+Node *MergeLists (Node *list1, Node *list2) {
+    Node *t, **xt;
+    for (xt = &t; list1 || list2;) {
+        Node **z = list1 == NULL ? &list2 : list2 == NULL ? &list1 : list1->data < list2->data ? &list1 : &list2;
+        *xt = *z;
+        xt = &(*z)->next;
+        *z = *xt;
+    }
+    *xt = NULL;
+    return t;
+}
+

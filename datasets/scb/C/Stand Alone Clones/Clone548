@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8645935
+*  Stack Overflow answer #:8646687
+*  And Stack Overflow answer#:8646077
+*/
+int main () {
+    ofstream outdata;
+    int i;
+    int array [5] = {4, 3, 6, 7, 12};
+    outdata.open ("example.dat");
+    if (!outdata) {
+        cerr << "Error: file could not be opened" << endl;
+        exit (1);
+    }
+    for (i = 0; i < 5; ++i)
+        outdata << array[i] << endl;
+    outdata.close ();
+    return 0;
+}
+
+int main () {
+    unsigned char bit_table_ [20] [40];
+    for (int i = 0; i != 20; i++)
+        for (int j = 0; j != 40; j++)
+            bit_table_[i][j] = i ^ j;
+    ofstream f ("c:/temp/bit_table.bin", ios : : binary | ios : : out);
+    unsigned char *buf = &bit_table_[0][0];
+    copy (buf, buf + sizeof (bit_table_), ostream_iterator < unsigned char > (f, ""));
+    return 0;
+}
+

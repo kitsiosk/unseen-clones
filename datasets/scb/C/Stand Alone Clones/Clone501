@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40732902
+*  Stack Overflow answer #:40733551
+*  And Stack Overflow answer#:40733311
+*/
+int main () {
+    FILE *fp1;
+    FILE *fp2;
+    char line [100];
+    char *token;
+    const char s [2] = ",";
+    fp1 = fopen ("file1.txt", "r");
+    fp2 = fopen ("file2.txt", "a");
+    while (fgets (line, sizeof (line), fp1)) {
+        token = strtok (line, s);
+        fprintf (fp2, "%s", token);
+        token = strtok (NULL, s);
+        fprintf (fp2, "%s\n", token);
+    }
+    fclose (fp1);
+    fclose (fp2);
+    return 0;
+}
+
+int main () {
+    char line [100];
+    FILE *ptr1 = fopen ("file1.txt", "r");
+    FILE *ptr2 = fopen ("file2.txt", "a");
+    while (fgets (line, sizeof (line), ptr1)) {
+        if (line[0] == '\n')
+            continue;
+        char *lineEnd = strstr (line, ", Hobbies");
+        *lineEnd = '\0';
+        fprintf (ptr2, "%s\n", line);
+    }
+    fclose (ptr1);
+    fclose (ptr2);
+    return 0;
+}
+

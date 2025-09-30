@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18350437
+*  Stack Overflow answer #:18350747
+*  And Stack Overflow answer#:18350479
+*/
+int main () {
+    pthread_t pth;
+    if (sem_init (&completed, 0, 0)) {
+        printf ("sem_init failed\n");
+        return 1;
+    }
+    pthread_create (& pth, NULL, threadfunc, "foo");
+    sem_wait (& completed);
+    printf ("Wait completed\n");
+    pthread_cancel (pth);
+    sem_destroy (& completed);
+}
+
+int main (void) {
+    pthread_t pth;
+    pthread_create (& pth, NULL, threadfunc, "foo");
+    pthread_mutex_lock (& mutex);
+    while (!getout)
+        pthread_cond_wait (&cond, &mutex);
+    pthread_mutex_unlock (& mutex);
+    pthread_cancel (pth);
+}
+

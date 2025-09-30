@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1777990
+*  Stack Overflow answer #:1778011
+*  And Stack Overflow answer#:36322735
+*/
+int main (void) {
+    enum {skip = -1, run, jump, scamper} label = skip;
+computeGoto :
+    switch (label) {
+    case skip :
+        break;
+        STATE (run);
+        STATE (jump);
+        STATE (scamper);
+    default :
+        printf ("Unknown state: %d\n", label);
+        exit (0);
+    }
+    label = foo ();
+    goto computeGoto;
+}
+
+int main (void) {
+    void *fns [3] = {&&one, &&two, &&three};
+    char p;
+    p = -1;
+    goto start;
+end :
+    return 0;
+start :
+    p++;
+    goto *fns[p];
+one :
+    printf ("hello ");
+    goto start;
+two :
+    printf ("World. \n");
+    goto start;
+three :
+    goto end;
+}
+

@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12534778
+*  Stack Overflow answer #:12534810
+*  And Stack Overflow answer#:12535198
+*/
+int main () {
+    char n = 'Y';
+    while (n == 'Y') {
+        printf ("Add Next Y/N: ");
+        n = getc (stdin);
+        getchar ();
+    }
+    printf ("n = %c", n);
+}
+
+int main () {
+    struct item e;
+    char line [200];
+    char next = 'Y';
+    while (toupper (next) == 'Y') {
+        printf ("Model name ");
+        fgets (line, sizeof (line), stdin);
+        line[strlen (line) - 1] = '\0';
+        strcpy (e.name, line);
+        printf ("\nAverage ");
+        fgets (line, sizeof (line), stdin);
+        e.avg = atoi (line);
+        printf ("\nPrice ");
+        fgets (line, sizeof (line), stdin);
+        e.cost = atof (line);
+        printf ("you input %s %d %f\n", e.name, e.avg, e.cost);
+        printf ("Add Next (Y/N): ");
+        next = getc (stdin);
+        getchar ();
+    }
+}
+

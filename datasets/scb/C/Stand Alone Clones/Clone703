@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39543155
+*  Stack Overflow answer #:39543255
+*  And Stack Overflow answer#:39543437
+*/
+int main () {
+    int c;
+    char input [MAX_LEN + 1];
+    int i = 0;
+    while ((c = getchar ()) != '\n' && c != EOF && i < MAX_LEN)
+        input[i++] = c;
+    if (c == EOF || c == '\n') {
+        input[i] = '\0';
+        printf ("read in your input string of: %s\n", input);
+    }
+    else {
+        printf ("don't buffer overflow me dude!\n");
+        return -1;
+    }
+    return 0;
+}
+
+int main (void) {
+    enum {MAX_LINES = 8};
+    char *lines [MAX_LINES];
+    int index = 0;
+    char *buffer = 0;
+    size_t buflen = 0;
+    while (index < MAX_LINES && getline (&buffer, &buflen, stdin) != -1) {
+        lines[index++] = buffer;
+        buffer = 0;
+        buflen = 0;
+    }
+    free (buffer);
+    for (int i = 0; i < index; i++)
+        printf ("%d: %s", i, lines[i]);
+    return 0;
+}
+

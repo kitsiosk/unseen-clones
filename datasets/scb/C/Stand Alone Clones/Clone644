@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33452133
+*  Stack Overflow answer #:33452183
+*  And Stack Overflow answer#:33452165
+*/
+int main () {
+    char *buffer;
+    long lSize;
+    struct Bar result = funct ();
+    char distribution [256] [2] = {0};
+    buffer = result.x;
+    lSize = result.y;
+    collect_character_distribution (buffer, lSize, distribution);
+    int i;
+    for (i = 0; i < 256; i++) {
+        printf ("%c: %d\n", distribution [i] [0], distribution [i] [1]);
+    }
+    return 0;
+}
+
+int main () {
+    char *buffer;
+    long lSize;
+    struct Bar result = funct ();
+    char **distribution;
+    buffer = result.x;
+    lSize = result.y;
+    distribution = collect_character_distribution (buffer, lSize);
+    for (int i = 0; i < 256; i++)
+        printf ("%s\n", distribution[i]);
+    for (int i = 0; i < 256; i++)
+        free (distribution[i]);
+    free (distribution);
+    return 0;
+}
+

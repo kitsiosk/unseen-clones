@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21245700
+*  Stack Overflow answer #:21245716
+*  And Stack Overflow answer#:21245772
+*/
+int main () {
+    char **s = (char **) malloc (1000 * sizeof (char *));
+    char tmpstr [1000];
+    int i;
+    while (-1 != getline (tmpstr)) {
+        s[i++] = strdup (tmpstr);
+    }
+    return 0;
+}
+
+int main (int argc, const char *argv []) {
+    char **s = malloc (sizeof (char *) * 1000);
+    int i = 0;
+    for (;;) {
+        s[i] = malloc (sizeof (char) * 1000);
+        if (getline (s[i]) == -1)
+            break;
+        printf ("In array: %s \n", s [i]);
+        i++;
+    }
+    return 0;
+}
+

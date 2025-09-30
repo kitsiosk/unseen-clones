@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4052940
+*  Stack Overflow answer #:12290229
+*  And Stack Overflow answer#:4201472
+*/
+LRESULT CALLBACK WindowFunc (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    PAINTSTRUCT ps;
+    switch (msg) {
+    case WM_CREATE :
+        break;
+    case WM_DESTROY :
+        if (m_hrc) {
+            wglMakeCurrent (NULL, NULL);
+            wglDeleteContext (m_hrc);
+        }
+        PostQuitMessage (0);
+        break;
+    default :
+        return DefWindowProc (hWnd, msg, wParam, lParam);
+    }
+    return 0;
+}
+
+LRESULT CALLBACK WindowFunc (HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    PAINTSTRUCT ps;
+    switch (msg) {
+    case WM_ERASEBKGND :
+        return 0;
+        break;
+    case WM_CREATE :
+        break;
+    case WM_DESTROY :
+        if (m_hrc) {
+            wglMakeCurrent (NULL, NULL);
+            wglDeleteContext (m_hrc);
+        }
+        PostQuitMessage (0);
+        break;
+    case WM_PAINT :
+        hDC = BeginPaint (hWnd, &ps);
+        renderSC ();
+        draw (hDC);
+        EndPaint (hWnd, & ps);
+        break;
+    case WM_SIZE :
+        w = LOWORD (lParam);
+        h = HIWORD (lParam);
+        wglMakeCurrent (NULL, NULL);
+        wglDeleteContext (m_hrc);
+        CreateDIB (w, h);
+        CreateHGLRC ();
+        verify (wglMakeCurrent (pdcDIB, m_hrc));
+        initSC ();
+        resizeSC (w, h);
+        renderSC ();
+        break;
+    default :
+        return DefWindowProc (hWnd, msg, wParam, lParam);
+    }
+    return 0;
+}
+

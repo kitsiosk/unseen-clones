@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48447689
+*  Stack Overflow answer #:48451169
+*  And Stack Overflow answer#:48449952
+*/
+int main () {
+    int i;
+    uint32_t val = 01111111111;
+    srand (time (NULL));
+    for (i = 0; i < 4; i++) {
+        int p = rand () % 11;
+        printf ("p=%d\n", p);
+        val = insert (val, p);
+    }
+    binprint (val);
+    printf ("\n");
+    return 0;
+}
+
+int main (void) {
+    int pop = 0;
+    unsigned v = 0, n = NBITS;
+    size_t its = 1;
+    srand (time (NULL));
+    v |= 1u << (NBITS - 1 - rand_int (sizeof v + 1));
+    pop++;
+    while (pop < BPOP) {
+        if (++its >= LIMIT) {
+            pop = its = 1;
+            v = 0;
+            v |= 1u << (NBITS - 1 - rand_int (sizeof v + 1));
+        }
+        unsigned shift = rand_int (NBITS);
+        if (v & (1u << shift))
+            continue;
+        if ((shift + 2) < NBITS && v & (1u << (shift + 2)))
+            continue;
+        if ((int) (shift - 2) >= 0 && v & (1u << (shift - 2)))
+            continue;
+        if ((shift + 1) < NBITS && v & (1u << (shift + 1)))
+            continue;
+        if ((int) (shift - 1) >= 0 && v & (1u << (shift - 1)))
+            continue;
+        v |= 1u << shift;
+        pop++;
+    }
+    printf ("\nv : 0x%08x\n", v);
+    while (n--) {
+        if (n + 1 < NBITS && (n + 1) % 4 == 0)
+            putchar ('-');
+        putchar ((v >> n & 1) ? '1' : '0');
+    }
+    putchar ('\n');
+    return 0;
+}
+

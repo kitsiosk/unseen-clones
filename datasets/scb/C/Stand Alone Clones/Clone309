@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9629473
+*  Stack Overflow answer #:9629518
+*  And Stack Overflow answer#:41250555
+*/
+int main () {
+    char str [] = "- This, a sample string.";
+    char *pch;
+    printf ("Splitting string \"%s\" into tokens:\n", str);
+    pch = strtok (str, " ,.-");
+    while (pch != NULL) {
+        printf ("%s\n", pch);
+        pch = strtok (NULL, " ,.-");
+    }
+    return 0;
+}
+
+int main (int argc, char const *argv []) {
+    char c_keywords [300] = "auto else    long    switch\
+    break\t   enum \t register    typedef\
+    \ncase    extern,  return  union\
+    ?char    float.   short   unsigned\
+    const   !for signed  void\
+    continue    goto    sizeof  volatile\
+    .default???? if  static  while\
+    do  int struct,,,,  _Packed\
+    double.......";
+    ListWithLength *list_with_length = getWords (c_keywords);
+    printListWithLength (list_with_length);
+    return 0;
+}
+

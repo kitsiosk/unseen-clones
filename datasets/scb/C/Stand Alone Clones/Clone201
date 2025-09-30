@@ -1,0 +1,95 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2495420
+*  Stack Overflow answer #:25110074
+*  And Stack Overflow answer#:2496831
+*/
+int main (int argc, char *argv []) {
+    int read, write;
+    FILE *wav = fopen ("test.wav", "rb");
+    FILE *mp3 = fopen ("file.mp3", "wb");
+    fseek (wav, 0, SEEK_END);
+    unsigned long file_size_wav = ftell (wav);
+    unsigned long bytes_PCM = file_size_wav - 40;
+    unsigned long n_total_samples = bytes_PCM / 4;
+    const unsigned long MAX_SAMPLE_NUMBER = pow (2, 10);
+    const unsigned short NTHREADS = 2;
+    const unsigned long MAX_MP3_SIZE = int (MAX_SAMPLE_NUMBER * 1.25 + 7200) + 1;
+    short int pcm_buffer [NTHREADS] [MAX_SAMPLE_NUMBER * 2];
+    unsigned char mp3_buffer [NTHREADS] [MAX_MP3_SIZE];
+    lame_t lame = lame_init ();
+    lame_set_in_samplerate (lame, 44100);
+    lame_set_VBR (lame, vbr_default);
+    lame_init_params (lame);
+    Data data_ptr [NTHREADS];
+    unsigned short n_main_loops = n_total_samples / MAX_SAMPLE_NUMBER / NTHREADS + 1;
+    cout << "total samples " << n_total_samples << endl;
+    cout << "Number of iterations in main loop : " << n_main_loops << endl;
+    unsigned long samples_remaining = n_total_samples;
+    unsigned long current_sample = 0;
+    pthread_t threadID [NTHREADS];
+    pthread_mutex_t mutexForReading = PTHREAD_MUTEX_INITIALIZER;
+    for (unsigned long i = 0; i < n_main_loops; i++) {
+        for (unsigned short j = 0; j < NTHREADS; j++) {
+            Data data;
+            data.lame = lame;
+            data.wav_file = wav;
+            data.pcm_buffer = pcm_buffer[j];
+            data.mp3_buffer = mp3_buffer[j];
+            data.first_sample = current_sample;
+            data.n_samples = min (MAX_SAMPLE_NUMBER, n_total_samples -current_sample);
+            data.mutexForReading = &mutexForReading;
+            current_sample += data.n_samples;
+            samples_remaining -= data.n_samples;
+            data_ptr[j] = data;
+            if (data_ptr[j].n_samples > 0) {
+                cout << "creating " << i << " " << j << " " << data_ptr[j].first_sample << " " << data_ptr[j].n_samples << endl;
+                pthread_create (& threadID [j], NULL, encode_chunk, (void *) (& data_ptr [j]));
+            }
+        }
+        for (unsigned short j = 0; j < NTHREADS; j++) {
+            if (data_ptr[j].n_samples > 0) {
+                pthread_join (threadID [j], NULL);
+            }
+        }
+        for (unsigned short j = 0; j < NTHREADS; j++)
+            if (data_ptr[j].n_samples > 0) {
+                fwrite (data_ptr [j].mp3_buffer, data_ptr [j].mp3_bytes_to_write, 1, mp3);
+            }
+            else {
+                data_ptr[j].mp3_bytes_to_write = lame_encode_flush (lame, data_ptr[j].mp3_buffer, data_ptr[j].mp3_buffer_size);
+            }
+    }
+    lame_close (lame);
+    fclose (mp3);
+    fclose (wav);
+}
+
+int main (void) {
+    int read, write;
+    FILE *pcm = fopen ("file.pcm", "rb");
+    FILE *mp3 = fopen ("file.mp3", "wb");
+    const int PCM_SIZE = 8192;
+    const int MP3_SIZE = 8192;
+    short int pcm_buffer [PCM_SIZE * 2];
+    unsigned char mp3_buffer [MP3_SIZE];
+    lame_t lame = lame_init ();
+    lame_set_in_samplerate (lame, 44100);
+    lame_set_VBR (lame, vbr_default);
+    lame_init_params (lame);
+    do {
+        read = fread (pcm_buffer, 2 * sizeof (short int), PCM_SIZE, pcm);
+        if (read == 0)
+            write = lame_encode_flush (lame, mp3_buffer, MP3_SIZE);
+        else
+            write = lame_encode_buffer_interleaved (lame, pcm_buffer, read, mp3_buffer, MP3_SIZE);
+        fwrite (mp3_buffer, write, 1, mp3);
+    }
+    while (read != 0);
+    lame_close (lame);
+    fclose (mp3);
+    fclose (pcm);
+    return 0;
+}
+

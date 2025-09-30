@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:739589
+*  Stack Overflow answer #:739782
+*  And Stack Overflow answer#:739641
+*/
+int main (void) {
+    FILE *fp;
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    fp = fopen ("/etc/motd", "r");
+    if (fp == NULL) {
+        printf ("File open failed\n");
+        return 0;
+    }
+    while ((read = getline (&line, &len, fp)) != -1) {
+        printf ("Line: %s", line);
+        const char *delim = " \n";
+        char *ptr;
+        ptr = (char *) strtok (line, delim);
+        while (ptr != NULL) {
+            printf ("Word: %s\n", ptr);
+            ptr = (char *) strtok (NULL, delim);
+        }
+    }
+    if (line) {
+        free (line);
+    }
+    return 0;
+}
+
+int main () {
+    char line [MAXLINE + 1];
+    int n = fscanf (stdin, "%" xstr (MAXLINE) "[^\n]%*[^\n]", line);
+    if (!feof (stdin)) {
+        getchar ();
+    }
+    while (n == 1) {
+        printf ("[line:] %s\n", line);
+        n = fscanf (stdin, "%" xstr (MAXLINE) "[^\n]%*[^\n]", line);
+        if (!feof (stdin)) {
+            getchar ();
+        }
+    }
+    return 0;
+}
+

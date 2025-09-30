@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49213611
+*  Stack Overflow answer #:49215284
+*  And Stack Overflow answer#:49217087
+*/
+int mm256_lzcnt_si256 (__m256i input) {
+    static const uint32_t indx [16] = {3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 0, 0};
+    static const uint32_t lz_msk [16] = {0, 0, 0, 0, 0, 0, 0, 0, 64, 64, 64, 64, 128, 128, 192, 192};
+    alignas (32)
+    uint64_t tmp [4] = {0, 0, 0, 0};
+    _mm256_storeu_si256 ((__m256i *) & tmp [0], input);
+    __m256i mask = _mm256_cmpeq_epi64 (input, _mm256_setzero_si256 ());
+    uint32_t i_mask = _mm256_movemask_pd (_mm256_castsi256_pd (mask));
+    uint64_t input_i = tmp[indx[i_mask]];
+    int32_t lz_input_i = _lzcnt_u64 (input_i);
+    int32_t lz = lz_msk[i_mask] + lz_input_i;
+    return lz;
+}
+
+int mm256_lzcnt_si256 (__m256i vec) {
+    __m256i nonzero_elem = _mm256_cmpeq_epi8 (vec, _mm256_setzero_si256 ());
+    unsigned mask = ~_mm256_movemask_epi8 (nonzero_elem);
+    if (mask == 0)
+        return 256;
+    alignas (32)
+    uint8_t elems [32];
+    _mm256_storeu_si256 ((__m256i *) elems, vec);
+    unsigned idx = bsr_nonzero (mask);
+    unsigned lz_msk = 31 - idx;
+    unsigned highest_nonzero_byte = elems[idx];
+    return lz_msk * 8 + _lzcnt_u32 (highest_nonzero_byte) - 24;
+}
+

@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53444743
+*  Stack Overflow answer #:53445796
+*  And Stack Overflow answer#:53451690
+*/
+int foo (void) {
+    int rc;
+    if (0 || (rc = 1, do1 ()) || (rc = 2, do2 ()) || (rc = 3, do3 ()) || (rc = 4, do4 ()) || (rc = 5, do5 ()) || (rc = 0)) {
+        switch (rc - 1) {
+        case 5 :
+            undo5 ();
+        case 4 :
+            undo4 ();
+        case 3 :
+            undo3 ();
+        case 2 :
+            undo2 ();
+        case 1 :
+            undo1 ();
+        default :
+            break;
+        }
+    }
+    return rc;
+}
+
+void foo () {
+    int result = -1;
+    int *p = NULL;
+    int *p2 = NULL;
+    int *p3 = NULL;
+    p = malloc (...)
+    if (p == NULL) {
+        result = 1;
+        goto exit;
+    }
+    p2 = malloc (...)
+    if (p2 == NULL) {
+        result = 2;
+        goto exit;
+    }
+    p3 = malloc (...)
+    if (p3 == NULL) {
+        result = 3;
+        goto exit;
+    }
+    bar (p, p2, p3);
+    result = 0;
+exit :
+    free (p3);
+    if (result != 0) {
+        free (p2);
+        free (p1);
+    }
+    return result;
+}
+

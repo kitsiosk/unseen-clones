@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48972238
+*  Stack Overflow answer #:48972333
+*  And Stack Overflow answer#:48972442
+*/
+main () {
+    const int numYears = 5;
+    char cities [5] [20];
+    float temps [25];
+    int i;
+    printf ("Please enter the yearly temperature of the five cities\n");
+    for (i = 0; i <= 4; i++) {
+        printf ("Enter city %d \n", i + 1);
+        scanf ("%s", & cities [i]);
+        printf ("Enter temperatures for city %d\n", i + 1);
+        for (int j = (i * numYears); j < (i * numYears) + numYears; j++) {
+            printf ("For year %d\n", (j % numYears) + 1);
+            scanf ("%f", & temps [j]);
+        }
+    }
+    return 0;
+}
+
+int main () {
+    char cities [5] [20];
+    float temps [25];
+    printf ("Please enter the yearly temperature of the five cities\n");
+    for (int i = 0; i <= 4; i++) {
+        printf ("Enter city %d \n", i + 1);
+        scanf ("%s", & cities [i]);
+        for (int i = 0; i <= 4; i++) {
+            printf ("Enter temperatures for city %d\n", i + 1);
+            for (int i = 0; i <= 24; i++) {
+                printf ("For year %d\n", i + 1);
+                scanf ("%f", & temps [i]);
+                if (i == 5) {
+                    continue;
+                }
+            }
+        }
+    }
+    return 0;
+}
+

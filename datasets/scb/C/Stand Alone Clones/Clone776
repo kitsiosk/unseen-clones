@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8746719
+*  Stack Overflow answer #:9527056
+*  And Stack Overflow answer#:8850136
+*/
+static gboolean read_data (App *app) {
+    guint len;
+    GstFlowReturn ret;
+    gdouble ms;
+    ms = g_timer_elapsed (app->timer, NULL);
+    if (ms > 1.0 / 20.0) {
+        GstBuffer *buffer;
+        GdkPixbuf *pb;
+        gboolean ok = TRUE;
+        buffer = gst_buffer_new ();
+        pb = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, 640, 480);
+        gdk_pixbuf_fill (pb, 0xffffffff);
+        GST_BUFFER_DATA (buffer) = gdk_pixbuf_get_pixels (pb);
+        GST_BUFFER_SIZE (buffer) = 640 * 480 * 3 * sizeof (guchar);
+        GST_DEBUG ("feed buffer");
+        g_signal_emit_by_name (app -> appsrc, "push-buffer", buffer, & ret);
+        gst_buffer_unref (buffer);
+        if (ret != GST_FLOW_OK) {
+            GST_DEBUG ("some error");
+            ok = FALSE;
+        }
+        g_timer_start (app -> timer);
+        return ok;
+    }
+    return TRUE;
+}
+
+static gboolean read_data (gst_app_t *app) {
+    GstBuffer *buffer;
+    guint8 *ptr;
+    gint size;
+    GstFlowReturn ret;
+    ptr = g_malloc (BUFF_SIZE);
+    g_assert (ptr);
+    size = fread (ptr, 1, BUFF_SIZE, app->file);
+    if (size == 0) {
+        ret = gst_app_src_end_of_stream (app->src);
+        g_debug ("eos returned %d at %d\n", ret, __LINE__);
+        return FALSE;
+    }
+    buffer = gst_buffer_new ();
+    GST_BUFFER_MALLOCDATA (buffer) = ptr;
+    GST_BUFFER_SIZE (buffer) = size;
+    GST_BUFFER_DATA (buffer) = GST_BUFFER_MALLOCDATA (buffer);
+    ret = gst_app_src_push_buffer (app->src, buffer);
+    if (ret != GST_FLOW_OK) {
+        g_debug ("push buffer returned %d for %d bytes \n", ret, size);
+        return FALSE;
+    }
+    if (size != BUFF_SIZE) {
+        ret = gst_app_src_end_of_stream (app->src);
+        g_debug ("eos returned %d at %d\n", ret, __LINE__);
+        return FALSE;
+    }
+    return TRUE;
+}
+

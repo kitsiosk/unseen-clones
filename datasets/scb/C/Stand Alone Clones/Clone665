@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33706724
+*  Stack Overflow answer #:33706963
+*  And Stack Overflow answer#:33706989
+*/
+int main () {
+    char a [] = {'2', '4', '6', '7', '7', '4', '4'};
+    int i;
+    for (i = 0; i < sizeof (a) / sizeof (char); i++) {
+        my_set[a[i] - '0'].num++;
+    }
+    printf ("%-10s%-10s\n", "Value:", "Count:");
+    for (i = 0; i < sizeof (my_set) / sizeof (TSet); i++) {
+        if (my_set[i].num != 0) {
+            printf ("%-10c%-10d\n", my_set [i].c, my_set [i].num);
+        }
+    }
+}
+
+int main () {
+    int arr [] = {2, 4, 6, 7, 7, 4, 4};
+    int size = (sizeof (arr) / sizeof (int));
+    printf ("Value:\tCount\n");
+    for (int i = 0; i < size; i++) {
+        int count = 0, bl = 1;
+        for (int j = i; j < size; j++) {
+            if (arr[i] == arr[j]) {
+                count++;
+            }
+        }
+        for (int j = i - 1; j >= 0; j--) {
+            if (arr[i] == arr[j]) {
+                bl = 0;
+            }
+        }
+        if (bl) {
+            printf ("%d\t\t%d\n", arr [i], count);
+        }
+    }
+    return 0;
+}
+

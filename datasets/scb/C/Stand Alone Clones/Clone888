@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10403588
+*  Stack Overflow answer #:50741140
+*  And Stack Overflow answer#:26402282
+*/
+GstFlowReturn new_sample (GstAppSink *appsink, gpointer) {
+    static int framecount = 0;
+    GstSample *sample = gst_app_sink_pull_sample (appsink);
+    GstCaps *caps = gst_sample_get_caps (sample);
+    GstBuffer *buffer = gst_sample_get_buffer (sample);
+    GstStructure *structure = gst_caps_get_structure (caps, 0);
+    const int width = g_value_get_int (gst_structure_get_value (structure, "width"));
+    const int height = g_value_get_int (gst_structure_get_value (structure, "height"));
+    if (!(framecount % 30)) {
+        g_print (".");
+    }
+    if (!framecount) {
+        g_print ("caps: %s\n", gst_caps_to_string (caps));
+    }
+    framecount++;
+    GstMapInfo map;
+    gst_buffer_map (buffer, & map, GST_MAP_READ);
+cv :
+    : Mat * prevFrame;
+    prevFrame = atomicFrame.exchange (new cv : : Mat (cv : : Size (width, height), CV_8UC3, (char *) map.data, cv : : Mat : : AUTO_STEP));
+    if (prevFrame) {
+        delete prevFrame;
+    }
+    gst_buffer_unmap (buffer, & map);
+    gst_sample_unref (sample);
+    return GST_FLOW_OK;
+}
+
+GstFlowReturn new_sample (GstAppSink *appsink, gpointer data) {
+    static int framecount = 0;
+    framecount++;
+    GstSample *sample = gst_app_sink_pull_sample (appsink);
+    GstCaps *caps = gst_sample_get_caps (sample);
+    GstBuffer *buffer = gst_sample_get_buffer (sample);
+    const GstStructure *info = gst_sample_get_info (sample);
+    GstMapInfo map;
+    gst_buffer_map (buffer, & map, GST_MAP_READ);
+    Mat frame (Size (320, 240), CV_8UC3, (char *) map.data, Mat : : AUTO_STEP);
+    int frameSize = map.size;
+    frameQueue.push_back (frame);
+    gst_buffer_unmap (buffer, & map);
+    if (framecount % 30 == 0) {
+        g_print (".");
+    }
+    if (framecount == 1) {
+        g_print ("%s\n", gst_caps_to_string (caps));
+    }
+    gst_sample_unref (sample);
+    return GST_FLOW_OK;
+}
+

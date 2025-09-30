@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39429803
+*  Stack Overflow answer #:39430037
+*  And Stack Overflow answer#:39430337
+*/
+int main (void) {
+    DIR *dirp;
+    struct dirent *dp;
+    dirp = opendir (".");
+    while ((dp = readdir (dirp)) != NULL) {
+        if (dp->d_type & DT_DIR) {
+            if (dp->d_name[0] != '.')
+                printf ("%s\n", dp->d_name);
+        }
+    }
+    closedir (dirp);
+    return 0;
+}
+
+int main () {
+    DIR *dirhandle = opendir (".");
+    struct dirent *de;
+    while (de = readdir (dirhandle)) {
+        _Bool is_dir;
+        {
+            struct stat stbuf;
+            stat (de -> d_name, & stbuf);
+            is_dir = S_ISDIR (stbuf.st_mode);
+        }
+        if (is_dir) {
+            printf ("%s/\n", de -> d_name);
+        }
+    }
+}
+

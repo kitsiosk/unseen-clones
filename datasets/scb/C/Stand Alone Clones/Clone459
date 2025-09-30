@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17645417
+*  Stack Overflow answer #:17645498
+*  And Stack Overflow answer#:17647153
+*/
+int main (int ac, char **av) {
+    char *str;
+    int i;
+    i = 0;
+    str = strdup ("Hello World");
+    while (str[i]) {
+        if (i == 6)
+            str[i] = '\0';
+        i++;
+    }
+    printf ("%s\n", str);
+}
+
+int main () {
+    char str [] = "hello world";
+    int i, strt, end, j;
+    setbuf (stdout, NULL);
+    printf ("enter the start and end points of the range of the array to remove:\n");
+    scanf ("%d%d", & strt, & end);
+    int len = strlen (str);
+    for (i = end; i >= strt; i--) {
+        str[i - 1] = str[i];
+        for (j = i + 1; j <= len; j++) {
+            str[j - 1] = str[j];
+        }
+        len--;
+    }
+    printf ("%s", str);
+    return 0;
+}
+

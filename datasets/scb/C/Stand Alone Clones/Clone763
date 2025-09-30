@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11673503
+*  Stack Overflow answer #:11674595
+*  And Stack Overflow answer#:11674058
+*/
+int main () {
+    memset (myUnion.c, 0, 8 * sizeof (char));
+    printMyUnion (& myUnion);
+    memset (myUnion.c, 0, 8 * sizeof (char));
+    myUnion.i = 10;
+    printMyUnion (& myUnion);
+    memset (myUnion.c, 0, 8 * sizeof (char));
+    myUnion.f = 10;
+    printMyUnion (& myUnion);
+    memset (myUnion.c, 0, 8 * sizeof (char));
+    myUnion.f = 3.1415;
+    printMyUnion (& myUnion);
+    return 0;
+}
+
+int main (void) {
+    int i = 10;
+    double x = 0.0;
+    print_hex ("i (set to 10)", & i, sizeof i);
+    print_hex ("x (set to 0.0)", & x, sizeof x);
+    memcpy (& x, & i, sizeof (int));
+    print_hex ("x (copied from i)", & x, sizeof x);
+    printf ("x (%%f format) = %f\n", x);
+    printf ("x (%%g format) = %g\n", x);
+    return 0;
+}
+

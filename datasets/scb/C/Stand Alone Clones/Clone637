@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27873740
+*  Stack Overflow answer #:27873870
+*  And Stack Overflow answer#:27874042
+*/
+int main (int argc, char *argv []) {
+    FILE *fp1 = NULL, *fp2 = NULL;
+    char buff1 [BUFSIZE], buff2 [BUFSIZE];
+    fp1 = fopen (argv[1], "r");
+    while (fgets (buff1, BUFSIZE -1, fp1) != NULL) {
+        printf ("%s\n", buff1);
+    }
+    fclose (fp1);
+    fp2 = fopen (argv[2], "r");
+    while (fgets (buff2, BUFSIZE -1, fp2) != NULL) {
+        printf ("%s\n", buff2);
+    }
+    fclose (fp2);
+}
+
+main (int argc, char *argv []) {
+    FILE *fp, *fp1;
+    if ((fp = fopen (argv[1], "r")) == NULL) {
+        printf ("file cannot be opened\n");
+        return 1;
+    }
+    if ((fp1 = fopen (argv[2], "r")) == NULL) {
+        printf ("file cannot be opened\n");
+        return 1;
+    }
+    int x, y;
+    fscanf (fp, "%d", & x);
+    x = x * x;
+    printf ("%d\n", x);
+    fscanf (fp1, "%d", & y);
+    y = x + y;
+    printf ("%d\n", y);
+}
+

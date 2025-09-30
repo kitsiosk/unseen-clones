@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27989119
+*  Stack Overflow answer #:27989139
+*  And Stack Overflow answer#:27989471
+*/
+int countLOC (const char * const filename) {
+    int c, nlines = 0;
+    int found = 0;
+    FILE *file;
+    file = fopen (filename, "r");
+    if (file == NULL) {
+        printf ("failed to open %s\n", filename);
+        return -1;
+    }
+    while ((c = fgetc (file)) != EOF) {
+        if (c == '\n') {
+            nlines += (found != 0) ? 1 : 0;
+            found = 0;
+        }
+        found = ((c == '|') || (found != 0));
+    }
+    nlines += (found != 0) ? 1 : 0;
+    printf ("%d", nlines);
+    fclose (files);
+    return nlines;
+}
+
+int countLOC (const char *filename) {
+    int c, nlines = 0, hasCh = 0;
+    FILE *fp = fopen (filename, "r");
+    while (1) {
+        c = getc (fp);
+        if (c == EOF || c == '\n') {
+            if (hasCh)
+                nlines++;
+            if (c == EOF)
+                break;
+            hasCh = 0;
+        }
+        else if (!hasCh && c == '|') {
+            hasCh = 1;
+        }
+    }
+    fclose (fp);
+    printf ("%d\n", nlines);
+    return nlines;
+}
+

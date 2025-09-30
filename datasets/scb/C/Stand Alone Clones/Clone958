@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48615327
+*  Stack Overflow answer #:48615497
+*  And Stack Overflow answer#:48615488
+*/
+int main (void) {
+    char saida [50];
+    char *res = text ();
+    if (res == NULL) {
+        fprintf (stderr, "failed to allocate memory\n");
+        return 1;
+    }
+    strncpy (saida, res, sizeof saida);
+    saida[sizeof (saida) - 1] = 0;
+    puts (saida);
+    free (res);
+    return 0;
+}
+
+int main (void) {
+    char saida [50], *p = text ();
+    if (p != NULL && strlen (p) < sizeof saida) {
+        strcpy (saida, p);
+        printf ("%s\n", saida);
+        free (p);
+    }
+    return 0;
+}
+

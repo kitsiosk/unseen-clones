@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45166917
+*  Stack Overflow answer #:45166983
+*  And Stack Overflow answer#:45167070
+*/
+void print_list (struct node *list) {
+    putchar ('[');
+    print_list_helper (list);
+    putchar (']');
+    void print_list_helper (struct node *list) {
+        if (list != NULL)
+            printf ("%d", list->data);
+        if (list->next != NULL) {
+            printf (", ");
+        }
+        print_list_helper (list -> next);
+    }}
+
+void print_list (struct node *list) {
+    static int print_start = 0;
+    if (print_start == 0) {
+        printf ("[");
+    }
+    if (list == NULL) {
+        printf ("]");
+        print_start = 0;
+    }
+    else {
+        print_start++;
+        printf ("%d", list -> data);
+        if (list->next != NULL) {
+            printf (", ");
+        }
+        print_list (list -> next);
+    }
+}
+

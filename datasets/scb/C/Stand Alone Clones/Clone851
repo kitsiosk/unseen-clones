@@ -1,0 +1,56 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34671814
+*  Stack Overflow answer #:34672050
+*  And Stack Overflow answer#:34672993
+*/
+int main () {
+    char str1 [100] = "The quick brown fox jumps over ";
+    char str2 [100] = "my big sphinx of quartz";
+    int i = 0;
+    int j = 0;
+    while (str1[i] != '\0') {
+        if (str1[i] != ' ')
+            str1[j++] = str1[i];
+        i++;
+    }
+    i = 0;
+    while (str2[i] != '\0') {
+        if (str2[i] != ' ' && j + 1 < sizeof (str1))
+            str1[j++] = str2[i];
+        i++;
+    }
+    str1[j] = '\0';
+    printf ("'%s'\n", str1);
+    return 0;
+}
+
+int main (void) {
+    char eingabe1 [MAX] = {0};
+    char eingabe2 [MAX] = {0};
+    int i = 0;
+    int j = 0;
+    printf ("Gib zwei Wörter ein, die aneinander angehängt werden sollen\n");
+    printf ("1. Zeichenkette: ");
+    fgets (eingabe1, MAX, stdin);
+    putchar ('\n');
+    printf ("2. Zeichenkette: ");
+    fgets (eingabe2, MAX, stdin);
+    putchar ('\n');
+    while (eingabe1[i])
+        i++;
+    if (i > 0) {
+        if (eingabe1[i - 1] == '\n')
+            i--;
+        while (i && eingabe1[i - 1] == ' ')
+            i--;
+    }
+    while (eingabe2[j]) {
+        eingabe1[i++] = eingabe2[j++];
+    }
+    eingabe1[i] = 0;
+    printf ("Nach Verketten: %s\n", eingabe1);
+    return 0;
+}
+

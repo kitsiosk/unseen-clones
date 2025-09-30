@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13746852
+*  Stack Overflow answer #:13751236
+*  And Stack Overflow answer#:13747685
+*/
+main () {
+    int i;
+    struct course *c;
+    c = malloc (sizeof (struct course));
+    c->num_nodes = 3;
+    c->nodes = malloc (sizeof (struct node) * c->num_nodes);
+    for (i = 0; i < c->num_nodes; i++)
+        c->nodes[i] = malloc (sizeof (struct node));
+    for (i = 0; i < c->num_nodes; i++)
+        free (c->nodes[i]);
+    free (c -> nodes);
+    free (c);
+}
+
+main () {
+    struct course *my_course;
+    my_course = calloc (1, sizeof (struct course));
+    struct node *my_nodes;
+    my_nodes = calloc (3, sizeof (struct node));
+    my_course.num_nodes = 3;
+    my_course.nodes = my_nodes;
+    free (my_nodes);
+    free (my_course);
+}
+

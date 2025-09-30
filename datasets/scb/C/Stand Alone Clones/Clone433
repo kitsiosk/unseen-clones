@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45657550
+*  Stack Overflow answer #:45661552
+*  And Stack Overflow answer#:45657843
+*/
+char *input (void) {
+    char *p = malloc (1);
+    size_t i = 0;
+    int c;
+    if (p == NULL) {
+        return NULL;
+    }
+    while ((c = getchar ()) != EOF && c != '\n') {
+        char *newp = realloc (p, i +2);
+        if (newp == NULL) {
+            free (p);
+            return NULL;
+        }
+        p = newp;
+        p[i++] = c;
+    }
+    if (i == 0 && c == EOF) {
+        free (p);
+        return NULL;
+    }
+    p[i] = '\0';
+    return p;
+}
+
+char *input (void) {
+    char *inpt = NULL, check;
+    size_t mem = MEMSZ, ndx = 0;
+    if (!(inpt = malloc (mem))) {
+        fprintf (stderr, "input() error: virtual memory exhausted.\n");
+        return NULL;
+    }
+    while ((check = getchar ()) && check != '\n' && check != EOF) {
+        if (ndx + 1 == mem) {
+            void *tmp = realloc (inpt, mem *2);
+            if (!tmp) {
+                fprintf (stderr, "realloc(): memory exhausted.\n");
+                break;
+            }
+            inpt = tmp;
+            mem *= 2;
+        }
+        inpt[ndx++] = check;
+    }
+    inpt[ndx] = 0;
+    return inpt;
+}
+

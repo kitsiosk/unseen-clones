@@ -1,0 +1,72 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33594098
+*  Stack Overflow answer #:33594402
+*  And Stack Overflow answer#:33594823
+*/
+int main (void) {
+    FILE *fp = NULL;
+    char file_name [257] = {'\0'};
+    char line [61] = {'\0'};
+    char word [61] = {'\0'};
+    int out = 0;
+    printf ("Enter file name:\n");
+    scanf (" %256[^\n]", file_name);
+    if ((fp = fopen (file_name, "r")) == NULL) {
+        printf ("could not open file\n");
+        return 1;
+    }
+    while ((fscanf (fp, "%60s", word)) == 1) {
+        if (strlen (line) + strlen (word) + 1 <= 60) {
+            strcat (line, " ");
+            strcat (line, word);
+            out = 0;
+        }
+        else {
+            printf ("%s\n", line);
+            strcpy (line, word);
+            out = 1;
+        }
+    }
+    if (!out) {
+        printf ("%s\n", line);
+    }
+    fclose (fp);
+    return 0;
+}
+
+int main (void) {
+    char ch, file_name [25];
+    char buff [50];
+    int pos = 0;
+    FILE *fp;
+    printf ("Enter file name: \n");
+    gets (file_name);
+    if (!(fp = fopen (file_name, "r"))) {
+        perror ("This file does not exist\n");
+        exit (EXIT_FAILURE);
+    }
+    int c, count;
+    count = 0;
+    while ((pos = readWord (fp, buff, &ch)) != EOF) {
+        count += pos + (!!ch);
+        if (count > 60) {
+            printf ("\n");
+            count = pos;
+        }
+        if (ch) {
+            printf ("%s%c", buff, ch);
+        }
+        else {
+            printf ("%s", buff);
+        }
+        if (!pos) {
+            count = 0;
+        }
+    }
+    putchar ('\n');
+    fclose (fp);
+    return 0;
+}
+

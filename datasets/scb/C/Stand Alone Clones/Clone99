@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54632274
+*  Stack Overflow answer #:54632671
+*  And Stack Overflow answer#:54632522
+*/
+void headers (char heads [4] [20], int *columnWidths, int noOfColumns) {
+    int headLength = 0;
+    printf ("|");
+    for (int i = 0; i < noOfColumns; i++) {
+        headLength += printf ("%*s|", *columnWidths, *heads);
+        columnWidths++;
+        heads++;
+    }
+    printf ("\n");
+    for (int i = 0; i < headLength + 1; i++) {
+        printf ("-");
+    }
+    printf ("\n");
+}
+
+void headers (const char **heads, int *columnWidths) {
+    int headLength = 0;
+    printf ("|");
+    while (*heads) {
+        headLength += printf ("%*s|", *columnWidths, *heads);
+        columnWidths++;
+        heads++;
+    }
+    printf ("\n");
+    for (int i = 0; i < headLength + 1; i++) {
+        printf ("-");
+    }
+    printf ("\n");
+}
+

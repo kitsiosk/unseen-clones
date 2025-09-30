@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20378430
+*  Stack Overflow answer #:20378587
+*  And Stack Overflow answer#:30064832
+*/
+int main () {
+    FILE *myFile;
+    myFile = fopen ("somenumbers.txt", "r");
+    int numberArray [16];
+    int i;
+    if (myFile == NULL) {
+        printf ("Error Reading File\n");
+        exit (0);
+    }
+    for (i = 0; i < 16; i++) {
+        fscanf (myFile, "%d,", & numberArray [i]);
+    }
+    for (i = 0; i < 16; i++) {
+        printf ("Number is: %d\n\n", numberArray [i]);
+    }
+    fclose (myFile);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int i, j;
+    short unsigned digitArray [16];
+    i = 0;
+    while (i != sizeof (digitArray) / sizeof (digitArray[0]) && 1 == scanf ("%1hu", digitArray +i)) {
+        i++;
+    }
+    for (j = 0; j != i; j++) {
+        printf ("%hu\n", digitArray [j]);
+    }
+    return 0;
+}
+

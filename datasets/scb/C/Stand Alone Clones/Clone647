@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2741859
+*  Stack Overflow answer #:2747910
+*  And Stack Overflow answer#:2743149
+*/
+static int linear (const int *arr, int n, int key) {
+    static int previous_key = INT_MIN;
+    static int previous_i = 0;
+    i = key >= previous_key ? previous_i : 0;
+    while (i < n) {
+        if (arr[i] >= key)
+            break;
+        ++i;
+    }
+    previous_key = key;
+    previous_i = i;
+    return i;
+}
+
+int linear (const int *array, int n, int key) {
+    int i = 0;
+    if (array[n - 1] >= key) {
+        do {
+            if (array[0] >= key)
+                return i + 0;
+            if (array[1] >= key)
+                return i + 1;
+            if (array[2] >= key)
+                return i + 2;
+            if (array[3] >= key)
+                return i + 3;
+            array += 4;
+            i += 4;
+        }
+        while (true);
+    }
+    return -1;
+}
+

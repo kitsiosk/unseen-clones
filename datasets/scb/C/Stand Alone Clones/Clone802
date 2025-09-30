@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32873744
+*  Stack Overflow answer #:32874526
+*  And Stack Overflow answer#:32874024
+*/
+int main (void) {
+    char one [30];
+    char two [30];
+    while (fgets (one, sizeof (one), stdin)) {
+        int len = strlen (one);
+        for (int i = 0; i < (len + 1); i++) {
+            two[i] = one[i];
+        }
+        printf ("%s", two);
+        break;
+    }
+    return EXIT_SUCCESS;
+}
+
+int main (void) {
+    char array1 [] = "Michi";
+    size_t len = strlen (array1);
+    char *array2 = malloc (len +1);
+    memcpy (array2, array1, len + 1);
+    printf ("Array2 = %s\n", array2);
+    free (array2);
+    return 0;
+}
+

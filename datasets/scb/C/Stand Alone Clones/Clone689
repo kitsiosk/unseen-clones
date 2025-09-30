@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44922135
+*  Stack Overflow answer #:44922412
+*  And Stack Overflow answer#:44922393
+*/
+int main () {
+    int n = 6;
+    int tab [] = {1, 2, 8, 4, 5, 6};
+    int maxdiff = 0;
+    for (int i = 1; i < n; i++) {
+        int diff = abs (tab[i] - tab[i - 1]);
+        if (diff > maxdiff) {
+            maxdiff = diff;
+        }
+    }
+    printf ("%d\n", maxdiff);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    const int n = 6;
+    int tab [n] = {1, 2, 8, 4, 5, 26};
+    if (n <= 1)
+        return 0;
+    else {
+        int maxdiff = INT_MIN;
+        for (int i = 1; i < n; i++)
+            maxdiff = max (maxdiff, abs (tab[i] - tab[i - 1]));
+        printf ("%d\n", maxdiff);
+    }
+    return 0;
+}
+

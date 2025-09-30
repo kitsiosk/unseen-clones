@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32300071
+*  Stack Overflow answer #:32300366
+*  And Stack Overflow answer#:32300733
+*/
+void enqueue (int item) {
+    if (front == 0 && rear == SIZE - 1)
+        printf ("\n Queue OverFlow Occured");
+    else if (front == -1 && rear == -1) {
+        front = rear = 0;
+        queue[rear] = item;
+    }
+    else if (rear == SIZE - 1 && front != 0) {
+        rear = 0;
+        queue[rear] = item;
+    }
+    else {
+        rear++;
+        queue[rear] = item;
+    }
+}
+
+void enqueue (int item) {
+    if (size >= SIZE) {
+        printf ("Queue is full");
+        return;
+    }
+    queue[write] = item;
+    write = (write + 1) % SIZE;
+    size++;
+}
+

@@ -1,0 +1,56 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:25493707
+*  Stack Overflow answer #:25493900
+*  And Stack Overflow answer#:34207733
+*/
+int main () {
+    int i, m1, m2, n, num;
+    puts ("\n");
+    scanf ("%d", & n);
+    for (i = 0; i < n; i++) {
+        scanf ("%d", & num);
+        if (i == 0) {
+            m1 = num;
+            m2 = num;
+        }
+        else if (num == -1) {
+            break;
+        }
+        else if (num > m1) {
+            m2 = m1;
+            m1 = num;
+        }
+        else if (num > m2) {
+            m2 = num;
+        }
+    }
+    printf ("%d\n", m2);
+    return 0;
+}
+
+main () {
+    int num, large = 0, slarge = 0, i = 0;
+    clrscr ();
+    printf ("Enter the number:");
+    while (i < 10) {
+        scanf ("%d", & num);
+        if (i == 0) {
+            large = num;
+        }
+        else if (num > large) {
+            slarge = large;
+            large = num;
+        }
+        else if (num > slarge) {
+            slarge = num;
+        }
+        i++;
+    }
+    printf ("Large number:%d", large);
+    printf ("\nSecond large=%d", slarge);
+    getch ();
+    return 0;
+}
+

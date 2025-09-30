@@ -1,0 +1,68 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9394867
+*  Stack Overflow answer #:27972414
+*  And Stack Overflow answer#:9403663
+*/
+void interp1 (double *x, int x_tam, double *y, double *xx, int xx_tam, double *yy) {
+    double dx, dy, *slope, *intercept;
+    int i, indiceEnVector;
+    slope = (double *) calloc (x_tam, sizeof (double));
+    intercept = (double *) calloc (x_tam, sizeof (double));
+    for (i = 0; i < x_tam; i++) {
+        if (i < x_tam - 1) {
+            dx = x[i + 1] - x[i];
+            dy = y[i + 1] - y[i];
+            slope[i] = dy / dx;
+            intercept[i] = y[i] - x[i] * slope[i];
+        }
+        else {
+            slope[i] = slope[i - 1];
+            intercept[i] = intercept[i - 1];
+        }
+    }
+    for (i = 0; i < xx_tam; i++) {
+        indiceEnVector = findNearestNeighbourIndex (xx[i], x, x_tam);
+        if (indiceEnVector != -1)
+            yy[i] = slope[indiceEnVector] * xx[i] + intercept[indiceEnVector];
+        else
+            yy[i] = DBL_MAX;
+    }
+    free (slope);
+    free (intercept);
+}
+
+void interp1 (int *x, int x_tam, double *y, int *xx, int xx_tam, double *yy) {
+    double *dx, *dy, *slope, *intercept, *elementoMasProximo, *xD;
+    int i, *indiceEnVector;
+    dx = (double *) calloc (x_tam -1, sizeof (double));
+    dy = (double *) calloc (x_tam -1, sizeof (double));
+    slope = (double *) calloc (x_tam -1, sizeof (double));
+    intercept = (double *) calloc (x_tam -1, sizeof (double));
+    indiceEnVector = (int *) malloc (sizeof (int));
+    elementoMasProximo = (double *) malloc (sizeof (double));
+    xD = (double *) calloc (x_tam, sizeof (double));
+    for (i = 0; i < x_tam; i++) {
+        xD[i] = x[i];
+    }
+    for (i = 0; i < x_tam; i++) {
+        if (i < x_tam - 1) {
+            dx[i] = x[i + 1] - x[i];
+            dy[i] = y[i + 1] - y[i];
+            slope[i] = dy[i] / dx[i];
+            intercept[i] = y[i] - x[i] * slope[i];
+        }
+        else {
+            dx[i] = dx[i - 1];
+            dy[i] = dy[i - 1];
+            slope[i] = slope[i - 1];
+            intercept[i] = intercept[i - 1];
+        }
+    }
+    for (i = 0; i < xx_tam; i++) {
+        encuentraValorMasProximo (xx [i], xD, x_tam, x_tam, elementoMasProximo, indiceEnVector);
+        yy[i] = slope[*indiceEnVector] * xx[i] + intercept[*indiceEnVector];
+    }
+}
+

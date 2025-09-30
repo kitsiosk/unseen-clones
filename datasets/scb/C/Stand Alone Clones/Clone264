@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2427909
+*  Stack Overflow answer #:2428565
+*  And Stack Overflow answer#:2428697
+*/
+int main (void) {
+    int values [5];
+    char *str = "14 22 33 48 5q";
+    size_t converted;
+    stringToIntList (str, values, sizeof values / sizeof values [0], & converted);
+    if (converted > 0) {
+        size_t i;
+        printf ("Converted %lu items from \"%s\":\n", (unsigned long) converted, str);
+        for (i = 0; i < converted; i++)
+            printf ("arr[%lu] = %d\n", (unsigned long) i, arr[i]);
+    }
+    else {
+        printf ("Could not convert any of \"%s\" to equivalent integer values\n", str);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    const char *str = "14 22 33 48";
+    int array [ARRAY_SIZE];
+    size_t index = 0;
+    char *pos = (char *) str;
+    while (*pos && index < ARRAY_SIZE) {
+        long value = strtol (pos, &pos, 10);
+        if (*pos != ' ' && *pos != '\0') {
+            fprintf (stderr, "Invalid character at %s\n", pos);
+            break;
+        }
+        array[index] = (int) value;
+        index++;
+    }
+}
+

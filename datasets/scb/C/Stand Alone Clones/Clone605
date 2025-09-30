@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:111928
+*  Stack Overflow answer #:4007806
+*  And Stack Overflow answer#:112956
+*/
+void main () {
+    clrscr ();
+    printf ("Welcome\n\n\n");
+    unsigned char x = 'A';
+    char ch_array [8];
+    for (int i = 0; x != 0; i++) {
+        ch_array[i] = x & 1;
+        x = x >> 1;
+    }
+    for (--i; i >= 0; i--)
+        printf ("%d", ch_array[i]);
+    getch ();
+}
+
+int main (void) {
+    {
+        char *tmp;
+        char *b = "0101";
+        printf ("%d\n", strtol (b, & tmp, 2));
+    }
+    {
+        printf ("%s\n", byte_to_binary (5));
+    }
+    return 0;
+}
+

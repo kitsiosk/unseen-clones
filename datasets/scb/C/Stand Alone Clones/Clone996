@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50827390
+*  Stack Overflow answer #:50827624
+*  And Stack Overflow answer#:50827702
+*/
+int main (void) {
+    test (INT_MIN);
+    test (- 2);
+    test (- 1);
+    test (0);
+    test (1);
+    test (2);
+    test (INT_MAX);
+    return 0;
+}
+
+int main (void) {
+    int r, n;
+    while (1) {
+        scanf ("%d", & n);
+        r = n & 0x80000000;
+        printf ("n & 0x80000000: 0x%x\n", r);
+        printf ("  n = %s\n", bin (n, 32));
+        printf ("  r = %s\n", bin (r, 32));
+        printf ("r = 0x%x, !r = 0x%x\n", r, ! r);
+        r = !r;
+        printf ("  r = %s\n", bin (r, 32));
+        printf ("r = 0x%x, !r = 0x%x\n", r, ! r);
+        r = !r;
+        printf ("  r = %s\n", bin (r, 32));
+    }
+    return 0;
+}
+

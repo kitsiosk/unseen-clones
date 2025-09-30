@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:34957656
+*  And Stack Overflow answer#:43222767
+*/
+int split (const char *txt, char delim, char ***tokens) {
+    int *tklen, *t, count = 1;
+    char **arr, *p = (char *) txt;
+    while (*p != '\0')
+        if (*p++ == delim)
+            count += 1;
+    t = tklen = calloc (count, sizeof (int));
+    for (p = (char *) txt; *p != '\0'; p++)
+        *p == delim ? *t++ : (*t)++;
+    *tokens = arr = malloc (count * sizeof (char *));
+    t = tklen;
+    p = *arr++ = calloc (*(t++) + 1, sizeof (char *));
+    while (*txt != '\0') {
+        if (*txt == delim) {
+            p = *arr++ = calloc (*(t++) + 1, sizeof (char *));
+            txt++;
+        }
+        else
+            *p++ = *txt++;
+    }
+    free (tklen);
+    return count;
+}
+
+int split (char *str, const char delimeter, char ***args) {
+    int cnt = 1;
+    char *t = str;
+    while (*t == delimeter)
+        t++;
+    char *t2 = t;
+    while (*(t2++))
+        if (*t2 == delimeter && *(t2 + 1) != delimeter && *(t2 + 1) != 0)
+            cnt++;
+    (*args) = malloc (sizeof (char *) * cnt);
+    for (int i = 0; i < cnt; i++) {
+        char *ts = t;
+        while (*t != delimeter && *t != 0)
+            t++;
+        int len = (t - ts + 1);
+        (*args)[i] = malloc (sizeof (char) * len);
+        memcpy ((* args) [i], ts, sizeof (char) * (len - 1));
+        (*args)[i][len - 1] = 0;
+        while (*t == delimeter)
+            t++;
+    }
+    return cnt;
+}
+

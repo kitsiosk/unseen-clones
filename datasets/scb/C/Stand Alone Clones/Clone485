@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:24830407
+*  Stack Overflow answer #:24830787
+*  And Stack Overflow answer#:24830768
+*/
+int main (int argc, char *argv []) {
+    struct termios termios;
+    tcgetattr (STDIN_FILENO, & termios);
+    termios.c_lflag &= ~ECHO;
+    tcsetattr (STDIN_FILENO, TCSAFLUSH, & termios);
+    char line [MAX_LINE_SIZE] = {0};
+    fgets (line, sizeof (line), stdin);
+    termios.c_lflag &= ~ECHO;
+    tcsetattr (STDIN_FILENO, TCSAFLUSH, & termios);
+    printf ("line: %s", line);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int ch;
+    printf ("Press x to exit.\n\n");
+    for (;;) {
+        ch = getch ();
+        printf ("ch = %c (%d)\n", ch, ch);
+        if (ch == 'x')
+            break;
+    }
+    return 0;
+}
+

@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52403743
+*  Stack Overflow answer #:52404494
+*  And Stack Overflow answer#:52404479
+*/
+int main () {
+    const size_t X = 2;
+    const size_t Y = 2;
+    int (*a) [Y] = malloc (sizeof (int [X] [Y]));
+    int count = 1;
+    for (size_t x = 0; x < X; x++) {
+        for (size_t y = 0; y < Y; y++) {
+            a[x][y] = count++;
+            printf ("%d ", a [x] [y]);
+        }
+        printf ("\n");
+    }
+    free (a);
+}
+
+int main () {
+    void *ptr = malloc (sizeof (int) * 4);
+    int (*a) [2];
+    a = ptr;
+    for (int i = 0; i < 2; ++i)
+        for (int j = 0; j < 2; ++j)
+            a[i][j] = i * 100 + j;
+    for (int i = 0; i < 2; ++i)
+        for (int j = 0; j < 2; ++j)
+            printf ("a[%d][%d]=%d\n", i, j, a[i][j]);
+    free (ptr);
+    return 0;
+}
+

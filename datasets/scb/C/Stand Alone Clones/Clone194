@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38635601
+*  Stack Overflow answer #:38637208
+*  And Stack Overflow answer#:38638734
+*/
+int main (void) {
+    const char *pins [] = {"d1", "d2", "d3", "d4", "d5", "o1", "o2", "o3", "o4"};
+    const int pinsNumbers [] = {1, 2, 19, 4, 14, 6, 12, 15, 17};
+    const char *key = "d3";
+    const char **p = bsearch (&key, pins, sizeof (pins) / sizeof (*pins), sizeof (const char *), cmp);
+    if (p)
+        printf ("%d\n", pinsNumbers[p - pins]);
+    return 0;
+}
+
+int main (void) {
+    int num;
+    unsigned char const inp [] = "d3";
+    printf ("\f%s is ", inp);
+    if (pin_to_num (&num, inp) == DECODE_OK) {
+        printf ("%d\r\n", num);
+    }
+    else {
+        printf ("err\r\n");
+    }
+    return 0;
+}
+

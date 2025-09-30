@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5772193
+*  Stack Overflow answer #:5772312
+*  And Stack Overflow answer#:29522172
+*/
+int main (int argc, char const *argv []) {
+    union int_chars c;
+    c.a = 10;
+    c.b[0] = 1;
+    c.b[1] = 2;
+    c.b[2] = 3;
+    c.b[3] = 4;
+    return 0;
+}
+
+int main () {
+    int i;
+    int x;
+    char e = 'E';
+    char t = 'T';
+    char n = 'N';
+    char a = 'A';
+    ((char *) &x)[0] = e;
+    ((char *) &x)[1] = t;
+    ((char *) &x)[2] = n;
+    ((char *) &x)[3] = a;
+    for (i = 0; i < 4; i++)
+        printf ("%c\n", ((char *) &x)[i]);
+    return 0;
+}
+

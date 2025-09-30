@@ -1,0 +1,78 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49091380
+*  Stack Overflow answer #:49092195
+*  And Stack Overflow answer#:49092174
+*/
+int main (void) {
+    char word [MAXC] = "";
+    size_t wordcnt = 0;
+    printf ("enter a word(s) below, [ctrl+d on blank line to end]\n");
+    for (;;) {
+        int vowels [NVOWEL] = {0}, vowelcnt = 0, rtn;
+        if ((rtn = scanf ("%127s", word)) == EOF)
+            break;
+        for (int i = 0; word[i]; i++) {
+            if ('A' <= word[i] && word[i] <= 'Z')
+                word[i] ^= 'a' - 'A';
+            switch (word[i]) {
+            case 'a' :
+                vowels[0] = 1;
+                break;
+            case 'e' :
+                vowels[1] = 1;
+                break;
+            case 'i' :
+                vowels[2] = 1;
+                break;
+            case 'o' :
+                vowels[3] = 1;
+                break;
+            case 'u' :
+                vowels[4] = 1;
+                break;
+            }
+        }
+        for (int i = 0; i < NVOWEL; i++)
+            if (vowels[i])
+                vowelcnt++;
+        if (vowelcnt >= NREQD)
+            wordcnt++;
+    }
+    printf ("\nThere are %zu words with %d different vowels.\n", wordcnt, NREQD);
+}
+
+int main (void) {
+    char line [1024];
+    int lookup_vowels [1 << CHAR_BIT] = {0};
+    lookup_vowels['a'] = lookup_vowels['e'] = lookup_vowels['i'] = lookup_vowels['o'] = lookup_vowels['u'] = 1;
+    const char *delim = " \t\r\n";
+    int num_of_words = 0;
+    printf ("Enter some text, to end input press ENTER and then CTRL+D\n");
+    while (1) {
+        if (fgets (line, sizeof line, stdin) == NULL)
+            break;
+        char *word = strtok (line, delim);
+        if (word == NULL)
+            continue;
+        do {
+            int present [1 << CHAR_BIT] = {0};
+            size_t len = strlen (word);
+            for (size_t i = 0; i < len; ++i) {
+                int c = tolower (word[i]);
+                if (lookup_vowels[c])
+                    present[c] = 1;
+            }
+            int count = present['a'] + present['e'] + present['i'] + present['o'] + present['u'];
+            if (count > 2) {
+                printf ("'%s' has more than three distinct vowels\n", word);
+                num_of_words++;
+            }
+        }
+        while ((word = strtok (NULL, delim)));
+    }
+    printf ("The number of word with three or more distinct vowels: %d\n", num_of_words);
+    return 0;
+}
+

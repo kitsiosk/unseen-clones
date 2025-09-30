@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3649874
+*  Stack Overflow answer #:49840783
+*  And Stack Overflow answer#:4225290
+*/
+int main () {
+    Display *dpy = XOpenDisplay (NULL);
+    char keys_return [32];
+    XQueryKeymap (dpy, keys_return);
+    KeyCode kc2 = XKeysymToKeycode (dpy, XK_Shift_L);
+    bool bShiftPressed = !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
+    printf ("Shift is %spressed\n", bShiftPressed ? "" : "not ");
+    XCloseDisplay (dpy);
+}
+
+int main (int argc, char *argv [], char *env []) {
+    if (argc != 2)
+        usage (argc, argv);
+    int key;
+    if (strcmp (argv[1], "lshift") == 0)
+        key = KEY_LEFTSHIFT;
+    else if (strcmp (argv[1], "rshift") == 0)
+        key = KEY_RIGHTSHIFT;
+    else if (strcmp (argv[1], "lalt") == 0)
+        key = KEY_LEFTALT;
+    else if (strcmp (argv[1], "ralt") == 0)
+        key = KEY_RIGHTALT;
+    else if (strcmp (argv[1], "lctrl") == 0)
+        key = KEY_LEFTCTRL;
+    else if (strcmp (argv[1], "rctrl") == 0)
+        key = KEY_RIGHTCTRL;
+    FILE *kbd = fopen ("/dev/input/by-path/platform-i8042-serio-0-event-kbd", "r");
+    char key_map [KEY_MAX / 8 + 1];
+    memset (key_map, 0, sizeof (key_map));
+    ioctl (fileno (kbd), EVIOCGKEY (sizeof (key_map)), key_map);
+    int keyb = key_map[key / 8];
+    int mask = 1 << (key % 8);
+    return !(keyb & mask);
+}
+

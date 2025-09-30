@@ -1,0 +1,71 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:32487184
+*  And Stack Overflow answer#:29259329
+*/
+char **split (char *str, size_t len, char delim, char ***result, unsigned long *count, unsigned long max) {
+    size_t i;
+    char **_result;
+    *count = 1;
+    _result = *result;
+    if (_result) {
+        _result[0] = str;
+    }
+    for (i = 0; i < len; ++i) {
+        if (str[i] == delim) {
+            str[i] = 0;
+            if (_result) {
+                _result[*count] = str + i + 1;
+            }
+            ++(*count);
+            if (max && *count == max) {
+                break;
+            }
+        }
+    }
+    if (_result) {
+        return _result;
+    }
+    *result = malloc ((*count) * sizeof (char *));
+    if (!*result) {
+        return NULL;
+    }
+    _result = *result;
+    _result[0] = str;
+    for (i = 1; i < *count; ++i) {
+        while (*str)
+            ++str;
+        ++str;
+        _result[i] = str;
+    }
+    return _result;
+}
+
+char **split (char *a_str, const char a_delim, int *len) {
+    char *s = (char *) malloc (sizeof (char) * strlen (a_str));
+    strcpy (s, a_str);
+    char *tmp = a_str;
+    int count = 0;
+    while (*tmp != '\0') {
+        if (*tmp == a_delim)
+            count += 1;
+        tmp += 1;
+    }
+    *len = count;
+    char **results = (char **) malloc (count * sizeof (char *));
+    results[0] = s;
+    int i = 1;
+    while (*s != '\0') {
+        if (*s == a_delim) {
+            *s = '\0';
+            s += 1;
+            results[i++] = s;
+        }
+        else
+            s += 1;
+    }
+    return results;
+}
+

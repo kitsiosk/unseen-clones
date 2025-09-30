@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45327198
+*  Stack Overflow answer #:45328242
+*  And Stack Overflow answer#:45327395
+*/
+int main (int argc, char const *argv []) {
+    FUNC_TABLE_INIT ();
+    FUNC_TABLE_ADD_ENTRY (foo1);
+    FUNC_TABLE_ADD_ENTRY (foo2);
+    FUNC_TABLE_ADD_ENTRY (foo3);
+    FUNC_TABLE_ADD_ENTRY (foo4);
+    if (1) {
+        FUNC_TABLE_ADD_ENTRY (foo5);
+    }
+    else {
+        FUNC_TABLE_ADD_ENTRY (foo6);
+    }
+    FUNC_TABLE_ITERATE (i) {
+        printf ("Name: '%s'; pointer: %p\n", i -> name, i -> func_ptr);
+    } return 0;
+}
+
+int main (int argc, char **argv) {
+    void *hndl = dlopen (NULL, RTLD_LAZY);
+    if (!hndl) {
+        fprintf (stderr, "dlopen failed: %s\n", dlerror ());
+        exit (EXIT_FAILURE);
+    }
+    for (int i = 0; i < argc; i++) {
+        void (*fptr) (void) = dlsym (hndl, argv[i]);
+        if (fptr != NULL)
+            fptr ();
+        else
+            fprintf (stderr, "dlsym %s failed: %s\n", argv[i], dlerror ());
+    }
+    dlclose (hndl);
+    return 0;
+}
+

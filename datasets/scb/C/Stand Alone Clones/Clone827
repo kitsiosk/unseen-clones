@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18846689
+*  Stack Overflow answer #:18847023
+*  And Stack Overflow answer#:18846904
+*/
+int main () {
+    int i;
+    struct a {
+        char a;
+        char b;
+        char c;
+        float f [10];
+    };
+    struct a my_struct;
+    my_struct.a = 'a';
+    my_struct.b = 'b';
+    my_struct.c = 'c';
+    for (i = 0; i < 10; i++)
+        my_struct.f[i] = i * 1.1;
+    printf ("%c,%c,%c", my_struct.a, my_struct.b, my_struct.c);
+    for (i = 0; i < 10; i++)
+        printf (",%.8f", my_struct.f[i]);
+    return 0;
+}
+
+int main (void) {
+    int i;
+    char testBuffer [TEST_BUFFER_CHARS] = {'\0'};
+    char *loc = testBuffer;
+    size_t testBufferSpace = TEST_BUFFER_CHARS;
+    size_t tempLen;
+    float testFloats [] = {1.1, 1.2, 1.3, 1.4};
+    for (i = 0; i < DIM (testFloats); ++i) {
+        snprintf (loc, testBufferSpace, "%f, ", testFloats [i]);
+        tempLen = strlen (loc);
+        loc += tempLen;
+    }
+    printf (testBuffer);
+    return 0;
+}
+

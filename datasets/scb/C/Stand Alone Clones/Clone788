@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1725124
+*  Stack Overflow answer #:1725169
+*  And Stack Overflow answer#:1725183
+*/
+int main (int argc, char **argv) {
+    wint_t letter = L '\0';
+    setlocale (LC_ALL, "");
+    while (1) {
+        if (!letter)
+            printf ("Type a letter to get its position: ");
+        letter = fgetwc (stdin);
+        if (letter == WEOF) {
+            putchar ('\n');
+            return 0;
+        }
+        else if (letter == L'\n' || letter == L'\r') {
+            letter = L'\0';
+        }
+        else {
+            printf ("%d\n", letter);
+        }
+    }
+    return 0;
+}
+
+int main () {
+    while (1) {
+        printf ("Type a letter to get its position: ");
+        int val = letter_nr ();
+        if (-1 != val)
+            printf ("Morse code is %d.\n", val);
+        else
+            printf ("Unknown Morse code.\n");
+        unsigned char new_line;
+        scanf ("%c", & new_line);
+    }
+    return 0;
+}
+

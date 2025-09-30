@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2416483
+*  Stack Overflow answer #:2416702
+*  And Stack Overflow answer#:2419307
+*/
+int main () {
+    int x, number, fac;
+    fac = 1;
+    printf ("Enter a number:\n");
+    scanf ("%d", & number);
+    if (number < 0) {
+        printf ("Factorial not defined for negative numbers.\n");
+        exit (0);
+    }
+    for (x = 1; x <= number; x++) {
+        if (number >= 0)
+            fac = fac * x;
+        else
+            fac = 1;
+    }
+    printf ("%d! = %d\n", number, fac);
+}
+
+int main (int argc, char *argv []) {
+    const char *test_cases [] = {"0", "1", "1", "1", "4", "24", "15", "1307674368000", "30", "265252859812191058636308480000000", "56", "710998587804863451854045647463724949736497978881168458687447040000000000000", NULL, NULL};
+    int index = 0;
+    BIGNUM *bn = NULL;
+    BIGNUM *fact = NULL;
+    char *result_str = NULL;
+    for (index = 0; test_cases[index] != NULL; index += 2) {
+        BN_dec2bn (& bn, test_cases [index]);
+        fact = factorial (bn);
+        result_str = BN_bn2dec (fact);
+        printf ("%3s: %s\n", test_cases [index], result_str);
+        assert (strcmp (result_str, test_cases [index + 1]) == 0);
+        OPENSSL_free (result_str);
+        BN_free (fact);
+        BN_free (bn);
+        bn = NULL;
+    }
+    return 0;
+}
+

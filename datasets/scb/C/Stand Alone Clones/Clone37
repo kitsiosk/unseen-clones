@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1801549
+*  Stack Overflow answer #:1801746
+*  And Stack Overflow answer#:36963869
+*/
+int main (void) {
+    int i;
+    struct node *newnode;
+    for (i = 0; i < 5; i++) {
+        newnode = malloc (sizeof (struct node));
+        newnode->data = i;
+        newnode->link = first;
+        first = newnode;
+    }
+    dumpNodes ();
+    reverse ();
+    dumpNodes ();
+    printf ("==========\n");
+    return 0;
+}
+
+void main () {
+    node *head;
+    clrscr ();
+    head = NULL;
+    add_end (& head, 1);
+    add_end (& head, 2);
+    add_end (& head, 3);
+    print_all (head);
+    reverse (& head);
+    print_all (head);
+    getch ();
+}
+

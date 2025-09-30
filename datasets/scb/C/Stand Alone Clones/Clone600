@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18251010
+*  Stack Overflow answer #:18251046
+*  And Stack Overflow answer#:18251195
+*/
+int main () {
+    int blah = 1;
+    int *blah1 = &blah;
+    int **blah2 = &blah1;
+    int ***blah3 = &blah2;
+    int ****blah4 = &blah3;
+    int *****blah5 = &blah4;
+    int ******blah6 = &blah5;
+    int *******blah7 = &blah6;
+    int ********blah8 = &blah7;
+    int *********blah9 = &blah8;
+    mega_pointer (blah9);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int a = 0;
+    int *p1, **p2, ***p3, ****p4, *****p5, ******p6, *******p7, ********p8, *********p9;
+    p1 = &a;
+    p2 = &p1;
+    p3 = &p2;
+    p4 = &p3;
+    p5 = &p4;
+    p6 = &p5;
+    p7 = &p6;
+    p8 = &p7;
+    p9 = &p8;
+    mega_pointer (p9);
+    printf ("a=%d\n", a);
+    return 0;
+}
+

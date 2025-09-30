@@ -1,0 +1,214 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45136080
+*  Stack Overflow answer #:45136461
+*  And Stack Overflow answer#:45136348
+*/
+int main () {
+    int a, b, c, d, e;
+    scanf ("%d", & a);
+    scanf ("%d", & b);
+    scanf ("%d", & c);
+    scanf ("%d", & d);
+    scanf ("%d", & e);
+    int a_count = 0;
+    int b_count = 0;
+    int c_count = 0;
+    int d_count = 0;
+    int e_count = 0;
+    int first, second, third, fourth, fifth;
+    if (a > b)
+        ++a_count;
+    if (a > c)
+        ++a_count;
+    if (a > d)
+        ++a_count;
+    if (a > e)
+        ++a_count;
+    if (b > a)
+        ++b_count;
+    if (b > c)
+        ++b_count;
+    if (b > d)
+        ++b_count;
+    if (b > e)
+        ++b_count;
+    if (c > a)
+        ++c_count;
+    if (c > b)
+        ++c_count;
+    if (c > d)
+        ++c_count;
+    if (c > e)
+        ++c_count;
+    if (d > a)
+        ++d_count;
+    if (d > b)
+        ++d_count;
+    if (d > c)
+        ++d_count;
+    if (d > e)
+        ++d_count;
+    if (e > a)
+        ++e_count;
+    if (e > b)
+        ++e_count;
+    if (e > c)
+        ++e_count;
+    if (e > d)
+        ++e_count;
+    switch (a_count) {
+    case 0 :
+        first = a;
+        break;
+    case 1 :
+        second = a;
+        break;
+    case 2 :
+        third = a;
+        break;
+    case 3 :
+        fourth = a;
+        break;
+    case 4 :
+        fifth = a;
+        break;
+    }
+    switch (b_count) {
+    case 0 :
+        first = b;
+        break;
+    case 1 :
+        second = b;
+        break;
+    case 2 :
+        third = b;
+        break;
+    case 3 :
+        fourth = b;
+        break;
+    case 4 :
+        fifth = b;
+        break;
+    }
+    switch (c_count) {
+    case 0 :
+        first = c;
+        break;
+    case 1 :
+        second = c;
+        break;
+    case 2 :
+        third = c;
+        break;
+    case 3 :
+        fourth = c;
+        break;
+    case 4 :
+        fifth = c;
+        break;
+    }
+    switch (d_count) {
+    case 0 :
+        first = d;
+        break;
+    case 1 :
+        second = d;
+        break;
+    case 2 :
+        third = d;
+        break;
+    case 3 :
+        fourth = d;
+        break;
+    case 4 :
+        fifth = d;
+        break;
+    }
+    switch (e_count) {
+    case 0 :
+        first = e;
+        break;
+    case 1 :
+        second = e;
+        break;
+    case 2 :
+        third = e;
+        break;
+    case 3 :
+        fourth = e;
+        break;
+    case 4 :
+        fifth = e;
+        break;
+    }
+    printf ("%d %d %d %d %d\n", first, second, third, fourth, fifth);
+    return 0;
+}
+
+int main () {
+    int a, b, c, d, e, temp;
+    printf ("Program 5.2: Ascending Order of Values\n");
+    printf ("======================================\n\n");
+    printf ("Enter first value: ");
+    scanf ("%d", & a);
+    printf ("Enter second value: ");
+    scanf ("%d", & b);
+    printf ("Enter third value: ");
+    scanf ("%d", & c);
+    printf ("Enter fourth value: ");
+    scanf ("%d", & d);
+    printf ("Enter fifth value: ");
+    scanf ("%d", & e);
+    printf ("\nRe-arranged in ascending order: \n");
+    printf ("===============================\n\n");
+    if (a > b) {
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    if (d > e) {
+        temp = d;
+        d = e;
+        e = temp;
+    }
+    if (c > e) {
+        temp = c;
+        c = e;
+        e = temp;
+    }
+    if (c > d) {
+        temp = c;
+        c = d;
+        d = temp;
+    }
+    if (a > d) {
+        temp = a;
+        a = d;
+        d = temp;
+    }
+    if (a > c) {
+        temp = a;
+        a = c;
+        c = temp;
+    }
+    if (b > e) {
+        temp = b;
+        b = e;
+        e = temp;
+    }
+    if (b > d) {
+        temp = b;
+        b = d;
+        d = temp;
+    }
+    if (b > c) {
+        temp = b;
+        b = c;
+        c = temp;
+    }
+    printf ("%d %d %d %d %d\n", a, b, c, d, e);
+    return 0;
+}
+

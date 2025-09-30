@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9456058
+*  Stack Overflow answer #:9456369
+*  And Stack Overflow answer#:9456136
+*/
+enum QE_Status quadratic_equation (double a, double b, double c, double *r) {
+    double discriminant;
+    if (r == 0)
+        return QE_NULL_POINTER;
+    if (a == 0.0)
+        return QE_NON_QUADRATIC;
+    discriminant = (b * b) - (4 * a * c);
+    if (discriminant < 0)
+        return QE_COMPLEX_ROOTS;
+    discriminant = sqrt (discriminant);
+    r[0] = (-b + discriminant) / (2 * a);
+    r[1] = (-b - discriminant) / (2 * a);
+    return QE_OK;
+}
+
+quadratic_roots_t quadratic_equation (double a, double b, double c) {
+    quadratic_roots_t roots;
+    double d;
+    d = b * b - 4 * a * c;
+    if (d < 0.0) {
+        roots.num_roots = 0;
+    }
+    else if (d == 0.0) {
+        roots.num_roots = 1;
+        roots.roots[0] = -b / (2 * a);
+    }
+    else {
+        roots.num_roots = 2;
+        roots.roots[0] = (-b - sqrt (d)) / (2 * a);
+        roots.roots[1] = (-b + sqrt (d)) / (2 * a);
+    }
+    return roots;
+}
+

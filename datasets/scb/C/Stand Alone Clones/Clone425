@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2303278
+*  Stack Overflow answer #:2304031
+*  And Stack Overflow answer#:2304815
+*/
+bool isRectangle (double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+    double cx, cy;
+    double dd1, dd2, dd3, dd4;
+    cx = (x1 + x2 + x3 + x4) / 4;
+    cy = (y1 + y2 + y3 + y4) / 4;
+    dd1 = sqr (cx -x1) + sqr (cy -y1);
+    dd2 = sqr (cx -x2) + sqr (cy -y2);
+    dd3 = sqr (cx -x3) + sqr (cy -y3);
+    dd4 = sqr (cx -x4) + sqr (cy -y4);
+    return dd1 == dd2 && dd1 == dd3 && dd1 == dd4;
+}
+
+bool isRectangle (double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+    double m1, m2, m3;
+    m1 = (y2 - y1) / (x2 - x1);
+    m2 = (y2 - y3) / (x2 - x3);
+    m3 = (y4 - y3) / (x4 - x3);
+    if ((m1 * m2) == -1 && (m2 * m3) == -1)
+        return true;
+    else
+        return false;
+}
+

@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:63166
+*  Stack Overflow answer #:13947253
+*  And Stack Overflow answer#:30452461
+*/
+int main (void) {
+    int n;
+    GetSystemTimesAddress ();
+    for (n = 0; n < 20; n++) {
+        printf ("CPU Usage: %3d%%\r", cpuusage ());
+        Sleep (2000);
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int i, j;
+    init_cpu ();
+    printf ("System has: %d CPUs\n", NumCpus);
+    for (i = 0; i < 20; i++) {
+        sample_cpus ();
+        for (j = 0; j < NumCpus; j++)
+            printf ("CPU #%d: %f\n", j, Loads[j]);
+        sleep (1);
+    }
+    close_cpu ();
+}
+

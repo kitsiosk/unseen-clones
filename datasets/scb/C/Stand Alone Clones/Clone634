@@ -1,0 +1,73 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36196652
+*  Stack Overflow answer #:36196968
+*  And Stack Overflow answer#:36196892
+*/
+void printField () {
+    int i, j;
+    char toPrint [10000];
+    char *current = toPrint;
+    system ("CLS");
+    for (i = 0; i < 52; i++) {
+        for (j = 0; j < 142; j++) {
+            if (field[i][j] == 0) {
+                *current++ = ' ';
+            }
+            if (field[i][j] == 9) {
+                *current++ = '\xDB';
+            }
+            if (field[i][j] == 2) {
+                *current++ = '\xDB';
+            }
+            if (field[i][j] == 1) {
+                *current++ = ' ';
+            }
+            if (field[i][j] == 6) {
+                *current++ = ' ';
+            }
+            if (field[i][j] == 7) {
+                *current++ = '\xCF';
+            }
+        }
+        *current++ = '\n';
+    }
+    *current = '\0';
+    puts (toPrint);
+}
+
+void printField () {
+    int i, j;
+    int n = 0;
+    char toPrint [52 * (142 + 1) + 1];
+    system ("CLS");
+    for (i = 0; i < 52; i++) {
+        for (j = 0; j < 142; j++) {
+            switch (field[i][j]) {
+            case 0 :
+                toPrint[n++] = ' ';
+                break;
+            case 9 :
+                toPrint[n++] = 219;
+                break;
+            case 2 :
+                toPrint[n++] = 219;
+                break;
+            case 1 :
+                toPrint[n++] = ' ';
+                break;
+            case 6 :
+                toPrint[n++] = ' ';
+                break;
+            case 7 :
+                toPrint[n++] = 207;
+                break;
+            }
+        }
+        toPrint[n++] = '\n';
+    }
+    toPrint[n] = '\0';
+    printf ("%s\n", toPrint);
+}
+

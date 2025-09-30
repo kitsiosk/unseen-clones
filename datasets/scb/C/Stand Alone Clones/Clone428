@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12773650
+*  Stack Overflow answer #:12773687
+*  And Stack Overflow answer#:12773738
+*/
+int main () {
+    for (x = 0; x < 6; x++) {
+        printf ("Give me the time of runner 1: ");
+        scanf ("%f", & timerunner1 [x]);
+        maximum = maximum > timerunner1[x] ? maximum : timerunner1[x];
+    }
+    printf ("%f\n", maximum);
+    return 0;
+}
+
+int main (void) {
+    float timerunner1 [5] = {0};
+    float highest;
+    int highestindex, i;
+    for (i = 0; i < 5; i++) {
+        printf ("\nEnter the %d element of the array: ", i);
+        scanf (% f, timerunner1 [i]);
+    }
+    highest = timerunner1[0];
+    highestindex = 0;
+    for (i = 1; i < 5; i++) {
+        if (highest < timerunner1[i]) {
+            highest = timerunner1[i];
+            highestindex = i;
+        }
+    }
+    printf ("\nThe highest time of the runner %d is: %f \n", highestindex, highest);
+    return 1;
+}
+

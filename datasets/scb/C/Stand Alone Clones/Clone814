@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17073147
+*  Stack Overflow answer #:17073477
+*  And Stack Overflow answer#:17073468
+*/
+int how_many_times (char *str1, char *str2) {
+    int result = 0, i, j = 0;
+    for (i = 0; i < strlen (str2); i++) {
+        if ((str1[j] == str2[i])) {
+            while (str1[j] == str2[i]) {
+                j++;
+                if (j == strlen (str1)) {
+                    result++;
+                    j = 0;
+                }
+                i++;
+            }
+        }
+        else {
+            i++;
+            j = 0;
+        }
+    }
+    return result;
+}
+
+int how_many_times (char *str, char *str2) {
+    int result = 0, i = 0, j, k, len = strlen (str);
+    while (str2[i]) {
+        j = 0;
+        k = 0;
+        while (1) {
+            if (str[j + k] == str2[i + k] && str[j] != 0) {
+                if (j + k == len - 1) {
+                    result++;
+                    break;
+                }
+            }
+            else {
+                break;
+            }
+            k++;
+        }
+        i++;
+    }
+    return result;
+}
+

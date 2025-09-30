@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4118016
+*  Stack Overflow answer #:4118556
+*  And Stack Overflow answer#:4118304
+*/
+int main (int argc, char *argv []) {
+    struct rlimit lim = {1, 1};
+    if (argc > 1 && argv[1][0] == '-' && argv[1][8] == 'l') {
+        printf ("limiting stack size\n");
+        if (setrlimit (RLIMIT_STACK, &lim) == -1) {
+            printf ("rlimit failed\n");
+            return 1;
+        }
+    }
+    foo ();
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    char *newarg [] = {"argv[0]", "one", "two"};
+    char *newenv [] = {NULL};
+    struct rlimit lim;
+    newarg[0] = argv[0];
+    getrlimit (RLIMIT_STACK, & lim);
+    printf ("lim: %d / %d\n", (int) lim.rlim_cur, (int) lim.rlim_max);
+    switch (argc) {
+    case 1 :
+        lim.rlim_cur = 65536;
+        lim.rlim_max = 65536;
+        if (setrlimit (RLIMIT_STACK, &lim) == -1)
+            return EXIT_FAILURE;
+        newarg[2] = NULL;
+        foo (1);
+        execve (argv [0], newarg, newenv);
+        break;
+    case 2 :
+        lim.rlim_cur = 1024;
+        lim.rlim_max = 1024;
+        if (setrlimit (RLIMIT_STACK, &lim) == -1)
+            return EXIT_FAILURE;
+        foo (2);
+        execve (argv [0], newarg, newenv);
+        break;
+    default :
+        foo (3);
+        break;
+    }
+    return 0;
+}
+

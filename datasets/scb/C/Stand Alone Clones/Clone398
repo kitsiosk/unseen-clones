@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27079589
+*  Stack Overflow answer #:27086393
+*  And Stack Overflow answer#:27087288
+*/
+int main (void) {
+    char nme [20];
+    unsigned long long nmbr;
+    int nmbr_len;
+    printf ("Enter:");
+    char buf [100];
+    fgets (buf, sizeof buf, stdin);
+    int n [2];
+    if (sscanf ("%19s %n%llu%n", nme, &n[0], &nmbr, &n[1]) != 2) {
+        Handle_BadInput ();
+    }
+    nmbr_len = n[1] - n[0];
+    printf ("%s %0*llu\n", nme, nmbr_len, nmbr);
+    return 0;
+}
+
+int main () {
+    char *line = NULL;
+    size_t n = 0;
+    ssize_t nchr = 0;
+    int idx = 0;
+    char *p = NULL;
+    nandn *nnlist = calloc (MAXL, sizeof (nnlist));
+    printf ("\nEnter name and number to add to book [ctrl+d] when done.\n\n");
+    while (printf (" name number: ") && (nchr = getline (&line, &n, stdin)) != -1) {
+        if (line[nchr - 1] == '\n')
+            line[--nchr] = 0;
+        p = strrchr (line, ' ');
+        if (!p)
+            break;
+        (nnlist + idx)->num = strdup (++p);
+        *(--p) = 0;
+        (nnlist + idx)->name = strdup (line);
+        idx++;
+    }
+    if (line)
+        free (line);
+    printf ("\n\nThe information collected was:\n\n");
+    int i = 0;
+    while ((nnlist + i)->name) {
+        printf ("  nnlist[%d]   %-24s  %s\n", i, (nnlist + i) -> name, (nnlist + i) -> num);
+        i++;
+    }
+    printf ("\n");
+    i = 0;
+    while ((nnlist + i)->name) {
+        free ((nnlist + i) -> name);
+        free ((nnlist + i) -> num);
+        i++;
+    }
+    free (nnlist);
+    return 0;
+}
+

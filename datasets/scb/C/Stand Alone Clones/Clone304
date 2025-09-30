@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48066271
+*  Stack Overflow answer #:48067049
+*  And Stack Overflow answer#:50524865
+*/
+void print_memory (const void *addr, size_t size) {
+    size_t printed = 0;
+    size_t i;
+    const unsigned char *pc = addr;
+    for (i = 0; i < size; ++i) {
+        int g;
+        g = (*(pc + i) >> 4) & 0xf;
+        g += g >= 10 ? 'a' - 10 : '0';
+        putchar (g);
+        printed++;
+        g = *(pc + i) & 0xf;
+        g += g >= 10 ? 'a' - 10 : '0';
+        putchar (g);
+        printed++;
+        if (printed % 32 == 0)
+            putchar ('\n');
+        else if (printed % 4 == 0)
+            putchar (' ');
+    }
+}
+
+void print_memory (const void *addr, size_t size) {
+    char *ptr;
+    size_t i;
+    if (addr && size > 0) {
+        ptr = (char *) addr;
+        i = 0;
+        while (i < size) {
+            print_hex (* (ptr + i), 0);
+            if (i % 2)
+                ft_putchar (' ');
+            if ((i + 1) % 16 == 0 || (i + 1) == size)
+                print_ascii (addr, i);
+            i++;
+        }
+    }
+}
+

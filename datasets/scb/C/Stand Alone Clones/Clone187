@@ -1,0 +1,67 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35051733
+*  Stack Overflow answer #:35073709
+*  And Stack Overflow answer#:35053546
+*/
+int main (int argc, char **argv) {
+    char buf [MAXC] = {0};
+    sp s [MAXS];
+    size_t i, n = 0;
+    FILE *ifp = argc > 1 ? fopen (argv[1], "r") : stdin;
+    FILE *tfp = fopen (argc > 2 ? argv[2] : "../dat/template.txt", "r");
+    FILE *ofp = argc > 3 ? fopen (argv[3], "w") : stdout;
+    if (!ifp || !tfp || !ofp) {
+        fprintf (stderr, "error: file open failed.\n");
+        return 1;
+    }
+    while (fgets (buf, MAXC, ifp)) {
+        char *p;
+        size_t idx = 0;
+        for (p = strtok (buf, "|"); p; p = strtok (NULL, "|\n")) {
+            fillsp (& s [n], p, & idx);
+        }
+        if (++n == MAXS) {
+            fprintf (stderr, "MAXS structs filled.\n");
+            break;
+        }
+    }
+    for (i = 0; i < n; i++)
+        welcome (&s[i], tfp);
+    if (ifp != stdin)
+        fclose (ifp);
+    if (ofp != stdout)
+        fclose (ofp);
+    fclose (tfp);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    FILE *ftmpl;
+    FILE *fcust;
+    FILE *fout;
+    int fldused;
+    char *cp;
+    char buf [5000];
+    fcust = xfopen ("data.txt", "r");
+    ftmpl = xfopen ("template.txt", "r");
+    fout = xfopen ("/dev/null", "w");
+    fldused = check_tmpl (fout, ftmpl);
+    check_cust (fout, fcust, fldused);
+    fout = xfclose (fout);
+    rewind (fcust);
+    while (1) {
+        cp = fgets (buf, sizeof (buf), fcust);
+        if (cp == NULL)
+            break;
+        cp = strchr (buf, '\n');
+        if (cp != NULL)
+            *cp = 0;
+        docust (stdout, ftmpl, buf);
+    }
+    fcust = xfclose (fcust);
+    ftmpl = xfclose (ftmpl);
+    return 0;
+}
+

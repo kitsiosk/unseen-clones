@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35335961
+*  Stack Overflow answer #:35336102
+*  And Stack Overflow answer#:35336221
+*/
+int main (void) {
+    int pn = 20;
+    int pos = 5;
+    double *arr = malloc (sizeof (double) * pn);
+    printf ("%p\n", arr);
+    for (int i = 0; i < pn; i++) {
+        arr[i] = i;
+    }
+    for (int i = 0; i < pn; i++) {
+        printf ("%.f ", arr [i]);
+    }
+    printf ("\n");
+    printf ("%i\n", pn);
+    array_remove (& arr, & pn, pos);
+    printf ("%p\n", arr);
+    for (int i = 0; i < pn; i++) {
+        printf ("%.f ", arr [i]);
+    }
+    printf ("\n");
+    printf ("%i", pn);
+    free (arr);
+}
+
+int main (void) {
+    size_t pn = 5;
+    size_t pos = 2;
+    int i;
+    double *arr = malloc (pn * sizeof (double));
+    if (arr != NULL) {
+        for (i = 0; i < pn; i++) {
+            arr[i] = (double) (i + 1);
+        }
+        if (array_remove (&arr, &pn, pos) == false) {
+            printf ("Failed to remove element %zu\n", pos);
+        }
+        for (i = 0; i < pn; i++)
+            printf ("arr[%d]: %f\n", i, arr[i]);
+        free (arr);
+    }
+    else {
+        printf ("Failed to alloc array\n");
+    }
+    return 0;
+}
+

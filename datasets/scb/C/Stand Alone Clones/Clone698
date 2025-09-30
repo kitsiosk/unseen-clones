@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39485246
+*  Stack Overflow answer #:39485527
+*  And Stack Overflow answer#:39485546
+*/
+Stuff *allocateArray () {
+    Stuff *stuff = malloc (sizeof (Stuff) * ARR_SIZE);
+    for (int i = 0; i < ARR_SIZE; i++) {
+        (*(stuff + i)) = (Stuff) {i, i + i};
+    }
+    for (int i = 0; i < ARR_SIZE; i++) {
+        printf ("%d : %d\n", (stuff + i) -> x, (stuff + i) -> y);
+    }
+    return stuff;
+}
+
+Stuff *allocateArray (size_t count) {
+    Stuff *stuff = (Stuff *) malloc (sizeof (Stuff) * count);
+    if (!stuff)
+        return NULL;
+    for (int i = 0; i < count; i++) {
+        stuff[i].x = i;
+        stuff[i].y = 2 * i;
+        printf ("%d : %d\n", stuff [i].x, stuff [i].y);
+    }
+    return stuff;
+}
+

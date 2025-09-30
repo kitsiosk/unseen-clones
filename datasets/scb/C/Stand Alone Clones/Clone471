@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20760914
+*  Stack Overflow answer #:20760971
+*  And Stack Overflow answer#:20760934
+*/
+main () {
+    int n, i;
+    FILE *fptr;
+    fptr = fopen ("f3.txt", "w");
+    if (fptr == NULL) {
+        printf ("Error!");
+        exit (1);
+    }
+    printf ("Enter n: ");
+    for (i = 0; i <= 3; i++) {
+        scanf ("%d \n", & n);
+        fprintf (fptr, "%d ", n);
+    }
+    fclose (fptr);
+    return 0;
+}
+
+int main () {
+    int n, i, c;
+    for (i = 0; i <= 2; i++) {
+        printf ("  scanf #%d (%%d) \n", i + 1);
+        scanf ("%d", & n);
+        printf ("  Read: %d\n", n);
+        c = getchar ();
+        printf ("  Last character in input buffer: %.2X\n", c);
+        printf ("  scanf #%d (space and \\n) \n", i + 1);
+        scanf (" \n");
+        c = getchar ();
+        printf ("  Last character in input buffer: %.2X\n", c);
+        ungetc (c, stdin);
+    }
+    return 0;
+}
+

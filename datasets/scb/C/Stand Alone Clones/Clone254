@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9685391
+*  Stack Overflow answer #:9685431
+*  And Stack Overflow answer#:9685443
+*/
+int main (int argc, char *argv []) {
+    int i;
+    char *lines [4];
+    FILE *file_handle = fopen ("my.txt", "r");
+    for (i = 0; i < 4; ++i) {
+        lines[i] = malloc (128);
+        fscanf (file_handle, "%127s", lines [i]);
+    }
+    for (i = 0; i < 4; ++i)
+        printf ("%d: %s\n", i, lines[i]);
+    for (i = 0; i < 4; ++i)
+        free (lines[i]);
+    return 0;
+}
+
+main () {
+    int i;
+    string array [4];
+    FILE *my;
+    my = fopen ("my.txt", "r");
+    for (i = 0; i < 4; i++) {
+        fscanf (data, "%" MAX_CHARS_STR "s", & array [i]);
+        ungetc ('x', data);
+        fscanf (data, "%*s");
+    }
+    fclose (my);
+}
+

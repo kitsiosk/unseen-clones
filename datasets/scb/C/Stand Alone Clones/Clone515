@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49677417
+*  Stack Overflow answer #:49677553
+*  And Stack Overflow answer#:49682877
+*/
+void removeColumn (int **matrix, int col) {
+    MATRIX_WIDTH--;
+    for (int i = 0; i < MATRIX_HEIGHT; i++) {
+        int curr_col = col;
+        while (curr_col < MATRIX_WIDTH) {
+            matrix[i][curr_col] = matrix[i][curr_col + 1];
+            curr_col++;
+        }
+        matrix[i] = realloc (matrix[i], sizeof (int) * MATRIX_WIDTH);
+    }
+}
+
+void removeColumn (matrix *matrix, int col) {
+    int y, i;
+    for (y = 0; y < matrix->height; ++y) {
+        if (col == matrix->width - 1) {
+            continue;
+        }
+        i = col + matrix->height * y;
+        while (i < matrix->width) {
+            matrix->values[i] = matrix->values[++i];
+        }
+    }
+    --matrix->width;
+}
+

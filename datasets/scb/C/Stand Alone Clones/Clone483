@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29682063
+*  Stack Overflow answer #:29683035
+*  And Stack Overflow answer#:29683694
+*/
+int main (void) {
+    char filename [] = "input1.txt";
+    FILE *input = fopen (filename, "r");
+    struct dna first = {""};
+    fscanf (input, "%24s", first.code);
+    printf ("1st : %s\n", first.code);
+    int i, size;
+    struct dna *data = makeArray (input, &size);
+    for (i = 0; i < size; ++i) {
+        printf ("%3d : %s\n", i + 1, data [i].code);
+    }
+    free (data);
+    system ("pause");
+    return 0;
+}
+
+int main () {
+    struct dna first;
+    char filename [] = "input1.txt";
+    FILE *input = fopen (filename, "r");
+    makeArray (input, & first);
+    fclose (input);
+    printf ("%s", first.code);
+    return 0;
+}
+

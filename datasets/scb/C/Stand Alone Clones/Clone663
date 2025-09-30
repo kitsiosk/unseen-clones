@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11765838
+*  Stack Overflow answer #:30622980
+*  And Stack Overflow answer#:11808933
+*/
+int main () {
+    for (int i = 0; i < N; i++)
+        arr[i] = 1;
+    build_tree (1, 0, N - 1);
+    memset (lazy, 0, sizeof lazy);
+    update_tree (1, 0, N - 1, 0, 6, 5);
+    update_tree (1, 0, N - 1, 7, 10, 12);
+    update_tree (1, 0, N - 1, 10, N - 1, 100);
+    cout << query_tree (1, 0, N -1, 0, N -1) << endl;
+}
+
+int main () {
+    lazy_segment_node *test = NULL;
+    initialize (& test, 1, 10);
+    printf ("Lazy evaluation test\n");
+    printf ("test->lower_value: %i\n", test -> lower_value);
+    printf ("test->upper_value: %i\n", test -> upper_value);
+    printf ("\nNode not propagated\n");
+    printf ("test->left_child: %p\n", test -> left_child);
+    printf ("test->right_child: %p\n", test -> right_child);
+    printf ("\nNode propagated with access:\n");
+    printf ("access(test)->left_child: %p\n", access (test) -> left_child);
+    printf ("access(test)->right_child: %p\n", access (test) -> right_child);
+    printf ("\nNode propagated with access, but subchilds are not:\n");
+    printf ("access(test)->left_child->left_child: %p\n", access (test) -> left_child -> left_child);
+    printf ("access(test)->left_child->right_child: %p\n", access (test) -> left_child -> right_child);
+    printf ("\nCan use access on subchilds:\n");
+    printf ("access(test->left_child)->left_child: %p\n", access (test -> left_child) -> left_child);
+    printf ("access(test->left_child)->right_child: %p\n", access (test -> left_child) -> right_child);
+    printf ("\nIt's possible to chain:\n");
+    printf ("access(access(access(test)->right_child)->right_child)->lower_value: %i\n", access (access (access (test) -> right_child) -> right_child) -> lower_value);
+    printf ("access(access(access(test)->right_child)->right_child)->upper_value: %i\n", access (access (access (test) -> right_child) -> right_child) -> upper_value);
+    free_lazy_segment_tree (test);
+    return 0;
+}
+

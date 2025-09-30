@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2184613
+*  Stack Overflow answer #:2190683
+*  And Stack Overflow answer#:2184875
+*/
+int main (int argc, char **argv) {
+    void *handle;
+    double (*cosine) (double);
+    char *error;
+    handle = dlopen ("libm.so", RTLD_LAZY);
+    if (!handle) {
+        fprintf (stderr, "%s\n", dlerror ());
+        exit (EXIT_FAILURE);
+    }
+    dlerror ();
+    *(void**) (&cosine) = dlsym (handle, "cos");
+    if ((error = dlerror ()) != NULL) {
+        fprintf (stderr, "%s\n", error);
+        exit (EXIT_FAILURE);
+    }
+    printf ("%f\n", (* cosine) (2.0));
+    dlclose (handle);
+    exit (EXIT_SUCCESS);
+}
+
+int main () {
+    char funcname [8192];
+    puts ("Who ya gonna call?");
+    gets (funcname);
+    if (ContainsFunction (funcname)) {
+        CallFunction (funcname)
+        );
+    }
+    else {
+        printf ("fail - no function %s\n", funcname);
+    }
+}
+

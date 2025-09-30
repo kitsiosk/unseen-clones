@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:16051365
+*  Stack Overflow answer #:19310805
+*  And Stack Overflow answer#:16080576
+*/
+float dot (float * restrict a, uint64_t b) {
+    int i;
+    float sum = 0;
+    for (i = 0; b && i < 64; i += 4, b >>= 4) {
+        __m128 t0 = _mm_load_ps (a);
+        a += 4;
+        __m128 t1 = _mm_load_ps (fltmask[b & 15]);
+        sum += _mm_cvtss_f32 (_mm_dp_ps (t0, t1, 15));
+    }
+    return sum;
+}
+
+float dot (__m128 *a, uint64_t b) {
+    __m128 sum [8];
+    int i;
+    for (i = 0; i < 8; i++) {
+        sum[i] = _mm_add_ps (_mm_and_ps (a[2 * i], mask[b & 0xf].xmm), _mm_and_ps (a[2 * i + 1], mask[(b & 0xf0) >> 4].xmm));
+        b >>= 8;
+    }
+    for (i = 0; i < 4; i++) {
+        sum[i] = _mm_add_ps (sum[2 * i], sum[2 * i + 1]);
+    }
+    sum[0] = _mm_add_ps (sum[0], sum[1]);
+    sum[2] = _mm_add_ps (sum[2], sum[3]);
+    sum[0] = _mm_add_ps (sum[0], sum[2]);
+    sum[0] = _mm_hadd_ps (sum[0], sum[0]);
+    sum[0] = _mm_hadd_ps (sum[0], sum[0]);
+    i = _mm_extract_ps (sum[0], 0);
+    return *((float *) (&i));
+}
+

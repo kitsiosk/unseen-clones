@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2450704
+*  Stack Overflow answer #:2450795
+*  And Stack Overflow answer#:2450908
+*/
+void trim (char *str) {
+    char *ptr = str;
+    while (*ptr == ' ' || *ptr == '\t' || *ptr == '\r' || *ptr == '\n')
+        ++ptr;
+    char *end = ptr;
+    while (*end)
+        ++end;
+    if (end > ptr) {
+        for (--end; end >= ptr && (*end == ' ' || *end == '\t' || *end == '\r' || *end == '\n'); --end)
+            ;
+    }
+    memmove (str, ptr, end - ptr);
+    str[end - ptr] = 0;
+}
+
+void trim (char *String) {
+    int dest;
+    int src = 0;
+    int len = strlen (String);
+    while (isspace (String[src]))
+        src++;
+    for (dest = 0; src < len; dest++, src++) {
+        String[dest] = String[src];
+    }
+    for (dest = len - 1; isspace (String[dest]); --dest) {
+        String[dest] = '\0';
+    }
+}
+

@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28144844
+*  Stack Overflow answer #:28145008
+*  And Stack Overflow answer#:28145042
+*/
+int main () {
+    int a = 548763, i = 0;
+    char str [20] = "";
+    int b = a;
+    while (b >= 10) {
+        b = b / 10;
+        i++;
+    }
+    str[i + 1] = '\0';
+    while (i >= 0) {
+        str[i] = a % 10 + 48;
+        a = a / 10;
+        i--;
+    }
+    printf ("the value of str is \"%s\"", str);
+    return 0;
+}
+
+int main () {
+    int number = 123456789;
+    int digit = floor (log10 (number)) + 1;
+    printf ("%d\n", digit);
+    int arr [digit];
+    int i;
+    for (i = digit; i > 0; i--) {
+        arr[digit - i] = (int) (number / pow (10, i -1)) % 10;
+        printf ("%d : %d\n", digit - i, arr [digit - i]);
+    }
+}
+

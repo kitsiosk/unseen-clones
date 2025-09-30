@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13204876
+*  Stack Overflow answer #:13204992
+*  And Stack Overflow answer#:13205311
+*/
+int main () {
+    char str [] = "- This, a sample string.";
+    char *pch;
+    printf ("Splitting string \"%s\" into tokens:\n", str);
+    pch = strtok (str, " ,.-");
+    while (pch != NULL) {
+        printf ("%s\n", pch);
+        pch = strtok (NULL, " ,.-");
+    }
+    return 0;
+}
+
+int main (void) {
+    char *p;
+    double val;
+    char str [] = "  102.33, 220.44";
+    int n = sscanf (str, "%lf", &val);
+    printf ("Value = %lf  sscanf returned %d\n", val, n);
+    val = strtod (str, &p);
+    printf ("Value = %lf  p points to: '%s'\n", val, p);
+    return 0;
+}
+

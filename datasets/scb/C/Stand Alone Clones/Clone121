@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19595659
+*  Stack Overflow answer #:19595812
+*  And Stack Overflow answer#:19595772
+*/
+void add (int value, Tree *t) {
+    Node **pp = &(t->root);
+    while (*pp) {
+        if (value == (*pp)->value) {
+            printf ("value already present in BST\n");
+            return;
+        }
+        if (value < (*pp)->value)
+            pp = &(*pp)->left;
+        else if (value > (*pp)->value)
+            pp = &(*pp)->right;
+    }
+    *pp = nodeCreate (value);
+    t->size++;
+}
+
+void add (int value, Tree *t) {
+    if (t->root == NULL) {
+        t->root = nodeCreate (value);
+        t->size++;
+        return;
+    }
+    Node *cursor = t->root;
+    Node *last = null;
+    while (cursor != NULL) {
+        last = cursor;
+        if (value == cursor->value) {
+            printf ("value already present in BST\n");
+            return;
+        }
+        if (value < cursor->value) {
+            cursor = cursor->left;
+        }
+        if (value > cursor->value) {
+            cursor = cursor->right;
+        }
+    }
+    cursor = nodeCreate (value);
+    if (value > cursor->value) {
+        last->right = cursor;
+    }
+    else {
+        last->left = cursor;
+    }
+    t->size = t->size + 1;
+}
+

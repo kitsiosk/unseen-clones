@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26981747
+*  Stack Overflow answer #:26981781
+*  And Stack Overflow answer#:26981780
+*/
+void printBoard (char board [boardSIZE] [boardSIZE]) {
+    int i, j;
+    for (i = 0; i < boardSIZE; i++) {
+        for (j = 0;
+        j < boardSIZE;
+        j ++) {board [i] [j] = 'X';
+        printf ("%c", board [i] [j]);
+    }
+    printf ("\n");
+}
+
+void printBoard (char board [boardSIZE] [boardSIZE]) {
+    int i, j;
+    for (i = 0; i < boardSIZE; i++) {
+        for (j = 0; j < boardSIZE; j++) {
+            board[i][j] = 'X';
+            printf ("%c", board [i] [j]);
+        }
+        printf ("\n");
+    }
+}
+

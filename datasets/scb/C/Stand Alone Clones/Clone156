@@ -1,0 +1,56 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40680633
+*  Stack Overflow answer #:40681550
+*  And Stack Overflow answer#:40681523
+*/
+int *multTwo (int *arr, int len) {
+    int *newarr;
+    int newlen;
+    if (*arr >= 5)
+        newlen = len + 1;
+    else
+        newlen = len;
+    newarr = (int *) malloc (sizeof (int) * newlen);
+    memset (newarr, 0, newlen);
+    int i, temp;
+    for (i = 1; i <= len; i++) {
+        temp = *(arr + i - 1) * 2;
+        if (temp < 10) {
+            *(newarr + i - 1) += temp;
+        }
+        else {
+            *(newarr + i - 1) += temp / 10;
+            *(newarr + i) += temp % 10;
+        }
+    }
+    return newarr;
+}
+
+int *multTwo (int *arr, size_t len) {
+    int value = 0;
+    int n_digits = 0;
+    while (len--) {
+        value += *arr;
+        value *= 10;
+        arr++;
+    }
+    value /= 10;
+    value *= 2;
+    int *digits = malloc (sizeof (*digits));
+    while ((value > 0) && (digits != NULL)) {
+        digits[n_digits++] = value % 10;
+        value /= 10;
+        digits = realloc (digits, sizeof (*digits) * (n_digits + 1));
+    }
+    if (digits != NULL) {
+        invert (digits, & digits [n_digits - 1]);
+        printf ("[ ");
+        for (int i = 0; i < n_digits; i++)
+            printf ("%d, ", digits[i]);
+        printf ("]\n");
+    }
+    return digits;
+}
+

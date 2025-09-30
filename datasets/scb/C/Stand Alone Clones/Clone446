@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29328654
+*  Stack Overflow answer #:29328944
+*  And Stack Overflow answer#:29328779
+*/
+void permute () {
+    if (count < 2) {
+        return;
+    }
+    int i;
+    struct node *temp1 = top;
+    struct node *temp2;
+    for (i = 0; i < count - 2; i++) {
+        temp1 = temp1->next;
+    }
+    temp2 = temp1->next;
+    temp1->next = top;
+    temp2->next = top->next;
+    top->next = NULL;
+    top = temp2;
+}
+
+void permute () {
+    if (top && top->next) {
+        int data = top->data;
+        struct node *last = top->next;
+        while (last->next)
+            last = last->next;
+        top->data = last->data;
+        last->data = data;
+    }
+}
+

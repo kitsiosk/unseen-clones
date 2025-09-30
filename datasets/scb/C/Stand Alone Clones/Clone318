@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26077874
+*  Stack Overflow answer #:26077933
+*  And Stack Overflow answer#:26077928
+*/
+int main () {
+    int test;
+    char (*a) [COLUMNS] = malloc (ROWS * sizeof *a);
+    int (*x) [COLUMNS] = malloc (ROWS * sizeof *x);
+    int (*y) [COLUMNS] = malloc (ROWS * sizeof *y);
+    a[100][20] = 'X';
+    x[4][999] = 666;
+    y[500][0] = 42;
+    scanf ("%d", & test);
+    printf ("%d", test);
+    free (a);
+    free (x);
+    free (y);
+    return 0;
+}
+
+int main () {
+    char **a;
+    int i, j;
+    a = malloc (1000 * sizeof (char *));
+    for (i = 0; i < 1000; i++) {
+        a[i] = malloc (1000 * sizeof (char));
+        for (j = 0; j < 1000; j++) {
+        }
+    }
+    for (i = 0; i < 1000; i++)
+        free (a[i]);
+    free (a);
+    return 0;
+}
+

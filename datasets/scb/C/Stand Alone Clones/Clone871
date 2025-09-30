@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46013382
+*  Stack Overflow answer #:46013943
+*  And Stack Overflow answer#:46014862
+*/
+char *strndup (const char *s, size_t n) {
+    char *p = memchr (s, '\0', n);
+    if (p != NULL)
+        n = p - s;
+    p = malloc (n +1);
+    if (p != NULL) {
+        memcpy (p, s, n);
+        p[n] = '\0';
+    }
+    return p;
+}
+
+char *strndup (const char *str, size_t len) {
+    size_t act = strnlen (str, len);
+    char *dst = malloc (act +1);
+    if (dst != 0) {
+        memmove (dst, str, act);
+        dst[act] = '\0';
+    }
+    return dst;
+}
+

@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35356844
+*  Stack Overflow answer #:35358210
+*  And Stack Overflow answer#:35357221
+*/
+int isRotated (char *s1, char *s2) {
+    char s [199];
+    if (strlen (s1) != strlen (s2))
+        return 0;
+    else if (strcmp (s1, s2) == 0)
+        return 1;
+    else
+        strcpy (s, s1);
+    strcat (s, s1);
+    return isSubString (s, s2);
+}
+
+int isRotated (char *s1, char *s2) {
+    char s [200];
+    strcpy (s, s1);
+    strcat (s, s1);
+    if (strstr (s, s2))
+        return 1;
+    else
+        return 0;
+}
+

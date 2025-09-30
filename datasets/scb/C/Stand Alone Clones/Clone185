@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1024389
+*  Stack Overflow answer #:1024396
+*  And Stack Overflow answer#:1024446
+*/
+char *int2bin (unsigned n, char *buf) {
+    static char static_buf [BITS + 1];
+    int i;
+    if (buf == NULL)
+        buf = static_buf;
+    for (i = BITS - 1; i >= 0; --i) {
+        buf[i] = (n & 1) ? '1' : '0';
+        n >>= 1;
+    }
+    buf[BITS] = '\0';
+    return buf;
+}
+
+char *int2bin (int i) {
+    size_t bits = sizeof (int) * CHAR_BIT;
+    char *str = malloc (bits +1);
+    if (!str)
+        return NULL;
+    str[bits] = 0;
+    unsigned u = *(unsigned*) &i;
+    for (; bits--; u >>= 1)
+        str[bits] = u & 1 ? '1' : '0';
+    return str;
+}
+

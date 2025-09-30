@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42878643
+*  Stack Overflow answer #:42878750
+*  And Stack Overflow answer#:42878739
+*/
+char *strrchr (const char *s, int c) {
+    size_t index = 0;
+    bool found = false;
+    c = (char) c;
+    if (!c)
+        return (char *) s + strlen (s);
+    for (size_t i = 0; s[i]; i++) {
+        if (s[i] == c) {
+            index = i;
+            found = true;
+        }
+    }
+    if (found)
+        return (char *) s + index;
+    return NULL;
+}
+
+char *strrchr (const char *s, int c) {
+    int index = 0;
+    for (int i = 0; i < strlen (s); i++) {
+        if (s[i] == c)
+            index = i;
+    }
+    if (index == -1)
+        return NULL;
+    else
+        return &s[index];
+}
+

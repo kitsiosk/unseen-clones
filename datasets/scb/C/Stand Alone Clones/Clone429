@@ -1,0 +1,56 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34611441
+*  Stack Overflow answer #:34611966
+*  And Stack Overflow answer#:34611661
+*/
+int main (void) {
+    int a, b, c, d;
+    printf ("Enter four integers (separate them with spaces): ");
+    scanf ("%d %d %d %d", & a, & b, & c, & d);
+    if (!(a < b || a < c || a < d)) {
+        printf ("\nLargest: %d\n", a);
+    }
+    else if (!(b < c || b < d)) {
+        printf ("\nLargest: %d\n", b);
+    }
+    else if (!(c < d)) {
+        printf ("\nLargest: %d\n", c);
+    }
+    else {
+        printf ("\nLargest: %d\n", d);
+    }
+    if (!(b < a || c < a || d < a)) {
+        printf ("Smallest: %d", a);
+    }
+    else if (!(c < b || d < b)) {
+        printf ("Smallest: %d", b);
+    }
+    else if (!(d < c)) {
+        printf ("Smallest: %d", c);
+    }
+    else {
+        printf ("Smallest: %d", d);
+    }
+    return 0;
+}
+
+int main (void) {
+    int array [] = {1, 6, 15, 9};
+    int length = sizeof array / sizeof array[0];
+    int big, small;
+    big = small = array[0];
+    for (int i = 0; i < length; i++) {
+        if (array[i] > big) {
+            big = array[i];
+        }
+        if (array[i] < small) {
+            small = array[i];
+        }
+    }
+    printf ("The biggest Number is:\t%d\n", big);
+    printf ("The smallest Number is:\t%d\n", small);
+    return 0;
+}
+

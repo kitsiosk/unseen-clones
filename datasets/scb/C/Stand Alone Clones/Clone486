@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22398987
+*  Stack Overflow answer #:22685072
+*  And Stack Overflow answer#:22403825
+*/
+int main () {
+    int n, input;
+    scanf ("%d", & n);
+    int count [201] = {0};
+    int max = 0, found = -1;
+    for (int i = 0; i < n; i++) {
+        scanf ("%d", & input);
+        count[input + 100]++;
+        if (max < count[input + 100]) {
+            max = count[input + 100];
+            found = input;
+        }
+    }
+    printf ("%d", found);
+    return 0;
+}
+
+int main () {
+    int counter [201] = {0}, n, i, input, maximum = 0;
+    scanf ("%d", & n);
+    for (i = 1; i <= n; i++) {
+        scanf ("%d", & input);
+        if (input >= -100 && input <= 100)
+            ++counter[input + 100];
+    }
+    maximum = counter[0];
+    int index = 0;
+    for (i = 0; i < 201; i++) {
+        if (counter[i] >= maximum) {
+            index = i;
+            maximum = counter[i];
+        }
+    }
+    printf ("number %d occured %d times\n", index - 100, maximum);
+    return 0;
+}
+

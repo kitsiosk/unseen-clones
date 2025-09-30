@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3408706
+*  Stack Overflow answer #:13194749
+*  And Stack Overflow answer#:3409211
+*/
+int main () {
+    char *hexstring = "deadbeef10203040b00b1e50";
+    int i;
+    unsigned int bytearray [12];
+    uint8_t str_len = strlen (hexstring);
+    for (i = 0; i < (str_len / 2); i++) {
+        sscanf (hexstring + 2 * i, "%02x", & bytearray [i]);
+        printf ("bytearray %d: %02x\n", i, bytearray [i]);
+    }
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    const char hexstring [] = "DEadbeef10203040b00b1e50", *pos = hexstring;
+    unsigned char val [12];
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++) {
+        sscanf (pos, "%2hhx", & val [count]);
+        pos += 2;
+    }
+    printf ("0x");
+    for (size_t count = 0; count < sizeof val / sizeof *val; count++)
+        printf ("%02x", val[count]);
+    printf ("\n");
+    return 0;
+}
+

@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:45656128
+*  Stack Overflow answer #:45656198
+*  And Stack Overflow answer#:45675248
+*/
+int main () {
+    char ch [100];
+    scanf ("%s", & ch);
+    int i = 0;
+    while (i < strlen (ch) / 2) {
+        ch[i] = ch[i] ^ ch[strlen (ch) - i - 1];
+        ch[strlen (ch) - i - 1] = ch[i] ^ ch[strlen (ch) - i - 1];
+        ch[i] = ch[i] ^ ch[strlen (ch) - i - 1];
+        i++;
+    }
+    printf ("Reversed String: %s\n", ch);
+    return 0;
+}
+
+int main () {
+    char ch [100];
+    scanf ("%99s", ch);
+    int i = 0;
+    while (1) {
+        if (!*ch || !ch[1])
+            break;
+        while (ch[i + 1])
+            ++i;
+        i <<= 8;
+        while ((i & 0xff) < i >> 8) {
+            ch[99] = ch[i & 0xff];
+            ch[i & 0xff] = ch[i >> 8];
+            ch[i >> 8] = ch[99];
+            i += 1 - 256;
+        }
+        ch[99] = 0;
+        break;
+        i++;
+    }
+    printf ("\n\n Reversed String: %s", ch);
+    return 0;
+}
+

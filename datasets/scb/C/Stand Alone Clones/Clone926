@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:25836642
+*  Stack Overflow answer #:25836872
+*  And Stack Overflow answer#:25837560
+*/
+int main () {
+    FILE *f = fopen ("test.txt", "r");
+    char word [MAX_LENGTH];
+    int length = strlen (word);
+    int i, j, k, flag = 0;
+    fgets (word, MAX_LENGTH, f);
+    for (i = 0; i < length; i++) {
+        if (word[i] == " ") {
+            flag = 0;
+            j = i;
+            for (k = i; word[k] != " "; k++) {
+                if (word[i] == 'a' | word[i] == 'e' | word[i] == 'i' | word[i] == 'o' | word[i] == 'u' | word[i] == 'y') {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0)
+                for (i = i; i <= k; i++)
+                    printf ("%c", word[i]);
+        }
+    }
+}
+
+int main () {
+    FILE *f = fopen ("test.txt", "r");
+    char line [MAX_LINE_LENGTH];
+    while (fgets (line, MAX_LINE_LENGTH, f)) {
+        char word [MAX_WORD_LENGTH];
+        char *curline = line;
+        int charsread;
+        if ((line[MAX_LINE_LENGTH - 1] != '\0') && (line[MAX_LINE_LENGTH - 1] != '\n')) {
+            while (fgetc (f) != '\n')
+                ;
+        }
+        while (sscanf (curline, "%s%n", word, &charsread) > 0) {
+            int i;
+            int wordlen = strlen (word);
+            int vowelfnd = 0;
+            for (i = 0; i < wordlen; i++) {
+                if (word[i] == 'a' || word[i] == 'e' || word[i] == 'i' || word[i] == 'o' || word[i] == 'u' || word[i] == 'y') {
+                    vowelfnd = 1;
+                    break;
+                }
+            }
+            if (!vowelfnd)
+                printf ("%s ", word);
+            curline += (charsread);
+        }
+    }
+    return 0;
+}
+

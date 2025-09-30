@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8465006
+*  Stack Overflow answer #:31072377
+*  And Stack Overflow answer#:19315089
+*/
+int main () {
+    char s1 [] = "oppa";
+    char s2 [] = "gangnam";
+    char s3 [] = "style";
+    {
+        char result [STR_SIZE] = {0};
+        snprintf (result, sizeof (result), "%s %s %s", s1, s2, s3);
+        printf ("%s\n", result);
+    }
+}
+
+int main () {
+    int a, l;
+    char str [50], str1 [50], str3 [100];
+    printf ("\nEnter a string: ");
+    scanf ("%s", str);
+    str3[0] = '\0';
+    printf ("\nEnter the string which you want to concat with string one: ");
+    scanf ("%s", str1);
+    strcat (str3, str);
+    strcat (str3, str1);
+    printf ("\nThe string is %s\n", str3);
+}
+

@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4352768
+*  Stack Overflow answer #:4353045
+*  And Stack Overflow answer#:4352928
+*/
+int main (int argc, char **argv) {
+    int buf_size = 0;
+    int buf_used = 0;
+    char *buf = NULL;
+    char *tmp = NULL;
+    char c;
+    int i = 0;
+    while ((c = getchar ()) != EOF) {
+        if (buf_used == buf_size) {
+            buf_size += 20;
+            tmp = realloc (buf, buf_size);
+            if (!tmp)
+                fatal_error ();
+            buf = tmp;
+        }
+        buf[buf_used] = c;
+        ++buf_used;
+    }
+    puts ("\n\n*** Dump of stdin ***\n");
+    for (i = 0; i < buf_used; ++i) {
+        putchar (buf [i]);
+    }
+    free (buf);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    int *data;
+    const int datacount = 50;
+    data = malloc (sizeof (int) * datacount);
+    if (!data) {
+        perror ("Error allocating memory");
+        abort ();
+    }
+    memset (data, 0, sizeof (int) * datacount);
+    data[0] = 1;
+    data[2] = 15;
+    data[49] = 66;
+    for (int i = 0; i < datacount; ++i) {
+        printf ("Element %d: %d\n", i, data [i]);
+    }
+}
+

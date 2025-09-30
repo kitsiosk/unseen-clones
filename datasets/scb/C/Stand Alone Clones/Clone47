@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37927463
+*  Stack Overflow answer #:37928485
+*  And Stack Overflow answer#:37929608
+*/
+int main (void) {
+    char line [256];
+    int i;
+    int x, y = 0;
+    while (y < 5) {
+        printf ("Please Insert X value\n");
+        if (fgets (line, sizeof (line), stdin)) {
+            if (validateLine (line)) {
+                if (1 != sscanf (line, "%d", &x)) {
+                    printf ("should never happen");
+                    exit (1);
+                }
+                break;
+            }
+            else {
+                printf ("Illegal input %s", line);
+            }
+        }
+        y++;
+    }
+    if (y < 5)
+        printf ("x=%d\n", x);
+    else
+        printf ("no more retries\n");
+    return 0;
+}
+
+int main (void) {
+    char buffer [256];
+    const int max_tries = 5;
+    int tries = 0;
+    long number;
+    while (tries++ < max_tries) {
+        puts ("Enter input:");
+        scanf ("%s", buffer);
+        if (!convert_to_long (&number, buffer))
+            break;
+        printf ("Invalid input. '%s' is not integer, %d tries left\n", buffer, max_tries - tries);
+    }
+    if (tries > max_tries)
+        puts ("No valid input found");
+    else
+        printf ("Valid input: %ld\n", number);
+    return EXIT_SUCCESS;
+}
+

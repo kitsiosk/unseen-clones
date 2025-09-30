@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2813325
+*  Stack Overflow answer #:2813432
+*  And Stack Overflow answer#:2813448
+*/
+int main () {
+    char *buff = "In this document, there are 345 words and 6 figures";
+    char extra1 [5000];
+    char extra2 [5000];
+    int a, b;
+    sscanf (buff, "%[In this document, there are ]%d%[ words and ]%d", extra1, & a, extra2, & b);
+    cout << a << " " << b << endl;
+    return 0;
+}
+
+int main () {
+    char str [] = "- This, a sample 9876 string.";
+    char *pch;
+    printf ("Splitting string \"%s\" into tokens:\n", str);
+    pch = strtok (str, " ,.-");
+    while (pch != NULL) {
+        if (pch[0] >= '0' && pch[0] <= '9') {
+        }
+        pch = strtok (NULL, " ,.-");
+    }
+    return 0;
+}
+

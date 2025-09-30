@@ -1,0 +1,80 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8746719
+*  Stack Overflow answer #:9527056
+*  And Stack Overflow answer#:8850136
+*/
+int main (int argc, char *argv []) {
+    App *app = &s_app;
+    GError *error = NULL;
+    GstBus *bus;
+    GstCaps *caps;
+    gst_init (& argc, & argv);
+    GST_DEBUG_CATEGORY_INIT (appsrc_pipeline_debug, "appsrc-pipeline", 0, "appsrc pipeline example");
+    app->loop = g_main_loop_new (NULL, TRUE);
+    app->timer = g_timer_new ();
+    app->pipeline = gst_parse_launch ("appsrc name=mysource ! video/x-raw-rgb,width=640,height=480 ! ffmpegcolorspace ! videoscale method=1 ! xvimagesink", NULL);
+    g_assert (app -> pipeline);
+    bus = gst_pipeline_get_bus (GST_PIPELINE (app->pipeline));
+    g_assert (bus);
+    gst_bus_add_watch (bus, (GstBusFunc) bus_message, app);
+    app->appsrc = gst_bin_get_by_name (GST_BIN (app->pipeline), "mysource");
+    g_assert (app -> appsrc);
+    g_assert (GST_IS_APP_SRC (app -> appsrc));
+    g_signal_connect (app -> appsrc, "need-data", G_CALLBACK (start_feed), app);
+    g_signal_connect (app -> appsrc, "enough-data", G_CALLBACK (stop_feed), app);
+    caps = gst_video_format_new_caps (GST_VIDEO_FORMAT_RGB, 640, 480, 0, 1, 4, 3);
+    gst_app_src_set_caps (GST_APP_SRC (app -> appsrc), caps);
+    gst_element_set_state (app -> pipeline, GST_STATE_PLAYING);
+    g_main_loop_run (app -> loop);
+    GST_DEBUG ("stopping");
+    gst_element_set_state (app -> pipeline, GST_STATE_NULL);
+    gst_object_unref (bus);
+    g_main_loop_unref (app -> loop);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    gst_app_t *app = &gst_app;
+    GstBus *bus;
+    GstStateChangeReturn state_ret;
+    if (argc != 2) {
+        printf ("File name not specified\n");
+        return 1;
+    }
+    app->file = fopen (argv[1], "r");
+    g_assert (app -> file);
+    gst_init (NULL, NULL);
+    app->pipeline = (GstPipeline *) gst_pipeline_new ("mypipeline");
+    bus = gst_pipeline_get_bus (app->pipeline);
+    gst_bus_add_watch (bus, (GstBusFunc) bus_callback, app);
+    gst_object_unref (bus);
+    app->src = (GstAppSrc *) gst_element_factory_make ("appsrc", "mysrc");
+    app->decoder = gst_element_factory_make ("decodebin", "mydecoder");
+    app->ffmpeg = gst_element_factory_make ("ffmpegcolorspace", "myffmpeg");
+    app->xvimagesink = gst_element_factory_make ("xvimagesink", "myvsink");
+    g_assert (app -> src);
+    g_assert (app -> decoder);
+    g_assert (app -> ffmpeg);
+    g_assert (app -> xvimagesink);
+    g_signal_connect (app -> src, "need-data", G_CALLBACK (start_feed), app);
+    g_signal_connect (app -> src, "enough-data", G_CALLBACK (stop_feed), app);
+    g_signal_connect (app -> decoder, "pad-added", G_CALLBACK (on_pad_added), app -> decoder);
+    gst_bin_add_many (GST_BIN (app -> pipeline), (GstElement *) app -> src, app -> decoder, app -> ffmpeg, app -> xvimagesink, NULL);
+    if (!gst_element_link ((GstElement *) app->src, app->decoder)) {
+        g_warning ("failed to link src anbd decoder");
+    }
+    if (!gst_element_link (app->ffmpeg, app->xvimagesink)) {
+        g_warning ("failed to link ffmpeg and xvsink");
+    }
+    state_ret = gst_element_set_state ((GstElement *) app->pipeline, GST_STATE_PLAYING);
+    g_warning ("set state returned %d\n", state_ret);
+    app->loop = g_main_loop_new (NULL, FALSE);
+    printf ("Running main loop\n");
+    g_main_loop_run (app -> loop);
+    state_ret = gst_element_set_state ((GstElement *) app->pipeline, GST_STATE_NULL);
+    g_warning ("set state null returned %d\n", state_ret);
+    return 0;
+}
+

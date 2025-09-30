@@ -1,0 +1,66 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29992107
+*  Stack Overflow answer #:29992734
+*  And Stack Overflow answer#:29993997
+*/
+int main (int argc, char const *argv []) {
+    VectorPeople vp;
+    Person timn;
+    Person batman;
+    Person bond;
+    Person superman;
+    init (& vp);
+    timn.first_name = "Timn";
+    timn.last_name = "Timothy";
+    timn.age = 38;
+    add (& vp, & timn);
+    batman.first_name = "Batn";
+    batman.last_name = "Man";
+    batman.age = 42;
+    add (& vp, & batman);
+    bond.first_name = "James";
+    bond.last_name = "Bond";
+    bond.age = 45;
+    add (& vp, & bond);
+    superman.first_name = "Super";
+    superman.last_name = "Man";
+    superman.age = 45;
+    add (& vp, & superman);
+    int i = 0;
+    for (; i < vp.num; ++i) {
+        printf ("Person: %s, %s.\n", vp.people [i].last_name, vp.people [i].first_name);
+    }
+    clear (& vp);
+    return 0;
+}
+
+int main (void) {
+    size_t population = 0;
+    size_t maxp = MAXPOP;
+    size_t i = 0;
+    Person timn, batman;
+    Person **people = calloc (MAXPOP, sizeof *people);
+    if (!people) {
+        fprintf (stderr, "error: virtual memory exhausted.\n");
+        return 1;
+    }
+    timn.first_name = strdup ("Timn");
+    timn.last_name = strdup ("Timothy");
+    timn.age = 38;
+    add_person (& people, timn, & population, & maxp);
+    free_person_names (& timn);
+    printf ("\nPerson 0\n first name: %s\n last name : %s\n age : %hhu\n", people [0] -> first_name, people [0] -> last_name, people [0] -> age);
+    batman.first_name = strdup ("Bat");
+    batman.last_name = strdup ("Man");
+    batman.age = 42;
+    add_person (& people, batman, & population, & maxp);
+    free_person_names (& batman);
+    printf ("\nPerson 1\n first name: %s\n last name : %s\n age : %hhu\n", people [1] -> first_name, people [1] -> last_name, people [1] -> age);
+    for (i = 0; i < population; i++)
+        free_person (people[i]);
+    free (people);
+    return 0;
+}
+

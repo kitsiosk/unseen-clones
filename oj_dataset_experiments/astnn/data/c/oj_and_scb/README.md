@@ -1,0 +1,2 @@
+This directory contains the OJ dataset merged with the SCB dataset (C files only).
+The original files are `programs.pkl` and `oj_clone_ids.pkl`. The rest of the files are generated afte running `pipeline_oj_scb.py` and serve as cache for the ASTNN model.

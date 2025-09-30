@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:11739894
+*  Stack Overflow answer #:11740334
+*  And Stack Overflow answer#:11740187
+*/
+char *GetSub (const char *src, int start, int count, char *dst) {
+    for (; *src && (start > 0); start--) {
+        src++;
+    }
+    for (; *src && (count > 0); count--) {
+        *dst++ = *src++;
+    }
+    *dst++ = 0;
+    return dst;
+}
+
+char *GetSub (const char *orig, int start, int count, char *final) {
+    int i;
+    for (i = 0; i < count; i++) {
+        final[i] = orig[i + start];
+        if (final[i] == '\0')
+            break;
+    }
+    final[i] = '\0';
+    return final;
+}
+

@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46284006
+*  Stack Overflow answer #:46327543
+*  And Stack Overflow answer#:46284698
+*/
+int main (void) {
+    int numLitLights = 0;
+    t1[0] = 1;
+    while (t1[7999] != 1) {
+        for (int j = 0; j < 7999; j++) {
+            if (t1[j]) {
+                t2[j + 1] = (t1[j + 1]) ? 0 : 1;
+            }
+        }
+        for (int j = 0; j < 8000; j++) {
+            t1[j] = t2[j];
+        }
+    }
+    for (int j = 0; j < 8000; j++) {
+        if (t1[j]) {
+            numLitLights++;
+        }
+    }
+    printf ("number of lit lamps: %d\n", numLitLights);
+}
+
+int main (void) {
+    t[0][0] = true;
+    t[0][1] = true;
+    int ip = 0;
+    while (t[N - 1][0] == 0 && t[N - 1][1] == 0) {
+        ip = !ip;
+        for (int j = 1; j < N; j++) {
+            if (t[j - 1][!ip]) {
+                t[j][ip] = !t[j][!ip];
+            }
+            else {
+                t[j][ip] = t[j][!ip];
+            }
+        }
+    }
+    int cpt1 = 0;
+    for (int j = 0; j < N; j++) {
+        cpt1 += t[j][1];
+    }
+    printf ("N=%d cpt=%d\n", N, cpt1);
+    return 0;
+}
+

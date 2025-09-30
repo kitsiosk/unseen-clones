@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37817181
+*  Stack Overflow answer #:37817273
+*  And Stack Overflow answer#:37818800
+*/
+int main (void) {
+    unsigned int n = 1234567890;
+    char *s = int_to_string (n);
+    puts (s);
+    free (s);
+    char s1 [100];
+    s1[0] = '\0';
+    puts (int_to_string1 (n, s1));
+}
+
+int main (void) {
+    int n, i;
+    char str [100] = "";
+    char numStr [100] = "";
+    n = 1234567890;
+    sprintf (numStr, "%d", n);
+    printf ("\n%d in words is : %s\n", n, int_to_string (n, str, numStr));
+    printf ("\n%d in words is : ", n);
+    sprintf (numStr, "%d", n);
+    for (i = 0; i < strlen (numStr); i++) {
+        print_digit (numStr [i]);
+    }
+    return 0;
+}
+

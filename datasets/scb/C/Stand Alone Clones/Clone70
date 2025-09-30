@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30402907
+*  Stack Overflow answer #:30403047
+*  And Stack Overflow answer#:30403210
+*/
+void inserord (Lint *li, int x, Lint *k) {
+    if (*li == NULL) {
+        return;
+    }
+    else if (((*li)->value) > x) {
+        Lint New;
+        New = (Lint) calloc (1, sizeof (Nodo));
+        New->value = x;
+        New->next = (*li);
+        (*k)->next = New;
+        return;
+    }
+    *k = *li;
+    inserord (& ((* li) -> next), x, & (* k));
+}
+
+void inserord (struct Nodo **current, int x, struct Nodo **prev) {
+    if ((*current == NULL) || !((*current)->value < x)) {
+        struct Nodo *nodo = malloc (sizeof (struct Nodo));
+        nodo->value = x;
+        nodo->next = *current;
+        if (*prev == *current)
+            *current = nodo;
+        else
+            (*prev)->next = nodo;
+        return;
+    }
+    prev = current;
+    current = &(*current)->next;
+    inserord (current, x, prev);
+}
+

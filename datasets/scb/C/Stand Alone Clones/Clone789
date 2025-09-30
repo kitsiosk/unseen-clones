@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1701055
+*  Stack Overflow answer #:1701142
+*  And Stack Overflow answer#:1702165
+*/
+int main () {
+    double x = std : : numeric_limits < double > : : max ();
+std :
+    : stringstream ss;
+    ss << std : : setprecision (10) << std : : fixed << x;
+std :
+    : string double_as_string = ss.str ();
+std :
+    : cout << double_as_string.length () << std : : endl;
+}
+
+int main (void) {
+    char dummy [1];
+    double value = 42.000042;
+    int siz;
+    char *representation;
+    siz = snprintf (dummy, sizeof dummy, "%f", value);
+    printf ("exact length needed to represent 'value' " "(without the '\\0' terminator) is %d.\n", siz);
+    representation = malloc (siz +1);
+    if (representation) {
+        sprintf (representation, "%f", value);
+        free (representation);
+    }
+    else {
+    }
+    return 0;
+}
+

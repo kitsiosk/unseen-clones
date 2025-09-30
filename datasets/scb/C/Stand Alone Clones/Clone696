@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27451220
+*  Stack Overflow answer #:27451290
+*  And Stack Overflow answer#:27457523
+*/
+int foo () {
+    char *p = NULL;
+    char *q = NULL;
+    int ret = 0;
+    if (NULL == (p = malloc (BUFSIZ))) {
+        ret = ERROR_CODE;
+        goto error;
+    }
+    if (NULL == (q = malloc (BUFSIZ))) {
+        ret = ERROR_CODE;
+        goto error;
+    }
+error :
+    free (p);
+    free (q);
+    return ret;
+}
+
+int foo () {
+    char *p = NULL;
+    char *q = NULL;
+    int ret = 0;
+    do {
+        if (NULL == (p = malloc (BUFSIZ))) {
+            ret = ERROR_CODE;
+            break;
+        }
+        if (NULL == (q = malloc (BUFSIZ))) {
+            ret = ERROR_CODE;
+            break;
+        }
+    }
+    while (0);
+    free (p);
+    free (q);
+    return ret;
+}
+

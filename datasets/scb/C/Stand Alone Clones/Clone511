@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8208021
+*  Stack Overflow answer #:48614746
+*  And Stack Overflow answer#:8210302
+*/
+int main () {
+    static int x = 5;
+    static int *p = &x;
+    printf ("(int) p   => %d\n", (int) p);
+    printf ("(int) p++ => %d\n", (int) p ++);
+    x = 5;
+    p = &x;
+    printf ("(int) ++p => %d\n", (int) ++ p);
+    x = 5;
+    p = &x;
+    printf ("++*p      => %d\n", ++ * p);
+    x = 5;
+    p = &x;
+    printf ("++(*p)    => %d\n", ++ (* p));
+    x = 5;
+    p = &x;
+    printf ("++*(p)    => %d\n", ++ * (p));
+    x = 5;
+    p = &x;
+    printf ("*p++      => %d\n", * p ++);
+    x = 5;
+    p = &x;
+    printf ("(*p)++    => %d\n", (* p) ++);
+    x = 5;
+    p = &x;
+    printf ("*(p)++    => %d\n", * (p) ++);
+    x = 5;
+    p = &x;
+    printf ("*++p      => %d\n", * ++ p);
+    x = 5;
+    p = &x;
+    printf ("*(++p)    => %d\n", * (++ p));
+    return 0;
+}
+
+int main () {
+    int a = 100;
+    int *p = &a;
+    printf ("%p\n", (void *) p);
+    ++(*p++);
+    printf ("%p\n", (void *) p);
+    printf ("%d\n", a);
+    return 0;
+}
+

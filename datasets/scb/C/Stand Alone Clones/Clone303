@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:23608391
+*  Stack Overflow answer #:23608707
+*  And Stack Overflow answer#:23608639
+*/
+int main () {
+    int a [N];
+    int i;
+    for (i = 0; i < N; ++i)
+        a[i] = i;
+    for (i = 0; i < N; ++i)
+        printf ("%d ", a[i]);
+    printf ("\n");
+    int *a_dyn;
+    a_dyn = malloc (N * sizeof (int));
+    for (i = 0; i < N; ++i)
+        a_dyn[i] = i;
+    for (i = 0; i < N; ++i)
+        printf ("%d ", a[i]);
+    printf ("\n");
+    free (a_dyn);
+    return 0;
+}
+
+int main (void) {
+    char (*arr) [50];
+    int i;
+    arr = malloc (sizeof (*arr) * 100);
+    if (arr == NULL) {
+        perror ("malloc");
+        exit (EXIT_FAILURE);
+    }
+    for (i = 0; i < 100; i++)
+        strcpy (arr[i], "test");
+    for (i = 0; i < 100; i++)
+        printf ("%s\n", arr[i]);
+    free (arr);
+    return 0;
+}
+

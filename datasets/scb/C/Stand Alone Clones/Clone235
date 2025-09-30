@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:421860
+*  Stack Overflow answer #:423643
+*  And Stack Overflow answer#:51051839
+*/
+main () {
+    int i = 0;
+    intc = '';
+    system ("stty raw -echo");
+    printf ("enter 'q' to quit \n");
+    for (; c != 'q'; i++) {
+        if (kbhit ()) {
+            c = getchar ();
+            printf ("\n got %c, on iteration %d", c, i);
+        }
+    }
+    system ("stty cooked echo");
+}
+
+int main (int argc, char *argv []) {
+    initscr ();
+    raw ();
+    noecho ();
+    keypad (stdscr, true);
+    auto f = std : : async (std : : launch : : async, get_keyboard_input);
+    while (f.wait_for (std : : chrono : : milliseconds (20)) != std : : future_status : : ready) {} endwin ();
+std :
+    : cout << "returned: " << f.get () << std : : endl;
+    return 0;
+}
+

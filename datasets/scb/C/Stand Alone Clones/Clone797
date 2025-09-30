@@ -1,0 +1,60 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4139405
+*  Stack Overflow answer #:4139811
+*  And Stack Overflow answer#:4139893
+*/
+int main () {
+    struct ifconf ifc;
+    struct ifreq ifr [10];
+    int sd, ifc_num, addr, bcast, mask, network, i;
+    sd = socket (PF_INET, SOCK_DGRAM, 0);
+    if (sd > 0) {
+        ifc.ifc_len = sizeof (ifr);
+        ifc.ifc_ifcu.ifcu_buf = (caddr_t) ifr;
+        if (ioctl (sd, SIOCGIFCONF, &ifc) == 0) {
+            ifc_num = ifc.ifc_len / sizeof (struct ifreq);
+            printf ("%d interfaces found\n", ifc_num);
+            for (i = 0; i < ifc_num; ++i) {
+                if (ifr[i].ifr_addr.sa_family != AF_INET) {
+                    continue;
+                }
+                printf ("%d) interface: %s\n", i + 1, ifr [i].ifr_name);
+                if (ioctl (sd, SIOCGIFADDR, &ifr[i]) == 0) {
+                    addr = ((struct sockaddr_in *) (&ifr[i].ifr_addr))->sin_addr.s_addr;
+                    printf ("%d) address: %d.%d.%d.%d\n", i + 1, INT_TO_ADDR (addr));
+                }
+                if (ioctl (sd, SIOCGIFBRDADDR, &ifr[i]) == 0) {
+                    bcast = ((struct sockaddr_in *) (&ifr[i].ifr_broadaddr))->sin_addr.s_addr;
+                    printf ("%d) broadcast: %d.%d.%d.%d\n", i + 1, INT_TO_ADDR (bcast));
+                }
+                if (ioctl (sd, SIOCGIFNETMASK, &ifr[i]) == 0) {
+                    mask = ((struct sockaddr_in *) (&ifr[i].ifr_netmask))->sin_addr.s_addr;
+                    printf ("%d) netmask: %d.%d.%d.%d\n", i + 1, INT_TO_ADDR (mask));
+                }
+                network = addr & mask;
+                printf ("%d) network: %d.%d.%d.%d\n", i + 1, INT_TO_ADDR (network));
+            }
+        }
+        close (sd);
+    }
+    return 0;
+}
+
+int main () {
+    struct ifaddrs *ifap, *ifa;
+    struct sockaddr_in *sa;
+    char *addr;
+    getifaddrs (& ifap);
+    for (ifa = ifap; ifa; ifa = ifa->ifa_next) {
+        if (ifa->ifa_addr->sa_family == AF_INET) {
+            sa = (struct sockaddr_in *) ifa->ifa_addr;
+            addr = inet_ntoa (sa->sin_addr);
+            printf ("Interface: %s\tAddress: %s\n", ifa -> ifa_name, addr);
+        }
+    }
+    freeifaddrs (ifap);
+    return 0;
+}
+

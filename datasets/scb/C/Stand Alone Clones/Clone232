@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:421860
+*  Stack Overflow answer #:33201364
+*  And Stack Overflow answer#:423643
+*/
+int main (int argc, char **argv) {
+    char c;
+    printf ("Press key");
+    while (!kbhit ()) {
+        printf (".");
+        fflush (stdout);
+        sleep (1);
+    }
+    c = getchar ();
+    printf ("\nChar received:%c\n", c);
+    printf ("Done.\n");
+    return 0;
+}
+
+main () {
+    int i = 0;
+    intc = '';
+    system ("stty raw -echo");
+    printf ("enter 'q' to quit \n");
+    for (; c != 'q'; i++) {
+        if (kbhit ()) {
+            c = getchar ();
+            printf ("\n got %c, on iteration %d", c, i);
+        }
+    }
+    system ("stty cooked echo");
+}
+

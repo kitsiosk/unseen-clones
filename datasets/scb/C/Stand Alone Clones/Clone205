@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41644980
+*  Stack Overflow answer #:41645334
+*  And Stack Overflow answer#:41645577
+*/
+int main (void) {
+    char *input1 = get_string ();
+    double numbers [100];
+    int n;
+    char *p = input1;
+    char *q;
+    for (n = 0; n < 100; n++) {
+        numbers[n] = strtod (p, &q);
+        if (p == q) {
+            break;
+        }
+        p = q;
+    }
+    for (int i = 0; i < n; i++) {
+        printf ("%f\n", numbers [i]);
+    }
+    return 0;
+}
+
+int main (void) {
+    string floats [FLOAT_STRING_N] [FLOAT_STRING_SIZE];
+    string input1 = get_string ();
+    char *p = input1;
+    int count;
+    for (count = 0; count < FLOAT_STRING_N; count++) {
+        while (isspace ((unsigned char) * p) p ++;
+        if (*p == '\0')
+            break;
+        int i;
+        for (i = 0; i < FLOAT_STRING_SIZE - 1; i++) {
+            if (isspace ((unsigned char) *p) || *p == '\0')
+                break;
+            floats[count][i] = *p++;
+        }
+        floats[count][i] = '\0';
+    }
+    int count;
+    for (int c = 0; c < count; c++) {
+        puts (floats [c]);
+    }
+    return 0;
+}
+

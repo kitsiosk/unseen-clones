@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54491474
+*  Stack Overflow answer #:54491705
+*  And Stack Overflow answer#:54491897
+*/
+int check (unsigned *a, size_t size) {
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] >= size) {
+            return 0;
+        }
+    }
+    for (size_t i = 0; i < size; ++i) {
+        size_t const x = a[i] % size;
+        a[x] = x + size;
+    }
+    int result = 1;
+    for (size_t i = 0; i < size; ++i) {
+        if (a[i] < size) {
+            result = 0;
+        }
+        else {
+            a[i] = a[i] - size;
+        }
+    }
+    return result;
+}
+
+int check (unsigned *a, unsigned size) {
+    for (unsigned i = 0; i < size; ++i) {
+        unsigned b = a[i];
+        if (b != i) {
+            do {
+                if (b < 0 || b >= size)
+                    return false;
+                unsigned c = a[b];
+                if (b == c)
+                    return false;
+                a[b] = b;
+                b = c;
+            }
+            while (b != i);
+            a[i] = i;
+        }
+    }
+    return true;
+}
+

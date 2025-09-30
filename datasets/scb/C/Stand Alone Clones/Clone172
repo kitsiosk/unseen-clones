@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41231708
+*  Stack Overflow answer #:41232593
+*  And Stack Overflow answer#:41232701
+*/
+void deleteNode (struct node **head_ref, int key) {
+    struct node *temp = *head_ref, *prev;
+    if (temp != NULL && temp->data == key) {
+        *head_ref = temp->next;
+        free (temp);
+        return;
+    }
+    while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp == NULL)
+        return;
+    prev->next = temp->next;
+    free (temp);
+}
+
+void deleteNode (node **head_ref, int key) {
+    node *curr = *head_ref, *prev = NULL;
+    while (curr != NULL && curr->value != key) {
+        prev = curr;
+        curr = curr->next;
+    }
+    if (curr == NULL)
+        return;
+    if (prev)
+        prev->next = curr->next;
+    else
+        *head_ref = curr->next;
+    free (curr);
+}
+

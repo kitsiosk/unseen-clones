@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:9210560
+*  And Stack Overflow answer#:9214240
+*/
+int main () {
+    char months [] = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
+    char **tokens;
+    printf ("months=[%s]\n\n", months);
+    tokens = str_split (months, ',');
+    if (tokens) {
+        int i;
+        for (i = 0; *(tokens + i); i++) {
+            printf ("month=[%s]\n", * (tokens + i));
+            free (* (tokens + i));
+        }
+        printf ("\n");
+        free (tokens);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    const char *str = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
+    char *strCpy;
+    char **split;
+    int num;
+    int i;
+    strCpy = malloc (strlen (str) * sizeof (*strCpy));
+    strcpy (strCpy, str);
+    split = str_split (strCpy, ',', &num);
+    if (split == NULL) {
+        puts ("str_split returned NULL");
+    }
+    else {
+        printf ("%i Results: \n", num);
+        for (i = 0; i < num; i++) {
+            puts (split [i]);
+        }
+    }
+    free (split);
+    free (strCpy);
+    return 0;
+}
+

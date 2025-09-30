@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:310363
+*  Stack Overflow answer #:310374
+*  And Stack Overflow answer#:643257
+*/
+int main () {
+    time_t base = 1142085600;
+    for (int i = 0; i < 4; ++i) {
+        struct tm *tm = localtime (&base);
+        tm->tm_mday += i;
+        time_t next = mktime (tm);
+    std :
+        : cout << ctime (& next);
+    }
+    return 0;
+}
+
+int main () {
+    time_t base = 1238216400;
+std :
+    : time_t start_date_t = base;
+std :
+    : time_t end_date_t = base;
+std :
+    : tm start_date = * std : : localtime (& start_date_t);
+std :
+    : tm end_date = * std : : localtime (& end_date_t);
+    end_date.tm_mday += 1;
+std :
+    : time_t b = mktime (& start_date);
+std :
+    : time_t e = mktime (& end_date);
+std :
+    : string start_date_str (ctime (& b));
+std :
+    : string stop_date_str (ctime (& e));
+    cout << " begin (MSK) (DST is not active): " << start_date_str;
+    cout << " end   (MSD) (DST is active):     " << stop_date_str;
+}
+

@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29455170
+*  Stack Overflow answer #:29455846
+*  And Stack Overflow answer#:29455350
+*/
+int main (void) {
+    pthread_t id1, id2;
+    pthread_mutex_lock (& mainMutex);
+    if (pthread_create (&id1, NULL, printOdd, NULL) != 0)
+        exit (1);
+    pthread_cond_wait (& mainCond, & mainMutex);
+    if (pthread_create (&id2, NULL, printEven, NULL) != 0)
+        exit (1);
+    pthread_cond_wait (& mainCond, & mainMutex);
+    pthread_mutex_unlock (& mainMutex);
+    pthread_mutex_lock (& oddMutex);
+    pthread_cond_signal (& oddCond);
+    pthread_mutex_unlock (& oddMutex);
+    pthread_join (id1, NULL);
+    pthread_join (id2, NULL);
+    exit (0);
+}
+
+int main (void) {
+    pthread_t pthread1, pthread2;
+    int ret1, ret2;
+    ret1 = pthread_create (&pthread1, NULL, printfun1, NULL);
+    if (ret1) {
+        printf ("thread creation failed");
+    }
+    ret2 = pthread_create (&pthread2, NULL, printfun2, NULL);
+    if (ret2) {
+        printf ("thread creation failed");
+    }
+    pthread_join (pthread1, NULL);
+    pthread_join (pthread2, NULL);
+}
+

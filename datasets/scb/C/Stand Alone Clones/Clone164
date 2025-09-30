@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19185958
+*  Stack Overflow answer #:19186521
+*  And Stack Overflow answer#:19186027
+*/
+int main () {
+    int x;
+    struct sigaction sa;
+    sa.sa_handler = handler;
+    sigemptyset (& sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction (SIGALRM, & sa, NULL);
+    alarm (5);
+    if (scanf ("%d", &x) == 1) {
+        printf ("%d\n", x);
+        alarm (0);
+    }
+    else {
+        printf ("timedout\n");
+    }
+    return 0;
+}
+
+int main (void) {
+    int value = 0;
+    struct timeval tmo;
+    fd_set readfds;
+    printf ("Enter a non-zero number: ");
+    fflush (stdout);
+    FD_ZERO (& readfds);
+    FD_SET (0, & readfds);
+    tmo.tv_sec = 5;
+    tmo.tv_usec = 0;
+    switch (select (1, &readfds, NULL, NULL, &tmo)) {
+    case -1 :
+        err (1, "select");
+        break;
+    case 0 :
+        printf ("User dont give input");
+        return (1);
+    }
+    scanf ("%d", & value);
+    if (value != 0) {
+        printf ("User input a number");
+    }
+    else {
+        printf ("User dont give input");
+    }
+    return (0);
+}
+

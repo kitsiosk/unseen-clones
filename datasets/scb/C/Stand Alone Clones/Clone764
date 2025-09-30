@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28683485
+*  Stack Overflow answer #:28686740
+*  And Stack Overflow answer#:28683855
+*/
+int main (int argc, char *argv []) {
+    int a [N] = {0};
+    while (next (a +N - 1, N) != 10) {
+        for (int i = 0; i < N; i++) {
+            if (a[i] != 0)
+                printf ("%d", a[i]);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    char array [256];
+    int i, n;
+    int max = (argc > 1) ? strtol (argv[1], NULL, 0) : 6;
+    int silent = 0;
+    long long count = 0;
+    if (max < 0) {
+        max = -max;
+        silent = 1;
+    }
+    array[sizeof (array) - 1] = '\0';
+    for (n = 1; n <= max; n++) {
+        count += enumerate (array + sizeof (array) - 1 - n, 0, n, '1', silent);
+        if (silent)
+            printf ("%lld combinations between 0 and 1E%d\n", count, n);
+    }
+}
+

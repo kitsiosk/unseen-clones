@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44764678
+*  Stack Overflow answer #:44765193
+*  And Stack Overflow answer#:44765738
+*/
+int main (void) {
+    int n, i, j;
+    printf ("Ingrese la cantidad de filas:\n");
+    scanf ("%d", & n);
+    for (i = n; i > 0; i--) {
+        for (j = n - i; j > 0; j--) {
+            printf (" ");
+        }
+        for (j = i; j > 0; j--) {
+            printf ("*");
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main (void) {
+    int n;
+    printf ("Enter number of stars: ");
+    fflush (stdout);
+    if (scanf ("%d", &n) == 1 && n > 0 && n < 1000) {
+        putchar ('\n');
+        char stars [n];
+        char space [n];
+        memset (stars, '*', n);
+        memset (space, ' ', n);
+        for (int i = 0; i < n; i++)
+            printf ("%.*s%.*s\n", i, space, n -i, stars);
+    }
+    return 0;
+}
+

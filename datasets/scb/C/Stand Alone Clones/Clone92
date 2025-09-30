@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10000621
+*  Stack Overflow answer #:10001260
+*  And Stack Overflow answer#:10002036
+*/
+int main (int ac, char *argv []) {
+    char str [] = "foo $$ foo ## foo []";
+    char *s = "foo";
+    char *p;
+    p = strtok (str, " ");
+    while (p != NULL) {
+        if (strcmp (p, s))
+            printf ("%s\n", p);
+        p = strtok (NULL, " ");
+    }
+    return 0;
+}
+
+int main (void) {
+    char *hay = "foo $$ foo ## foo [] fox @@ foo ??";
+    char *needle = "foo";
+    char *np;
+    char **vs;
+    size_t vslen = 0;
+    size_t nlen = strlen (needle);
+    if ((vs = malloc (sizeof (char *))) == NULL) {
+        perror ("main");
+        return 1;
+    }
+    *vs = NULL;
+    while (*(np = find (hay, needle))) {
+        if (np != hay) {
+            pushstr (& vs, & vslen, hay, np - hay);
+            hay = np + nlen;
+        }
+        else {
+            hay += nlen;
+        }
+    }
+    if (np != hay)
+        pushstr (&vs, &vslen, hay, np -hay);
+    while (*vs)
+        printf ("V: '%s'\n", *vs++);
+    vs -= vslen;
+    while (*vs)
+        free (*vs++);
+    vs -= vslen;
+    free (vs);
+    return 0;
+}
+

@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:43839257
+*  Stack Overflow answer #:43839587
+*  And Stack Overflow answer#:43839503
+*/
+int read (void *array) {
+    FILE *file = fopen (DATA_FILE, "r");
+    if (file == NULL) {
+        perror ("fopen:");
+        exit (EXIT_FAILURE);
+    }
+    char *words = array;
+    int rows;
+    for (rows = 0; rows < MAX_ROWS; ++rows, words += COLS) {
+        if (fscanf (file, "%" S (MAX_WORD_LENGTH) "s", words) == EOF)
+            break;
+    }
+    fclose (file);
+    return rows;
+}
+
+int read (char words [] [31]) {
+    FILE *file;
+    int i, j, count = 0;
+    file = fopen ("words.txt", "r");
+    for (i = 0; i < 7; i++) {
+        count += (1 == fscanf (file, "%s", words[i]));
+    }
+    return count;
+}
+

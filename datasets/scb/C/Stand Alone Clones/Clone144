@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30003379
+*  Stack Overflow answer #:30003889
+*  And Stack Overflow answer#:30003548
+*/
+int main (int argc, const char *argv []) {
+    char *buf = "add 56 89 29";
+    int sum = 0;
+    if (!strncmp (buf, "add", 3)) {
+        buf += 3;
+        while (*buf != '\0') {
+            if (isdigit (*buf) == 0) {
+                ++buf;
+                continue;
+            }
+            int digit;
+            int num = 0;
+            while (isdigit (*buf)) {
+                digit = (int) *buf - 48;
+                num = (num * 10) + digit;
+                ++buf;
+            }
+            sum += num;
+            printf ("Current no: %d\t Sum: %d\n", num, sum);
+        }
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char temp [100];
+    char op [4];
+    char *buf = "add 56 89 29";
+    int offset = 0;
+    int used = 0;
+    int rcount = 0;
+    int lastno = -999;
+    int currno;
+    bzero (& temp, sizeof (temp));
+    sscanf (buf, "%3s%n", op, & used);
+    offset += used;
+    if (!strcmp (op, "add")) {
+        while ((sscanf (buf +offset, "%99s%n", temp, &used)) == 1) {
+            currno = atoi (temp);
+            offset += used;
+            printf ("Current no: %d\tOffset: %d\n", currno, offset);
+            lastno = currno;
+        }
+    }
+    return 0;
+}
+

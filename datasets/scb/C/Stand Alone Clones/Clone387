@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13201042
+*  Stack Overflow answer #:13201525
+*  And Stack Overflow answer#:13204481
+*/
+int main (void) {
+    int i, base;
+    int word [32];
+    unsigned long int number;
+    printf ("Enter the decimal number to be converted: ");
+    scanf ("%ld", & number);
+    printf ("\nEnter the new base: ");
+    scanf ("%d", & base);
+    i = wordCalculator (word, number, base);
+    printf ("The number is: ");
+    for (; i >= 0; i--) {
+        if (word[i] <= 9)
+            printf ("%d", word[i]);
+        else
+            printf ("%c", (65 - 10 + word[i]));
+    }
+    printf ("\n");
+}
+
+int main () {
+    int n;
+    char output [100];
+    printf ("Enter a number: ");
+    scanf ("%d", & n);
+    itoa (n, output, 2);
+    printf ("The number %d is %s in binary.", n, output);
+    return 0;
+}
+

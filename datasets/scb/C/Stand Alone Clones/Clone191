@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9613960
+*  Stack Overflow answer #:9614379
+*  And Stack Overflow answer#:9958072
+*/
+int main (void) {
+    int a [11] = {1, 2, 3, 4, 5, 11, 11, 11, 11, 16, 16};
+    int a_size = sizeof (a) / sizeof (a[0]);
+    print (a, a_size, "Before", "a");
+    a_size = compact (a, a_size);
+    print (a, a_size, "After", "a");
+    int b [11] = {11, 1, 11, 3, 16, 2, 5, 11, 4, 11, 16};
+    int b_size = sizeof (b) / sizeof (b[0]);
+    print (b, b_size, "Before", "b");
+    qsort (b, b_size, sizeof (b [0]), intcmp);
+    print (b, b_size, "Sorted", "b");
+    b_size = compact (b, b_size);
+    print (b, b_size, "After", "b");
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int a [] = {31, 44, 44, 67, 67, 99, 99, 100, 101};
+    int k = remove_dups (a, 9);
+    assert (k == 3);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", a[i]);
+    printf ("\n\n");
+    int b [] = {-5, -3, -2, -2, -2, -2, 1, 3, 5, 5, 18, 18};
+    k = remove_dups (b, 12);
+    assert (k == 4);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", b[i]);
+    printf ("\n\n");
+    int c [] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    k = remove_dups (c, 9);
+    assert (k == 9);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", c[i]);
+    return 0;
+}
+

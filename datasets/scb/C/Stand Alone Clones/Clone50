@@ -1,0 +1,62 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42050699
+*  Stack Overflow answer #:42051095
+*  And Stack Overflow answer#:42053473
+*/
+int main (void) {
+    int array [SIZE], min, max;
+    printf ("Enter %d numbers:\n", SIZE);
+    for (size_t i = 0; i < SIZE; i++) {
+        if (scanf ("%d", &array[i]) != 1) {
+            printf ("Invalid number entered\n");
+            exit (EXIT_FAILURE);
+        }
+    }
+    max = min = array[0];
+    for (size_t i = 1; i < SIZE; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+        else if (array[i] < min) {
+            min = array[i];
+        }
+    }
+    printf ("Maximum: %d\nMinimum: %d\n", max, min);
+    return 0;
+}
+
+int main (void) {
+    int a, b, c, d, e, min, max;
+    if (scanf ("%d%d%d%d%d", &a, &b, &c, &d, &e) != 5)
+        return 1;
+    min = max = a;
+    if (b > max) {
+        max = b;
+    }
+    if (c > max) {
+        max = c;
+    }
+    if (d > max) {
+        max = d;
+    }
+    if (e > max) {
+        max = e;
+    }
+    if (min > b) {
+        min = b;
+    }
+    if (min > c) {
+        min = c;
+    }
+    if (min > d) {
+        min = d;
+    }
+    if (min > e) {
+        min = e;
+    }
+    printf ("Maximum: %d\nMinimum: %d", max, min);
+    return 0;
+}
+

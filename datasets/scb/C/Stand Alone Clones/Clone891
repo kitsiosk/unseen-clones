@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37517291
+*  Stack Overflow answer #:37519971
+*  And Stack Overflow answer#:37517326
+*/
+main () {
+    int i = 1;
+    goto x;
+y :
+    printf ("This is the 1st goto statement\n");
+    goto z;
+x :
+    if (i == 1) {
+        printf ("This is the 2nd goto statement\n");
+        goto y;
+    }
+z :
+    printf ("End of the program\n");
+}
+
+int main () {
+    int a = 1;
+    if (a < 0) {
+        printf ("out");
+    }
+    else {
+        print ("in");
+    }
+    return 1;
+}
+

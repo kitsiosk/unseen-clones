@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27641842
+*  Stack Overflow answer #:27642004
+*  And Stack Overflow answer#:27642008
+*/
+int main (int argc, char *argv []) {
+    char line [100];
+    fgets (line, 100, stdin);
+    char *tab [20];
+    char *p = NULL;
+    p = strtok (line, " ");
+    int nb = -1;
+    while (p != NULL) {
+        nb++;
+        tab[nb] = malloc (sizeof (char) * 100);
+        strcpy (tab [nb], p);
+        p = strtok (NULL, " ");
+    }
+    tab[nb][strlen (tab[nb]) - 1] = '\0';
+    int i;
+    for (i = nb; i >= 0; i--) {
+        printf ("%s ", tab [i]);
+        free (tab [i]);
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main (void) {
+    size_t size;
+    printf ("enter the number of words: ");
+    scanf ("%zu", & size);
+    char arr [size] [20];
+    char revarr [size] [20];
+    for (size_t i = 0; i < size; i++)
+        scanf ("%s", arr[i]);
+    printf ("\n");
+    for (size_t i = 0; i < size; i++)
+        strcpy (revarr[i], arr[size - i - 1]);
+    printf ("the reversed sentence is");
+    for (size_t i = 0; i < size; i++)
+        printf (" %s", revarr[i]);
+    printf ("\n");
+    return 0;
+}
+

@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47220212
+*  Stack Overflow answer #:47222878
+*  And Stack Overflow answer#:47220460
+*/
+int main (void) {
+    char str [] = "aaaaaaaa";
+    size_t len_str = strlen (str);
+    string *p = malloc (sizeof *p + len_str + 1);
+    if (!p) {
+        return 1;
+    }
+    p->size = len_str;
+    strcpy (p -> str, str);
+    puts (p -> str);
+    strncpy (p -> str, str, len_str + 1);
+    puts (p -> str);
+    memcpy (p -> str, str, len_str + 1);
+    puts (p -> str);
+    free (p);
+}
+
+int main () {
+    pack *p = malloc (sizeof (pack));
+    char str [1024];
+    fgets (str, sizeof (str), stdin);
+    p->c = strdup (str);
+    puts (p -> c);
+    free (p -> c);
+    free (p);
+    return 0;
+}
+

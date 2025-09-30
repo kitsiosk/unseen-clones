@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2182002
+*  Stack Overflow answer #:2182581
+*  And Stack Overflow answer#:12218264
+*/
+void SwapBytes (void *pv, size_t n) {
+    assert (n > 0);
+    char *p = pv;
+    size_t lo, hi;
+    for (lo = 0, hi = n - 1; hi > lo; lo++, hi--) {
+        char tmp = p[lo];
+        p[lo] = p[hi];
+        p[hi] = tmp;
+    }
+}
+
+inline void SwapBytes (void *source, int size) {
+    typedef unsigned char TwoBytes [2];
+    typedef unsigned char FourBytes [4];
+    typedef unsigned char EightBytes [8];
+    unsigned char temp;
+    if (size == 2) {
+        TwoBytes *src = (TwoBytes *) source;
+        temp = (*src)[0];
+        (*src)[0] = (*src)[1];
+        (*src)[1] = temp;
+        return;
+    }
+    if (size == 4) {
+        FourBytes *src = (FourBytes *) source;
+        temp = (*src)[0];
+        (*src)[0] = (*src)[3];
+        (*src)[3] = temp;
+        temp = (*src)[1];
+        (*src)[1] = (*src)[2];
+        (*src)[2] = temp;
+        return;
+    }
+    if (size == 8) {
+        EightBytes *src = (EightBytes *) source;
+        temp = (*src)[0];
+        (*src)[0] = (*src)[7];
+        (*src)[7] = temp;
+        temp = (*src)[1];
+        (*src)[1] = (*src)[6];
+        (*src)[6] = temp;
+        temp = (*src)[2];
+        (*src)[2] = (*src)[5];
+        (*src)[5] = temp;
+        temp = (*src)[3];
+        (*src)[3] = (*src)[4];
+        (*src)[4] = temp;
+        return;
+    }
+}
+

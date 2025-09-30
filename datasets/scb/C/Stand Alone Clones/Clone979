@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6117056
+*  Stack Overflow answer #:6117225
+*  And Stack Overflow answer#:6117145
+*/
+int sendToServer (char *msg, int bitfields) {
+    unsigned int bits = bswap32 (bitfields);
+    size_t len = strlen (msg);
+    size_t nlen = bswap64 (len);
+    iovec data [3];
+    data[0].iov_base = &nlen;
+    data[0].iov_len = sizeof (nlen);
+    data[1].iov_base = msg;
+    data[1].iov_len = len;
+    data[2].iov_base = &bits;
+    data[2].iov_len = sizeof (bits);
+    writev (fd, & data, sizeof (data) / sizeof (data [0]));
+}
+
+int sendToServer (int sock, char *msg, int flags) {
+    size_t siz = strlen (msg) + 1;
+    unsigned char *buf = malloc_or_die (siz +1);
+    buf[0] = flags;
+    memcpy (buf + 1, msg, size);
+    send (sock, msg, strlen (msg), 0);
+    free (buf);
+    return 0;
+}
+

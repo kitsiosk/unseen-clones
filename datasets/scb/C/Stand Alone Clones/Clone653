@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40078327
+*  Stack Overflow answer #:40092595
+*  And Stack Overflow answer#:40078769
+*/
+size_t parsing (int **nums, char *a) {
+    size_t nums_sz = 0;
+    char *res;
+    while ((res = strtok (a, "(,)"))) {
+        nums_sz++;
+        *nums = realloc (*nums, sizeof (int) * nums_sz);
+        (*nums)[nums_sz - 1] = atoi (res);
+        a = NULL;
+    }
+    return nums_sz;
+}
+
+static int parsing (char *a) {
+    char temp [80];
+    strcpy (temp, a);
+    printf ("temp 0 = %p [[%s]]\n", (void *) temp, temp);
+    char *word1 = strtok (temp, "(,)");
+    printf ("word 1 = %p [[%s]]\n", (void *) word1, word1 == 0 ? "<nothing>" : word1);
+    char *word2 = strtok (NULL, "(,)");
+    printf ("word 2 = %p [[%s]]\n", (void *) word2, word2 == 0 ? "<nothing>" : word2);
+    int u = strtoumax (word1, 0, 0);
+    int v = strtoumax (word2, 0, 0);
+    printf ("%d %d\n", u, v);
+    return 1;
+}
+

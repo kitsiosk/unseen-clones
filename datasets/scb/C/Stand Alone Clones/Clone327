@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27160073
+*  Stack Overflow answer #:47373904
+*  And Stack Overflow answer#:27160518
+*/
+int main () {
+    char str [] = "This is a simple string made with simple code";
+    char *pch;
+    int i = 0, count = 0;
+    for (i = 0; i < strlen (str); i++) {
+        if (str[i] == 's' && str[i + 1] == 'i' && str[i + 2] == 'm' && str[i + 3] == 'p' && str[i + 4] == 'l' && str[i + 5] == 'e') {
+            count++;
+        }
+    }
+    for (i = 1; i <= count; i++) {
+        pch = strstr (str, "simple");
+        strncpy (pch, "sample", 6);
+    }
+    puts (str);
+    return 0;
+}
+
+int main (void) {
+    char *result;
+    result = changewords_1 ("Hello I'm Number One", "Number", "Index");
+    printf ("[%s]\n", result);
+    free (result);
+    result = changewords_2 ("Here Is The Onerous Number One ...", "One", "Four");
+    printf ("[%s]\n", result);
+    free (result);
+    result = changewords_3 ("Here Is Number One Again", "One", "Fourty-Five Hundred");
+    printf ("[%s]\n", result);
+    free (result);
+    return 0;
+}
+

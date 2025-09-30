@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33325876
+*  Stack Overflow answer #:33326403
+*  And Stack Overflow answer#:33326351
+*/
+struct doStuffRet doStuff (int a, int b) {
+    int option;
+    struct doStuffRet r = {{a, b}};
+    scanf ("%d", & option);
+    switch (option) {
+    case 1 :
+        r.arr[0] = a - 2;
+        r.arr[1] = b;
+        return r;
+        break;
+    case 2 :
+        r.arr[0] = a;
+        r.arr[1] = b - 2;
+        return r;
+        break;
+    default :
+        return r;
+    }
+}
+
+void doStuff (int *a, int *b, int option) {
+    switch (option) {
+    case 1 :
+        *a = *a - 2;
+        break;
+    case 2 :
+        *b = *b - 2;
+        break;
+    default :
+        break;
+    }
+}
+

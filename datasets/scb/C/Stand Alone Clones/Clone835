@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50276364
+*  Stack Overflow answer #:50277772
+*  And Stack Overflow answer#:50276465
+*/
+int main (void) {
+    int start, end;
+    unsigned n;
+    printf ("Enter an integer: ");
+    fflush (stdout);
+    if (scanf (" %n%u%n", &start, &n, &end) == 1) {
+        int length = end - start;
+        unsigned reversedNumber = 0;
+        for (int i = length; i > 0; i--) {
+            unsigned remainder = n % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            n /= 10;
+        }
+        printf ("Reversed Number = %0*u\n", length, reversedNumber);
+    }
+    return 0;
+}
+
+int main (void) {
+    int n, reversedNumber = 0, remainder;
+    printf ("Enter an integer: ");
+    scanf ("%d", & n);
+    {
+        size_t i = (0 > n);
+        while (n != 0) {
+            remainder = n % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            n /= 10;
+            ++i;
+        }
+        printf ("Reversed Number = %0*d\n", (int) i, reversedNumber);
+    }
+    return 0;
+}
+

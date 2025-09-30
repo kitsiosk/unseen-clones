@@ -1,0 +1,74 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1149929
+*  Stack Overflow answer #:3758542
+*  And Stack Overflow answer#:1157571
+*/
+int add (int x, int y) {
+    int a, b;
+    do {
+        a = x & y;
+        b = x ^ y;
+        x = a << 1;
+        y = b;
+    }
+    while (a);
+    return b;
+}
+
+unsigned int add (unsigned int a, unsigned int b) {
+    unsigned int sum;
+    unsigned int carry;
+    byte * const aBytes = (byte *) &a;
+    byte * const bBytes = (byte *) &b;
+    byte * const sumBytes = (byte *) &sum;
+    byte * const carryBytes = (byte *) &carry;
+    byte const test [4] = {0x12, 0x34, 0x56, 0x78};
+    byte BYTE_0, BYTE_1, BYTE_2, BYTE_3;
+    if (0x12345678 == *(unsignedint*) test) {
+        BYTE_0 = 3;
+        BYTE_1 = 2;
+        BYTE_2 = 1;
+        BYTE_3 = 0;
+    }
+    else {
+        BYTE_0 = 0;
+        BYTE_1 = 1;
+        BYTE_2 = 2;
+        BYTE_3 = 3;
+    }
+    add_byte (aBytes [BYTE_0], bBytes [BYTE_0], & sumBytes [BYTE_0], & carryBytes [BYTE_0]);
+    add_byte (aBytes [BYTE_1], bBytes [BYTE_1], & sumBytes [BYTE_1], & carryBytes [BYTE_1]);
+    if (carryBytes[BYTE_0] == 1) {
+        if (sumBytes[BYTE_1] == 255) {
+            sumBytes[BYTE_1] = 0;
+            carryBytes[BYTE_1] = 1;
+        }
+        else {
+            add_byte (sumBytes [BYTE_1], 1, & sumBytes [BYTE_1], & carryBytes [BYTE_0]);
+        }
+    }
+    add_byte (aBytes [BYTE_2], bBytes [BYTE_2], & sumBytes [BYTE_2], & carryBytes [BYTE_2]);
+    if (carryBytes[BYTE_1] == 1) {
+        if (sumBytes[BYTE_2] == 255) {
+            sumBytes[BYTE_2] = 0;
+            carryBytes[BYTE_2] = 1;
+        }
+        else {
+            add_byte (sumBytes [BYTE_2], 1, & sumBytes [BYTE_2], & carryBytes [BYTE_1]);
+        }
+    }
+    add_byte (aBytes [BYTE_3], bBytes [BYTE_3], & sumBytes [BYTE_3], & carryBytes [BYTE_3]);
+    if (carryBytes[BYTE_2] == 1) {
+        if (sumBytes[BYTE_3] == 255) {
+            sumBytes[BYTE_3] = 0;
+            carryBytes[BYTE_3] = 1;
+        }
+        else {
+            add_byte (sumBytes [BYTE_3], 1, & sumBytes [BYTE_3], & carryBytes [BYTE_2]);
+        }
+    }
+    return sum;
+}
+

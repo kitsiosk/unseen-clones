@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1513734
+*  Stack Overflow answer #:1513806
+*  And Stack Overflow answer#:1513833
+*/
+int main () {
+    int i;
+    char c;
+    if ((int) signal (SIGINT, sigcatch) < 0) {
+        perror ("signal");
+        exit (1);
+    }
+    if ((int) signal (SIGQUIT, sigcatch) < 0) {
+        perror ("signal");
+        exit (1);
+    }
+    if ((int) signal (SIGTERM, sigcatch) < 0) {
+        perror ("signal");
+        exit (1);
+    }
+    if (ttyraw (0) < 0) {
+        fprintf (stderr, "Can't go to raw mode.\n");
+        exit (1);
+    }
+    while ((i = read (0, &c, 1)) == 1) {
+        if ((c &= 255) == 0177)
+            break;
+        printf ("%o\n\r", c);
+    }
+    if (ttyreset (0) < 0) {
+        fprintf (stderr, "Cannot reset terminal!\n");
+        exit (- 1);
+    }
+    if (i < 0) {
+        fprintf (stderr, "Read error.\n");
+        exit (- 1);
+    }
+    return 0;
+}
+
+int main () {
+    init_keyboard ();
+    char ch = 'x';
+    while (ch != 'q') {
+        printf ("looping\n");
+        sleep (1);
+        if (kbhit ()) {
+            printf ("you hit");
+            do {
+                ch = readch ();
+                printf (" '%c'(%i)", isprint (ch) ? ch : '?', (int) ch);
+            }
+            while (kbhit ());
+            puts ("");
+        }
+    }
+    close_keyboard ();
+}
+

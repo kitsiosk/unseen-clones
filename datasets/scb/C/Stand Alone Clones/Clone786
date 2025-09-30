@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38933373
+*  Stack Overflow answer #:38933457
+*  And Stack Overflow answer#:38933854
+*/
+void insert (struct node **start) {
+    struct node *temp;
+    temp = (struct node *) malloc (sizeof (struct node));
+    temp->data = 75;
+    temp->next = NULL;
+    if (*start == NULL) {
+        *start = temp;
+    }
+    else {
+        struct node *curr = *start;
+        while (curr->next != NULL) {
+            curr = curr->next;
+        }
+        curr->next = temp;
+    }
+}
+
+int insert (struct node **start, int data) {
+    struct node *new_node = malloc (sizeof (struct node));
+    int success = new_node != NULL;
+    if (success) {
+        new_node->data = data;
+        new_node->next = NULL;
+        while (*start)
+            start = &(*start)->next;
+        *start = new_node;
+    }
+    return success;
+}
+

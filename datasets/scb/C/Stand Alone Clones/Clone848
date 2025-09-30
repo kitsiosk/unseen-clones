@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34361464
+*  Stack Overflow answer #:34362334
+*  And Stack Overflow answer#:34362640
+*/
+int main () {
+    int zeroCounter = 0;
+    char inputNumber [256];
+    printf ("Please enter the numerical value:");
+    fgets (inputNumber, 256, stdin);
+    int j;
+    for (j = 0; inputNumber[j] != '\n'; j++) {
+        if (inputNumber[j] == '0')
+            zeroCounter++;
+    }
+    printf ("this value had %d zeros, here they are:    ", zeroCounter);
+    while (zeroCounter != 0) {
+        printf ("0");
+        zeroCounter--;
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main (void) {
+    int inputNumber, i, j, prod = 1;
+    int numberOfInputs;
+    scanf ("%d", & numberOfInputs);
+    for (i = 1; i <= numberOfInputs; i++) {
+        scanf ("%d", & inputNumber);
+        for (j = 1; j < inputNumber; j++) {
+            if (inputNumber % j == 0) {
+                prod = prod * j;
+            }
+        }
+        printf ("%04d\n", prod % 10000);
+    }
+    return 0;
+}
+

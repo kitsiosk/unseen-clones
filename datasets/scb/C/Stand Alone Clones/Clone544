@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12435671
+*  Stack Overflow answer #:17654730
+*  And Stack Overflow answer#:49066372
+*/
+public static Quaternion LookAt (Vector3 sourcePoint, Vector3 destPoint) {
+    Vector3 forwardVector = Vector3.Normalize (destPoint -sourcePoint);
+    float dot = Vector3.Dot (Vector3.forward, forwardVector);
+    if (Math.Abs (dot -(-1.0f)) < 0.000001f) {
+        return new Quaternion (Vector3.up.x, Vector3.up.y, Vector3.up.z, 3.1415926535897932f);
+    }
+    if (Math.Abs (dot -(1.0f)) < 0.000001f) {
+        return Quaternion.identity;
+    }
+    float rotAngle = (float) Math.Acos (dot);
+    Vector3 rotAxis = Vector3.Cross (Vector3.forward, forwardVector);
+    rotAxis = Vector3.Normalize (rotAxis);
+    return CreateFromAxisAngle (rotAxis, rotAngle);
+}
+
+public static Quaternion LookAt (Vector3 sourcePoint, Vector3 destPoint) {
+    Vector3 forwardVector = Vector3.Normalize (destPoint -sourcePoint);
+    Vector3 rotAxis = Vector3.Cross (Vector3.forward, forwardVector);
+    float dot = Vector3.Dot (Vector3.forward, forwardVector);
+    Quaternion q;
+    q.x = rotAxis.x;
+    q.y = rotAxis.y;
+    q.z = rotAxis.z;
+    q.w = dot + 1;
+    return q.normalize ();
+}
+

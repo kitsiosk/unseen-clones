@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10668504
+*  Stack Overflow answer #:12930480
+*  And Stack Overflow answer#:10668528
+*/
+int main (void) {
+    char *line = NULL;
+    size_t count;
+    char *dup_line;
+    getline (& line, & count, stdin);
+    dup_line = strdup (line);
+    puts (dup_line);
+    free (dup_line);
+    free (line);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char s [BUF_SIZE];
+    int ln;
+    puts ("Enter String");
+    gets (s);
+    ln = strlen (s);
+    char *dyn_s = (char *) malloc (strlen (s) +1);
+    dyn_s = s;
+    dyn_s[strlen (s)] = '\0';
+    puts (dyn_s);
+    return 0;
+}
+

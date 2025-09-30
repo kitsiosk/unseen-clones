@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31806460
+*  Stack Overflow answer #:31807054
+*  And Stack Overflow answer#:31806933
+*/
+int main (void) {
+    uint32_t *store [2];
+    int i;
+    int *states [2];
+    states[0] = (int []) {1, 0, 0, 1};
+    states[1] = (int []) {0, 0, 0, 2};
+    for (i = 0; i < 2; i++) {
+        store[i] = states[i];
+    }
+}
+
+int main () {
+    int store [3] [4];
+    int i;
+    int states [3] [4] = {{1, 0, 0, 1}, {0, 0, 0, 2}};
+    for (i = 0; i < 3; i++) {
+        printf ("store[%d] = ", i);
+        for (int inner = 0;
+        inner < 4;
+        inner ++) {store [i] [inner] = states [i] [inner];
+        printf ("%d ", store [i] [inner]);
+    }
+    printf ("\n");
+}
+

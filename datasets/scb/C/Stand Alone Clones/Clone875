@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:12911299
+*  Stack Overflow answer #:28321635
+*  And Stack Overflow answer#:12911465
+*/
+int main (int argc, char **argv) {
+    FILE *fp;
+    long errcount = 0L;
+    long lines = 0L;
+    if (argc != 3) {
+        printf ("Usage: %s csvfilepath delimiter\n", basename (argv [0]));
+        return (RET_FAIL);
+    }
+    if ((delim = argv[2][0]) == '\0') {
+        fprintf (stderr, "delimiter must be specified\n");
+        return (RET_FAIL);
+    }
+    fp = fopen (argv[1], "r");
+    if (fp == NULL) {
+        fprintf (stderr, "Error opening file: %d\n", errno);
+        return (RET_FAIL);
+    }
+    lines = loadFile (fp, &errcount);
+    fclose (fp);
+    printf ("Processed %ld lines, encountered %ld error(s)\n", lines, errcount);
+    if (errcount > 0)
+        return (RET_FAIL);
+    return (RET_OK);
+}
+
+int main () {
+    FILE *stream = fopen ("input", "r");
+    char line [1024];
+    while (fgets (line, 1024, stream)) {
+        char *tmp = strdup (line);
+        printf ("Field 3 would be %s\n", getfield (tmp, 3));
+        free (tmp);
+    }
+}
+

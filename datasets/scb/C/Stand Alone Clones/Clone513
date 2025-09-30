@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52561123
+*  Stack Overflow answer #:52561460
+*  And Stack Overflow answer#:52561462
+*/
+int main (void) {
+    char *str1 = malloc (initial_malloc);
+    if (str1) {
+        strcpy (str1, "hello");
+        mystrncat (str1, "World", 3);
+        printf ("%s\n", str1);
+        free (str1);
+    }
+    return EXIT_SUCCESS;
+}
+
+int main (void) {
+    char *str1 = malloc (initial_malloc);
+    char *str2 = malloc (initial_malloc);
+    if (str1 == NULL || str2 == NULL) {
+        printf ("memory allocation failure\n");
+        return EXIT_FAILURE;
+    }
+    strcpy (str1, "hello");
+    strcpy (str2, "World");
+    mystrncat (str1, str2, 3);
+    printf ("%s\n", str1);
+    free (str1);
+    free (str2);
+    return EXIT_SUCCESS;
+}
+

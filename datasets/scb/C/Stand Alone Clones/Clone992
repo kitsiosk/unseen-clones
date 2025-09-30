@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35968899
+*  Stack Overflow answer #:35969332
+*  And Stack Overflow answer#:35969201
+*/
+int main (void) {
+    char n [64];
+    char m [64];
+    char *p = n;
+    int i = 0;
+    int c;
+    scanf ("%63[0-9] %63[0-9]", n, m);
+    while ((c = m[i++]) != '\0') {
+        int j = c - '0';
+        while (j-- > 0)
+            if (*p)
+                putchar (*p++);
+        putchar (' ');
+    }
+    putchar ('\n');
+    return 0;
+}
+
+int main () {
+    int n, m, digit;
+    int i, j;
+    int n10, m10;
+    scanf ("%d %d", & n, & m);
+    int lengthOfM = nDigits (m);
+    n10 = multipleOfTen (n);
+    m10 = multipleOfTen (m);
+    for (i = 0; i < lengthOfM; i++) {
+        digit = m / m10;
+        m10 /= 10;
+        for (j = 0; j < digit; j++) {
+            printf ("%d", n / n10);
+            n = n % n10;
+            n10 /= 10;
+        }
+        printf ("\n");
+        m = m % multipleOfTen (m);
+    }
+    return 0;
+}
+

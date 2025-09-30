@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6590593
+*  Stack Overflow answer #:6606908
+*  And Stack Overflow answer#:6592851
+*/
+void main () {
+    clrscr ();
+    int in [10] [10];
+    int out [10] [10];
+    int row, column, i, j;
+    printf ("enter row");
+    scanf ("%d", & row);
+    printf ("Enter column");
+    scanf ("%d", & column);
+    for (i = 1; i <= row; i++) {
+        for (j = 1; j <= column; j++) {
+            printf ("Enter (%d,%d)th value", i, j);
+            scanf ("%d", & in [i - 1] [j - 1]);
+        }
+    }
+    printf ("\ninput is\n\n");
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < column; j++) {
+            printf ("%d\t", in [i] [j]);
+        }
+        printf ("\n");
+    }
+    printf ("\nOutput is\n\n");
+    for (i = 0; i < column; i++) {
+        for (j = 0; j < row; j++) {
+            printf ("%d\t", in [j] [i]);
+            out[i][j] = in[j][i];
+        }
+        printf ("\n");
+    }
+    getch ();
+}
+
+int main (void) {
+    int oldar [2] [3] = {{1, 2, 3}, {4, 5, 6}};
+    int newar [3] [2];
+    transpose (& oldar [0] [0], & newar [0] [0], 2, 3);
+    int i, j;
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 3; j++)
+            printf ("%d ", oldar[i][j]);
+        printf ("\n");
+    }
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 2; j++)
+            printf ("%d ", newar[i][j]);
+        printf ("\n");
+    }
+}
+

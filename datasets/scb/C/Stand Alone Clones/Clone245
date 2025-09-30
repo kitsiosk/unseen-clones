@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:19076294
+*  Stack Overflow answer #:19076433
+*  And Stack Overflow answer#:19076473
+*/
+void insert (int val, char arr []) {
+    struct Node *temp2 = malloc (sizeof (struct Node));
+    temp2->type = val;
+    strcpy (temp2 -> cmd, arr);
+    temp2->next = NULL;
+    if (head == NULL) {
+        head = temp2;
+    }
+    else {
+        struct Node *temp1 = head;
+        while (temp1->next != NULL)
+            temp1 = temp1->next;
+        temp1->next = temp2;
+    }
+}
+
+void insert (int val, char arr []) {
+    struct Node **pp = &head;
+    while (*pp)
+        pp = &(*pp)->next;
+    *pp = malloc (sizeof (**pp));
+    (*pp)->next = NULL;
+    (*pp)->type = val;
+    strcpy ((* pp) -> cmd, arr);
+}
+

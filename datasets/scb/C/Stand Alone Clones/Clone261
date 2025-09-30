@@ -1,0 +1,69 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34800668
+*  Stack Overflow answer #:34800994
+*  And Stack Overflow answer#:34800890
+*/
+int getFileData (FILE *fp, Song *SongList, int globalCounter) {
+    int newCount = globalCounter;
+    char fileOut [1024];
+    int lineno = 0;
+    while (!feof (fp)) {
+        if (fgets (fileOut, 1024, fp) != NULL) {
+            char *tokenizer;
+            tokenizer = strtok (fileOut, ",");
+            int counter = 0;
+            SongList[newCount].title = strdup (tokenizer);
+            counter++;
+            while (tokenizer != NULL) {
+                tokenizer = strtok (NULL, ",");
+                if (counter == 1)
+                    SongList[newCount].artist = strdup (tokenizer);
+                if (counter == 2)
+                    SongList[newCount].year = strdup (tokenizer);
+                counter++;
+            }
+            printf ("%i\n", newCount);
+            printf ("TITLE: %s\n", SongList [newCount].title);
+            printf ("ARTIST: %s\n", SongList [newCount].artist);
+            printf ("YEAR: %s\n", SongList [newCount].year);
+            newCount++;
+        }
+    }
+    return newCount;
+}
+
+int getFileData (FILE *fp, Song *SongList, int *globalCounter) {
+    int newCount = *globalCounter;
+    char fileOut [1024];
+    while (newCount < 1024 && fgets (fileOut, 1024, fp) != NULL) {
+        char *p = fileOut;
+        char *fileTitle;
+        char *fileArtist;
+        char *fileYear;
+        fileTitle = p;
+        if ((p = strchr (p, ',')) == NULL)
+            continue;
+        *p++ = '\0';
+        p += strspn (p, " \t");
+        fileArtist = p;
+        if ((p = strchr (p, ',')) == NULL)
+            continue;
+        *p++ = '\0';
+        p += strspn (p, " \t");
+        fileYear = p;
+        p += strcspn (p, ",\n");
+        *p = '\0';
+        SongList[newCount].title = strdup (fileTitle);
+        SongList[newCount].artist = strdup (fileArtist);
+        SongList[newCount].year = strdup (fileYear);
+        printf ("%i\n", newCount);
+        printf ("TITLE: %s\n", SongList [newCount].title);
+        printf ("ARTIST: %s\n", SongList [newCount].artist);
+        printf ("YEAR: %s\n\n", SongList [newCount].year);
+        newCount++;
+    }
+    return *globalCounter = newCount;
+}
+

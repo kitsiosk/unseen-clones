@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3263972
+*  Stack Overflow answer #:3264093
+*  And Stack Overflow answer#:3264084
+*/
+void main (void) {
+    char str2 [30];
+    char *str;
+    str = malloc (30);
+    printf ("Enter a sentence:");
+    gets (str);
+    check (str);
+    strcpy (str2, str);
+    getch ();
+}
+
+void main (void) {
+    char str [30], str2 [30];
+    printf ("Enter a sentence:");
+    gets (str);
+    if (check (str2, str)) {
+        printf ("check succeeded %s\n", str2);
+    }
+    getch ();
+}
+

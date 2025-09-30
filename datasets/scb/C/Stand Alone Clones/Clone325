@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:35596448
+*  Stack Overflow answer #:35596948
+*  And Stack Overflow answer#:35596759
+*/
+int main (int argc, char *argv []) {
+    char game [10] = argv[0];
+    int players = atoi (argv[1]);
+    char deck [52] [3];
+    for (int i = 0; i < argc - 2; i++) {
+        strcpy (deck [i], argv [i + 2]);
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int players = atoi (argv[1]);
+    char deck [52] [3];
+    int i, j, pid, cid;
+    if (players > 5 || players < 3) {
+        printf ("%d is not the allowed number of players, min is 3 and max is 5\n", players);
+        exit (0);
+    }
+    for (i = 0; i < argc - 2; i++) {
+        strcpy (deck [i], argv [i + 2]);
+    }
+    for (i = 0; i < argc - 2; i++) {
+        printf ("%s\n", deck [i]);
+    }
+}
+

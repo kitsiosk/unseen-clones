@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20816195
+*  Stack Overflow answer #:20816325
+*  And Stack Overflow answer#:20816465
+*/
+int main () {
+    unsigned long *data = malloc (sizeof (unsigned long) * 9);
+    int i;
+    for (i = 0; i < 9; ++i)
+        data[i] = i;
+    printf ("%lu\n", sumOfColTwo (data));
+    free (data);
+    return 0;
+}
+
+int main (void) {
+    int data [N_ROWS * N_COLS];
+    int i, j;
+    for (i = 0; i < N_ROWS * N_COLS; i++)
+        data[i] = 'A' + i;
+    printf ("By rows\n");
+    for (i = 0; i < N_ROWS; i++) {
+        for (j = 0; j < N_COLS; j++)
+            printf (" %c", data[i * N_COLS + j]);
+        putchar ('\n');
+    }
+    printf ("By cols\n");
+    for (i = 0; i < N_COLS; i++) {
+        for (j = 0; j < N_ROWS; j++)
+            printf (" %c", data[j * N_ROWS + i]);
+        putchar ('\n');
+    }
+    sum_by_cols (data);
+    sum_by_rows (data);
+    return 0;
+}
+

@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33019818
+*  Stack Overflow answer #:33020211
+*  And Stack Overflow answer#:33023072
+*/
+int main (void) {
+    char string [100];
+    char *tptr;
+    size_t i, len;
+    printf ("\nEnter string: ");
+    if (fgets (string, sizeof (string), stdin) == NULL)
+        return 1;
+    tptr = strtok (string, " \n\r\t");
+    while (tptr != NULL) {
+        tptr[0] = toupper (tptr[0]);
+        len = strlen (tptr);
+        for (i = 0; i < len; i++)
+            printf ("%c", tptr[len - 1 - i]);
+        tptr = strtok (NULL, " \n\r\t");
+        if (tptr != NULL)
+            printf (" ");
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main (void) {
+    int i, l, m, upper = 1;
+    char c;
+    char buff [] = "this is a simple string";
+    l = strlen (buff);
+    printf ("Original string:\n\t'%s'\n\n", buff);
+    for (i = 0; i < l; i++) {
+        if (upper)
+            buff[i] = toupper (buff[i]);
+        upper = isspace (buff[i]);
+    }
+    printf ("Capitalized:\n\t'%s'\n\n", buff);
+    for (i = 0; i < (l / 2); i++) {
+        c = buff[i];
+        buff[i] = buff[l - (i + 1)];
+        buff[l - (i + 1)] = c;
+    }
+    printf ("Reversed:\n\t'%s'\n\n", buff);
+    return 0;
+}
+

@@ -1,0 +1,85 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26572570
+*  Stack Overflow answer #:26572662
+*  And Stack Overflow answer#:26572909
+*/
+int main (void) {
+    int choose, number1, number2, total_hold;
+    do {
+        printf ("\n");
+        printf ("1: sum of two numbers \n");
+        printf ("2: difference of two numbers\n");
+        printf ("3: product of two numbers\n");
+        printf ("<0:terminate the program\n");
+        printf ("Select calculation:");
+        scanf ("%d", & choose);
+        if (choose < 0) {
+            printf ("Terminating the program...");
+            break;
+        }
+        printf ("Enter the first number:");
+        scanf ("%d", & number1);
+        printf ("Enter the second number:");
+        scanf ("%d", & number2);
+        if (choose == 1) {
+            total_hold = sumOfNumbers (number1, number2);
+            displayS (number1, number2, total_hold);
+        }
+        else if (choose == 2) {
+            total_hold = differenceOfNumbers (number1, number2);
+            displayD (number1, number2, total_hold);
+        }
+        else if (choose == 3) {
+            total_hold = MultiplicationOfNumbers (number1, number2);
+            displayM (number1, number2, total_hold);
+        }
+    }
+    while (choose > 0);
+    return 0;
+}
+
+int main (void) {
+    while (1) {
+        enum {Exit = 0, Addition = 1, Difference = 2, Multiplication = 3};
+        unsigned int choose;
+        int number1, number2, total_hold;
+        printf ("\n");
+        printf ("%d: sum of two numbers \n", Addition);
+        printf ("%d: difference of two numbers\n", Difference);
+        printf ("%d: product of two numbers\n", Multiplication);
+        printf ("%d: terminate the program\n", Exit);
+        printf ("Select calculation:");
+        scanf ("%u", & choose);
+        if (choose == Exit) {
+            printf ("Terminating the program...");
+            break;
+        }
+        if (choose <= Multiplication) {
+            printf ("Enter the first number:");
+            scanf ("%d", & number1);
+            printf ("Enter the second number:");
+            scanf ("%d", & number2);
+        }
+        switch (choose) {
+        case Addition :
+            {total_hold = sumOfNumbers (number1, number2);
+            displayS (number1, number2, total_hold);
+            break;
+        case Difference :
+            total_hold = differenceOfNumbers (number1, number2);
+            displayD (number1, number2, total_hold);
+            break;
+        case Multiplication :
+            total_hold = MultiplicationOfNumbers (number1, number2);
+            displayM (number1, number2, total_hold);
+            break;
+        default :
+            printf ("Invalid selection. Try again.\n");
+            break;
+        }
+    }
+    return 0;
+}
+

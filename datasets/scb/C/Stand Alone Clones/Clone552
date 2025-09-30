@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:25341486
+*  Stack Overflow answer #:25342903
+*  And Stack Overflow answer#:25345374
+*/
+Student *add_new (Student *slist) {
+    Student *ptemp;
+    char name [NAME_SIZE];
+    int mark;
+    printf ("Adding new entry\nName\t=>");
+    scanf ("%s", name);
+    printf ("Marks\t=>");
+    scanf ("%d", & mark);
+    ptemp = malloc (sizeof (*ptemp));
+    strcpy (ptemp -> name, name);
+    ptemp->mark = mark;
+    ptemp->next = slist;
+    return ptemp;
+}
+
+Student *add_new (list curr) {
+    list temp = &slist[entry_total];
+    printf ("Adding new entry\nName\t=>");
+    scanf ("%s", temp -> name);
+    printf ("Marks\t=>");
+    scanf ("%d", & temp -> mark);
+    if (curr != NULL) {
+        curr->next = temp;
+    }
+    return temp;
+}
+

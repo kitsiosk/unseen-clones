@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32295236
+*  Stack Overflow answer #:32296127
+*  And Stack Overflow answer#:32296020
+*/
+int main (void) {
+    int a [] = {10, 2, 6, 3, -1, 5, 9, 8, 4, 7};
+    int i, j, p, n = sizeof (a) / sizeof (a[0]);
+    p = a[0];
+    i = 0;
+    for (j = i + 1; j < n; j++) {
+        if (a[j] < p) {
+            i = j;
+            p = a[i];
+        }
+    }
+    printf ("%d ", p);
+    i = find_next (a, n, i +1, p);
+    while (i < n) {
+        p = a[i];
+        printf ("%d ", p);
+        i = find_next (a, n, i +1, p);
+    }
+    printf ("\n");
+    return 0;
+}
+
+int main () {
+    int a [] = {10, 2, 6, 3, 5, 9, 8, 4, 7};
+    int l = sizeof a / sizeof a[0];
+    int i, j;
+    int check = 1;
+    for (i = 0; i < l; i++) {
+        check = 1;
+        for (j = i + 1; j < l; j++) {
+            if (a[i] >= a[j]) {
+                check = 0;
+            }
+        }
+        if (check)
+            printf ("%d", a[i]);
+    }
+    printf ("\n");
+    return 0;
+}
+

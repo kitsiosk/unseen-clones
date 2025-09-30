@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38675046
+*  Stack Overflow answer #:38675314
+*  And Stack Overflow answer#:38675688
+*/
+int main (void) {
+    const char *string = "A > B";
+    char lho [100];
+    char op [3];
+    char rho [100];
+    if (sscanf (string, "%99[^=><]%2[=><]%99[^=><]", lho, op, rho) == 3) {
+        fprintf (stdout, "left hand operand: %s\n", lho);
+        fprintf (stdout, "operator: %s\n", op);
+        fprintf (stdout, "right hand operand: %s\n", rho);
+    }
+    return 0;
+}
+
+int main (void) {
+    char *source_str = "A <> B";
+    char *left, *delim, *right;
+    if (!split_string (source_str, &left, &delim, &right)) {
+        printf ("invalid input\n");
+    }
+    else {
+        printf ("left: \"%s\"\n", left);
+        printf ("delim: \"%s\"\n", delim);
+        printf ("right: \"%s\"\n", right);
+        free (left);
+        free (delim);
+        free (right);
+    }
+    return 0;
+}
+

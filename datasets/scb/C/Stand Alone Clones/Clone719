@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28984289
+*  Stack Overflow answer #:28984361
+*  And Stack Overflow answer#:28984365
+*/
+int foo (int size, int new_size, int **ptr1, double **ptr2) {
+    int i;
+    new_size = size * 2;
+    *ptr1 = malloc (new_size * sizeof (int));
+    *ptr2 = NULL;
+    if (*ptr1 == NULL)
+        return 1;
+    *ptr2 = malloc (new_size * sizeof (double));
+    if (*ptr2 == NULL) {
+        free (*ptr1);
+        return 2;
+    }
+    for (i = 0; i < new_size; i++) {
+        (*ptr1)[i] = 1;
+        (*ptr2)[i] = 2;
+    }
+    return 0;
+}
+
+void foo (int size, int new_size, int **ptr1, double **ptr2) {
+    int i;
+    new_size = size * 2;
+    *ptr1 = (int *) calloc (new_size, sizeof (int));
+    *ptr2 = (double *) calloc (new_size, sizeof (double));
+    for (i = 0; i < new_size; i++) {
+        (*ptr1)[i] = 1;
+        (*ptr2)[i] = 2;
+    }
+}
+

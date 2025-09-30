@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:10918078
+*  Stack Overflow answer #:10918420
+*  And Stack Overflow answer#:10918400
+*/
+void destroyList (void **ini, void **end, int listType) {
+    void *aux;
+    void *head = ini;
+    void *tail = end;
+    while (*head != NULL) {
+        if (listType == 0) {
+            aux = (NodeOne *) *head;
+            *head = ((NodeOne *) *head)->next;
+            free ((NodeOne *) aux;
+        }
+        else {
+            ...same thing with casts to NodeTwo *...
+        }
+    }
+    *tail = NULL;
+}
+
+void destroyList (void *ini, void *end, int listType) {
+    NodeOne *aux = NULL;
+    NodeOne **head = ini;
+    NodeOne **tail = end;
+    while (*head != NULL) {
+        aux = *head;
+        *head = (*head)->next;
+        free (aux);
+    }
+    *tail = NULL;
+}
+

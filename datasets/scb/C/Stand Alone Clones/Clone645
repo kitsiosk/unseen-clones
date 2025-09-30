@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33266709
+*  Stack Overflow answer #:33267802
+*  And Stack Overflow answer#:33267301
+*/
+int main (int argc, char *argv [argc]) {
+    unsigned dollars = 0;
+    char dimes = 0;
+    char pennies = 0;
+    unsigned fixed = 0;
+    FILE *values;
+    values = fopen ("values", "r");
+    while (fscanf (values, "%u.%c%c%*i\n", &dollars, &dimes, &pennies) != EOF) {
+        dimes -= '0';
+        pennies -= '0';
+        fixed = (dollars * 100) + (dimes * 10) + pennies;
+        printf ("$%u.%u%u -> %u (cents)\n", dollars, dimes, pennies, fixed);
+    }
+    return 0;
+}
+
+int main (void) {
+    FILE *inf;
+    unsigned cents;
+    double money;
+    if ((inf = fopen ("test.txt", "r")) == NULL)
+        return 1;
+    while (fscanf (inf, "%lf", &money) == 1) {
+        cents = (unsigned) (money * 100.0 + 0.1);
+        printf ("File %f, cents %u\n", money, cents);
+    }
+    fclose (inf);
+    return 0;
+}
+

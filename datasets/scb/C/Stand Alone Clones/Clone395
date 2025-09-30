@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7298509
+*  Stack Overflow answer #:7298530
+*  And Stack Overflow answer#:7299351
+*/
+void blank (char *s, const char *toBlank) {
+    int i = 0, j;
+    while (s[i] != '\0') {
+        j = 0;
+        while (toBlank[j] != '\0') {
+            if (s[i] == toBlank[j]) {
+                s[i] = ' ';
+                break;
+            }
+            else {
+                ++j;
+            }
+        }
+        ++i;
+    }
+    printf ("%s", s);
+}
+
+void blank (char *str, char *wits) {
+    size_t pos, len;
+    for (pos = len = 0; str[pos]; pos += len) {
+        len = strspn (str +pos, wits);
+        if (len)
+            memset (str +pos, ' ', len);
+        else
+            len = strcspn (str +pos, wits);
+    }
+}
+

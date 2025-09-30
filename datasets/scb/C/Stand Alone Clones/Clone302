@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30438159
+*  Stack Overflow answer #:30438850
+*  And Stack Overflow answer#:30438394
+*/
+void create_matrix_2 (int rows, int cols, double (**array) [rows] [cols]) {
+    double (*A) [cols] = malloc (sizeof (double [rows] [cols]));
+    for (int row = 0; row < rows; row++) {
+        for (int col = 0; col < cols; col++) {
+            A[row][col] = row * cols + col;
+        }
+    }
+    for (int row = 0; row < rows; row++) {
+        for (int col = 0; col < cols; col++) {
+            printf ("%lf, ", A [row] [col]);
+        }
+        printf ("\n");
+    }
+    *array = (void *) A;
+}
+
+int create_matrix_2 (size_t rows, size_t cols, int (**a) [rows] [cols]) {
+    int result = 0;
+    if (NULL == a) {
+        result = -1;
+        errno = EINVAL;
+    }
+    else {
+        (*a) = malloc (sizeof **a);
+        if (NULL == (*a)) {
+            result = -1;
+        }
+        else {
+            for (size_t row = 0; row < rows; row++) {
+                for (size_t col = 0; col < cols; col++) {
+                    (**a)[row][col] = row * cols + col;
+                }
+            }
+            for (size_t row = 0; row < rows; row++) {
+                for (size_t col = 0; col < cols; col++) {
+                    printf ("%d, ", (* * a) [row] [col]);
+                }
+                printf ("\n");
+            }
+        }
+    }
+    return result;
+}
+

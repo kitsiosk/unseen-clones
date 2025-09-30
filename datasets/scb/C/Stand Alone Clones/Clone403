@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9243312
+*  Stack Overflow answer #:11429631
+*  And Stack Overflow answer#:9243464
+*/
+int main (int argc, char **argv) {
+    if (argc <= 2) {
+        if (argv)
+            argc = atoi (argv[1]);
+        else
+            return argc;
+    }
+    argc *= main (argc -1, NULL);
+    if (argv) {
+        printf ("=%d\n", argc);
+        return 0;
+    }
+    return argc;
+}
+
+int main () {
+    int n;
+    long factorial;
+    printf ("Compute the factorial of what number? ");
+    scanf ("%d", & n);
+    factorial = 1L;
+    while (n > 0)
+        factorial *= n--;
+    printf ("The factorial is %ld\n", factorial);
+    return 0;
+}
+

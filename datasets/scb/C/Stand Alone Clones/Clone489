@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53543035
+*  Stack Overflow answer #:53543277
+*  And Stack Overflow answer#:53575605
+*/
+int main () {
+    const char *key1 = "keynumber1";
+    uint32_t match = jenkins_one_at_a_time_hash (key1, strlen (key1));
+    printf ("Target 0x%lX\n", (unsigned long) match);
+    uint32_t i = 0;
+    do {
+        uint32_t hash = jenkins_one_at_a_time_hash (&i, sizeof i);
+        if (hash == match) {
+            printf ("0x%lX: 0x%lX\n", (unsigned long) i, (unsigned long) hash);
+            fflush (stdout);
+        }
+    }
+    while (++i);
+    const char *key2 = "\x3C\xA0\x94\xB9";
+    uint32_t match2 = jenkins_one_at_a_time_hash (key2, strlen (key2));
+    printf ("Match 0x%lX\n", (unsigned long) match2);
+}
+
+int main () {
+    uint8_t buf [INPUT_LEN + 1];
+    for (int i = 0; i <= INPUT_LEN; i++)
+        buf[INPUT_LEN] = 0;
+    uint32_t hash = TARGET_HASH;
+    hash *= 0x3FFF8001;
+    hash ^= (hash >> 11) ^ (hash >> 22);
+    hash *= 0x38E38E39;
+    bool found = find_preimage (hash, buf, INPUT_LEN -1);
+    if (found) {
+        printf ("hash(\"%s\") = 0x%08X\n", buf, TARGET_HASH);
+    }
+    else {
+        printf ("No matching input of %d bytes found for hash 0x%08X. :(", INPUT_LEN, TARGET_HASH);
+    }
+    return !found;
+}
+

@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32837045
+*  Stack Overflow answer #:32837531
+*  And Stack Overflow answer#:32837312
+*/
+int main (void) {
+    printf ("[dad] pid %d\n", getpid ());
+    for (int i = 0; i < 3; i++)
+        if (fork () == 0) {
+            printf ("[son] pid %d from pid %d\n", getpid (), getppid ());
+            exit (0);
+        }
+    for (int i = 0; i < 3; i++)
+        wait (NULL);
+}
+
+int main (void) {
+    int count = COUNT, children = 0;
+    pid_t retpid = 1;
+    while (count-- > 0 && retpid > 0)
+        if ((retpid = fork ()) > 0)
+            children++;
+    if (retpid != 0) {
+        printf ("Parent %d spawned %d/%d children\n", getpid (), children, COUNT);
+        while (children-- > 0)
+            wait (NULL);
+    }
+    else {
+        printf ("Child %d, sired by %d\n", getpid (), getppid ());
+    }
+    return 0;
+}
+

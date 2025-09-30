@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20730053
+*  Stack Overflow answer #:20730128
+*  And Stack Overflow answer#:32541958
+*/
+inline unsigned root (unsigned x, unsigned n) {
+    switch (n) {
+    case 0 :
+        return 1;
+    case 1 :
+        return x;
+    case 2 :
+        return (unsigned) sqrt ((double) x);
+    case 3 :
+        return (unsigned) cbrt ((double) x);
+    default :
+        return (unsigned) pow (x, 1.0 / n);
+    }
+}
+
+int root (int a, int n) {
+    int v = 1, bit, tp, t;
+    if (n == 0)
+        return 0;
+    if (n == 1)
+        return a;
+    tp = iPow (v, n);
+    while (tp < a) {
+        v <<= 1;
+        tp = iPow (v, n);
+    }
+    if (tp == a)
+        return v;
+    v >>= 1;
+    bit = v >> 1;
+    tp = iPow (v, n);
+    while (a > tp) {
+        v += bit;
+        t = iPow (v, n);
+        if (t > a)
+            v -= bit;
+        else
+            tp = t;
+        if ((bit >>= 1) == 0)
+            break;
+    }
+    return v;
+}
+

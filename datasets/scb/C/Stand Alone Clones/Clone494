@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33796210
+*  Stack Overflow answer #:33796961
+*  And Stack Overflow answer#:33796798
+*/
+void averageGradeOfStudents (int M, int N, float p [], float (*xPtr) [quizzes]) {
+    float grade [M];
+    for (int i = 0; i < M; i++)
+        grade[i] = 0;
+    for (int i = 0; i < M; i++) {
+        for (int k = 0; k < N; k++) {
+            grade[i] += xPtr[i][k];
+        }
+    }
+    printf ("The average grades for the students are:\n\n");
+    for (int k = 0; k < M; k++) {
+        p[k] = grade[k] / N;
+        printf ("  student[%3d] is: %6.2f\n", k, p [k]);
+    }
+    putchar ('\n');
+}
+
+void averageGradeOfStudents (int M, int N, float p [], float x [] [N]) {
+    for (int row = 0; row < M; row++) {
+        p[row] = 0;
+        for (int col = 0; col < N; col++) {
+            p[row] += x[row][col];
+        }
+        p[row] /= N;
+    }
+    for (int row = 0; row < M; row++) {
+        printf ("The average grade of student%d is: %.2f\n\n", row, p [row]);
+    }
+}
+

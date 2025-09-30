@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39109280
+*  Stack Overflow answer #:39110395
+*  And Stack Overflow answer#:39109415
+*/
+int main () {
+    char uname [CSTR_MAX_LEN + 1];
+    char passwd [CSTR_MAX_LEN + 1];
+    printf ("Enter your username: ");
+    scanf ("%s", uname);
+    printf ("Enter your password: ");
+    scanf ("%s", passwd);
+    if ((strcmp (uname, "waw") == 0) && (strcmp (passwd, "wow") == 0)) {
+        printf ("You have logged in\n");
+    }
+    else {
+        printf ("Failed, please try again\n");
+    }
+    return 0;
+}
+
+int main () {
+    int res;
+    char uname [40];
+    char passwd [40];
+    printf ("Enter your username: ");
+    res = scanf ("%39s", uname);
+    if (res != 1)
+        exit (1);
+    printf ("Enter your password: ");
+    res = scanf ("%39s", passwd);
+    if (res != 1)
+        exit (1);
+    printf (" \n");
+    if ((strcmp (uname, "waw") == 0) && (strcmp (passwd, "wow") == 0)) {
+        printf ("You have logged in\n");
+    }
+    else {
+        printf ("Failed, please try again\n");
+    }
+    return 0;
+}
+

@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:39139130
+*  Stack Overflow answer #:39141766
+*  And Stack Overflow answer#:39139647
+*/
+int main () {
+    cout << "\nDynamic 2D Array.\n\n";
+    vector < string > vArray;
+    string line;
+    ifstream fileToRead ("d2d.txt");
+    while (getline (fileToRead, line)) {
+        vArray.push_back (line);
+    }
+    fileToRead.close ();
+    for (int i = 0; i < vArray.size (); i++) {
+        cout << " [ " << vArray[i] << " ] \n";
+    }
+    cout << "\nPress ANY key to close.\n\n";
+    cin.ignore ();
+    cin.get ();
+    return 0;
+}
+
+int main (void) {
+    int rows = 4, cols = 5;
+    char * (*arr) [cols];
+    int i, j;
+    arr = malloc (sizeof (*arr) * rows);
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            arr[i][j] = "hello";
+        }
+    }
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            printf ("%s\t", arr [i] [j]);
+        }
+        printf ("\n");
+    }
+    free (arr);
+    return 0;
+}
+

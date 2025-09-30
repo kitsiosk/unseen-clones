@@ -1,0 +1,48 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9871071
+*  Stack Overflow answer #:9871230
+*  And Stack Overflow answer#:24447940
+*/
+int main (void) {
+    struct timeval start, end;
+    long mtime, secs, usecs;
+    gettimeofday (& start, NULL);
+    something_else ();
+    gettimeofday (& end, NULL);
+    secs = end.tv_sec - start.tv_sec;
+    usecs = end.tv_usec - start.tv_usec;
+    mtime = ((secs) *1000 + usecs / 1000.0) + 0.5;
+    printf ("Elapsed time: %ld millisecs\n", mtime);
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    struct timeval now;
+    struct timeval later;
+    clock_t tNow = clock ();
+    gettimeofday (& now, NULL);
+    clock_t tLater = tNow;
+    while (tNow == tLater)
+        tLater = clock ();
+    gettimeofday (& later, NULL);
+    printf ("CLOCKS_PER_SEC %ld\n", CLOCKS_PER_SEC);
+    double cpuRes = (double) (tLater - tNow) / CLOCKS_PER_SEC;
+    printf ("CPU time usage resolution looks to be %f seconds\n", cpuRes);
+    unsigned long long nowUs = ((unsigned long long) now.tv_sec) * 1000000ULL;
+    nowUs += (unsigned long long) now.tv_usec;
+    unsigned long long laterUs = ((unsigned long long) later.tv_sec) * 1000000ULL;
+    laterUs += (unsigned long long) later.tv_usec;
+    printf ("gettimeofday changed by %d uS when CPU time changed by %f seconds\n", (int) (laterUs - nowUs), cpuRes);
+    gettimeofday (& now, NULL);
+    later = now;
+    while ((now.tv_sec == later.tv_sec) && (now.tv_usec == later.tv_usec))
+        gettimeofday (&later, NULL);
+    nowUs = ((unsigned long long) now.tv_sec) * 1000000ULL;
+    nowUs += (unsigned long long) now.tv_usec;
+    laterUs = ((unsigned long long) later.tv_sec) * 1000000ULL;
+    laterUs += (unsigned long long) later.tv_usec;
+    printf ("gettimeofday resolution looks to be %d us\n", (int) (laterUs - nowUs));
+}
+

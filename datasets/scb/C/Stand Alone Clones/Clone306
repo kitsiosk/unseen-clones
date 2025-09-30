@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1247989
+*  Stack Overflow answer #:1248017
+*  And Stack Overflow answer#:28008980
+*/
+int main (int argC, char *argV []) {
+    char *name = malloc (MAX_NAME_SZ);
+    if (name == NULL) {
+        printf ("No memory\n");
+        return 1;
+    }
+    printf ("What is your name? ");
+    fgets (name, MAX_NAME_SZ, stdin);
+    if ((strlen (name) > 0) && (name[strlen (name) - 1] == '\n'))
+        name[strlen (name) - 1] = '\0';
+    printf ("Hello %s. Nice to meet you.\n", name);
+    free (name);
+    return 0;
+}
+
+int main () {
+    char string [100], c;
+    int i;
+    printf ("Enter the string: ");
+    scanf ("%s", string);
+    i = strlen (string);
+    do {
+        scanf ("%c", & c);
+        string[i++] = c;
+    }
+    while (c != '\n');
+    string[i - 1] = 0;
+    return 0;
+}
+

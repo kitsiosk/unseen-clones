@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:18831964
+*  Stack Overflow answer #:18833221
+*  And Stack Overflow answer#:18832062
+*/
+int main () {
+    int ui1;
+    int ui2;
+    puts ("Please enter two numbers:\n");
+    int sum = 10;
+    while (sum > 4) {
+        printf ("enter number 1:\n");
+        scanf ("%i", & ui1);
+        printf ("enter number 2:\n");
+        scanf ("%i", & ui2);
+        sum = ui1 + ui2;
+    }
+    printf ("result is:  %d\n", sum);
+    getchar ();
+    getchar ();
+    return 0;
+}
+
+int main () {
+    int ui1;
+    int ui2;
+    puts ("Please enter two numbers:");
+    scanf ("%d %d", & ui1, & ui2);
+    int sum;
+    sum = ui1 + ui2;
+    while (sum > 4) {
+        printf ("Whats up !");
+        sum = 0;
+    }
+    return 0;
+}
+

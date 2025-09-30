@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17590835
+*  Stack Overflow answer #:17591122
+*  And Stack Overflow answer#:17590969
+*/
+int main (void) {
+    double param, result;
+    errno = 0;
+    param = 1e3;
+    result = exp (param);
+    if (errno == ERANGE) {
+        printf ("exp(%f) overflows\n", param);
+        result = param;
+    }
+    printf ("The exponential value of %f is %f.\n", param, result);
+    return 0;
+}
+
+int main () {
+    int my_input = 0;
+    int my_exp = 0;
+std :
+    : cout << "Enter test value\n";
+std :
+    : cin >> my_input;
+std :
+    : cout << "Enter test exponent\n";
+std :
+    : cin >> my_exp;
+    bool exp_unsafe = 1;
+    exp_unsafe = is_exp_overflow (my_input, my_exp);
+    if (!exp_unsafe)
+        runExp (my_input, my_exp);
+    else
+    std :
+    : cout << "Code is unsafe\n";
+    return 0;
+}
+

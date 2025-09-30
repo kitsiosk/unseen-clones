@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48226806
+*  Stack Overflow answer #:48235362
+*  And Stack Overflow answer#:48227417
+*/
+long GetReverse (unsigned long n) {
+    if (n < 10) {
+        return n;
+    }
+    else {
+        unsigned long r = GetReverse (n / 10);
+        int p = snprintf (NULL, 0, "%lu", r);
+        return lround (pow (10, p)) * (n % 10) + r;
+    }
+}
+
+long GetReverse (unsigned long n) {
+    static unsigned long m = 0;
+    static int recursive_level = 0;
+    recursive_level++;
+    if (n < 10) {
+        recursive_level--;
+        m = m * 10 + n;
+        int temp = m;
+        if (recursive_level == 0) {
+            m = 0;
+        }
+        return temp;
+    }
+    m = m * 10 + (n % 10);
+    GetReverse (n / 10);
+    recursive_level--;
+    int temp = m;
+    if (recursive_level == 0) {
+        m = 0;
+    }
+    return temp;
+}
+

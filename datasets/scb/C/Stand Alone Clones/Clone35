@@ -1,0 +1,62 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:24099073
+*  Stack Overflow answer #:24099129
+*  And Stack Overflow answer#:24099932
+*/
+int main () {
+    char s [SIZE];
+    char *months [] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    int result;
+    printf ("enter the month : ");
+    gets (s);
+    result = get_month (s, months);
+    if (result)
+        printf ("%s - %d.  is the month of the year.\n", s, result);
+    else
+        printf ("%s invalid\n", s);
+    return 0;
+}
+
+int main (void) {
+    int result = 0;
+    char s [21] = {0};
+    printf ("Enter a month: ");
+    if (fgets (s, 20, stdin) == NULL) {
+        return EXIT_FAILURE;
+    }
+    for (int idx = 0; idx < 21; ++idx) {
+        if (!isalpha (s[idx])) {
+            s[idx] = '\0';
+        }
+    }
+    result = get_month_number (s);
+    if (result < 0) {
+        printf ("%s is an invalid argument.\n", s);
+    }
+    else {
+        char a [3] = {0};
+        switch (result) {
+        case 1 :
+            a[0] = 's';
+            a[1] = 't';
+            break;
+        case 2 :
+            a[0] = 'n';
+            a[1] = 'd';
+            break;
+        case 3 :
+            a[0] = 'r';
+            a[1] = 'd';
+            break;
+        default :
+            a[0] = 't';
+            a[1] = 'h';
+            break;
+        }
+        printf ("%s is the %d%s month of the year.\n", s, result, a);
+    }
+    return EXIT_SUCCESS;
+}
+

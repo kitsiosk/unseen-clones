@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37626146
+*  Stack Overflow answer #:37626660
+*  And Stack Overflow answer#:37626178
+*/
+void push (int data, node **top_node) {
+    if (top_node == NULL) {
+        *top_node = (struct node *) malloc (sizeof (struct node));
+        (*top_node)->ptr = NULL;
+        (*top_node)->info = data;
+    }
+    else {
+        node *temp = (struct node *) malloc (sizeof (struct node));
+        temp->ptr = *top_node;
+        temp->info = data;
+        *top_node = temp;
+    }
+}
+
+void push (int data, node **top_node) {
+    if (*top_node == NULL) {
+        *top_node = malloc (sizeof (**top_node));
+        if (*top_node == NULL)
+            return;
+        (*top_node)->ptr = NULL;
+        (*top_node)->info = data;
+    }
+    else
+}
+

@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:22479887
+*  Stack Overflow answer #:22480054
+*  And Stack Overflow answer#:22480060
+*/
+int main (void) {
+    unsigned int i;
+    scanf ("%u", & i);
+    unsigned int x;
+    scanf ("%u", & x);
+    int output = 0;
+    int t = 0;
+    while (x > 0) {
+        t = x % 10;
+        if (t == x) {
+            output++;
+        }
+        x /= 10;
+    }
+    printf ("%d", output);
+}
+
+int main (int argc, char **argv) {
+    unsigned int i;
+    scanf ("%u", & i);
+    if (i > 9) {
+        printf ("expecting a single digit\n");
+        return 1;
+    }
+    unsigned int x;
+    scanf ("%u", & x);
+    int output = 0;
+    if (x == 0) {
+        if (i == 0) {
+            output = 1;
+        }
+    }
+    else {
+        while (x > 0) {
+            if (i == (x % 10)) {
+                output++;
+            }
+            x /= 10;
+        }
+    }
+    printf ("%d\n", output);
+    return 0;
+}
+

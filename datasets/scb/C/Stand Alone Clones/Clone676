@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8436841
+*  Stack Overflow answer #:8438663
+*  And Stack Overflow answer#:44738388
+*/
+void listdir (const char *name, int indent) {
+    DIR *dir;
+    struct dirent *entry;
+    if (!(dir = opendir (name)))
+        return;
+    while ((entry = readdir (dir)) != NULL) {
+        if (entry->d_type == DT_DIR) {
+            char path [1024];
+            if (strcmp (entry->d_name, ".") == 0 || strcmp (entry->d_name, "..") == 0)
+                continue;
+            snprintf (path, sizeof (path), "%s/%s", name, entry -> d_name);
+            printf ("%*s[%s]\n", indent, "", entry -> d_name);
+            listdir (path, indent + 2);
+        }
+        else {
+            printf ("%*s- %s\n", indent, "", entry -> d_name);
+        }
+    }
+    closedir (dir);
+}
+
+void listdir (char *path, size_t size) {
+    DIR *dir;
+    struct dirent *entry;
+    size_t len = strlen (path);
+    if (!(dir = opendir (path))) {
+        fprintf (stderr, "path not found: %s: %s\n", path, strerror (errno));
+        return;
+    }
+    puts (path);
+    while ((entry = readdir (dir)) != NULL) {
+        char *name = entry->d_name;
+        if (entry->d_type == DT_DIR) {
+            if (!strcmp (name, ".") || !strcmp (name, ".."))
+                continue;
+            if (len + strlen (name) + 2 > size) {
+                fprintf (stderr, "path too long: %s/%s\n", path, name);
+            }
+            else {
+                path[len] = '/';
+                strcpy (path + len + 1, name);
+                listdir (path, size);
+                path[len] = '\0';
+            }
+        }
+        else {
+            printf ("%s/%s\n", path, name);
+        }
+    }
+    closedir (dir);
+}
+

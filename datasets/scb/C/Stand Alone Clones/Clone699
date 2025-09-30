@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27831527
+*  Stack Overflow answer #:27831707
+*  And Stack Overflow answer#:27831605
+*/
+int main () {
+    char string1 [11];
+    char string2 [11];
+    char string3 [11];
+    char string4 [11];
+    char string5 [11];
+    char string6 [11];
+    char string7 [11];
+    char string8 [11];
+    char string9 [11];
+    FILE *fileReader = fopen ("text.txt", "r");
+    if (fileReader) {
+        fscanf (fileReader, "%10s %10s %10s %10s %10s %10s %10s %10s %10s", string1, string2, string3, string4, string5, string6, string7, string8, string9);
+        printf ("Found: %s %s %s %s %s %s %s %s %s\n", string1, string2, string3, string4, string5, string6, string7, string8, string9);
+        fclose (fileReader);
+    }
+    else {
+        puts ("Error opening filestream!");
+    }
+    return 0;
+}
+
+int main () {
+    char line [1024];
+    char str1 [1024], str2 [1024], str3 [1024];
+    while (fgets (line, sizeof (line), stdin) != NULL) {
+        if (strlen (line) > 0 && line[strlen (line) - 1] != '\n') {
+            puts ("The line is longer than expected");
+            return 1;
+        }
+        if (sscanf (line, "%s %s %s", str1, str2, str3) != 3) {
+            puts ("Error parsing, not enough columns");
+            return 2;
+        }
+    }
+    return EXIT_SUCCESS;
+}
+

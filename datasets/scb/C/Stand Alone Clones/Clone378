@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:51596516
+*  Stack Overflow answer #:51596685
+*  And Stack Overflow answer#:51597853
+*/
+int main () {
+    int i, j;
+    char str [1000];
+    scanf ("%s", str);
+    for (i = 0; str[i] != '\0'; i++) {
+        for (j = i + 1; str[j] != '\0'; j++) {
+            if (str[i] == str[j]) {
+                printf ("%c", str [i]);
+                return 0;
+            }
+        }
+    }
+}
+
+int main (void) {
+    char str [1000];
+    char map [UCHAR_MAX + 1] = {0};
+    if (scanf ("%999s", str) == 1) {
+        for (int i = 0; str[i] != '\0'; i++) {
+            int n = (unsigned char) str[i];
+            if (map[n]++ != 0) {
+                printf ("first duplicate: %c\n", str [i]);
+                break;
+            }
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,61 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52715808
+*  Stack Overflow answer #:52721784
+*  And Stack Overflow answer#:52716480
+*/
+int main (void) {
+    system ("stty raw");
+    unsigned int count = 0;
+    for (;;) {
+        if (inputExists ()) {
+            char input [256] = {0};
+            read (0, input, 255);
+            count += strlen (input);
+            printf ("\rCount is now %d\n", count);
+        }
+        else if (count > 0) {
+            count--;
+            printf ("\rDecremented count to %d\n", count);
+        }
+        puts ("\rWaiting...");
+        wait ();
+    }
+}
+
+int main (int argc, char *argv []) {
+    struct termios orig_attr, new_attr;
+    int c = '\0';
+    int n = 5;
+    tcgetattr (fileno (stdin), & orig_attr);
+    memcpy (& new_attr, & orig_attr, sizeof (new_attr));
+    new_attr.c_lflag &= ~(ICANON | ECHO);
+    new_attr.c_cc[VMIN] = 0;
+    new_attr.c_cc[VTIME] = 10;
+    tcsetattr (fileno (stdin), TCSANOW, & new_attr);
+    printf ("Starting with n = %d\n", n);
+    do {
+        c = getchar ();
+        if (c != EOF) {
+            n++;
+            printf ("Key pressed!\n");
+            printf ("n++ => %d\n", n);
+        }
+        else {
+            n--;
+            printf ("n-- => %d\n", n);
+            if (n == 0) {
+                printf ("Exiting ...\n");
+                break;
+            }
+            if (feof (stdin)) {
+                clearerr (stdin);
+            }
+        }
+    }
+    while (c != 'q');
+    tcsetattr (fileno (stdin), TCSANOW, & orig_attr);
+    return 0;
+}
+

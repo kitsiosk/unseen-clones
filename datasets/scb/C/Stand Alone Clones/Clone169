@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29971301
+*  Stack Overflow answer #:29972085
+*  And Stack Overflow answer#:29971325
+*/
+int main (void) {
+    int result = EXIT_SUCCESS;
+    int *pi = NULL;
+    if (-1 == array_allocate (&pi)) {
+        result = EXIT_FAILURE;
+        perror ("array_allocate() failed");
+    }
+    else {
+        ssize_t result_number_of_elements = array_number_of_elements (pi);
+        if (-1 == result_number_of_elements) {
+            result = EXIT_FAILURE;
+            perror ("array_number_of_elements() failed");
+        }
+        else {
+            size_t number_of_elements = result_number_of_elements;
+            printf ("The number of array's elements is %zu.\n", number_of_elements);
+        }
+    }
+    free (pi);
+    return result;
+}
+
+int main () {
+    int *app;
+    int i;
+    int count;
+    count = 20;
+    app = NULL;
+    printf ("Inside main\n");
+    alloco (& app, count);
+    if (app == NULL)
+        return -1;
+    for (i = 0; i < count; i++)
+        printf ("app[%d] = %d \n", i, app[i]);
+    free (app);
+    return 0;
+}
+

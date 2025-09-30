@@ -1,0 +1,46 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36512862
+*  Stack Overflow answer #:36513225
+*  And Stack Overflow answer#:36513224
+*/
+void card_Print (card *thisNode) {
+    char face [6];
+    char *suit;
+    if (thisNode->suit == 'H')
+        suit = "Hearts";
+    else if (thisNode->suit == 'C')
+        suit = "Clubs";
+    ...if (thisNode -> face == 11) strcpy (face, "Jack");
+    else if (thisNode->face == 12)
+        strcpy (face, "Queen");
+    else if (thisNode->face == 13)
+        strcpy (face, "King");
+    else if (thisNode->face == 1)
+        strcpy (face, "Ace");
+    else
+        sprintf (face, "%d", thisNode->face);
+    printf ("%s of %s\n", face, suit);
+    return;
+}
+
+void card_Print (card *thisNode) {
+    char *suit;
+    switch (thisNode->suit) {
+    case 'D' :
+        suit = "Diamonds";
+        break;
+    case 'C' :
+        suit = "Clubs";
+        break;
+    case 'H' :
+        suit = "Hearts";
+        break;
+    case 'S' :
+        suit = "Spades";
+        break;
+    }
+    printf ("%s of %s", faces [thisNode -> face - 1], suit);
+}
+

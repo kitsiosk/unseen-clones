@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:25794636
+*  And Stack Overflow answer#:9214240
+*/
+int main () {
+    char **res;
+    int k = 0;
+    int count = 0;
+    int rc;
+    rc = split (str, ',', &res, &count);
+    if (rc) {
+        printf ("Error: %s errno: %d \n", strerror (errno), errno);
+    }
+    printf ("count: %d\n", count);
+    for (k = 0; k < count; k++) {
+        printf ("str: %s\n", res [k]);
+    }
+    free (res);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    const char *str = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
+    char *strCpy;
+    char **split;
+    int num;
+    int i;
+    strCpy = malloc (strlen (str) * sizeof (*strCpy));
+    strcpy (strCpy, str);
+    split = str_split (strCpy, ',', &num);
+    if (split == NULL) {
+        puts ("str_split returned NULL");
+    }
+    else {
+        printf ("%i Results: \n", num);
+        for (i = 0; i < num; i++) {
+            puts (split [i]);
+        }
+    }
+    free (split);
+    free (strCpy);
+    return 0;
+}
+

@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26618903
+*  Stack Overflow answer #:26619062
+*  And Stack Overflow answer#:26619166
+*/
+char *strrev (char *str) {
+    if (!str) {
+        fprintf (stderr, "%s() Error: invalid string\n", __func__);
+        return NULL;
+    }
+    char *begin = str;
+    char *end = str + strlen (str) - 1;
+    char tmp;
+    while (end > begin) {
+        tmp = *end;
+        *end-- = *begin;
+        *begin++ = tmp;
+    }
+    return str;
+}
+
+char *strrev (char *str) {
+    char c, *front, *back;
+    if (!str || !*str)
+        return str;
+    for (front = str, back = str + strlen (str) - 1; front < back; front++, back--) {
+        c = *front;
+        *front = *back;
+        *back = c;
+    }
+    return str;
+}
+

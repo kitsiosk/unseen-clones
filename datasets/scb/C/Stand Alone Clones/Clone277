@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:51118734
+*  Stack Overflow answer #:51119027
+*  And Stack Overflow answer#:51122350
+*/
+int main () {
+    int num, x, tmp, sum = 0;
+    scanf ("%d", & num);
+    tmp = num;
+    printf ("Factors are: ");
+    while (1) {
+        x = getFirst (tmp);
+        printf ("%d ", x);
+        if (x == tmp)
+            break;
+        tmp /= x;
+    }
+    printf ("\n");
+    printf ("Sum of factors is: ");
+    tmp = num;
+    while (1) {
+        x = getFirst (tmp);
+        printf ("%d ", x);
+        sum += x;
+        if (x == tmp)
+            break;
+        printf ("+ ");
+        tmp /= x;
+    }
+    printf ("= %d\n", sum);
+}
+
+int main () {
+    char expr [9 * 11 + 1];
+    int i, j, pos, num, isPrime, sum;
+    printf ("Input number: ");
+    if (scanf ("%d", &num) != 1)
+        return 1;
+    printf ("Factors are: 1");
+    pos = 0;
+    expr[pos] = '\0';
+    sum = 1;
+    for (i = 2; i <= num; i++) {
+        if (num % i == 0) {
+            isPrime = 1;
+            for (j = 2; j * j <= i; j++) {
+                if (i % j == 0) {
+                    isPrime = 0;
+                    break;
+                }
+            }
+            if (isPrime == 1) {
+                pos += sprintf (expr +pos, "+%d", i);
+                printf (" %d", i);
+                sum += i;
+            }
+        }
+    }
+    printf ("\nSum of its factors: 1%s = %d\n", expr, sum);
+    return 0;
+}
+

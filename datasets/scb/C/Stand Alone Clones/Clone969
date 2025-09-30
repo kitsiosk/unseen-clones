@@ -1,0 +1,54 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49102109
+*  Stack Overflow answer #:49102279
+*  And Stack Overflow answer#:49102282
+*/
+int main (int argc, char *argv []) {
+    int command;
+    char *strNumThreads = NULL;
+    int i;
+    while ((command = getopt (argc, argv, "n:")) != -1) {
+        if (command == 'n') {
+            strNumThreads = optarg;
+            break;
+        }
+    }
+    srand (time (NULL));
+    int numThreads = atoi (strNumThreads);
+    if (numThreads == 0) {
+        fprintf (stderr, "Invalid number of threads\n");
+        return 1;
+    }
+    pthread_t threads [numThreads];
+    for (i = 0; i < numThreads; i++) {
+        pthread_create (threads + i, NULL, randomNumberGenerator, NULL);
+    }
+    for (i = 0; i < numThreads; ++i)
+        pthread_join (threads[i], NULL);
+    printf ("%d\n", randomSum);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    if (argc != 2) {
+        printf ("Please provide a number of threads.\n");
+        exit (EXIT_FAILURE);
+    }
+    long count = strtol (argv[1], NULL, 10);
+    pthread_t threads [count];
+    sum_t sum;
+    pthread_mutex_init (& (sum.lock), NULL);
+    sum.sum = 0;
+    for (long i = 0; i < count; ++i) {
+        pthread_create (& (threads [i]), NULL, do_sum, & sum);
+    }
+    for (long i = 0; i < count; ++i) {
+        pthread_join (threads [i], NULL);
+    }
+    pthread_mutex_destroy (& (sum.lock));
+    printf ("%ld\n", sum.sum);
+    return 0;
+}
+

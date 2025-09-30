@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:23188315
+*  Stack Overflow answer #:23188539
+*  And Stack Overflow answer#:23188564
+*/
+int main (void) {
+    char userName [10];
+    char names [20];
+    printf ("\n\n\n\nPlease enter your name: ");
+    scanf ("%s", userName);
+    FILE *fp;
+    fp = fopen ("results.dat", "r");
+    if (fp == NULL) {
+        printf ("I couldn't open results.dat for writing.\n");
+        exit (0);
+    }
+    while (fgets (names, 20, fp)) {
+        names[strlen (names) - 1] = '\0';
+        if (strcmp (names, userName) == 0) {
+            printf ("Match found\n");
+        }
+    }
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    char name [64];
+    char buffer [64];
+    printf ("Please enter your name: ");
+    file = fopen ("results.dat", "rw");
+    if (!file) {
+        printf ("Results.dat could not be opened.\n");
+        exit (- 1);
+    }
+    if (fgets (buffer, 64, file)) {
+        if (strcmp (buffer, "john")) {
+            printf ("Contents of file is john\n");
+        }
+    }
+    return 0;
+}
+

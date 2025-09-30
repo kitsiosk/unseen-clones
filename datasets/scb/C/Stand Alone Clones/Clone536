@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3221156
+*  Stack Overflow answer #:3221286
+*  And Stack Overflow answer#:14295648
+*/
+printPrimeFactors (int num) {
+    if (isPrime (num)) {
+        printf ("%d ", num);
+    }
+    else {
+        for (i = 2; i < sqrt (num); i++) {
+            if (num % i == 0) {
+                printPrimeFactors (i);
+                printPrimeFactors (num / i);
+            }
+        }
+    }
+}
+
+void printPrimeFactors (int num) {
+    static int divisor = 2;
+    if (num == 1) {
+        divisor = 2;
+        return;
+    }
+    else if (num % divisor == 0) {
+        cout << divisor << " ";
+        printPrimeFactors (num / divisor);
+    }
+    else {
+        divisor++;
+        printPrimeFactors (num);
+    }
+}
+

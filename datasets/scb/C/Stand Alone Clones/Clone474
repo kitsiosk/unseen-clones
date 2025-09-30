@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13533414
+*  Stack Overflow answer #:14652508
+*  And Stack Overflow answer#:14490307
+*/
+int main () {
+    while (1) {
+        primeIndex = 0;
+        compositeIndex = 0;
+        tempIndex = 0;
+        initializeArrays ();
+        compositeFactors[0] = getNumberToFactor ();
+        cout << "\n\n";
+        if (compositeFactors[0] == 0)
+            return 0;
+        numberOfCompositeFactors = 1;
+        factorComposites ();
+    }
+}
+
+int main (void) {
+    ULL factor;
+    ULL n;
+std :
+    : cout << "Enter the number for which you want a prime factor: ";
+std :
+    : cin >> n;
+    factor = pollard (n);
+    if (factor == 0)
+    std :
+    : cout << "No factor found.  Your number may be prime, but it is     not certain.\n\n";
+    else
+    std :
+    : cout << "One factor is: " << factor << "\n\n";
+}
+

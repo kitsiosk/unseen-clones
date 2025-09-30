@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:948221
+*  Stack Overflow answer #:948367
+*  And Stack Overflow answer#:948530
+*/
+void run_pipeline (int num, char *cmds [], char **argvs [], int pids []) {
+    int fd_in = -1, fd_out;
+    int i;
+    for (i = 0; i < num; i++) {
+        int fd_pipe [2];
+        if (i + 1 < num) {
+            pipe (fd_pipe);
+            fd_out = fd_pipe[1];
+        }
+        else
+            fd_out = -1;
+        pids[i] = fork_and_exec_with_fds (cmds[i], argvs[i], fd_in, fd_out);
+        close (fd_in);
+        close (fd_out);
+        fd_in = fd_pipe[0];
+    }
+}
+
+void run_pipeline (command *cmd, int input) {
+    int pfds [2] = {-1, -1};
+    if (cmd->next != NULL) {
+        pipe (pfds);
+    }
+    if (fork () == 0) {
+        if (input != -1) {
+            dup2 (input, STDIN_FILENO);
+            close (input);
+        }
+        if (pfds[1] != -1) {
+            dup2 (pfds [1], STDOUT_FILENO);
+            close (pfds [1]);
+        }
+        if (pfds[0] != -1) {
+            close (pfds [0]);
+        }
+        execvp (cmd -> argv [0], cmd -> argv);
+        exit (1);
+    }
+    else {
+        if (input != -1) {
+            close (input);
+        }
+        if (pfds[1] != -1) {
+            close (pfds [1]);
+        }
+        if (cmd->next != NULL) {
+            run_pipeline (cmd -> next, pfds [0]);
+        }
+    }
+}
+

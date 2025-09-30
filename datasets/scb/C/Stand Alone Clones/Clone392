@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:40199509
+*  Stack Overflow answer #:40200120
+*  And Stack Overflow answer#:40199559
+*/
+void main () {
+    int i, j;
+    int arr [5] [5] = {{1, 2, 3, 4, 5}, {1, 2, 3, 4, 5}};
+    printf ("Sizeof(arr) : %d\n", sizeof (arr));
+    printf ("Sizeof(arr[0]) : %d\n", sizeof (arr [0]));
+    for (int i = 0; i < (sizeof (arr) / sizeof (arr[0])); i++) {
+        for (int j = 0; j < (sizeof (arr[0]) / sizeof (arr[0][0])); j++)
+            arr[i][j] += 1;
+    }
+    for (int i = 0; i < (sizeof (arr) / sizeof (arr[0])); i++) {
+        for (int j = 0; j < (sizeof (arr[i]) / sizeof (arr[0][0])); j++)
+            printf ("%d ", arr[i][j]);
+        printf ("\n");
+    }
+    printf ("\n");
+}
+
+int main (int argc, char **argv) {
+    int arr [LENGTH] [LENGTH] = {{0}};
+    for (int i = 0; i < LENGTH; i++) {
+        fprintf (stderr, "%p contains %d elements\n", (void *) arr [i], (int) sizeof (arr) / sizeof (* arr));
+        for (int j = 0; j < LENGTH; j++) {
+            arr[i][j]++;
+            fprintf (stderr, "%d ", arr [i] [j]);
+        }
+        fprintf (stderr, "\n");
+    }
+    return EXIT_SUCCESS;
+}
+

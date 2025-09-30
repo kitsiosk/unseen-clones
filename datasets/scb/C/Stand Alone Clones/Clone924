@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:13638653
+*  Stack Overflow answer #:13638907
+*  And Stack Overflow answer#:13638904
+*/
+static void foo (struct foo_t *f, size_t limit, size_t *result_length) {
+    size_t i = 0;
+    struct foo_t a;
+    a.X = 5;
+    struct foo_t b;
+    b.X = 10;
+    struct foo_t c;
+    c.X = 4;
+    if (i < limit)
+        f[i++] = a;
+    if (i < limit)
+        f[i++] = b;
+    if (i < limit)
+        f[i++] = c;
+    *result_length = i;
+}
+
+void foo (struct foo_t *f, size_t limit, size_t *result_length) {
+    int i = 0;
+    struct foo_t a, b, c;
+    a.X = 5;
+    b.X = 10;
+    c.X = 4;
+    f[i++] = a;
+    f[i++] = b;
+    f[i++] = c;
+    *result_length = i;
+}
+

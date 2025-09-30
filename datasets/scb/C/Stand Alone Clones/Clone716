@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52715808
+*  Stack Overflow answer #:52716595
+*  And Stack Overflow answer#:52717293
+*/
+int main () {
+    int counter = 0;
+    char ch;
+    struct termios orig_attr, new_attr;
+    tcgetattr (fileno (stdin), & orig_attr);
+    memcpy (& new_attr, & orig_attr, sizeof (new_attr));
+    new_attr.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr (fileno (stdin), TCSANOW, & new_attr);
+    pthread_t pid;
+    if (pthread_create (&pid, NULL, thread, &counter)) {
+        fprintf (stderr, "Create thread failed");
+        exit (1);
+    }
+    while (1) {
+        char c = getchar ();
+        __sync_add_and_fetch (& counter, 1);
+        printf ("add: %d\n", counter);
+    }
+    return 0;
+}
+
+int main (void) {
+    int ch;
+    timer_t tid;
+    struct itimerspec its = {0};
+    struct sigevent se = {0};
+    se.sigev_notify = SIGEV_THREAD;
+    se.sigev_notify_function = timer;
+    its.it_value.tv_sec = its.it_interval.tv_sec = 1;
+    timer_create (CLOCK_REALTIME, & se, & tid);
+    timer_settime (tid, 0, & its, NULL);
+    initscr ();
+    halfdelay (1);
+    noecho ();
+    curs_set (0);
+    for (;;) {
+        ch = getch ();
+        if (ch != ERR) {
+            changed = 1;
+            value++;
+        }
+        if (changed) {
+            changed = 0;
+            mvprintw (0, 0, "%d ", value);
+            refresh ();
+        }
+    }
+    endwin ();
+}
+

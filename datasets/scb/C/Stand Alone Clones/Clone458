@@ -1,0 +1,60 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34415963
+*  Stack Overflow answer #:34416559
+*  And Stack Overflow answer#:34416221
+*/
+int main () {
+    float manyTest = 0, gr = 0, avg = 0;
+    int i;
+    printf ("How many tests you wanna average? (Minimum 1 Maximum 25)\n");
+    scanf (" %f", & manyTest);
+    if (manyTest <= 0) {
+        printf ("The Minimum is 1!\n");
+    }
+    else if (manyTest > 25) {
+        printf ("The Maximum is 25!\n");
+    }
+    else {
+        printf ("Write down your grades on those tests:\n");
+        for (i = 0; i < manyTest; ++i) {
+            scanf (" %f", & gr);
+            avg += gr;
+        }
+        printf ("Your average grade is: %.2f\n", avg / manyTest);
+    }
+    system ("pause");
+    return 0;
+}
+
+int main () {
+    int total = 0;
+    double acc = 0, val;
+    for (;;) {
+        fputs ("Value: ", stdout);
+        fflush (stdout);
+        errno = 0;
+        int res = fscanf (stdin, "%lf", &val);
+        if (res == EOF) {
+            if (errno == 0) {
+                fprintf (stdout, "Done! You entered %d values averaging %f.\n", total, acc / total);
+            }
+            else {
+                fputs ("There was an error, aborting!\n", stdout);
+            }
+            break;
+        }
+        else if (res == 0) {
+            fputs ("Sorry, I did not understand. Try again.\n", stdout);
+            clearerr (stdin);
+            for (int r = 0; r != EOF && r != '\n'; r = fgetc (stdin)) {
+            }
+        }
+        else {
+            acc += val;
+            ++total;
+        }
+    }
+}
+

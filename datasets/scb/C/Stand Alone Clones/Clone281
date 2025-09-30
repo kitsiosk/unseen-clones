@@ -1,0 +1,66 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37817181
+*  Stack Overflow answer #:37817273
+*  And Stack Overflow answer#:37818650
+*/
+char *int_to_string (unsigned int n) {
+    if (n < 10) {
+        char *p = "";
+        switch (n) {
+        case 0 :
+            p = "Zero";
+            break;
+        case 1 :
+            p = "One";
+            break;
+        case 2 :
+            p = "Two";
+            break;
+        case 3 :
+            p = "Three";
+            break;
+        case 4 :
+            p = "Four";
+            break;
+        case 5 :
+            p = "Five";
+            break;
+        case 6 :
+            p = "Six";
+            break;
+        case 7 :
+            p = "Seven";
+            break;
+        case 8 :
+            p = "Eight";
+            break;
+        case 9 :
+            p = "Nine";
+            break;
+        }
+        char *q = malloc (strlen (p) +1);
+        strcpy (q, p);
+        free (p);
+        return q;
+    }
+    else {
+        char *q = int_to_string (n / 10);
+        char *p = int_to_string (n % 10);
+        q = realloc (q, strlen (q) +strlen (p) + 2);
+        strcat (q, " ");
+        return strcat (q, p);
+    }
+}
+
+char *int_to_string (int n) {
+    char str [100] = "";
+    char str1 [100] = "";
+    ...strcat (str, int_to_string (n / 10));
+    strcat (str, " ");
+    strcat (str, int_to_string (n % 10));
+    strcpy (str1, str);
+    return str1;
+}
+

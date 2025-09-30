@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36172970
+*  Stack Overflow answer #:36182729
+*  And Stack Overflow answer#:36173098
+*/
+void printAfterX (int *arr, int n, int *x) {
+    if (x < arr || x >= arr + n) {
+        printf ("No such element");
+    }
+    while (x < arr + n) {
+        printf ("%d  ", * x);
+        x++;
+    }
+}
+
+void printAfterX (int *arr, int n, int *x) {
+    if (x < arr || x + 1 > arr + n) {
+        printf ("not found");
+    }
+    else {
+        for (x = x + 1; x < arr + n; x++) {
+            printf ("%d  ", * x);
+        }
+    }
+}
+

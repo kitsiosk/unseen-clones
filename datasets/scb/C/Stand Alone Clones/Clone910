@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:25595208
+*  Stack Overflow answer #:25595648
+*  And Stack Overflow answer#:25595994
+*/
+int main () {
+    char ch = 'b';
+    char alp [26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    string enc [26] = {"00", "01", "02"};
+    map < char, string > valueDecoderMap;
+    for (int i = 0; i < (sizeof (alp)); i++) {
+        valueDecoderMap[alp[i]] = enc[i];
+    }
+    map < char, string > : : iterator mapIterator;
+    mapIterator = valueDecoderMap.find (ch);
+    if (mapIterator != valueDecoderMap.end ()) {
+        cout << "Key = " << mapIterator->first << " Value = " << mapIterator->second << endl;
+    }
+    else {
+        cout << "No encoding present for " << ch << endl;
+    }
+    return 0;
+}
+
+int main () {
+    char input = std : : cin.get () - 'a';
+    if (input < 9)
+    std :
+    : cout << 0;
+std :
+    : cout << int (input) << "\n\nPress Enter to exit program. ";
+std :
+    : cin.sync ();
+std :
+    : cin.ignore (std : : numeric_limits < streamsize > : : max (), '\n');
+}
+

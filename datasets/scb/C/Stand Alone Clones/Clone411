@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1642211
+*  Stack Overflow answer #:1642319
+*  And Stack Overflow answer#:1642238
+*/
+int main (int argc, char *argv []) {
+    int file_handle;
+    int dup2_res;
+    if (argc == 2) {
+        file_handle = open (argv[1], O_RDONLY);
+        dup2_res = dup2 (file_handle, STDIN_FILENO);
+    }
+    char buffer [100];
+    ssize_t read_bytes = 1;
+    while (read_bytes) {
+        read_bytes = read (STDIN_FILENO, &buffer, sizeof (buffer));
+        buffer[read_bytes] = 0;
+        printf ("%s", buffer);
+    }
+    close (file_handle);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int fileno;
+    if (argc > 1) {
+        fileno = open (argv[1], O_RDONLY);
+        if (fileno < 0) {
+            printf ("Unable to open file, aborting\n");
+            return 1;
+        }
+    }
+    else
+        fileno = STDIN_FILENO;
+}
+

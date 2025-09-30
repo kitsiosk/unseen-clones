@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5422061
+*  Stack Overflow answer #:12773678
+*  And Stack Overflow answer#:5422227
+*/
+void *malloc (size_t size) {
+    size = (size + sizeof (free_block) + (align_to - 1)) & ~(align_to - 1);
+    free_block *block = free_block_list_head.next;
+    free_block **head = &(free_block_list_head.next);
+    while (block != 0) {
+        if (block->size >= size) {
+            *head = block->next;
+            return ((char *) block) + sizeof (free_block);
+        }
+        head = &(block->next);
+        block = block->next;
+    }
+    block = (free_block *) sbrk (size);
+    block->size = size;
+    return ((char *) block) + sizeof (free_block);
+}
+
+void *malloc (size_t size) {
+    void *return_ptr = NULL;
+    int i;
+    if (dictionary == NULL) {
+        dictionary = sbrk (1024 * sizeof (mem_dictionary));
+        memset (dictionary, 0, 1024 * sizeof (mem_dictionary));
+    }
+    for (i = 0; i < dictionary_ct; i++)
+        if (dictionary[i].size >= size && dictionary[i].freed) {
+            dictionary[i].freed = 0;
+            return dictionary[i].addr;
+        }
+    return_ptr = sbrk (size);
+    dictionary[dictionary_ct].addr = return_ptr;
+    dictionary[dictionary_ct].size = size;
+    dictionary[dictionary_ct].freed = 0;
+    dictionary_ct++;
+    return return_ptr;
+}
+

@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3263972
+*  Stack Overflow answer #:3264084
+*  And Stack Overflow answer#:3264217
+*/
+void main (void) {
+    char str [30], str2 [30];
+    printf ("Enter a sentence:");
+    gets (str);
+    if (check (str2, str)) {
+        printf ("check succeeded %s\n", str2);
+    }
+    getch ();
+}
+
+int main (void) {
+    char str [30], str2 [30];
+    char *p;
+    p = str;
+    printf ("Enter a sentence:");
+    fgets (str, sizeof str, stdin);
+    strcpy (str2, check (& p));
+    printf ("You said: %s\n", str2);
+    return 0;
+}
+

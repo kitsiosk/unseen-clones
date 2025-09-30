@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30842947
+*  Stack Overflow answer #:30852809
+*  And Stack Overflow answer#:30849401
+*/
+int printf_NoIntegerPart (double x, int prec) {
+    assert (prec >= 2 && prec <= 100);
+    char buffer [prec + 16];
+    sprintf (buffer, "%.*E", prec - 1, x);
+    int dp = '.';
+    char *dp_ptr = strchr (buffer, dp);
+    char *E_ptr = strchr (buffer, 'E');
+    if (dp_ptr && dp_ptr > buffer && E_ptr) {
+        dp_ptr[0] = dp_ptr[-1];
+        dp_ptr[-1] = dp;
+        if (x != 0) {
+            int expo = atoi (&E_ptr[1]);
+            sprintf (& E_ptr [1], "%+.02d", expo + 1);
+        }
+    }
+    return puts (buffer);
+}
+
+int printf_NoIntegerPart (double x, int prec) {
+    char buf [20 + prec];
+    sprintf (buf, "%+.*E", prec - 1, x * 10.0);
+    if (buf[2] == '.') {
+        buf[2] = buf[1];
+        buf[1] = '.';
+    }
+    puts (buf);
+}
+

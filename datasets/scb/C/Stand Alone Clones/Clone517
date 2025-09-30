@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21737906
+*  Stack Overflow answer #:21745211
+*  And Stack Overflow answer#:21775401
+*/
+int main () {
+    FILE *fin;
+    FILE *fout;
+    int character;
+    fin = fopen ("in.txt", "r");
+    fout = fopen ("out.txt", "w");
+    while ((character = fgetc (fin)) != EOF) {
+        for (int i = 0; i < numberOfBytesInChar ((unsigned char) character) - 1; i++) {
+            putchar (character);
+            fprintf (fout, "%c", character);
+            character = fgetc (fin);
+        }
+        putchar (character);
+        printf (" ");
+        fprintf (fout, "%c ", character);
+    }
+    fclose (fin);
+    fclose (fout);
+    printf ("\nFile has been created...\n");
+    return 0;
+}
+
+int main () {
+    setlocale (LC_ALL, "en_US.UTF-8");
+    FILE *fin;
+    FILE *fout;
+    wint_t wc;
+    fin = fopen ("in.txt", "r");
+    fout = fopen ("out.txt", "w");
+    while ((wc = fgetwc (fin)) != WEOF) {
+    }
+    fclose (fin);
+    fclose (fout);
+    printf ("File has been created...\n");
+    return 0;
+}
+

@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9685391
+*  Stack Overflow answer #:9685443
+*  And Stack Overflow answer#:9685546
+*/
+main () {
+    int i;
+    string array [4];
+    FILE *my;
+    my = fopen ("my.txt", "r");
+    for (i = 0; i < 4; i++) {
+        fscanf (data, "%" MAX_CHARS_STR "s", & array [i]);
+        ungetc ('x', data);
+        fscanf (data, "%*s");
+    }
+    fclose (my);
+}
+
+main () {
+    int i;
+    string array [4];
+    for (i = 0; i < 4; i++) {
+        if ((array[i] = (char *) (malloc (sizeof (char) * LEN))) == NULL) {
+            printf ("malloc failed");
+            return 1;
+        }
+    }
+    FILE *my;
+    my = fopen ("my.txt", "r");
+    for (i = 0; i < 4; i++)
+        fscanf (data, "%s", &array[i]);
+    fclose (my);
+}
+

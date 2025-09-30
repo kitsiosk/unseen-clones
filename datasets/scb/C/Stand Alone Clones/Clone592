@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21227259
+*  Stack Overflow answer #:21227289
+*  And Stack Overflow answer#:21227315
+*/
+int main () {
+    int input [1];
+    int total = 0;
+    int n;
+    printf ("Please enter the number of elements to add: ");
+    scanf ("%d", & n);
+    for (int i = 0; i < n; i++) {
+        printf ("Please enter integer %d: ", (i + 1));
+        scanf ("%d", & input [i]);
+    }
+    for (int i = 0; i < n; i++) {
+        total = total + input[i];
+    }
+    printf ("The sum is = ", total);
+}
+
+int main () {
+    int input [2];
+    for (int i = 0; i < 2; i++) {
+        printf ("Please enter an integer: ");
+        scanf ("%d", & input [i]);
+    }
+    int total = input[0] + input[1];
+    printf ("%d + %d = %d ", input [0], input [1], total);
+}
+

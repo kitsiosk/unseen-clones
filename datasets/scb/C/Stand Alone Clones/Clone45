@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6026377
+*  Stack Overflow answer #:6026487
+*  And Stack Overflow answer#:6026451
+*/
+void pushCategory (GJCType *menu, CategoryTypePtr category) {
+    CategoryTypePtr newCategory;
+    CategoryTypePtr current;
+    if ((newCategory = malloc (sizeof (CategoryType))) == NULL) {
+        fprintf (stderr, "can't malloc enough memory for new category pointer.\n");
+        exit (EXIT_FAILURE);
+    }
+    newCategory->headItem = NULL;
+    strncpy (newCategory -> categoryID, category -> categoryID, ID_LEN);
+    if (menu->headCategory == NULL) {
+        menu->headCategory = new;
+    }
+    else {
+        current = menu->headCategory;
+        while (current->nextCategory != NULL) {
+            current = current->nextCategory;
+        }
+        current->nextCategory = newCategory;
+    }
+    menu->numCategories++;
+}
+
+void pushCategory (GJCType *menu, CategoryTypePtr category) {
+    CategoryTypePtr current;
+    if (menu->headCategory == NULL) {
+        menu->headCategory = category;
+    }
+    else {
+        current = menu->headCategory;
+        while (current->nextCategory != NULL) {
+            current = current->nextCategory;
+        }
+        current->nextCategory = category;
+    }
+    menu->numCategories++;
+}
+

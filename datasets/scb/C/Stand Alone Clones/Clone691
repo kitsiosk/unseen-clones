@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27816345
+*  Stack Overflow answer #:27816395
+*  And Stack Overflow answer#:27817437
+*/
+void add_back (Node *s, int x) {
+    if (s == NULL)
+        return;
+    Node *new_node = malloc (sizeof (Node));
+    new_node->value = x;
+    Node *start = s;
+    while (start->next != NULL) {
+        start = start->next;
+    }
+    new_node->next = NULL;
+    start->next = newnode;
+}
+
+void add_back (Node **head, int x) {
+    Node **tail = head;
+    Node *new_node;
+    while (*tail != NULL)
+        tail = &(*tail)->next;
+    new_node = malloc (sizeof (Node));
+    new_node->value = x;
+    new_node->next = NULL;
+    *tail = new_node;
+}
+

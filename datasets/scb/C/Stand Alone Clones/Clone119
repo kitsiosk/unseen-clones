@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37892659
+*  Stack Overflow answer #:37892674
+*  And Stack Overflow answer#:37892914
+*/
+int main (void) {
+    int i;
+    double num [10];
+    for (i = 1; i <= 10; i++) {
+        printf ("Enter a number: ");
+        if (scanf ("%lf", &num[i - 1]) != 1) {
+            puts ("read error");
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int main (int argc, char **argv) {
+    size_t i, n;
+    double max, min, tmp, ad [MAXD] = {0.0};
+    FILE *fp = argc > 1 ? fopen (argv[1], "r") : stdin;
+    if (!fp) {
+        fprintf (stderr, "error: file open failed '%s'.\n", argv [1]);
+        return 1;
+    }
+    for (n = 0; n < MAXD && fscanf (fp, " %lf", &tmp) == 1; n++)
+        ad[n] = tmp;
+    if (fp != stdin)
+        fclose (fp);
+    printf ("\narray values:\n\n");
+    for (i = 0; i < n; i++)
+        printf ("  ad[%2zu] : %13.2lf\n", i, ad[i]);
+    if (maxmin_dbl (ad, &max, &min, n))
+        printf ("\n maximum : %.2lf\n minimum : %.2lf\n\n", max, min);
+    else {
+        fprintf (stderr, "error: maxmin_dbl failed.\n");
+        return 1;
+    }
+    return 0;
+}
+

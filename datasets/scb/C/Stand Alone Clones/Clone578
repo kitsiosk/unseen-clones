@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1015533
+*  Stack Overflow answer #:1015549
+*  And Stack Overflow answer#:1016181
+*/
+int main () {
+    int x;
+    int sum = 0;
+    for (x = 1; x <= 1000; x++)
+        if (x % 3 == 0 || x % 5 == 0)
+            sum += x;
+    printf ("%d\n", sum);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    int i;
+    int const mult3 = (1000 - 1) / 3;
+    int const mult5 = (1000 - 1) / 5;
+    int const mult15 = (1000 - 1) / 15;
+    int sum3 = 0;
+    int sum5 = 0;
+    int sum15 = 0;
+    int soln;
+    for (i = 1; i <= mult3; i++) {
+        sum3 += 3 * i;
+    }
+    for (i = 1; i <= mult5; i++) {
+        sum5 += 5 * i;
+    }
+    for (i = 1; i <= mult15; i++) {
+        sum15 += 15 * i;
+    }
+    soln = sum3 + sum5 - sum15;
+    printf ("%d\n", soln);
+    return 0;
+}
+

@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9456058
+*  Stack Overflow answer #:9456136
+*  And Stack Overflow answer#:9456218
+*/
+quadratic_roots_t quadratic_equation (double a, double b, double c) {
+    quadratic_roots_t roots;
+    double d;
+    d = b * b - 4 * a * c;
+    if (d < 0.0) {
+        roots.num_roots = 0;
+    }
+    else if (d == 0.0) {
+        roots.num_roots = 1;
+        roots.roots[0] = -b / (2 * a);
+    }
+    else {
+        roots.num_roots = 2;
+        roots.roots[0] = (-b - sqrt (d)) / (2 * a);
+        roots.roots[1] = (-b + sqrt (d)) / (2 * a);
+    }
+    return roots;
+}
+
+int quadratic_equation (double a, double b, double c, double *root_a, double *root_b) {
+    double discriminant = ((b * b) - (4 * a * c));
+    if (discriminant < 0) {
+        return -1;
+    }
+    if (root_a != NULL) {
+        *root_a = (-b + sqrt (discriminant)) / (2 * a);
+    }
+    if (root_b != NULL) {
+        *root_b = (-b - sqrt (discriminant)) / (2 * a);
+    }
+    return 0;
+}
+

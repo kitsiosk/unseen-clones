@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53403775
+*  Stack Overflow answer #:53404005
+*  And Stack Overflow answer#:53407267
+*/
+int main () {
+    test (0, 0);
+    test (1, 1);
+    test (2, 2);
+    test (3, 4);
+    test (4, 5);
+    test (5, 7);
+    test (6, 9);
+    test (1000000000, 14846928141);
+}
+
+int main (int argc, char *argv []) {
+    unsigned long long from = 1000, to = 2000;
+    if (argc > 1) {
+        to = from = strtoull (argv[1], NULL, 0);
+        if (argc > 2) {
+            to = strtoull (argv[1], NULL, 0);
+        }
+    }
+    printf ("bitpop from %llu to %llu: %llu\n", from, to, bitpop (to + 1) - bitpop (from));
+    return 0;
+}
+

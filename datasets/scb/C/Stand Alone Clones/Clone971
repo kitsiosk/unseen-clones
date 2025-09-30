@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:24526047
+*  Stack Overflow answer #:24526494
+*  And Stack Overflow answer#:24526180
+*/
+int main (int argc, const char *argv []) {
+    const char *fileName = "MyFile.txt";
+    int size = 1024;
+    int ret = 0;
+    if (3 == argc) {
+        fileName = argv[1];
+        size = atoi (argv[2]);
+    }
+    ret = CreateFileSetSize (fileName, size);
+    return ret;
+}
+
+int main (int argc, char **argv) {
+    FILE *fp = fopen ("test.dat", "w+");
+    if (fp) {
+        fseek (fp, wanted_size - 1, SEEK_SET);
+        fwrite ("", 1, sizeof (char), fp);
+        fclose (fp);
+    }
+    return 0;
+}
+

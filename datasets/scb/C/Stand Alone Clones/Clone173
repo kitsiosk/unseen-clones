@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41231708
+*  Stack Overflow answer #:41232593
+*  And Stack Overflow answer#:41232701
+*/
+int main () {
+    struct node *head = NULL;
+    FILE *file = fopen ("duom.txt", "r");
+    int i = 0;
+    fscanf (file, "%d", & i);
+    while (!feof (file)) {
+        push (& head, i);
+        fscanf (file, "%d", & i);
+    }
+    fclose (file);
+    puts ("Created Linked List: ");
+    printList (head);
+    min (& head);
+    puts ("\nLinked List after Deletion of minimum: ");
+    printList (head);
+    return 0;
+}
+
+int main (void) {
+    linkedList *A = readList ();
+    int min = searchMin (A);
+    printList (A);
+    deleteNode (& A, min);
+    printList (A);
+    freeList (A);
+    return 0;
+}
+

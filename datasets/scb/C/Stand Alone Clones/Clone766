@@ -1,0 +1,28 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:5439174
+*  Stack Overflow answer #:5439226
+*  And Stack Overflow answer#:5439315
+*/
+int main (void) {
+    int a, b, m;
+    printf ("Please enter two integers between 1-12:\n");
+    scanf ("%d%d", & a, & b);
+    for (m = a + 1; b; b--, m++) {
+        printf (" ");
+        print_month (m);
+        putchar ('\n');
+    }
+}
+
+int main (void) {
+    int m;
+    printf ("Enter month: ");
+    scanf ("%d", & m);
+    if (1 <= m && m <= 12) {
+        printf ("%s\n", months [m - 1]);
+    }
+    return 0;
+}
+

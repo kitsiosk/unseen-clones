@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33583478
+*  Stack Overflow answer #:33583562
+*  And Stack Overflow answer#:33590685
+*/
+int main () {
+    int i = 0;
+    int j = 1;
+    char key [6] = "april", ckey [6];
+    printf ("Enter the key: ");
+    scanf ("%s", ckey);
+    for (i = 0; i < 6; i++) {
+        if (ckey[i] != key[i])
+            j = 0;
+    }
+    if (j == 1)
+        printf (% s, "Correct.")
+    else
+        printf (% s, "Wrong.")
+    return 0;
+}
+
+int main (void) {
+    char key [6] = "april", ckey [6];
+    printf ("Enter the key: ");
+    fgets (ckey, sizeof ckey, stdin);
+    if (!compare (key, ckey)) {
+        printf ("Correct.");
+    }
+    else {
+        printf ("Wrong.");
+    }
+    return 0;
+}
+

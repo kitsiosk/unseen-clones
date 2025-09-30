@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:14485133
+*  Stack Overflow answer #:14485258
+*  And Stack Overflow answer#:14485190
+*/
+char *reverseString (char *original_string) {
+    int length = strlen (original_string);
+    int top_limit = length - 1;
+    char *reversed_string = malloc (sizeof (char) * (1 + length));
+    int count = 0;
+    while (count < length) {
+        reversed_string[count] = original_string[top_limit];
+        top_limit--;
+        count++;
+    }
+    reversed_string[count] = '\0';
+    return reversed_string;
+}
+
+char *reverseString (char *original_string) {
+    size_t length = strlen (original_string);
+    char *reversed_string = malloc (length +1);
+    size_t start;
+    size_t end;
+    for (start = 0, end = length - 1; start < length; start++, end--) {
+        reversed_string[start] = original_string[end];
+    }
+    reversed_string[start] = '\0';
+    return reversed_string;
+}
+

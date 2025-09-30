@@ -1,0 +1,35 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47638353
+*  Stack Overflow answer #:47693773
+*  And Stack Overflow answer#:47638578
+*/
+int main (void) {
+    char str [] = "hello big panda";
+    int nchars = 0;
+    nchars = prnword (str, 0);
+    nchars += prnword (str +nchars, 0);
+    nchars += prnword (str +nchars, 0);
+    putchar ('\n');
+    nchars = 0;
+    nchars += prnword (str, 3);
+    putchar ('\n');
+    nchars = 0;
+    nchars = prnword (str, 1);
+    putchar ('\n');
+    return 0;
+}
+
+int main () {
+    char inputString [] = {"hello big panda"};
+    int k = 0;
+    int i = 0;
+    while (isalpha (inputString[i])) {
+        i++;
+    }
+    inputString[i] = '\0';
+    printf ("%s", inputString);
+    return 0;
+}
+

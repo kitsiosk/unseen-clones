@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9210528
+*  Stack Overflow answer #:29259329
+*  And Stack Overflow answer#:39286524
+*/
+char **split (char *a_str, const char a_delim, int *len) {
+    char *s = (char *) malloc (sizeof (char) * strlen (a_str));
+    strcpy (s, a_str);
+    char *tmp = a_str;
+    int count = 0;
+    while (*tmp != '\0') {
+        if (*tmp == a_delim)
+            count += 1;
+        tmp += 1;
+    }
+    *len = count;
+    char **results = (char **) malloc (count * sizeof (char *));
+    results[0] = s;
+    int i = 1;
+    while (*s != '\0') {
+        if (*s == a_delim) {
+            *s = '\0';
+            s += 1;
+            results[i++] = s;
+        }
+        else
+            s += 1;
+    }
+    return results;
+}
+
+char **split (const char *str, char sep) {
+    char **array;
+    unsigned int start = 0, stop, toks = 0, t;
+    token *tokens = malloc ((strlen (str) + 1) * sizeof (token));
+    for (stop = 0; str[stop]; stop++) {
+        if (str[stop] == sep) {
+            tokens[toks].start = str + start;
+            tokens[toks].len = stop - start;
+            toks++;
+            start = stop + 1;
+        }
+    }
+    tokens[toks].start = str + start;
+    tokens[toks].len = stop - start;
+    toks++;
+    array = malloc ((toks + 1) * sizeof (char *));
+    for (t = 0; t < toks; t++) {
+        char *token = calloc (tokens[t].len + 1, 1);
+        memcpy (token, tokens [t].start, tokens [t].len);
+        array[t] = token;
+    }
+    array[t] = NULL;
+    free (tokens);
+    return array;
+}
+

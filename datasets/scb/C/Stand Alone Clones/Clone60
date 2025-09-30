@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:2067096
+*  Stack Overflow answer #:2067244
+*  And Stack Overflow answer#:2069328
+*/
+int main () {
+    using namespace std;
+    char c;
+    short s;
+    int i;
+    cout << "sizeof(char): " << sizeof (char) << endl;
+    cout << "sizeof(short): " << sizeof (short) << endl;
+    cout << "sizeof(int): " << sizeof (int) << endl;
+    cout << "short is " << (int) &s - (int) &c << " bytes away from a char" << endl;
+    cout << "int is " << (int) &i - (int) &s << " bytes away from a short" << endl;
+}
+
+int main (void) {
+    SPRINT (char);
+    SPRINT (unsigned char);
+    SPRINT (short);
+    SPRINT (unsigned short);
+    SPRINT (int);
+    SPRINT (unsigned int);
+    SPRINT (long);
+    SPRINT (unsigned long);
+    SPRINT (float);
+    SPRINT (double);
+    SPRINT (long double);
+    SPRINT (size_t);
+    SPRINT (ptrdiff_t);
+    SPRINT (time_t);
+    SPRINT (void *);
+    SPRINT (char *);
+    SPRINT (short *);
+    SPRINT (int *);
+    SPRINT (long *);
+    SPRINT (float *);
+    SPRINT (double *);
+    SPRINT (int (*) (void));
+    SPRINT (double (*) (void));
+    SPRINT (char * (*) (void));
+    SPRINT (struct {char a;});
+    SPRINT (struct {short a;});
+    SPRINT (struct {int a;});
+    SPRINT (struct {long a;});
+    SPRINT (struct {float a;});
+    SPRINT (struct {double a;});
+    SPRINT (struct {char a; double b;});
+    SPRINT (struct {short a; double b;});
+    SPRINT (struct {long a; double b;});
+    SPRINT (struct {char a; char b; short c;});
+    SPRINT (struct {char a; char b; long c;});
+    SPRINT (struct {short a; short b;});
+    SPRINT (struct {char a [3]; char b [3];});
+    SPRINT (struct {char a [3]; char b [3]; short c;});
+    SPRINT (struct {long double a;});
+    SPRINT (struct {char a; long double b;});
+    return (0);
+}
+

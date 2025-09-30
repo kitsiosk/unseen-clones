@@ -1,0 +1,53 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47272368
+*  Stack Overflow answer #:47272911
+*  And Stack Overflow answer#:47272518
+*/
+int main (void) {
+    char str [41];
+    printf ("Enter a string (40 characters maximum): ");
+    fflush (stdout);
+    if (scanf ("%40s", str) == 1) {
+        int i;
+        printf ("The even string is:");
+        for (i = 0; str[i]; i++) {
+            if (i % 2 == 0) {
+                str[i / 2] = str[i];
+            }
+            else {
+                putchar (str [i]);
+            }
+        }
+        printf ("\n");
+        printf ("The odd string is:%.*s\n ", (i + 1) / 2, str);
+    }
+    return 0;
+}
+
+int main (void) {
+    char str [41];
+    char odd [21];
+    char even [21];
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    printf ("Enter a string (40 characters maximum): ");
+    if (scanf ("%40s", str) != 1)
+        return 1;
+    while (str[i] != '\0') {
+        if (i % 2 == 0) {
+            odd[j++] = str[i];
+        }
+        else {
+            even[k++] = str[i];
+        }
+        i++;
+    }
+    odd[j] = even[k] = '\0';
+    printf ("The even string is: %s\n", even);
+    printf ("The odd string is: %s\n", odd);
+    return 0;
+}
+

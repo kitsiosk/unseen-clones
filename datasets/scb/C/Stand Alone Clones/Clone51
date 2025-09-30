@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:47735699
+*  Stack Overflow answer #:47735753
+*  And Stack Overflow answer#:47735743
+*/
+int *numConvert (int dec) {
+    int *hold = malloc (sizeof *hold * 8);
+    if (hold == NULL) {
+        fprintf (stderr, "Error in malloc");
+        exit (1);
+    }
+    int x = dec;
+    ........return hold;
+}
+
+int *numConvert (int dec) {
+    int *hold = (int *) malloc (sizeof (int) * 8);
+    int x = dec;
+    for (int y = 7; y >= 0; y--) {
+        if (x % 2 == 0 || x == 0) {
+            hold[y] = 0;
+        }
+        else {
+            hold[y] = 1;
+        }
+        x = x / 2;
+    }
+    printf ("\ntest loop: ");
+    for (int i = 0; i < 8; i++) {
+        printf ("%i", hold [i]);
+    }
+    printf ("\n");
+    return hold;
+}
+

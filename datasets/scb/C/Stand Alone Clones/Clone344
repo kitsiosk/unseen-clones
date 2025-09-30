@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4650489
+*  Stack Overflow answer #:4650524
+*  And Stack Overflow answer#:4650694
+*/
+uint64_t pack (float a, float b) {
+    union converter ca = {
+        .f = a
+    };
+    union converter cb = {
+        .f = b
+    };
+    return ((uint64_t) cb.i << 32) + ca.i;
+}
+
+long long pack (float lo, float hi) {
+    assert (sizeof (float) == 4);
+    assert (sizeof (long long) == 8);
+    assert (CHAR_BIT == 8);
+    uint32_t target;
+    memcpy (& target, & lo, sizeof (target));
+    long long result = target;
+    memcpy (& target, & hi, sizeof (target));
+    result += ((long long) target) << 32;
+    return result;
+}
+

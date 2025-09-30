@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33928227
+*  Stack Overflow answer #:33928796
+*  And Stack Overflow answer#:33928645
+*/
+char *getLine (char *s, int max) {
+    int i = 0, c = 0;
+    char *p = s;
+    while (i + 1 < max && (c = getchar ()) != '\n' && c != EOF) {
+        *p++ = c;
+        i++;
+    }
+    *p = 0;
+    return s;
+}
+
+char *getLine (void) {
+    int ch;
+    int size = 100;
+    size_t pos = 0;
+    char *result = malloc (size * sizeof (char *));
+    while ((ch = getchar ()) != EOF) {
+        *result++ = ch;
+        if (++pos >= size) {
+            realloc (result, size += 100);
+            if (!result)
+                exit (1);
+        }
+        if (c == '\n')
+            break;
+    }
+    *result = '\0';
+    return result - pos;
+}
+

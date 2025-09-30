@@ -1,0 +1,58 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:43525394
+*  Stack Overflow answer #:43525787
+*  And Stack Overflow answer#:43525738
+*/
+void vymazstudenta (STUDENT **head, const char *priezvisko) {
+    STUDENT *tmp = NULL;
+    if (*head != NULL) {
+        if (strcmp (head->priezvisko, priezvisko) == 0) {
+            tmp = *head;
+            *head = (*head)->next;
+        }
+        else {
+            STUDENT *traverse = *head;
+            while (traverse->next != NULL && strcmp (traverse->next->priezvisko, priezvisko) != 0) {
+                traverse = traverse->next;
+            }
+            if (traverse->next != NULL) {
+                tmp = traverse->next;
+                traverse->next = traverse->next->next;
+            }
+        }
+    }
+    if (tmp != NULL) {
+        free (tmp);
+    }
+    else {
+        fprintf (stderr, "Student %s sa nenasiel.\n", priezvisko);
+    }
+}
+
+void vymazstudenta (STUDENT **head, const char *priezvisko) {
+    if (*head == NULL) {
+        return;
+    }
+    if (!strcmp (*head->priezvisko, priezvisko)) {
+        STUDENT *hladany = *head;
+        *head = *head->next;
+        free (hladany);
+        return;
+    }
+    STUDENT *traverse = *head->next;
+    STUDENT *previous = *head;
+    while (traverse != NULL) {
+        if (!strcmp (traverse->priezvisko, priezvisko)) {
+            previous->next = traverse->next;
+            free (traverse);
+            return;
+        }
+        previous = traverse;
+        traverse = traverse->next;
+    }
+    fprintf (stderr, "Student %s sa nenasiel.\n", priezvisko);
+    return;
+}
+

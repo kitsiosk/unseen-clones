@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34800668
+*  Stack Overflow answer #:34800994
+*  And Stack Overflow answer#:34800890
+*/
+int main () {
+    FILE *fin = fopen ("test.txt", "rt");
+    int newCount = getFileData (fin, SongList, globalCounter);
+    int counter = 0;
+    while (counter < newCount) {
+        printf ("%s, %s, %s", SongList [counter].title, SongList [counter].artist, SongList [counter].year);
+        counter++;
+    }
+}
+
+int main () {
+    FILE *fin;
+    if ((fin = fopen ("test.txt", "r")) != NULL) {
+        getFileData (fin, SongList, & globalCounter);
+        fclose (fin);
+    }
+    for (int counter = 0; counter < globalCounter; counter++) {
+        printf ("%s, %s, %s\n", SongList [counter].title, SongList [counter].artist, SongList [counter].year);
+        counter++;
+    }
+    return 0;
+}
+

@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:30064121
+*  Stack Overflow answer #:30064343
+*  And Stack Overflow answer#:30064404
+*/
+int main (int argc, char *argv []) {
+    int i, j;
+    int lines [18] [3];
+    i = 0;
+    while (i != sizeof (lines) / sizeof (lines[0]) && 3 == scanf ("%i %i %i", lines[i] + 0, lines[i] + 1, lines[i] + 2)) {
+        i++;
+    }
+    for (j = 0; j != i; j++) {
+        printf ("%i %i %i\n", lines [j] [0], lines [j] [1], lines [j] [2]);
+    }
+    return 0;
+}
+
+int main (void) {
+    int i = 0;
+    int numlines = 0;
+    char buf [MAXB] = {0};
+    char lines [MAXL] [MAXD];
+    FILE *fp = fopen ("inputs/control.txt", "r");
+    if (fp == 0) {
+        fprintf (stderr, "failed to open inputs/control.txt\n");
+        return 1;
+    }
+    while (i < MAXL && fgets (buf, MAXB -1, fp)) {
+        if (sscanf (buf, "%hhd %hhd %hhd", &lines[i][0], &lines[i][1], &lines[i][2]) == 3)
+            i++;
+    }
+    fclose (fp);
+    numlines = i;
+    int j = 0;
+    for (i = 0; i < numlines; i++)
+        for (j = 0; j < MAXD; j++)
+            printf (" line[%2d][%2d] : %hhd\n", i, j, lines[i][j]);
+    printf ("\n");
+    return 0;
+}
+

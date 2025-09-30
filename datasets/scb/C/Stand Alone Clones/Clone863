@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42621698
+*  Stack Overflow answer #:42622137
+*  And Stack Overflow answer#:42622502
+*/
+void *func2 (void *arg) {
+    bool *check = (bool *) arg;
+    ...func4 ();
+    if (*check == TRUE)
+        goto end;
+    char *var2 = malloc (10);
+    func5 ();
+    if (*check == TRUE)
+        goto clean_var2;
+    char *var3 = malloc (20);
+    ...cleanup : free (var3);
+clean_var2 :
+    free (var2);
+end :
+    return (void *) 0;
+}
+
+void *func2 (void *arg) {
+    struct func2_data data = {NULL, NULL};
+    pthread_cleanup_push (func2_cleanup, & data);
+    func4 ();
+    data.var2 = malloc (10);
+    pthread_testcancel ();
+    func5 ();
+    data.var3 = malloc (10);
+    pthread_testcancel ();
+    pthread_cleanup_pop (1);
+    return NULL;
+}
+

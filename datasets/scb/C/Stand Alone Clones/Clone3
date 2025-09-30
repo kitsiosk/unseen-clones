@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31542494
+*  Stack Overflow answer #:44079431
+*  And Stack Overflow answer#:54281735
+*/
+main () {
+    int c;
+    while ((c = getchar ()) != EOF) {
+        putchar (c);
+        if (c == ' ') {
+            while ((c = getchar ()) == ' ')
+                ;
+            putchar (c);
+        }
+    }
+}
+
+int main () {
+    int c, p;
+    while ((c = getchar ()) != EOF) {
+        if (c == ' ' && p == ' ') {
+            continue;
+        }
+        putchar (c);
+        p = c;
+    }
+    return 0;
+}
+

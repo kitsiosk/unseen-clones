@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3989790
+*  Stack Overflow answer #:46528661
+*  And Stack Overflow answer#:20766446
+*/
+void main () {
+    int w, nwords [MAX] = {0}, i = 0;
+    while ((w = getchar ()) != EOF) {
+        if (w == ' ' || w == '\t' || w == '\n')
+            ++i;
+        else
+            ++nwords[i];
+    }
+    for (i = 0; i < MAX; i++) {
+        printf ("\n");
+        for (; nwords[i] > 0; nwords[i]--)
+            printf ("$");
+        if (nwords[i + 1] == 0)
+            break;
+        printf ("\n");
+    }
+    printf ("\n");
+}
+
+main () {
+    int i, wnum = 0, c, wc [50];
+    int count = 0, state;
+    state = RESET;
+    for (i = 0; i < 50; ++i)
+        wc[i] = 0;
+    while ((c = getchar ()) != EOF) {
+        if (c == '\n' || c == '\t' || c == ' ' || c == '"') {
+            if (state != RESET)
+                state = RESET;
+        }
+        else if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
+            if (state == RESET) {
+                count = RESET;
+                ++wnum;
+                state = ON;
+            }
+            ++count;
+            wc[wnum - 1] = count;
+        }
+    }
+    c = RESET;
+    for (i = 0; i < wnum; ++i) {
+        if (c < wc[i])
+            c = wc[i];
+    }
+    for (i = c; i > 0; --i) {
+        for (count = 0; count < wnum; ++count) {
+            if (wc[count] - i < 0)
+                printf ("  ");
+            else
+                printf ("x ");
+        }
+        printf ("\n");
+    }
+}
+

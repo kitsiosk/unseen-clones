@@ -1,0 +1,1 @@
+This directory contains the BCB dataset, as obtained from the ASTNN replication package.

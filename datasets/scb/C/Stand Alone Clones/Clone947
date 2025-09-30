@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3339946
+*  Stack Overflow answer #:3339980
+*  And Stack Overflow answer#:3339958
+*/
+char *function () {
+    char *result = NULL;
+    char *mem = get_memory (100);
+    if (mem) {
+        struct binder *b = get_binder ('regular binder');
+        if (b) {
+            struct file *f = mk_file ();
+            if (f) {
+            }
+            free (b);
+        }
+        free (mem);
+    }
+    return result;
+}
+
+char *function () {
+    char *retval = NULL;
+    char *mem = get_memory (100);
+    if (!mem)
+        goto out_error;
+    struct binder *b = get_binder ('regular binder');
+    if (!b)
+        goto out_error_mem;
+    struct file *f = mk_file ();
+    if (!f)
+        goto out_error_b;
+    retval = good_value;
+out_error_b :
+    free_binder (b);
+out_error_mem :
+    free (mem);
+out_error :
+    return retval;
+}
+

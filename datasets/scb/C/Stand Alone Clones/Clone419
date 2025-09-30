@@ -1,0 +1,56 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:37046064
+*  Stack Overflow answer #:37046199
+*  And Stack Overflow answer#:37046426
+*/
+int main (void) {
+    char str1 [] = "Japan Korea Spain Germany Australia France ";
+    char str2 [] = "England USA Russia Italy Australia India Nepal France";
+    char *tar = strtok (str1, " ");
+    char *ptr;
+    size_t sz;
+    while (tar) {
+        if ((ptr = strstr (str2, tar)) != NULL) {
+            if ((ptr == str2) || (*(ptr - 1) == ' ')) {
+                sz = strlen (tar);
+                if ((*(ptr + sz) == ' ') || (*(ptr + sz) == '\0')) {
+                    puts (tar);
+                }
+            }
+        }
+        tar = strtok (NULL, " ");
+    }
+    return 0;
+}
+
+int main () {
+    char str1 [] = "Japan Korea Spain Germany Australia France ";
+    char str2 [] = "England USA Russia Italy Australia India Nepal France";
+    char *tar1 [MAXSTR];
+    char *tar2 [MAXSTR];
+    char *tok;
+    int ind1 = 0, ind2 = 0;
+    int i, j;
+    tok = strtok (str1, " \t");
+    while (tok != NULL && ind1 < MAXSTR) {
+        tar1[ind1++] = tok;
+        tok = strtok (NULL, " \t");
+    }
+    tok = strtok (str2, " \t");
+    while (tok != NULL && ind2 < MAXSTR) {
+        tar2[ind2++] = tok;
+        tok = strtok (NULL, " \t");
+    }
+    for (i = 0; i < ind1; i++) {
+        for (j = 0; j < ind2; j++) {
+            if (strcmp (tar1[i], tar2[j]) == 0) {
+                printf ("%s\n", tar1 [i]);
+                break;
+            }
+        }
+    }
+    return 0;
+}
+

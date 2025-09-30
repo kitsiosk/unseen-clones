@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:757059
+*  Stack Overflow answer #:757205
+*  And Stack Overflow answer#:762605
+*/
+unsigned GetLowestBitPos (unsigned value) {
+    byte *bytes = (byte *) value;
+    if (bytes[0])
+        return lowestBitTable[bytes[0]];
+    else if (bytes[1])
+        return lowestBitTable[bytes[1]] + 8;
+    else if (bytes[2])
+        return lowestBitTable[bytes[2]] + 16;
+    else
+        return lowestBitTable[bytes[3]] + 24;
+}
+
+unsigned GetLowestBitPos (unsigned value) {
+    union {
+        int i [2];
+        double d;
+    } temp = {
+        .d = value ^ (value - !!value)
+    };
+    return (temp.i[1] >> 20) - 1023;
+}
+

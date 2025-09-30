@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:36248210
+*  Stack Overflow answer #:36248861
+*  And Stack Overflow answer#:36248940
+*/
+int main () {
+    char upc [12];
+    printf ("Enter the UPC code (11 digits):");
+    scanf ("%11s", upc);
+    if (strlen (upc) == 11) {
+        if (isDigit (upc)) {
+        }
+        else {
+            printf ("The UPC must contain only digits\n");
+        }
+    }
+    else {
+        printf ("The UPC must be exactly 11 digits long\n");
+    }
+    return 0;
+}
+
+int main () {
+    long long input;
+    int first_sum = 0, second_sum = 0, total, i;
+    printf ("Enter the UPC code (11 digits): ");
+    if (scanf ("%lld", &input) == 1) {
+        i = 0;
+        while (input) {
+            if (i % 2 == 0)
+                first_sum += input % 10;
+            else
+                second_sum += input % 10;
+            input /= 10;
+            i++;
+        }
+    }
+    total = (3 * first_sum) + second_sum;
+    printf ("Check digit: %d\n", 9 - ((total - 1) % 10));
+    return 0;
+}
+

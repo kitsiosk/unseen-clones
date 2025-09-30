@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3009042
+*  Stack Overflow answer #:5976619
+*  And Stack Overflow answer#:3009145
+*/
+void SetStdOutToNewConsole () {
+    AllocConsole ();
+    HANDLE consoleHandle = GetStdHandle (STD_OUTPUT_HANDLE);
+    int fileDescriptor = _open_osfhandle ((intptr_t) consoleHandle, _O_TEXT);
+    FILE *fp = _fdopen (fileDescriptor, "w");
+    *stdout = *fp;
+    setvbuf (stdout, NULL, _IONBF, 0);
+    SetConsoleTitle (L "Debug Output");
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    if (GetConsoleScreenBufferInfo (consoleHandle, &csbi)) {
+        COORD bufferSize;
+        bufferSize.X = csbi.dwSize.X;
+        bufferSize.Y = 9999;
+        SetConsoleScreenBufferSize (consoleHandle, bufferSize);
+    }
+}
+
+void SetStdOutToNewConsole () {
+    int hConHandle;
+    long lStdHandle;
+    FILE *fp;
+    AllocConsole ();
+    lStdHandle = (long) GetStdHandle (STD_OUTPUT_HANDLE);
+    hConHandle = _open_osfhandle (lStdHandle, _O_TEXT);
+    fp = _fdopen (hConHandle, "w");
+    *stdout = *fp;
+    setvbuf (stdout, NULL, _IONBF, 0);
+}
+

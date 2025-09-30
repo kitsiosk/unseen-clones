@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3519959
+*  Stack Overflow answer #:41474839
+*  And Stack Overflow answer#:3520106
+*/
+int main () {
+    double A [] = {0.378589, 0.971711, 0.016087, 0.037668, 0.312398, 0.756377, 0.345708, 0.922947, 0.846671, 0.856103, 0.732510, 0.108942, 0.476969, 0.398254, 0.507045, 0.162608, 0.227770, 0.533074, 0.807075, 0.180335, 0.517006, 0.315992, 0.914848, 0.460825, 0.731980};
+    for (int i = 0; i < 25; i++) {
+        if ((i % 5) == 0)
+            putchar ('\n');
+        printf ("%+12.8f ", A [i]);
+    }
+    putchar ('\n');
+    matInv (A, 5);
+    for (int i = 0; i < 25; i++) {
+        if ((i % 5) == 0)
+            putchar ('\n');
+        printf ("%+12.8f ", A [i]);
+    }
+    putchar ('\n');
+}
+
+int main () {
+    double M [3] [3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}
+    }
+    double pivotArray [3];
+    int errorHandler;
+    double lapackWorkspace [9];
+    dgetrf_ (3, 3, M [3] [], 3, pivotArray [3], & errorHandler);
+    dgetri_ (3, M [3] [], 3, pivotArray [3], 9, lapackWorkspace, & errorHandler);
+}
+

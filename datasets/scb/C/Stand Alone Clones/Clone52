@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:53566888
+*  Stack Overflow answer #:53567026
+*  And Stack Overflow answer#:53567004
+*/
+int main (void) {
+    FILE *data = NULL;
+    size_t nlines = 0;
+    char a [MAXC] = "";
+    printf ("Enter a filename: ");
+    if (fscanf (stdin, " %1023[^\n]", a) != 1) {
+        fputs ("user canceled input.\n", stderr);
+        return 1;
+    }
+    if ((data = fopen (a, "r")) == NULL) {
+        perror ("fopen-a");
+        return 1;
+    }
+    printf ("file opened: %s\n\n", a);
+    while (fgets (a, MAXC, data) != NULL)
+        printf ("line[%3zu]: %s", nlines +++1, a);
+    fclose (data);
+    return 0;
+}
+
+int main (void) {
+    char filename [MAX_FILENAME_LENGTH + 2];
+    if (!fgets (filename, sizeof (filename), stdin)) {
+        fputs ("Input error :(\n\n", stderr);
+        return EXIT_FAILURE;
+    }
+    size_t length = strlen (filename);
+    if (length && filename[length - 1] == '\n')
+        filename[--length] = '\0';
+    filename [strcspn (filename, "\n")] = '\0' FILE * input = fopen (filename, "r");
+    if (!input) {
+        fprintf (stderr, "Couldn't open \"%s\" for reading :(\n\n", filename);
+        return EXIT_FAILURE;
+    }
+    fclose (input);
+}
+

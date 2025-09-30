@@ -1,0 +1,44 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50276364
+*  Stack Overflow answer #:50302526
+*  And Stack Overflow answer#:50276465
+*/
+int main (void) {
+    int number;
+    printf ("\nenter a number: ");
+    scanf ("%i", & number);
+    int power = 1;
+    while (number / power > 9)
+        power *= 10;
+    int sum = 0;
+    do {
+        int digit = number / power;
+        if (power != 1)
+            sum += digit;
+        number %= power;
+        power /= 10;
+    }
+    while (power > 0);
+    printf ("sum (skipping last digit) = %i\n", sum);
+    return 0;
+}
+
+int main (void) {
+    int n, reversedNumber = 0, remainder;
+    printf ("Enter an integer: ");
+    scanf ("%d", & n);
+    {
+        size_t i = (0 > n);
+        while (n != 0) {
+            remainder = n % 10;
+            reversedNumber = reversedNumber * 10 + remainder;
+            n /= 10;
+            ++i;
+        }
+        printf ("Reversed Number = %0*d\n", (int) i, reversedNumber);
+    }
+    return 0;
+}
+

@@ -1,0 +1,71 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:38348707
+*  Stack Overflow answer #:44351243
+*  And Stack Overflow answer#:38356989
+*/
+int main (int argc, char *argv []) {
+    struct sigevent sev;
+    struct itimerspec ts;
+    timer_t *tidlist;
+    int s, j;
+    if (argc < 2)
+        usageErr ("%s secs[/nsecs][:int-secs[/int-nsecs]]...\n", argv[0]);
+    tidlist = calloc (argc -1, sizeof (timer_t));
+    if (tidlist == NULL)
+        errExit ("malloc");
+    sev.sigev_notify = SIGEV_THREAD;
+    sev.sigev_notify_function = threadFunc;
+    sev.sigev_notify_attributes = NULL;
+    for (j = 0; j < argc - 1; j++) {
+        itimerspecFromStr (argv [j + 1], & ts);
+        sev.sigev_value.sival_ptr = &tidlist[j];
+        if (timer_create (CLOCK_REALTIME, &sev, &tidlist[j]) == -1)
+            errExit ("timer_create");
+        printf ("Timer ID: %ld (%s)\n", (long) tidlist [j], argv [j + 1]);
+        if (timer_settime (tidlist[j], 0, &ts, NULL) == -1)
+            errExit ("timer_settime");
+    }
+    s = pthread_mutex_lock (&mtx);
+    if (s != 0)
+        errExitEN (s, "pthread_mutex_lock");
+    for (;;) {
+        s = pthread_cond_wait (&cond, &mtx);
+        if (s != 0)
+            errExitEN (s, "pthread_cond_wait");
+        printf ("main(): expireCnt = %d\n", expireCnt);
+    }
+}
+
+int main (void) {
+    struct sigevent timer_signal_event;
+    timer_t timer;
+    struct itimerspec timer_period;
+    printf ("Create timer\n");
+    timer_signal_event.sigev_notify = SIGEV_THREAD;
+    timer_signal_event.sigev_notify_function = Timer_has_expired;
+    timer_signal_event.sigev_value.sival_ptr = (void *) &pass_value_by_pointer;
+    timer_signal_event.sigev_notify_attributes = NULL;
+    timer_create (CLOCK_MONOTONIC, & timer_signal_event, & timer);
+    printf ("Start timer\n");
+    timer_period.it_value.tv_sec = 1;
+    timer_period.it_value.tv_nsec = 0;
+    timer_period.it_interval.tv_sec = 0;
+    timer_period.it_interval.tv_nsec = 0;
+    timer_settime (timer, 0, & timer_period, NULL);
+    sleep (2);
+    printf ("----------------------------\n");
+    printf ("Start timer a second time\n");
+    timer_settime (timer, 0, & timer_period, NULL);
+    sleep (2);
+    printf ("----------------------------\n");
+    printf ("Start timer a third time\n");
+    timer_settime (timer, 0, & timer_period, NULL);
+    printf ("Cancel timer\n");
+    timer_delete (timer);
+    sleep (2);
+    printf ("The timer expiration handler function should not have been called\n");
+    return EXIT_SUCCESS;
+}
+

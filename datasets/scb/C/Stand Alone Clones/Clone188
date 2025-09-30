@@ -1,0 +1,60 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27660427
+*  Stack Overflow answer #:27663684
+*  And Stack Overflow answer#:27662788
+*/
+int main (void) {
+    char *inputString = "1-2,4^,14-56";
+    char *next_code_at = inputString;
+    long result;
+    char dest [100], *dest_ptr;
+    printf ("%s\n", inputString);
+    dest[0] = 0;
+    dest_ptr = dest;
+    while (next_code_at && *next_code_at) {
+        while (*next_code_at && !(isdigit (*next_code_at))) {
+            dest_ptr += sprintf (dest_ptr, "%c", *next_code_at);
+            next_code_at++;
+        }
+        if (*next_code_at) {
+            result = strtol (next_code_at, &next_code_at, 10);
+            if (errno) {
+                perror ("strtol failed");
+                return EXIT_FAILURE;
+            }
+            else {
+                if (result < LONG_MAX)
+                    dest_ptr += sprintf (dest_ptr, "%ld", result +1);
+                else {
+                    fprintf (stderr, "number too large!\n");
+                    return EXIT_FAILURE;
+                }
+            }
+        }
+    }
+    printf ("%s\n", dest);
+    return EXIT_SUCCESS;
+}
+
+int main () {
+std :
+    : string input ("1-2,4^,14-56");
+std :
+    : regex number ("\\d+");
+    auto ri_begin = std : : sregex_iterator (input.begin (), input.end (), number);
+    auto ri_end = std : : sregex_iterator ();
+    for (auto i = ri_begin; i != ri_end; ++i) {
+    std :
+        : smatch match = * i;
+        int value = std : : stoi (match.str ());
+    std :
+        : string replacement = std : : to_string (++ value);
+        input.replace (match.position (), match.length (), replacement);
+    }
+std :
+    : cout << input << std : : endl;
+    return 0;
+}
+

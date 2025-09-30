@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54282732
+*  Stack Overflow answer #:54283157
+*  And Stack Overflow answer#:54282943
+*/
+int main (void) {
+    int m = 10;
+    int n = 12;
+    int (*M) [m] = malloc (n *m * sizeof (M [0] [0]));
+    if (M == NULL) {
+        fprintf (stderr, "Failed to allocate %zu bytes memory\n", n * m * sizeof (M [0] [0]));
+        exit (EXIT_FAILURE);
+    }
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++)
+            M[i][j] = (i + 1) * 100 + (j + 1);
+    }
+    print_2dvla (n, m, M);
+    free (M);
+    return 0;
+}
+
+int main () {
+    int n = 3, m = 4, i, j, count = 0;
+    int *array [n];
+    for (i = 0; i < n; i++)
+        array[i] = (int *) malloc (m * sizeof (int));
+    if (array[i] == NULL) {
+        perror ("Unable to allocate array");
+        exit (1);
+    }
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            array[i][j] = ++count;
+    for (i = 0; i < n; i++)
+        for (j = 0; j < m; j++)
+            printf ("%d ", array[i][j]);
+    for (i = 0; i < n; i++)
+        free (array[i]);
+}
+

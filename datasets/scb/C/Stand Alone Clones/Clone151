@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3408706
+*  Stack Overflow answer #:15784664
+*  And Stack Overflow answer#:31007189
+*/
+In main () {
+    printf ("enter string :\n");
+    fgets (buf, 200, stdin);
+    unsigned char str_len = strlen (buf);
+    k = 0;
+    unsigned char bytearray [100];
+    for (j = 0; j < str_len - 1; j = j + 2) {
+        bytearray[k++] = converttohex (&buffer[j]);
+        printf (" %02X", bytearray [k - 1]);
+    }
+}
+
+void main () {
+    char *examples [] = {"", "5", "D", "5D", "5Df", "deadbeef10203040b00b1e50", "02invalid55"};
+    unsigned char byte_array [128];
+    int i = 0;
+    for (; i < sizeof (examples) / sizeof (char *); i++) {
+        int size = convert (examples[i], byte_array, 128);
+        if (size < 0) {
+            printf ("Failed to convert '%s'\n", examples [i]);
+        }
+        else if (size == 0) {
+            printf ("Nothing to convert for '%s'\n", examples [i]);
+        }
+        else {
+            print (byte_array, size);
+        }
+    }
+}
+

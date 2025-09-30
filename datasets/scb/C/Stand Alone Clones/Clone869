@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:42812404
+*  Stack Overflow answer #:42812594
+*  And Stack Overflow answer#:42812561
+*/
+void fnEmployeeNumSort (struct strPerson *ptrPerson, size_t n) {
+    for (size_t last = n; !(n < 2); n = last) {
+        for (size_t i = last = 1; i < n; i++) {
+            if (ptrPerson[i].nEmployeeNum < ptrPerson[i - 1].nEmployeeNum) {
+                struct strPerson temp = ptrPerson[i];
+                ptrPerson[i] = ptrPerson[i - 1];
+                ptrPerson[i - 1] = temp;
+                last = i;
+            }
+        }
+    }
+}
+
+void fnEmployeeNumSort (struct strPerson *ptrPerson, size_t count) {
+    for (size_t i = 0; i < count - 1; i++) {
+        if (ptrPerson[i].nEmployeeNum > ptrPerson[i + 1].nEmployeeNum) {
+            struct strPerson temp = ptrPerson[i + 1];
+            ptrPerson[i + 1] = ptrPerson[i];
+            ptrPerson[i] = temp;
+            if (i > 0) {
+                i -= 2;
+            }
+        }
+    }
+}
+

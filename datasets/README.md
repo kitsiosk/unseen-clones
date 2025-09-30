@@ -1,0 +1,4 @@
+# Datasets
+We provide all the datasets used in our experiments. We reuse the `OJ` and `SCB` datasets from relevant literature, and provide them here for convenience. Regarding, `BCB_v2_sampled_BF`, which is a balanced version of `BCB_v2_sampled` that is used in recent literature, we provide both the dataset (in the `bcb_v2_sampled_bf` folder) and the code that created it. The code requires the full version of `BCB`, which is available in a PostgreSQL format [here](https://github.com/clonebench/BigCloneBench). After you setup the database, the script `utilities/bcb_utilities.py` runs the algorithm we propose in our paper to create the dataset. 
+
+Note that **you do not have to do it manually**; just follow the instructions of the `README.md` in the root folder and the script will be automatically invoked when needed.

@@ -1,0 +1,34 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:32946676
+*  Stack Overflow answer #:32946952
+*  And Stack Overflow answer#:32950088
+*/
+char *get_path (char *argv) {
+    char *path = malloc (sizeof (char) * strlen (argv));
+    if (path != NULL) {
+        strcpy (path, "C:");
+        strcat (path, argv + 11);
+        printf ("%s, sizeof: %d \n", path, strlen (path));
+    }
+    return path;
+}
+
+char *get_path (char *argv) {
+    int i = 0;
+    char *path = malloc (sizeof (char) * strlen (argv) + 2);
+    if (path != NULL) {
+        strcpy (path, "C:");
+        strcat (path, argv);
+        printf ("\n  path and program== %s", path);
+        printf ("%s, sizeof: %d \n", path, strlen (path));
+        for (i = strlen (path);; i--) {
+            if (path[i] == '\\')
+                break;
+            path[i] = '\0';
+        }
+    }
+    return path;
+}
+

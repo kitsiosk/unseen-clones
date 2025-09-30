@@ -1,0 +1,57 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:21447366
+*  Stack Overflow answer #:21447523
+*  And Stack Overflow answer#:21447624
+*/
+void my_int (int x) {
+    int n;
+    int copy;
+    char digit;
+    if (!x) {
+        my_char ('0');
+        return;
+    }
+    if (x < 0) {
+        x = x * -1;
+        my_char ('-');
+    }
+    n = 1;
+    copy = x / 10;
+    while (copy) {
+        n *= 10;
+        copy /= 10;
+    }
+    while (n) {
+        digit = x / n;
+        my_char (digit + '0');
+        x -= digit * n;
+        n /= 10;
+    }
+}
+
+void my_int (int x) {
+    int temp = 0;
+    int divFactor = 10;
+    if (x == 0) {
+        my_char ('0');
+        return;
+    }
+    if (x < 0) {
+        x = x * -1;
+        my_char ('-');
+    }
+    temp = x;
+    while ((temp /= 10) > 10) {
+        divFactor *= 10;
+    }
+    for (; divFactor > 0; divFactor /= 10) {
+        temp = x;
+        temp /= divFactor;
+        my_char (temp + '0');
+        x -= divFactor * temp;
+    }
+    printf ("\n done!");
+}
+

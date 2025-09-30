@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17532293
+*  Stack Overflow answer #:17532753
+*  And Stack Overflow answer#:17532710
+*/
+unsigned int age (char const *name) {
+    static bool table_is_initialized = false;
+    Lookup_Table name_func_map;
+    if (!table_is_initialized) {
+        name_func_map["Cathy"] = Cathy_age;
+        name_func_map["Kate"] = Kate_age;
+        name_func_map["Tom"] = Tom_age;
+        name_func_map["John"] = John_age;
+    }
+std :
+    : string name_key = name;
+Lookup_Table :
+    : const_iterator iterator = name_func_map.find (name_key);
+    unsigned int persons_age = 0U;
+    if (iterator != name_func_map.end ()) {
+        persons_age = (*(iterator.second)) ();
+    }
+    return persons_age;
+}
+
+bool age (char *NAME) {
+    bool found = false;
+    for (int i = 0; i < age_lookup_table_size; ++i) {
+        if (stricmp (age_lookup_table[i], NAME) == 0) {
+            age_lookup_table[i].func ();
+            found = true;
+            break;
+        }
+    }
+    return found;
+}
+

@@ -1,0 +1,128 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:6951913
+*  Stack Overflow answer #:6951989
+*  And Stack Overflow answer#:6952033
+*/
+void main () {
+    int n, m, j;
+    clrscr ();
+    printf ("Enter any number between 1 to 99 : ");
+    scanf ("%d", & n);
+    printf ("You entered ");
+    if (n > 0 && n <= 10)
+        goto one;
+    else if (n > 10 && n < 20) {
+        m = n % 10;
+        goto two;
+    }
+    else if (n > 20 && n < 100) {
+        j = n / 10;
+        n = n % 10;
+        goto three;
+    }
+two :
+    switch (m) {
+    case 1 :
+        printf ("eleven ");
+        break;
+    case 2 :
+        printf ("twelve ");
+        break;
+    case 3 :
+        printf ("thirteen ");
+        break;
+    case 4 :
+        printf ("fourteen ");
+        break;
+    case 5 :
+        printf ("fifteen ");
+        break;
+    case 6 :
+        printf ("sixteen ");
+        break;
+    case 7 :
+        printf ("seventeen ");
+        break;
+    case 8 :
+        printf ("eighteen ");
+        break;
+    case 9 :
+        printf ("nineteen ");
+        break;
+    }
+three :
+    switch (j) {
+    case 2 :
+        printf ("twenty ");
+        goto one;
+    case 3 :
+        printf ("thirty ");
+        goto one;
+    case 4 :
+        printf ("fourty ");
+        goto one;
+    case 5 :
+        printf ("fifty ");
+        goto one;
+    case 6 :
+        printf ("sixty ");
+        goto one;
+    case 7 :
+        printf ("seventy ");
+        goto one;
+    case 8 :
+        printf ("eighty ");
+        goto one;
+    case 9 :
+        printf ("ninety ");
+        goto one;
+    }
+one :
+    switch (n) {
+    case 1 :
+        printf ("one ");
+        break;
+    case 2 :
+        printf ("two ");
+        break;
+    case 3 :
+        printf ("three ");
+        break;
+    case 4 :
+        printf ("four ");
+        break;
+    case 5 :
+        printf ("five ");
+        break;
+    case 6 :
+        printf ("six ");
+        break;
+    case 7 :
+        printf ("seven ");
+        break;
+    case 8 :
+        printf ("eight ");
+        break;
+    case 9 :
+        printf ("nine ");
+        break;
+    case 10 :
+        printf ("ten ");
+        break;
+    }
+    getch ();
+}
+
+int main (int argc, char **argv) {
+    long sum = 0;
+    int count = 0;
+    if (argc <= 1) {
+        fprintf (stderr, "wrong number of arguments\n");
+        return -1;
+    }
+    print (atoi (argv [1]));
+    return 0;
+}
+

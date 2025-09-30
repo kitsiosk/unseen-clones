@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:421860
+*  Stack Overflow answer #:33201364
+*  And Stack Overflow answer#:51051839
+*/
+int main (int argc, char **argv) {
+    char c;
+    printf ("Press key");
+    while (!kbhit ()) {
+        printf (".");
+        fflush (stdout);
+        sleep (1);
+    }
+    c = getchar ();
+    printf ("\nChar received:%c\n", c);
+    printf ("Done.\n");
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    initscr ();
+    raw ();
+    noecho ();
+    keypad (stdscr, true);
+    auto f = std : : async (std : : launch : : async, get_keyboard_input);
+    while (f.wait_for (std : : chrono : : milliseconds (20)) != std : : future_status : : ready) {} endwin ();
+std :
+    : cout << "returned: " << f.get () << std : : endl;
+    return 0;
+}
+

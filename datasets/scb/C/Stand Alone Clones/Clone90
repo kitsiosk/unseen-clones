@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:8752373
+*  Stack Overflow answer #:8752486
+*  And Stack Overflow answer#:8752403
+*/
+void readFrag (char *fragName) {
+    FILE *file;
+    int tmp;
+    file = fopen (fragName, "r");
+    if (!file) {
+        perror ("Error reading fragment file in readFrag");
+        return;
+    }
+    fscanf (file, "%d", & tmp);
+}
+
+void readFrag (char *fragName) {
+    FILE *file;
+    int tmp;
+    char szWorkingDir [PATH_MAX];
+    szWorkingDirectory[0] = '\0';
+    getwd (szWorkingDirectory);
+    printf ("Attempting to open %s/%s\n", szWorkingDir, fragName);
+    file = fopen (fragName, "rt");
+    if (file != NULL)
+        fscanf (file, "%d", &tmp);
+}
+

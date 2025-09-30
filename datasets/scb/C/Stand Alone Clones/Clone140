@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:943191
+*  Stack Overflow answer #:943210
+*  And Stack Overflow answer#:943224
+*/
+int main (void) {
+    char *num, *p;
+    num = malloc (sizeof (char) * 100);
+    if (num == NULL)
+        exit (1);
+    memset (num, 0, sizeof (char) * 100);
+    p = num;
+    strncpy (num, "123056", 100 - 1);
+    *(p + 3) = '4';
+    printf ("%s\n", num);
+    free (num);
+    return 0;
+}
+
+int main (void) {
+    char *num = malloc (100);
+    char *p = num;
+    strcpy (num, "123056");
+    p = p + 3;
+    *p = '4';
+    printf ("%s\n", num);
+    return 0;
+}
+

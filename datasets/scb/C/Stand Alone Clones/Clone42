@@ -1,0 +1,42 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:63776
+*  Stack Overflow answer #:64949
+*  And Stack Overflow answer#:70906
+*/
+TYPE reverser (TYPE n) {
+    TYPE k = 1, nrev = 0, i, nrevbit1, nrevbit2;
+    int count;
+    for (i = 0; !i || (1 << i && (1 << i) != 1); i += 2) {
+        k = 1 << i;
+        count = 0;
+        while (k << 1 && k << 1 != 1) {
+            k <<= 1;
+            count++;
+        }
+        nrevbit1 = n & (1 << (i / 2));
+        nrevbit1 <<= count;
+        nrevbit2 = n & 1 << ((i / 2) + count);
+        nrevbit2 >>= count;
+        nrev |= nrevbit1;
+        nrev |= nrevbit2;
+    }
+    return nrev;
+}
+
+TYPE reverser (TYPE n) {
+    TYPE nrev = 0, i, bit1, bit2;
+    int count;
+    for (i = 0; i < TYPE_BITS; i += 2) {
+        count = TYPE_BITS - i - 1;
+        bit1 = n & (1 << (i / 2));
+        bit1 <<= count;
+        bit2 = n & 1 << ((i / 2) + count);
+        bit2 >>= count;
+        nrev |= bit1;
+        nrev |= bit2;
+    }
+    return nrev;
+}
+

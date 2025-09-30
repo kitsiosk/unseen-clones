@@ -1,0 +1,29 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:111928
+*  Stack Overflow answer #:112956
+*  And Stack Overflow answer#:34641674
+*/
+int main (void) {
+    {
+        char *tmp;
+        char *b = "0101";
+        printf ("%d\n", strtol (b, & tmp, 2));
+    }
+    {
+        printf ("%s\n", byte_to_binary (5));
+    }
+    return 0;
+}
+
+int main (void) {
+    int ip1 = 0x01020304;
+    int ip2 = 0x05060708;
+    printf ("%s %s\n", TO_BASE (ip1, 16), TO_BASE (ip2, 16));
+    printf ("%s %s\n", TO_BASE (ip1, 2), TO_BASE (ip2, 2));
+    puts (TO_BASE (ip1, 8));
+    puts (TO_BASE (ip1, 36));
+    return 0;
+}
+

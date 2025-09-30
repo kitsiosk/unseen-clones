@@ -1,0 +1,30 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33010010
+*  Stack Overflow answer #:33011325
+*  And Stack Overflow answer#:33011325
+*/
+uint64_t 64bitrandom () {
+    uint64_t rv;
+    size_t count;
+    do {
+        count = fread (&rv, sizeof (rv), 1, source);
+    }
+    while (count != 1);
+    return rv;
+}
+
+uint64_t 64bitrandom () {
+    uint64_t rv = 0;
+    int c;
+    for (i = 0; i < sizeof (rv); i++) {
+        do {
+            c = fgetc (source)
+        }
+        while (c < 0);
+        rv = (rv << 8) | (c & 0xff);
+    }
+    return rv;
+}
+

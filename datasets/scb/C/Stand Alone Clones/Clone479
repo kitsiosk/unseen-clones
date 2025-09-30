@@ -1,0 +1,39 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:23312276
+*  Stack Overflow answer #:23312695
+*  And Stack Overflow answer#:23312918
+*/
+static void shuffle (void *array, size_t n, size_t size) {
+    if (n > 1) {
+        char *carray = array;
+        void *aux;
+        aux = malloc (size);
+        size_t i;
+        for (i = 1; i < n; ++i) {
+            size_t j = rand () % (i + 1);
+            j *= size;
+            memcpy (aux, & carray [j], size);
+            memcpy (& carray [j], & carray [i * size], size);
+            memcpy (& carray [i * size], aux, size);
+        }
+        free (aux);
+    }
+}
+
+void shuffle (void *arr, size_t n, size_t size) {
+    char *tmp;
+    char *array;
+    size_t i, r;
+    array = (char *) arr;
+    tmp = (char *) malloc (size);
+    for (i = n - 1; i + 1 > 0; --i) {
+        r = rand () % (i + 1);
+        memcpy (tmp, & array [size * r], size);
+        memcpy (& array [size * r], & array [size * i], size);
+        memcpy (& array [size * i], tmp, size);
+    }
+    free (tmp);
+}
+

@@ -1,0 +1,38 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4621151
+*  Stack Overflow answer #:4677175
+*  And Stack Overflow answer#:4622298
+*/
+int main (int c) {
+    if (read (0, &c, 1)) {
+        if (c - 41) {
+            if (c - 40) {
+                if (c % 96 > 26) {
+                    main (c);
+                }
+                putchar (c);
+            }
+            main (c);
+        }
+    }
+    else
+        exit (0);
+}
+
+main (c) {
+    int s [9], *p = s - 1;
+    for (; read (0, &c, 1);) {
+        isalpha (c) ? putchar (c) : c == '(' ? (c = 0) : c == ')' ? (c = 1) : isdigit (c) ? : (*++p = c);
+        if (c == 0) {
+            x ()
+            main (0);
+        }
+        if (c == 1)
+            break;
+    }
+    x (=)
+    return 0;
+}
+

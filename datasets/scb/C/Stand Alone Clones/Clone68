@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:1993571
+*  Stack Overflow answer #:3939467
+*  And Stack Overflow answer#:7462411
+*/
+void itoa (int n, char *s) {
+    char c;
+    if (n < 0) {
+        *s++ = '-';
+        itoa (- n, s);
+        return;
+    }
+    c = '0' + n % 10;
+    itoa (n / 10, s);
+    while (n /= 10)
+        s++;
+    *s++ = c;
+    *s = '\0';
+}
+
+void itoa (char **a, int i) {
+    int dig;
+    if (i < 10) {
+        **a = i + 48;
+        *(++(*a)) = '\0';
+        return;
+    }
+    dig = i % 10;
+    itoa (a, i / 10);
+    **a = dig + 48;
+    *(++(*a)) = '\0';
+    return;
+}
+

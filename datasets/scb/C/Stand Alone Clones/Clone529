@@ -1,0 +1,32 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:3463426
+*  Stack Overflow answer #:18402952
+*  And Stack Overflow answer#:51847107
+*/
+int main () {
+    FILE *f;
+    char c;
+    f = fopen ("test.txt", "rt");
+    while ((c = fgetc (f)) != EOF) {
+        printf ("%c", c);
+    }
+    fclose (f);
+    return 0;
+}
+
+int main () {
+    int num;
+    FILE *fptr;
+    if ((fptr = fopen ("/root/Desktop/my_pass.txt", "r")) == NULL) {
+        puts ("File not exists");
+        exit (1);
+    }
+    else
+        fscanf (fptr, "%d", &num);
+    printf ("My pass is:  %d\n", num);
+    fclose (fptr);
+    return 0;
+}
+

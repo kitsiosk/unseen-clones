@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:28567417
+*  Stack Overflow answer #:28567817
+*  And Stack Overflow answer#:28568282
+*/
+int main (int argc, char *argv []) {
+    int arr [5];
+    int i;
+    for (i = 0; i < 5; i++)
+        arr[i] = 0;
+    printf ("Before: ");
+    for (i = 0; i < sizeof (int) * 5; i++)
+        printf ("%2.2X ", ((char *) arr)[i]);
+    printf ("\n");
+    ((short *) (((char *) (&arr[1])) + 8))[3] = 100;
+    printf ("After: ");
+    for (i = 0; i < sizeof (int) * 5; i++)
+        printf ("%2.2X ", ((char *) arr)[i]);
+    printf ("\n");
+    return 0;
+}
+
+int main () {
+    int arr [5];
+    char *start = (char *) &arr;
+    char *end = (char *) &((short *) (((char *) (&arr[1])) + 8))[3];
+    printf ("sizeof(int)=%zu\n", sizeof (int));
+    printf ("sizeof(short)=%zu\n", sizeof (short));
+    printf ("offset=%td <- THIS IS THE ANSWER\n", (end - start));
+    printf ("100=%04x (hex)\n", 100);
+    for (size_t i = 0; i < 5; ++i) {
+        printf ("arr[%zu]=%d (%08x hex)\n", i, arr [i], arr [i]);
+    }
+}
+

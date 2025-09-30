@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:17715918
+*  Stack Overflow answer #:17716570
+*  And Stack Overflow answer#:17720557
+*/
+int rev (int number) {
+    int base = 1;
+    while (number / (base * 10)) {
+        base *= 10;
+    }
+    if (number <= 9) {
+        return number;
+    }
+    else if (number >= 10) {
+        int revNum = (number % 10) * base;
+        return rev (number / 10) + revNum;
+    }
+}
+
+int rev (int revNum) {
+    if (revNum) {
+        reverse = (reverse * 10) + (revNum % 10);
+        rev (revNum / 10);
+    }
+    else
+        return;
+    return reverse;
+}
+

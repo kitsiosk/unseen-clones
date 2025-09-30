@@ -1,0 +1,43 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31373932
+*  Stack Overflow answer #:31374173
+*  And Stack Overflow answer#:31374169
+*/
+struct Entry *filterLen (int len, struct Entry *en) {
+    struct Entry *result = NULL, *temp = NULL;
+    while (en != NULL) {
+        if (en->len == len) {
+            if (temp == NULL) {
+                result = malloc (sizeof (struct Entry));
+                temp = result;
+            }
+            else {
+                temp->next = malloc (sizeof (struct Entry));
+                temp = temp->next;
+            }
+            temp->word = strdup (en->word);
+            temp->len = en->len;
+            temp->next = NULL;
+        }
+        en = en->next;
+    }
+    return result;
+}
+
+Entry *filterLen (int len, Entry *en) {
+    Entry result = {NULL, 0, NULL};
+    Entry *curr = &result;
+    while (en != NULL) {
+        if (en->len == len) {
+            Entry *temp = malloc (sizeof (*temp));
+            *temp = *en;
+            temp->next = NULL;
+            curr = curr->next = temp;
+        }
+        en = en->next;
+    }
+    return result.next;
+}
+

@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46256091
+*  Stack Overflow answer #:46256661
+*  And Stack Overflow answer#:46256594
+*/
+int main (void) {
+    char array [50] [50];
+    char buff;
+    FILE *cola = fopen ("C:/Users/danie/Desktop/cola.txt", "r");
+    if (cola == NULL) {
+        return 1;
+    }
+    for (int i = 0; i < 50; i++) {
+        for (int k = 0; k < 50; k++) {
+            if (fscanf (cola, "%c", &buff) != 1 || buff == '\n') {
+                array[i][k] = '\0';
+                break;
+            }
+            array[i][k] = buff;
+        }
+    }
+    fclose (cola);
+    for (int i = 0; i < 50; i++) {
+        for (int k = 0; k < 50 && array[i][k] != '\0'; k++) {
+            printf ("%c", array [i] [k]);
+        }
+        printf ("\n");
+    }
+    return 0;
+}
+
+int main (void) {
+    enum {LINE_LEN = 80, NUM_LINES = 50};
+    char array [NUM_LINES] [LINE_LEN];
+    int i;
+    for (i = 0; i < NUM_LINES; i++) {
+        if (read_line (stdin, LINE_LEN, array[i]) == EOF)
+            break;
+    }
+    int num_lines = i;
+    for (i = 0; i < num_lines; i++)
+        puts (array[i]);
+    return 0;
+}
+

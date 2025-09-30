@@ -1,0 +1,51 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44570121
+*  Stack Overflow answer #:44573956
+*  And Stack Overflow answer#:44570704
+*/
+void name_abbreviated (char *name) {
+    char tmp [LEN + 1], abbr [LEN], *words [LEN], *token;
+    int i = 0;
+    strncpy (tmp, name, LEN);
+    token = strtok (tmp, " ");
+    while (token) {
+        words[i++] = token;
+        token = strtok (NULL, " ");
+    }
+    words[i - 1][strlen (words[i - 1]) - 1] = '\0';
+    sprintf (abbr, "%s, ", words [i - 1]);
+    for (int j = 0; j < i - 1; j++)
+        sprintf (abbr +strlen (abbr), "%c. ", words[j][0]);
+    puts (abbr);
+}
+
+void name_abbreviated (char name []) {
+    char last_name [20];
+    int j = 0, last_space_idx;
+    for (int i = strlen (name) - 1; i >= 0; --i) {
+        if (name[i] == ' ') {
+            last_space_idx = i;
+            while (name[i])
+                last_name[j++] = name[++i];
+            last_name[j] = '\0';
+            break;
+        }
+    }
+    char rest_name [15];
+    rest_name[0] = name[0];
+    rest_name[1] = '.';
+    rest_name[2] = ' ';
+    j = 3;
+    for (int i = 3; i < last_space_idx; ++i) {
+        if (name[i] == ' ') {
+            rest_name[j++] = name[i + 1];
+            rest_name[j++] = '.';
+            rest_name[j++] = ' ';
+        }
+    }
+    rest_name[j - 1] = '\0';
+    printf ("%s, %s\n", last_name, rest_name);
+}
+

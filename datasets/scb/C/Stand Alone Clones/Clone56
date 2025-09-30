@@ -1,0 +1,64 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:4144232
+*  Stack Overflow answer #:4144527
+*  And Stack Overflow answer#:4144654
+*/
+uint32_t muldiv (uint32_t a, uint32_t b, uint32_t c) {
+    uint32_t hi = a > b ? a : b;
+    uint32_t lo = a > b ? b : a;
+    uint32_t sum = 0;
+    uint32_t cnt = 0;
+    for (uint32_t i = 0; i < hi; i++) {
+        sum += lo;
+        while (sum >= c) {
+            sum -= c;
+            cnt++;
+        }
+    }
+    return cnt;
+}
+
+INT32 muldiv (INT32 a, INT32 b, INT32 c) {
+    INT32 q = 0, r = 0, qn, rn;
+    int qneg = 0, rneg = 0;
+    if (c == 0)
+        c = 1;
+    if (a < 0) {
+        qneg = !qneg;
+        rneg = !rneg;
+        a = -a;
+    }
+    if (b < 0) {
+        qneg = !qneg;
+        rneg = !rneg;
+        b = -b;
+    }
+    if (c < 0) {
+        qneg = !qneg;
+        c = -c;
+    }
+    qn = b / c;
+    rn = b % c;
+    while (a) {
+        if (a & 1) {
+            q += qn;
+            r += rn;
+            if (r >= c) {
+                q++;
+                r -= c;
+            }
+        }
+        a >>= 1;
+        qn <<= 1;
+        rn <<= 1;
+        if (rn >= c) {
+            qn++;
+            rn -= c;
+        }
+    }
+    result2 = rneg ? -r : r;
+    return qneg ? -q : q;
+}
+

@@ -1,0 +1,41 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:48876393
+*  Stack Overflow answer #:48876451
+*  And Stack Overflow answer#:48876459
+*/
+int main (void) {
+    char str1 [30] = "Hello ";
+    char str2 [30] = "World!";
+    printf ("mystrcat(\"%s\", \"%s\") = %s\n", str1, str2, mystrcat (str1, str2, sizeof str1));
+    char str3 [100] = "This is a long sentence";
+    printf ("mystrcat(\"%s\", \"%s\") = %s\n", str1, str3, mystrcat (str1, str3, sizeof str1));
+    char line [100];
+    printf ("Enter some text: ");
+    fflush (stdout);
+    fgets (line, sizeof line, stdin);
+    line[strcspn (line, "\n")] = 0;
+    strcpy (str3, "User input was: ");
+    printf ("mystrcat: %s\n", mystrcat (str3, line, sizeof str3));
+    return 0;
+}
+
+int main () {
+    char first_string [10];
+    char second_string [10];
+    char concatenated_string [20];
+    fprintf (stdout, "str1 = ");
+    fgets (first_string, sizeof (first_string), stdin);
+    fprintf (stdout, "str2 = ");
+    fgets (second_string, sizeof (second_string), stdin);
+    const char *tmp = concatenate (concatenated_string, sizeof (concatenated_string), first_string, second_string);
+    if (!tmp) {
+        fprintf (stderr, "would overflow\n");
+    }
+    else {
+        fprintf (stdout, "concatenated: %s\n", concatenated_string);
+    }
+    return 0;
+}
+

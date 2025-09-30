@@ -1,0 +1,37 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:52712559
+*  Stack Overflow answer #:52719190
+*  And Stack Overflow answer#:52713044
+*/
+int main (void) {
+    pthread_t thread [THREADS_MAX];
+    pthread_mutex_init (& m_init, NULL);
+    pthread_cond_init (& c_init, NULL);
+    for (size_t i = 0; i < THREADS_MAX; ++i) {
+        pthread_mutex_lock (& m_init);
+        init_done = 0;
+        pthread_create (& thread [i], NULL, thread_function, & i);
+        while (!init_done) {
+            pthread_cond_wait (& c_init);
+        }
+        pthread_mutex_unlock (& m_init);
+    }
+    ...
+}
+
+int main () {
+    int i = 0;
+    int reduces = 10;
+    pthread_t *threadIDs;
+    threadIDs = (pthread_t *) malloc (sizeof (pthread_t) * reduces);
+    for (; i < reduces; i++) {
+        Param *p;
+        p = (Param *) malloc (sizeof (*p));
+        p->index = i;
+        pthread_create (& threadIDs [i], NULL, thread, p);
+    }
+    return 0;
+}
+

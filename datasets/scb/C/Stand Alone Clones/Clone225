@@ -1,0 +1,59 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:26637623
+*  Stack Overflow answer #:26637792
+*  And Stack Overflow answer#:26637874
+*/
+int main (void) {
+    float weight [USERS];
+    float height [USERS];
+    float BMI = 0.0f;
+    char *BMI_Status [THRESHOLDS + 1] = {"Normal", "Overweight", "Obese"};
+    float thresholds [THRESHOLDS] = {10.0, 20.0};
+    int i, j;
+    for (i = 0; i < USERS; i++) {
+        printf ("Please enter your weight: ");
+        scanf ("%f", & (weight [i]));
+        printf ("Now enter your height: ");
+        scanf ("%f", & (height [i]));
+    }
+    for (i = 0; i < USERS; i++) {
+        BMI = weight[i] / (height[i] * height[i]);
+        printf ("%d\t%f\t", i, BMI);
+        for (j = 0; j < THRESHOLDS; j++) {
+            if (BMI < thresholds[j]) {
+                break;
+            }
+        }
+        printf ("%s\n", BMI_Status [j]);
+    }
+    return 0;
+}
+
+int main (void) {
+    float weight_value [10];
+    float user_height [10];
+    float BMI = 0.0f;
+    char BMI_Status [30];
+    int i;
+    for (i = 0; i < 10; i++) {
+        printf ("Please enter your weight: ");
+        scanf ("%f", & weight_value [i]);
+        printf ("Now enter your height: ");
+        scanf ("%f", & user_height [i]);
+    }
+    printf ("USER     BMI\t\tSTATUS\n");
+    for (i = 0; i < 10; i++) {
+        BMI = weight_value[i] / (user_height[i] * user_height[i]);
+        printf ("%d\t%f\t", i + 1, BMI);
+        if (BMI < 30)
+            printf ("Underweight\n");
+        else if (BMI < 50)
+            printf ("Normal\n");
+        else
+            printf ("Overweight\n");
+    }
+    return 0;
+}
+

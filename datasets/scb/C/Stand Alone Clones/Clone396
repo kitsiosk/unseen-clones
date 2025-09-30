@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:46861611
+*  Stack Overflow answer #:46865702
+*  And Stack Overflow answer#:46861781
+*/
+int main () {
+    int a [50] = {1, 2, -3, 0, 0, 6, 7, -8, 0, SENTINEL};
+    int count = 0;
+    int i = 0;
+    for (i = 0; i < 50; i++) {
+        if (a[i] == SENTINEL)
+            break;
+        if (a[i]) {
+            count++;
+        }
+    }
+    printf ("Total Element :%d ", count);
+    return 0;
+}
+
+int main () {
+    int a [50] = ARRAY_INITIALISER;
+    size_t count;
+    {
+        int tmp [] = ARRAY_INITIALISER;
+        count = sizeof tmp / sizeof *tmp;
+    }
+    printf ("Total number of elements 'used': %zu\n", count);
+    return 0;
+}
+

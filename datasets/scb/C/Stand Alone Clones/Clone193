@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:9613960
+*  Stack Overflow answer #:9958072
+*  And Stack Overflow answer#:9615396
+*/
+int main (int argc, char *argv []) {
+    int a [] = {31, 44, 44, 67, 67, 99, 99, 100, 101};
+    int k = remove_dups (a, 9);
+    assert (k == 3);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", a[i]);
+    printf ("\n\n");
+    int b [] = {-5, -3, -2, -2, -2, -2, 1, 3, 5, 5, 18, 18};
+    k = remove_dups (b, 12);
+    assert (k == 4);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", b[i]);
+    printf ("\n\n");
+    int c [] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    k = remove_dups (c, 9);
+    assert (k == 9);
+    for (int i = 0; i < k; i++)
+        printf ("%d ", c[i]);
+    return 0;
+}
+
+int main () {
+    bool duplicate = false;
+    int a [11] = {1, 2, 3, 4, 5, 11, 11, 11, 11, 16, 16};
+    int b [11];
+    int index = 0;
+    for (int i = 0; i < arraysize (a); i++) {
+        for (int j = 0; j < index; j++) {
+            if (a[i] == b[j]) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (!duplicate) {
+            b[index] = a[i];
+            index++;
+        }
+        duplicate = false;
+    }
+    int c [index];
+    for (int k = 0; k < index; k++) {
+        c[k] = b[k];
+    }
+}
+

@@ -1,0 +1,84 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:31860851
+*  Stack Overflow answer #:31879999
+*  And Stack Overflow answer#:31882153
+*/
+int main (void) {
+    struct interface *before, *after;
+    double interval = 5.0;
+    if (install_done (SIGINT) || install_done (SIGTERM)) {
+        fprintf (stderr, "Cannot install signal handlers: %s.\n", strerror (errno));
+        return EXIT_FAILURE;
+    }
+    before = NULL;
+    after = list_interfaces ();
+    if (!after) {
+        fprintf (stderr, "Cannot get network interface statistics: %s.\n", strerror (errno));
+        return EXIT_FAILURE;
+    }
+    while (!done) {
+        struct interface *curr, *prev;
+        struct timespec req, rem;
+        double duration = interval;
+        double tx_rate, rx_rate;
+        set_timespec (& req, duration);
+        if (nanosleep (&req, &rem) == -1 && errno == EINTR)
+            duration -= get_timespec (&rem);
+        if (done)
+            break;
+        if (duration <= 0.0)
+            continue;
+        free_interfaces (before);
+        before = after;
+        after = list_interfaces ();
+        if (!after) {
+            fprintf (stderr, "Cannot get network interface statistics: %s.\n", strerror (errno));
+            return EXIT_FAILURE;
+        }
+        rx_rate = 0.0;
+        tx_rate = 0.0;
+        for (curr = after; curr != NULL; curr = curr->next) {
+            if (!strcmp (curr->name, "lo"))
+                continue;
+            prev = find_interface (before, curr->name);
+            if (prev) {
+                const double rx = ((double) curr->rx_bytes - (double) prev->rx_bytes) * 8.0 / 1024.0 / duration;
+                const double tx = ((double) curr->tx_bytes - (double) prev->tx_bytes) * 8.0 / 1024.0 / duration;
+                printf ("%s: %9.0f kbits/s sent, %9.0f kbits/s received\n", curr -> name, tx, rx);
+                rx_rate += rx;
+                tx_rate += tx;
+            }
+        }
+        printf ("Total: %9.0f kbits/s sent, %9.0f kbits/s received\n\n", tx_rate, rx_rate);
+        fflush (stdout);
+    }
+    return EXIT_SUCCESS;
+}
+
+int main (int argc, char **argv) {
+    const char *iface = "wlan0";
+    if (argc > 1)
+        iface = argv[1];
+    FILE *recvf = open_stat (iface, "rx_bytes");
+    if (!recvf)
+        exit (1);
+    FILE *xmitf = open_stat (iface, "tx_bytes");
+    if (!xmitf)
+        exit (1);
+    unsigned long recv = read_stat (recvf);
+    unsigned long xmit = read_stat (xmitf);
+    for (int i = 0; i < COUNT; ++i) {
+        sleep (1);
+        unsigned long new_recv = read_stat (recvf);
+        unsigned long new_xmit = read_stat (xmitf);
+        printf ("in: %6.3f kB/s, out: %6.3f kB/s\n", (new_recv - recv) / 1024.0, (new_xmit - xmit) / 1024.0);
+        recv = new_recv;
+        xmit = new_xmit;
+    }
+    fclose (recvf);
+    fclose (xmitf);
+    return 0;
+}
+

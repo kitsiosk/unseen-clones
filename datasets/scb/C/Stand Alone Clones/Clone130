@@ -1,0 +1,33 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41025752
+*  Stack Overflow answer #:41026224
+*  And Stack Overflow answer#:41026162
+*/
+int main (void) {
+    int arr1 [] = {1, 2, 3, 4, 5};
+    int arr2 [] = {3, 4, 5, 1, 2};
+    int arr3 [] = {3, 4, 5, 2, 1};
+    int arr4 [] = {1, 0, 1, 1, 0};
+    int arr5 [] = {1, 0, 1, 0, 1};
+    size_t size = sizeof (arr1) / sizeof (*arr1);
+    TEST (size, arr1, arr2);
+    TEST (size, arr1, arr3);
+    TEST (size, arr4, arr5);
+}
+
+int main (void) {
+    {
+        int a [] = {1, 2, 3, 4, 5};
+        int b [] = {3, 4, 5, 1, 2};
+        printf ("The arrays are equivalent: %d\n", is_equivalent (a, b, sizeof (a) / sizeof (* a)));
+    }
+    {
+        int a [] = {1, 2, 3, 4, 5};
+        int b [] = {3, 4, 5, 2, 1};
+        printf ("The arrays are equivalent: %d\n", is_equivalent (a, b, sizeof (a) / sizeof (* a)));
+    }
+    return 0;
+}
+

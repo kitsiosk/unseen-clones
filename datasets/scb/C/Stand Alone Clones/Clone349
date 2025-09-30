@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:44798899
+*  Stack Overflow answer #:44801116
+*  And Stack Overflow answer#:44799004
+*/
+int main () {
+    int n;
+    printf ("Select the sports u want to do\n");
+    printf ("1.Tennis\n2.Karate\n3.Football\n");
+    scanf ("%d", & n);
+    Switch (n) {
+    case 1 :
+        printf ("You chose Tennis\n");
+        break;
+    case 2 :
+        printf ("You chose Karate\n");
+        break;
+    case 3 :
+        printf ("You chose Football\n");
+        break;
+    default :
+        printf ("Please enter an appropriate number !");
+    }}
+
+int main (void) {
+    int v;
+    int ret = scanf ("%d", &v);
+    if (ret == 1)
+        printf ("OK, %d\n", v);
+    else
+        printf ("Something went wrong!\n");
+    return 0;
+}
+

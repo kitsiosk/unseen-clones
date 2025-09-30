@@ -1,0 +1,71 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:54330961
+*  Stack Overflow answer #:54331298
+*  And Stack Overflow answer#:54331211
+*/
+int *calc (int x, int y, int z) {
+    static int result [3] = {0, 0, 0};
+    if (x > y && x > z) {
+        result[0] = x;
+        if (y < z) {
+            result[2] = y;
+            result[1] = z;
+        }
+    }
+    else if (y > x && y > z) {
+        result[0] = y;
+        if (x < z) {
+            result[2] = x;
+            result[1] = z;
+        }
+    }
+    else if (z > x && z > y) {
+        result[0] = z;
+        if (y < x) {
+            result[2] = y;
+            result[1] = x;
+        }
+    }
+    return result;
+}
+
+int *calc (int x, int y, int z) {
+    static int result [3] = {0, 0, 0};
+    if (x > y && x > z) {
+        result[0] = x;
+        if (y < z) {
+            result[2] = y;
+            result[1] = z;
+        }
+        else {
+            result[1] = y;
+            result[2] = z;
+        }
+    }
+    if (y > x && y > z) {
+        result[0] = y;
+        if (x < z) {
+            result[2] = x;
+            result[1] = z;
+        }
+        else {
+            result[1] = x;
+            result[2] = z;
+        }
+    }
+    if (z > x && z > y) {
+        result[0] = z;
+        if (y < x) {
+            result[2] = y;
+            result[1] = x;
+        }
+        else {
+            result[1] = y;
+            result[2] = x;
+        }
+    }
+    return result;
+}
+

@@ -1,0 +1,67 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:530116
+*  Stack Overflow answer #:530242
+*  And Stack Overflow answer#:530414
+*/
+int main (int argc, char **argv) {
+    char *datum = malloc (entry_size);
+    input_size = 4096;
+    input = malloc (input_size);
+    while (1) {
+        if (fread (datum, 1, entry_size, stdin) < entry_size)
+            break;
+        size_t new_size = (num_items + 1) * entry_size;
+        if (new_size > input_size) {
+            input = realloc (input, input_size *2);
+            input_size *= 2;
+        }
+        memcpy (input + num_items * entry_size, datum, entry_size);
+        num_items++;
+    }
+    qsort (input, num_items, entry_size, compare_func);
+    fwrite (input, entry_size, num_items, stdout);
+    return 0;
+}
+
+int main (int argc, char *argv []) {
+    if (argc != 2 || stdin == NULL) {
+        print_usage ();
+        exit (EXIT_FAILURE);
+    }
+    entry_size = atoi (argv[1]);
+    if (entry_size <= 0 || entry_size >= INT_MAX) {
+        print_usage ();
+        exit (EXIT_FAILURE);
+    }
+    char *input = NULL;
+    char *datum = (char *) malloc (entry_size);
+    if (datum == NULL)
+        exit (EXIT_FAILURE);
+    while (1) {
+        int read_size = fread (datum, 1, entry_size, stdin);
+        if (read_size == 0)
+            break;
+        if (read_size < entry_size) {
+            while (read_size < entry_size) {
+                memcpy (datum, '\0', 1);
+                read_size++;
+            }
+            break;
+        }
+        size_t new_size = (num_items + 1) * entry_size;
+        if (new_size > input_size) {
+            input = (char *) realloc (input, new_size);
+            if (input == NULL)
+                exit (EXIT_FAILURE);
+            input_size = new_size;
+        }
+        memcpy (input + num_items * entry_size, datum, entry_size);
+        num_items++;
+    }
+    qsort (input, num_items, entry_size, compare);
+    fwrite (input, entry_size, num_items, stdout);
+    exit (EXIT_SUCCESS);
+}
+

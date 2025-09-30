@@ -1,0 +1,50 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34167437
+*  Stack Overflow answer #:34169527
+*  And Stack Overflow answer#:34169470
+*/
+char *ft_itoa (int n) {
+    char s [50];
+    int i;
+    int neg;
+    i = 0;
+    neg = 0;
+    if (n < 0) {
+        neg = 1;
+    }
+    else {
+        n = -n;
+    }
+    do {
+        s[i++] = '0' - (n % 10);
+        n /= 10;
+    }
+    while (n);
+    if (neg)
+        s[i++] = '-';
+    s[i] = '\0';
+    return strdup (strrev (s));
+}
+
+char *ft_itoa (int n) {
+    char buf [sizeof (int) * CHAR_BIT / 3 + 3];
+    char *s;
+    unsigned int v;
+    v = n;
+    if (n < 0) {
+        v = -v;
+    }
+    s = buf + sizeof (buf);
+    *--s = '\0';
+    while (v >= 10) {
+        *--s = '0' + v % 10;
+        v /= 10;
+    }
+    *--s = '0' + v;
+    if (n < 0)
+        *--s = '-';
+    return strdup (s);
+}
+

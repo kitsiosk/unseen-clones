@@ -1,0 +1,55 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:49566557
+*  Stack Overflow answer #:49566726
+*  And Stack Overflow answer#:49566730
+*/
+int main (void) {
+    float numbers [N];
+    size_t size = 0;
+    while (size < N && scanf ("%f", numbers +size) == 1 && numbers[size] != 0) {
+        size++;
+    }
+    for (size_t i = 0; i < size; i++) {
+        printf ("%.2f ", numbers [i]);
+    }
+    float result;
+    sum (numbers, size, & result);
+    printf ("\nSuma elementow tablicy T[%zu]: %f\n", size, result);
+    avg (numbers, size, & result);
+    printf ("Srednia elementow tablicy T[%zu]: %f\n", size, result);
+}
+
+int main () {
+    unsigned int size = 1, i;
+    float T [N], val = 0, wynik = 0;
+    float *result = &wynik, *tab = T;
+    while (scanf ("%f", &val) == 1 && val != 0) {
+        if (scanf ("%f", &val) == 0) {
+            printf ("Wprowadzono niepoprawny znak. Koczenie...\n");
+            return 0;
+        }
+        else if (val == 0) {
+            break;
+        }
+        else {
+            *tab = val;
+            tab++;
+            size++;
+        }
+    }
+    tab = T;
+    for (i = 0; i < size - 1; i++) {
+        printf ("%.2lf ", * tab);
+        tab++;
+    }
+    tab = T;
+    sum (tab, size, & wynik);
+    printf ("\nSuma elementow tablicy T[%u]: %f\n", size - 1, wynik);
+    avg (tab, size, & wynik);
+    printf ("Srednia elementow tablicy T[%u]: %f\n", size - 1, wynik);
+    getch ();
+    return 1;
+}
+

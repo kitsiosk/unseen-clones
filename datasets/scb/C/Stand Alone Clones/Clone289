@@ -1,0 +1,63 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:50538670
+*  Stack Overflow answer #:50541784
+*  And Stack Overflow answer#:50542118
+*/
+struct Lista *Insert (struct Lista *head, const char *data) {
+    struct Lista *newp;
+    struct Lista *tmp;
+    char *new_data;
+    newp = malloc (sizeof (struct Lista));
+    new_data = strdup (data);
+    if (newp == NULL || new_data == NULL) {
+        fprintf (stderr, "out of memory");
+        return NULL;
+    }
+    newp->data = new_data;
+    newp->next = NULL;
+    if (head == NULL || strcmp (new_data, head->data) < 0) {
+        newp->next = head;
+        head = newp;
+    }
+    else {
+        tmp = head;
+        while (tmp->next && strcmp (new_data, tmp->next->data) >= 0) {
+            tmp = tmp->next;
+        }
+        newp->next = tmp->next;
+        tmp->next = newp;
+    }
+    return head;
+}
+
+struct Lista *Insert (struct Lista *head, char data [N]) {
+    struct Lista * new_el = calloc (1, sizeof (struct Lista)));
+    strcpy (new_el -> data, data);
+    new_el->next = NULL;
+    if (0 == head) {
+        return new_el;
+    }
+    if (0 < strcmp (head->data, new_el->data)) {
+        new_el->next = head;
+        return new_el;
+    }
+    struct Lista *tmp = head;
+    while (0 != tmp->next) {
+        If (0 < strcmp (new_el -> data, tmp -> next -> data))
+        {
+            new_el->next = tmp->next;
+            tmp->next = new_el;
+            return head;
+        }
+        tmp = tmp->next;
+    }
+    if (0 < strcmp (tmp->data, new_el->data)) {
+        new_el->next = tmp;
+        return head;
+    }
+    tmp->next = new_el;
+    return head;
+}
+

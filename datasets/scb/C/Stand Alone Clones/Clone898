@@ -1,0 +1,52 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34971524
+*  Stack Overflow answer #:34971681
+*  And Stack Overflow answer#:34971685
+*/
+void decimal_to_binary (unsigned long num, FILE *out) {
+    int i = 256, a = 0;
+    char binarr [257];
+    memset (binarr, '0', sizeof (binarr) - 1);
+    binarr[i] = '\0';
+    while (num != 0) {
+        --i;
+        if (num % 2) {
+            binarr[i] = '1';
+        }
+        num /= 2;
+    }
+    if (i > 256 - 8)
+        i = 256 - 8;
+    fprintf (out, "%s ", binarr + i);
+    printf ("%s\n", binarr + i);
+}
+
+void decimal_to_binary (unsigned long num, FILE *out) {
+    int i = 255, a = 0;
+    char binarr [255];
+    for (i = 0; i < 255; i++) {
+        binarr[i] = '0';
+    }
+    if (num != 0) {
+        while (num != 0) {
+            if (num % 2 == 0) {
+                binarr[i] = '0';
+                i--;
+            }
+            else {
+                binarr[i] = '1';
+                i--;
+            }
+            num /= 2;
+        }
+    }
+    else {
+        fprintf (out, "00000000");
+    }
+    fprintf (out, "%s ", binarr + strlen (binarr) - 8);
+    printf ("%s\n", binarr + strlen (binarr) - 8);
+    memset (binarr, 0, sizeof (binarr));
+}
+

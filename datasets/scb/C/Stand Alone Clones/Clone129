@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:7911919
+*  Stack Overflow answer #:7911956
+*  And Stack Overflow answer#:7911962
+*/
+void Sort (phone phonebook []) {
+    phone temp;
+    int i;
+    int j;
+    for (i = 0; i < counter; i++) {
+        for (j = i + 1; j < counter; j++) {
+            if (strcmp (phonebook[i].Surname, phonebook[j].Surname) > 0) {
+                temp = phonebook[i];
+                phonebook[i] = phonebook[j];
+                phonebook[j] = temp;
+            }
+        }
+    }
+}
+
+void Sort (phone phonebook []) {
+    phone temp;
+    int i;
+    int didSwap;
+    didSwap = 1;
+    while (didSwap) {
+        didSwap = 0;
+        for (i = 0; i < counter - 1; i++) {
+            if (strcmp (phonebook[i].Surname, phonebook[i + 1].Surname) > 0) {
+                temp = phonebook[i];
+                phonebook[i] = phonebook[i + 1];
+                phonebook[i + 1] = temp;
+                didSwap = 1;
+            }
+        }
+    }
+}
+

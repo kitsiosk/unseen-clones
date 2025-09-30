@@ -1,0 +1,49 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:33239705
+*  Stack Overflow answer #:33239971
+*  And Stack Overflow answer#:33520026
+*/
+bool execc (char *cmd, char *r) {
+    FILE *fp;
+    char t1 [1024];
+    fp = popen (cmd, "r");
+    if (fp == NULL) {
+        return false;
+    }
+    while (fgets (t1, sizeof (t1), fp) != NULL) {
+        memcpy (r, t1, strlen (t1));
+        r = &r[strlen (t1)];
+        r[0] = '\0';
+    }
+    pclose (fp);
+    return true;
+}
+
+bool execc (char *cmd, char **value) {
+    FILE *fp;
+    char buffer [128];
+    char *tmp;
+    int size;
+    fp = popen (cmd, "r");
+    if (fp == NULL) {
+        return false;
+    }
+    while (size = fread (buffer, 1, sizeof (buffer), fp)) {
+        buffer[size] = '\0';
+        if (*value == NULL) {
+            *value = strdup (buffer);
+        }
+        else {
+            tmp = *value;
+            *value = (char *) calloc (strlen (tmp) +strlen (buffer), sizeof (char));
+            memcpy (* value, tmp, strlen (tmp));
+            memcpy (* value + strlen (tmp), buffer, strlen (buffer));
+            free (tmp);
+        }
+    }
+    pclose (fp);
+    return true;
+}
+

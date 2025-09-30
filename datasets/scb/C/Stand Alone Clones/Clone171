@@ -1,0 +1,47 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:20923165
+*  Stack Overflow answer #:29509207
+*  And Stack Overflow answer#:26781209
+*/
+unsigned add_gray (unsigned lhs, unsigned rhs) {
+    unsigned lhs_base = hyperfloor (lhs);
+    unsigned rhs_base = hyperfloor (rhs);
+    if (lhs_base == rhs_base) {
+        if (lhs == rhs) {
+            return (lhs << 1u) ^ __builtin_parity (lhs);
+        }
+        return (lhs_base << 1u) ^ add_gray (lhs_base ^ lhs, lhs_base ^ rhs);
+    }
+    if (lhs_base < rhs_base) {
+        swap (& lhs, & rhs);
+        swap (& lhs_base, & rhs_base);
+    }
+    if (lhs == lhs_base) {
+        return lhs ^ rhs;
+    }
+    unsigned tmp = add_gray (lhs ^ lhs_base, rhs);
+    if (hyperfloor (tmp) < lhs_base) {
+        return lhs_base ^ tmp;
+    }
+    return (lhs_base << 1u) ^ (lhs_base ^ tmp);
+}
+
+unsigned add_gray (unsigned lhs, unsigned rhs) {
+    bool e = __builtin_parity (lhs);
+    bool f = __builtin_parity (rhs);
+    unsigned res = 0u;
+    for (unsigned i = 0u; i < CHAR_BIT * sizeof (unsigned); ++i) {
+        bool lhs_i = (lhs >> i) & 1u;
+        bool rhs_i = (rhs >> i) & 1u;
+        bool e_cpy = e;
+        bool f_cpy = f;
+        unsigned res_i = (e_cpy & f_cpy) ^ lhs_i ^ rhs_i;
+        res |= (res_i << i);
+        e = (e_cpy & (!f_cpy)) ^ lhs_i;
+        f = ((!e_cpy) & f_cpy) ^ rhs_i;
+    }
+    return res;
+}
+

@@ -1,0 +1,45 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:29215998
+*  Stack Overflow answer #:29218166
+*  And Stack Overflow answer#:29218077
+*/
+int main () {
+    int n;
+    char c;
+    printf ("Enter a number: ");
+    if (2 != scanf ("%d%c", &n, &c)) {
+        printf ("Invalid number input\n");
+        return 1;
+    }
+    if (c != '\n') {
+        printf ("Invalid number input\n");
+        return 1;
+    }
+    if (n < 1 || n > 30) {
+        printf ("Valid range is 1..30\n");
+        return 1;
+    }
+    printf ("You entered %d\n", n);
+    return 0;
+}
+
+int main () {
+    int uNum = 0;
+    printf ("\nEnter a number between 1 and %d:\n", MAXNUM);
+    while (printf ("\n  uNum: ")) {
+        int rtn = scanf ("%d", &uNum);
+        int c = 0;
+        if (rtn == 0)
+            do {
+                c = getchar ();
+            }
+            while (c != '\n' && c != EOF);
+        if (uNum > 0 && uNum < MAXNUM + 1)
+            break;
+    }
+    printf ("\nValue : %d\n\n", uNum);
+    return 0;
+}
+

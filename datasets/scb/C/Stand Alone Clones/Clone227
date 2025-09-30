@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41195565
+*  Stack Overflow answer #:41195748
+*  And Stack Overflow answer#:41195713
+*/
+int valueOf (t_node *node, int n, int *result) {
+    int current = 0;
+    while (current < n && node != NULL) {
+        node = node->next;
+        current += 1;
+    }
+    if (node == NULL) {
+        return 0;
+    }
+    else {
+        *result = node->value;
+        return 1;
+    }
+}
+
+int valueOf (t_node *node, int n, int *val) {
+    int current = 0;
+    int value;
+    while (node->next != NULL) {
+        value = node->val;
+        if (current == n) {
+            *val = value;
+            return 0;
+        }
+        if (current > n) {
+            return -1;
+        }
+        node = node->next;
+        current += 1;
+    }
+    return -1;
+}
+

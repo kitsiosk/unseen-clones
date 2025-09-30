@@ -1,0 +1,40 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:34336736
+*  Stack Overflow answer #:34359076
+*  And Stack Overflow answer#:34337210
+*/
+int main (int argc, char *argv []) {
+    char tftp_cmd [TFTP_MAX_BUFFER_SIZE];
+    char ip_server [IP_MAX_LEN];
+    char file_name [FILE_MAX_LEN];
+    const char *tftp_get = "tftp -g -r ";
+    if (3 != argc) {
+        fprintf (stderr, "USAGE: %s <serverIP> <filename>\n", argv [0]);
+        exit (EXIT_FAILURE);
+    }
+    strcpy (ip_server, argv [1]);
+    strcpy (file_name, argv [2]);
+    strncpy (tftp_cmd, tftp_get, TFTP_MAX_BUFFER_SIZE);
+    printf ("tftp get command = %s\n", tftp_cmd);
+    strncat (tftp_cmd, file_name.TFTP_MAX_BUFFER_SIZE - strlen (tftp_cmd));
+    printf ("tftp get command = %s\n", tftp_cmd);
+    strncat (tftp_cmd, ip_server, TFTP_MAX_BUFFER_SIZE - strlen (tftp_cmd);
+    printf ("tftp get command = %s\n", tftp_cmd);
+    return 0
+}
+
+int main (int argc, char **argv) {
+    if (argc < 3) {
+        fprintf (stderr, "Too few arguments.\n");
+        exit (1);
+    }
+    const char *file_name = argv[2];
+    const char *ip_server = argv[1];
+    char tftp_cmd [TFTP_MAX_BUFFER_SIZE];
+    int outlen = snprintf (tftp_cmd, sizeof tftp_cmd, "tftp -g -r %s %s", file_name, ip_server);
+    if (outlen >= sizeof tftp_cmd) {fprintf (stderr, "Arguments are too long\n");
+    exit (1);
+}
+

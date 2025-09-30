@@ -1,0 +1,31 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:41049333
+*  Stack Overflow answer #:41049614
+*  And Stack Overflow answer#:41049603
+*/
+int addNode (struct node **st, int d) {
+    while (*st)
+        st = &(*st)->next_ptr;
+    *st = malloc (sizeof (struct node));
+    int success = *st != NULL;
+    if (success) {
+        (*st)->n = d;
+        (*st)->next_ptr = NULL;
+    }
+    return success;
+}
+
+void addNode (node *iterator, int d) {
+    newNode = (node *) malloc (sizeof (node));
+    newNode->n = d;
+    newNode->next_ptr = NULL;
+    if (iterator != 0) {
+        while (iterator->next != 0) {
+            iterator = iterator->next;
+        }
+    }
+    iterator->next = newNode;
+}
+

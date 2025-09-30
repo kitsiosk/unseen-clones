@@ -1,0 +1,36 @@
+/*
+* Semantic clone benchmark
+*  Source code are extracted from Stack Overflow
+*  Stack overflow Question #:27555965
+*  Stack Overflow answer #:27556083
+*  And Stack Overflow answer#:27556432
+*/
+int main () {
+    int c;
+    int blank, tab, newl;
+    blank = tab = newl = 0;
+    while ((c = getchar ()) != EOF) {
+        if (c == ' ') {
+            ++blank;
+        }
+        else if (c == '\t') {
+            ++tab;
+        }
+        else if (c == '\n') {
+            ++newl;
+        }
+    }
+    printf ("There are %d blank lines, %d tabs, and %d new lines\n", blank, tab, newl);
+    return 0;
+}
+
+int main () {
+    int c;
+    int count [255] = {0};
+    while ((c = getchar ()) != EOF) {
+        count[c]++;
+    }
+    printf ("There are %d blank lines, %d tabs, and %d new lines\n", count [' '], count ['\t'], count ['\n']);
+    return 0;
+}
+
