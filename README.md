@@ -1,5 +1,5 @@
 # Detecting Semantic Clones of Unseen Functionality
-This is the replication package for the paper titled "Detecting Semantic Clones of Unseen Functionality" that will be presented at ASE '25.
+This is the replication package for the paper titled [Detecting Semantic Clones of Unseen Functionality](https://arxiv.org/pdf/2510.04143) that will be presented at ASE '25.
 
 ### Table of Contents
 - [Structure](#structure)
